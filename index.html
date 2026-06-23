@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Care Medical Clinic (HCMC) - Chiang Mai</title>
+  <link rel="icon" type="image/jpeg" href="HCMC Logo.jpg">
+  <meta name="description"
+    content="HCMC Clinic in Chiang Mai provides bespoke medical check-ups, internist care, and travel vaccinations under Dr. M. Tailored health profiles for active lifestyles.">
+  <meta name="keywords"
+    content="HCMC Chiang Mai, Dr. M Internist, Trail Runner Doctor, Health Check Up Chiang Mai, Travel Vaccines Chiang Mai, Prescription Refill Chiang Mai">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            iceblue: {
+              DEFAULT: '#D8ECF3',
+              light: '#EBF6FA',
+              dark: '#B0D9E7'
+            },
+            navy: {
+              DEFAULT: '#0F172A',
+              light: '#1E293B',
+              slate: '#475569',
+              tint: '#F8FAFC'
+            },
+            accent: {
+              red: '#EF4444',
+              redHover: '#DC2626'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.8);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+    }
+
+    .custom-shadow {
+      box-shadow: 0 4px 30px rgba(15, 23, 42, 0.03);
+    }
+
+    .hover-scale {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hover-scale:hover {
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body class="bg-navy-tint text-navy font-sans antialiased min-h-screen">
+
+  <header class="sticky top-0 z-50 glass-nav border-b border-slate-100 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="#home" class="flex items-center group">
+        <img src="LOGO 2 Tran.png" alt="Health Care Medical Clinic"
+          class="h-12 md:h-16 w-auto transition-transform duration-300 group-hover:scale-[1.02]">
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-8">
+        <a href="#home" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">Home</a>
+        <a href="#about" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">About Dr.M</a>
+        <a href="#checkup" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">Check-up</a>
+        <a href="#vaccination"
+          class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">Vaccination</a>
+        <a href="#consultation" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">Online
+          Consultation</a>
+        <a href="#contact" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">Contact</a>
+      </nav>
+
+      <div class="hidden lg:flex items-center gap-4">
+        <a href="#booking-section-anchor" id="nav-btn-refill"
+          class="px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-navy border border-navy rounded-lg hover:bg-navy hover:text-white transition-all duration-300">
+          Refill Prescription
+        </a>
+        <a href="#booking-section-anchor" id="nav-btn-appt"
+          class="px-5 py-2.5 text-xs font-semibold uppercase tracking-wider bg-navy text-white rounded-lg hover:bg-navy-light shadow-md transition-all duration-300">
+          Book Appointment
+        </a>
+      </div>
+
+      <button id="mobile-menu-btn" class="lg:hidden p-2 text-navy hover:bg-slate-100 rounded-lg transition-colors"
+        aria-label="Toggle Menu">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+
+    <div id="mobile-drawer"
+      class="hidden lg:hidden border-t border-slate-100 bg-white px-6 py-8 flex flex-col gap-6 shadow-lg">
+      <a href="#home" class="mobile-nav-link font-semibold text-lg text-navy">Home</a>
+      <a href="#about" class="mobile-nav-link font-semibold text-lg text-navy">About Dr.M</a>
+      <a href="#checkup" class="mobile-nav-link font-semibold text-lg text-navy">Check-up</a>
+      <a href="#vaccination" class="mobile-nav-link font-semibold text-lg text-navy">Vaccination</a>
+      <a href="#consultation" class="mobile-nav-link font-semibold text-lg text-navy">Online Consultation</a>
+      <a href="#contact" class="mobile-nav-link font-semibold text-lg text-navy">Contact</a>
+      <div class="h-px bg-slate-100 my-2"></div>
+      <div class="flex flex-col gap-4">
+        <a href="#booking-section-anchor" id="drawer-btn-refill"
+          class="mobile-nav-link text-center py-3 text-sm font-semibold uppercase tracking-wider text-navy border border-navy rounded-lg hover:bg-navy hover:text-white transition-colors">
+          Refill Prescription
+        </a>
+        <a href="#booking-section-anchor" id="drawer-btn-appt"
+          class="mobile-nav-link text-center py-3 text-sm font-semibold uppercase tracking-wider bg-navy text-white rounded-lg hover:bg-navy-light transition-colors">
+          Book Appointment
+        </a>
+      </div>
+    </div>
+  </header>
+
+
+  <section id="home" class="relative pt-12 pb-24 md:py-32 overflow-hidden bg-white">
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-iceblue/30 -skew-x-12 origin-top-right -z-10 hidden md:block">
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-12 md:gap-16 items-center">
+      <div class="md:col-span-7 flex flex-col gap-6 md:gap-8">
+        <div
+          class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-iceblue text-navy font-semibold text-xs uppercase tracking-wider w-fit">
+          <i data-lucide="shield-check" class="w-5 h-5 text-navy"></i>
+          HCMC We Care
+        </div>
+
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-navy">
+          Bespoke Medicine for <br class="hidden lg:inline"><span class="text-navy-slate font-light italic">Your Active
+            Life</span>
+        </h1>
+
+        <p class="text-base md:text-lg text-navy-slate leading-relaxed">
+          At Health Care Medical Clinic, we define healthcare through the lens of individual biology and daily
+          realities. Founded and led by Dr. Nisachon Morgan, an expert Internist and active trail runner, we bridge
+          high-level
+          diagnostic internal medicine with a practical understanding of physical performance and lifestyle
+          optimization.
+        </p>
+
+        <div id="about"
+          class="p-6 rounded-2xl bg-iceblue/40 border border-iceblue-dark/20 flex flex-col gap-4 relative">
+          <div
+            class="absolute -top-3 right-6 bg-navy text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">
+            Meet the Internist
+          </div>
+          <h3 class="font-bold text-lg text-navy flex items-center gap-2">
+            <i data-lucide="heart" class="w-5 h-5 text-accent-red fill-accent-red"></i>
+            The Dr. M Philosophy
+          </h3>
+          <p class="text-sm text-navy-slate leading-relaxed">
+            "As an internist managing medical complexities and an ultra-marathoner navigating extreme mountain terrains,
+            I understand how variables like stress, diet, and clinical markers impact daily vitality. We do not just run
+            lab tests; we decipher your physiological data to help you move, heal, and live optimally."
+          </p>
+          <div class="flex items-center gap-4 mt-2">
+            <div class="flex flex-col">
+              <span class="font-bold text-sm text-navy">Dr. Nisachon Morgan, MD</span>
+              <span class="text-xs text-navy-slate">Board-Certified Internist | Endurance Athlete & Trail Runner</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-4 mt-2">
+          <a href="#checkup"
+            class="px-6 py-3.5 font-semibold text-sm rounded-lg bg-navy text-white hover:bg-navy-light transition-all shadow-lg shadow-navy/10 flex items-center gap-2 group">
+            Find Your Check-up Program
+            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+          </a>
+          <a href="#consultation"
+            class="px-6 py-3.5 font-semibold text-sm rounded-lg text-navy-slate hover:text-navy transition-colors flex items-center gap-2">
+            Learn About Online Consults
+          </a>
+        </div>
+      </div>
+
+      <div class="md:col-span-5 relative flex justify-center">
+        <div class="relative w-full max-w-sm md:max-w-none">
+          <div class="absolute -inset-4 bg-iceblue rounded-3xl -rotate-3 -z-10"></div>
+          <div class="absolute -inset-4 border border-navy/10 rounded-3xl rotate-2 -z-10"></div>
+
+          <img src="dr_m_profile.png" alt="Dr. M - Internist and Trail Runner"
+            class="w-full object-cover rounded-2xl shadow-xl border-4 border-white aspect-[4/5] object-center">
+
+          <div
+            class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur px-5 py-3.5 rounded-xl shadow-lg border border-slate-100 flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-xs text-navy-slate font-medium">Clinic Status</span>
+              <span class="text-sm font-bold text-navy flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                Accepting Patients
+              </span>
+            </div>
+            <a href="#booking-section-anchor" id="hero-book-btn"
+              class="px-3.5 py-1.5 text-xs font-semibold bg-navy text-white rounded-lg hover:bg-navy-light transition-colors">
+              Book
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="py-24 bg-iceblue/50 border-y border-iceblue-dark/20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12 flex flex-col gap-4">
+        <span class="text-xs font-bold text-accent-red tracking-widest uppercase">Specialist Screening Focus</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-navy tracking-tight">Metabolic Health Assessment</h2>
+        <p class="text-navy-slate text-sm md:text-base">
+          Metabolic disorders represent the silent precursor to cardiovascular complications and diabetes. Select your
+          profile below to view the customized biomarker tracking panels.
+        </p>
+      </div>
+
+      <div
+        class="flex justify-center gap-3 mb-8 max-w-md mx-auto bg-white p-1.5 rounded-2xl shadow-sm border border-slate-100">
+        <button type="button" data-highlight-tab="METABOLIC-FU45"
+          class="hl-tab-btn flex-1 py-2.5 px-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all bg-navy text-white shadow-sm">
+          Female < 45 </button>
+            <button type="button" data-highlight-tab="METABOLIC-FO45"
+              class="hl-tab-btn flex-1 py-2.5 px-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all bg-transparent text-navy hover:bg-slate-50">
+              Female > 45
+            </button>
+            <button type="button" data-highlight-tab="METABOLIC-MALE"
+              class="hl-tab-btn flex-1 py-2.5 px-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all bg-transparent text-navy hover:bg-slate-50">
+              Male Profile
+            </button>
+      </div>
+
+      <div
+        class="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 grid md:grid-cols-12 hover-scale">
+        <div
+          class="md:col-span-7 p-8 md:p-12 flex flex-col gap-6 justify-between border-b md:border-b-0 md:border-r border-slate-100">
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center gap-2">
+              <span
+                class="px-3 py-1 rounded-full bg-accent-red/10 text-accent-red text-xs font-bold uppercase tracking-wider">
+                Doctor's Recommendation
+              </span>
+              <span class="px-3 py-1 rounded-full bg-navy/5 text-navy text-xs font-semibold uppercase tracking-wider">
+                Endocrine Focus
+              </span>
+            </div>
+            <h3 id="hl-package-title" class="text-2xl md:text-3xl font-extrabold text-navy transition-all duration-300">
+              Metabolic disorder check up package
+            </h3>
+            <p id="hl-package-desc" class="text-sm text-navy-slate leading-relaxed transition-all duration-300">
+              Loading package details...
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4 my-2">
+            <div class="flex items-start gap-2.5">
+              <div class="p-1 rounded-lg bg-emerald-50 text-emerald-600 mt-0.5"><i data-lucide="check"
+                  class="w-4 h-4"></i></div>
+              <div class="flex flex-col">
+                <span class="font-bold text-xs text-navy">HOMA-IR Score</span>
+                <span class="text-[10px] text-navy-slate">Insulin Resistance Index</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <div class="p-1 rounded-lg bg-emerald-50 text-emerald-600 mt-0.5"><i data-lucide="check"
+                  class="w-4 h-4"></i></div>
+              <div class="flex flex-col">
+                <span class="font-bold text-xs text-navy">Thyroid (TSH)</span>
+                <span class="text-[10px] text-navy-slate">Metabolic Regulation</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <div class="p-1 rounded-lg bg-emerald-50 text-emerald-600 mt-0.5"><i data-lucide="check"
+                  class="w-4 h-4"></i></div>
+              <div class="flex flex-col">
+                <span class="font-bold text-xs text-navy">HbA1C Marker</span>
+                <span class="text-[10px] text-navy-slate">Glycemic Control mapping</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <div class="p-1 rounded-lg bg-emerald-50 text-emerald-600 mt-0.5"><i data-lucide="check"
+                  class="w-4 h-4"></i></div>
+              <div class="flex flex-col">
+                <span class="font-bold text-xs text-navy">Inflammation Panel</span>
+                <span class="text-[10px] text-navy-slate">C-Reactive Protein Lab</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-6 mt-4">
+            <button id="book-metabolic-btn"
+              class="px-6 py-3.5 bg-navy text-white rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-navy-light transition-all flex items-center gap-2">
+              Book This Package
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="md:col-span-5 bg-navy-tint/50 p-8 md:p-12 flex flex-col justify-between gap-8">
+          <div class="flex flex-col gap-4">
+            <span class="text-xs text-navy-slate font-medium uppercase tracking-wider">Included Lab Tests:</span>
+            <ul id="hl-package-items" class="flex flex-col gap-2.5 text-xs text-navy max-h-60 overflow-y-auto pr-1">
+            </ul>
+          </div>
+
+          <div class="flex flex-col gap-2 pt-6 border-t border-slate-200">
+            <span class="text-xs text-navy-slate font-medium">All-Inclusive Package Price:</span>
+            <div class="flex items-baseline gap-2">
+              <span id="hl-package-price"
+                class="text-3xl md:text-4xl font-extrabold text-accent-red transition-all duration-300">0</span>
+              <span class="text-sm font-semibold text-accent-red">THB</span>
+              <span class="text-xs text-navy-slate ml-2 font-medium">Net Rate</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="checkup" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-16 flex flex-col gap-4">
+        <span class="text-xs font-bold text-navy tracking-widest uppercase">Wellness Matching Tool</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-navy tracking-tight">Interactive Check-up Filter</h2>
+        <p class="text-navy-slate text-sm md:text-base">
+          Select your demographics and health concerns to find the screening packages tailored for your specific
+          physiological profile.
+        </p>
+      </div>
+
+      <div
+        class="max-w-3xl mx-auto bg-navy-tint rounded-2xl border border-slate-100 p-6 md:p-8 flex flex-col gap-8 shadow-sm">
+        <div class="flex flex-col gap-3">
+          <label class="text-xs font-bold uppercase tracking-wider text-navy-slate flex items-center gap-1.5">
+            <span
+              class="w-4 h-4 rounded-full bg-navy text-white text-[10px] flex items-center justify-center font-bold">1</span>
+            Select Gender
+          </label>
+          <div class="grid grid-cols-2 gap-4">
+            <button type="button" data-filter-gender="male"
+              class="gender-btn py-4 px-6 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-sm flex items-center justify-center gap-3 transition-all duration-200">
+              <i data-lucide="user" class="w-4 h-4"></i> Male
+            </button>
+            <button type="button" data-filter-gender="female"
+              class="gender-btn py-4 px-6 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-sm flex items-center justify-center gap-3 transition-all duration-200">
+              <i data-lucide="user" class="w-4 h-4"></i> Female
+            </button>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <label class="text-xs font-bold uppercase tracking-wider text-navy-slate flex items-center gap-1.5">
+            <span
+              class="w-4 h-4 rounded-full bg-navy text-white text-[10px] flex items-center justify-center font-bold">2</span>
+            Select Age Group
+          </label>
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+            <button type="button" data-filter-age="under-40"
+              class="age-btn py-3.5 px-4 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-xs md:text-sm transition-all duration-200">
+              Under 40
+            </button>
+            <button type="button" data-filter-age="40-49"
+              class="age-btn py-3.5 px-4 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-xs md:text-sm transition-all duration-200">
+              40 - 49 Yrs
+            </button>
+            <button type="button" data-filter-age="50-59"
+              class="age-btn py-3.5 px-4 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-xs md:text-sm transition-all duration-200">
+              50 - 59 Yrs
+            </button>
+            <button type="button" data-filter-age="60-69"
+              class="age-btn py-3.5 px-4 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-xs md:text-sm transition-all duration-200">
+              60 - 69 Yrs
+            </button>
+            <button type="button" data-filter-age="70+"
+              class="age-btn py-3.5 px-4 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-xs md:text-sm transition-all duration-200">
+              70+ Yrs
+            </button>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <label class="text-xs font-bold uppercase tracking-wider text-navy-slate flex items-center gap-1.5">
+            <span
+              class="w-4 h-4 rounded-full bg-navy text-white text-[10px] flex items-center justify-center font-bold">3</span>
+            Diabetic Status
+          </label>
+          <div class="grid grid-cols-2 gap-4">
+            <button type="button" data-filter-diabetes="no"
+              class="diabetes-btn py-4 px-6 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-sm flex items-center justify-center gap-3 transition-all duration-200">
+              <i data-lucide="check" class="w-4 h-4"></i> Non-Diabetic
+            </button>
+            <button type="button" data-filter-diabetes="yes"
+              class="diabetes-btn py-4 px-6 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-sm flex items-center justify-center gap-3 transition-all duration-200">
+              <i data-lucide="alert-circle" class="w-4 h-4"></i> Diabetic
+            </button>
+          </div>
+        </div>
+
+        <div class="flex justify-end border-t border-slate-200 pt-4">
+          <button id="reset-filters"
+            class="flex items-center gap-2 text-xs font-semibold text-navy-slate hover:text-navy transition-colors py-2 px-4 rounded-lg">
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Reset Choices
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-16 max-w-4xl mx-auto">
+        <h3 class="text-xs font-bold text-navy-slate uppercase tracking-wider mb-6 flex items-center gap-2">
+          <i data-lucide="activity" class="w-4 h-4"></i> Recommended Programs
+        </h3>
+        <div id="filter-results" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="vaccination" class="py-24 bg-iceblue/30 border-y border-iceblue-dark/20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col lg:flex-row justify-between items-start gap-8 mb-16">
+        <div class="max-w-2xl flex flex-col gap-4">
+          <span class="text-xs font-bold text-navy tracking-widest uppercase">Immunization & Specials</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-navy tracking-tight">Travel Vaccines & Promotions</h2>
+          <p class="text-navy-slate text-sm md:text-base">
+            Essential protection for international travelers, long-term expatriates, and high-risk groups.
+          </p>
+        </div>
+        <div class="flex gap-4">
+          <a href="#booking-section-anchor" id="vaccine-sched-btn"
+            class="px-5 py-3 bg-navy text-white rounded-lg text-xs font-semibold uppercase tracking-wider hover:bg-navy-light shadow-md transition-all">
+            Schedule Vaccination
+          </a>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-12 items-start">
+        <div
+          class="lg:col-span-7 bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm flex flex-col gap-6">
+          <h3 class="font-extrabold text-lg text-navy flex items-center gap-2">
+            <i data-lucide="globe" class="w-5 h-5 text-navy-slate"></i>
+            Traveler Immunization List
+          </h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs md:text-sm border-collapse">
+              <thead>
+                <tr class="border-b border-slate-100 text-navy-slate uppercase tracking-wider text-[10px] font-bold">
+                  <th class="pb-3 w-7/12">Vaccine & Description</th>
+                  <th class="pb-3 w-2/12 text-center">Protocol</th>
+                  <th class="pb-3 w-3/12 text-right">Price (THB)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-50 text-navy">
+                <tr>
+                  <td class="py-4">
+                    <span class="font-bold block">Hepatitis A & B Combination</span>
+                    <span class="text-xs text-navy-slate block mt-0.5">Twinrix - Active protection against liver
+                      infection.</span>
+                  </td>
+                  <td class="py-4 text-center text-xs text-navy-slate">3 Doses</td>
+                  <td class="py-4 text-right font-semibold text-accent-red">1,850 <span
+                      class="text-[10px] text-navy-slate">/dose</span></td>
+                </tr>
+                <tr>
+                  <td class="py-4">
+                    <span class="font-bold block">Rabies Pre-Exposure Prophylaxis</span>
+                    <span class="text-xs text-navy-slate block mt-0.5">Highly recommended for rural travelers & cyclists
+                      in Chiang Mai.</span>
+                  </td>
+                  <td class="py-4 text-center text-xs text-navy-slate">2 Doses</td>
+                  <td class="py-4 text-right font-semibold text-accent-red">950 <span
+                      class="text-[10px] text-navy-slate">/dose</span></td>
+                </tr>
+                <tr>
+                  <td class="py-4">
+                    <span class="font-bold block">Typhoid Fever Vaccine</span>
+                    <span class="text-xs text-navy-slate block mt-0.5">Single-dose injection. Crucial for street food
+                      enthusiasts.</span>
+                  </td>
+                  <td class="py-4 text-center text-xs text-navy-slate">Single Shot</td>
+                  <td class="py-4 text-right font-semibold text-accent-red">850</td>
+                </tr>
+                <tr>
+                  <td class="py-4">
+                    <span class="font-bold block">Tdap (Tetanus, Diphtheria, Pertussis)</span>
+                    <span class="text-xs text-navy-slate block mt-0.5">Boosters recommended every 10 years for general
+                      safety.</span>
+                  </td>
+                  <td class="py-4 text-center text-xs text-navy-slate">Single Shot</td>
+                  <td class="py-4 text-right font-semibold text-accent-red">1,200</td>
+                </tr>
+                <tr>
+                  <td class="py-4">
+                    <span class="font-bold block">Japanese Encephalitis (JE)</span>
+                    <span class="text-xs text-navy-slate block mt-0.5">Protects against mosquito-borne brain
+                      inflammation.</span>
+                  </td>
+                  <td class="py-4 text-center text-xs text-navy-slate">Single Shot</td>
+                  <td class="py-4 text-right font-semibold text-accent-red">1,400</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="bg-navy-tint p-4 rounded-xl flex items-start gap-3 mt-2">
+            <i data-lucide="info" class="w-4 h-4 text-navy-slate mt-0.5 flex-shrink-0"></i>
+            <span class="text-[11px] text-navy-slate leading-relaxed">Prices listed include clinician fee and disposable
+              materials.</span>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 flex flex-col gap-6">
+          <div
+            class="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm flex flex-col justify-between hover-scale min-h-[220px]">
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center justify-between">
+                <span
+                  class="px-2.5 py-1 rounded bg-accent-red/10 text-accent-red text-[10px] font-bold uppercase tracking-wider">
+                  Duo Vaccination Promo
+                </span>
+                <i data-lucide="sparkles" class="w-5 h-5 text-accent-red"></i>
+              </div>
+              <h4 class="font-extrabold text-base text-navy">Pneumonia PCV15 + Quadrivalent Flu</h4>
+              <p class="text-xs text-navy-slate leading-relaxed">
+                Co-administered protection recommended for seniors (65+), asthma sufferers, or diabetics.
+              </p>
+            </div>
+            <div class="flex items-baseline justify-between mt-6 pt-4 border-t border-slate-50">
+              <span class="text-xs text-navy-slate font-medium">Combined Price:</span>
+              <div class="flex items-baseline gap-1">
+                <span class="text-2xl font-extrabold text-accent-red">3,650</span>
+                <span class="text-xs font-bold text-accent-red uppercase">THB Net</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm flex flex-col justify-between hover-scale min-h-[220px]">
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 rounded bg-navy/10 text-navy text-[10px] font-bold uppercase tracking-wider">
+                  Qdenga Vaccine Package
+                </span>
+                <i data-lucide="shield" class="w-5 h-5 text-navy-slate"></i>
+              </div>
+              <h4 class="font-extrabold text-base text-navy">Dengue Fever Prevention Program</h4>
+              <p class="text-xs text-navy-slate leading-relaxed">
+                New Qdenga 2-dose series (3 months interval). Prevents up to 80% of dengue fever hospitalizations.
+              </p>
+            </div>
+            <div class="flex items-center justify-between mt-6 pt-4 border-t border-slate-50">
+              <span class="text-xs text-navy-slate font-medium">Pricing Plan:</span>
+              <div class="flex flex-col items-end">
+                <span class="text-base font-bold text-navy">2,400 <span class="text-[10px] text-navy-slate">THB / Single
+                    Shot</span></span>
+                <span class="text-lg font-extrabold text-accent-red">4,500 <span class="text-[10px] text-navy-slate">THB
+                    / Course (2 Shots)</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="consultation" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div
+        class="bg-navy rounded-3xl p-8 md:p-12 text-white flex flex-col lg:flex-row items-center justify-between gap-8 mb-20 shadow-xl relative overflow-hidden">
+        <div class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-navy-light/20 -z-0"></div>
+        <div class="flex flex-col gap-4 max-w-2xl relative z-10">
+          <span class="text-xs text-iceblue font-bold tracking-widest uppercase">Remote Healthcare</span>
+          <h3 class="text-2xl md:text-3xl font-extrabold tracking-tight">Need a Virtual Consultation?</h3>
+          <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+            Expatriates and travelers can consult with Dr. M online from anywhere. Ideal for medical opinions,
+            laboratory reviews, and international prescription alignment.
+          </p>
+          <div class="flex flex-wrap gap-4 text-xs font-semibold mt-2">
+            <span class="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-full text-slate-200">
+              <i data-lucide="video" class="w-4 h-4 text-iceblue"></i> Zoom Video Calls
+            </span>
+            <span class="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-full text-slate-200">
+              <i data-lucide="video" class="w-4 h-4 text-iceblue"></i> LINE Video Calls
+            </span>
+            <span class="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-full text-slate-200">
+              <i data-lucide="video" class="w-4 h-4 text-iceblue"></i> WhatsApp Video Calls
+            </span>
+          </div>
+        </div>
+        <div class="relative z-10 flex-shrink-0">
+          <a href="#contact"
+            class="px-6 py-4 bg-iceblue text-navy rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-white transition-all shadow-lg flex items-center gap-2">
+            Initiate Virtual Request
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+
+      <div id="booking-section-anchor" class="scroll-mt-24 max-w-4xl mx-auto">
+        <div class="flex items-center justify-center gap-4 mb-8">
+          <button type="button" id="tab-appt"
+            class="px-6 py-3 font-bold text-xs uppercase tracking-widest rounded-xl transition-all bg-navy text-white shadow-md">
+            <i data-lucide="calendar" class="w-4 h-4 inline-block mr-1"></i> Appointment Form
+          </button>
+          <button type="button" id="tab-refill"
+            class="px-6 py-3 font-bold text-xs uppercase tracking-widest rounded-xl transition-all bg-white text-navy border border-navy hover:bg-slate-50">
+            <i data-lucide="pill" class="w-4 h-4 inline-block mr-1"></i> Refill Prescription
+          </button>
+        </div>
+
+        <div id="section-appt"
+          class="bg-navy-tint rounded-3xl border border-slate-100 p-8 shadow-sm flex flex-col gap-6">
+          <div>
+            <h3 class="text-xl font-extrabold text-navy">Make an Appointment</h3>
+            <p class="text-xs text-navy-slate mt-1">Book your wellness screening or clinic consultation with Dr. M</p>
+          </div>
+
+          <form id="appointment-form" class="flex flex-col gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="flex flex-col gap-1.5">
+                <label for="appt-firstname" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">First
+                  Name *</label>
+                <input type="text" id="appt-firstname" required
+                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="John">
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="appt-middlename"
+                  class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Middle Name</label>
+                <input type="text" id="appt-middlename"
+                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="Middle">
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="appt-lastname" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Last
+                  Name *</label>
+                <input type="text" id="appt-lastname" required
+                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="Doe">
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="appt-email" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Email
+                Address *</label>
+              <input type="email" id="appt-email" required
+                class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white"
+                placeholder="john@example.com">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div class="flex flex-col gap-1.5">
+                <label for="appt-phone" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Phone
+                  Number *</label>
+                <input type="tel" id="appt-phone" required
+                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white"
+                  placeholder="+66 80-123-4567">
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="appt-date" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Preferred
+                  Date *</label>
+                <input type="date" id="appt-date" required
+                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div class="flex flex-col gap-1.5">
+                <label for="appt-gender"
+                  class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Gender</label>
+                <select id="appt-gender" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white">
+                  <option value="">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other / Prefer not to say</option>
+                </select>
+              </div>
+              <!-- จากเดิมที่เป็น Select Dropdown เปลี่ยนเป็น Input Date ครับ -->
+              <div class="flex flex-col gap-1.5">
+                <label for="appt-dob" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Date of
+                  Birth *</label>
+                <input type="date" id="appt-dob" required
+                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white">
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="appt-program" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Target
+                Program / Purpose of Visit</label>
+              <select id="appt-program" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white">
+                <option value="" disabled selected>-- Select Purpose of Visit / Health Profile --</option>
+
+                <optgroup label="General Clinic Services">
+                  <option value="GENERAL-CONSULT">Consult a Doctor / General Medical Care (พบแพทย์ / รักษาโรคทั่วไป)
+                  </option>
+                  <option value="travel-vaccine">Travel Vaccine Administration (ปรึกษาและรับวัคซีนท่องเที่ยว)</option>
+                  <option value="custom">Custom Customized Plan (ปรึกษาจัดโปรแกรมตรวจเฉพาะบุคคล)</option>
+                </optgroup>
+
+                <optgroup label="Special Programs">
+                  <option value="UNDER-40">Check Up program for under 40 (4,270 THB)</option>
+                  <option value="METABOLIC-FU45">Check Up - Female Under 45 with Metabolic disorder (4,717 THB)
+                  </option>
+                  <option value="METABOLIC-FO45">Check Up - Female Over 45 with Metabolic disorder (5,267 THB)
+                  </option>
+                  <option value="METABOLIC-MALE">Check Up - Men with Metabolic disorder (5,367 THB)</option>
+                </optgroup>
+
+                <optgroup label="Female Non-Diabetic Profiles">
+                  <option value="F40-NO-DM">Check Up program F40 No DM (5,030 THB)</option>
+                  <option value="F50-NO-DM">Check Up program F50 No DM (5,855 THB)</option>
+                  <option value="F60-NO-DM">Check Up program F60 No DM (7,280 THB)</option>
+                  <option value="F70-NO-DM">Check Up program F70 No DM (8,480 THB)</option>
+                </optgroup>
+
+                <optgroup label="Female Diabetic Profiles">
+                  <option value="F40-DM">Check Up program F40 DM (6,650 THB)</option>
+                  <option value="F50-DM">Check Up program F50 DM (6,925 THB)</option>
+                  <option value="F60-DM">Check Up program F60 DM (8,350 THB)</option>
+                  <option value="F70-DM">Check Up program F70 DM (9,550 THB)</option>
+                </optgroup>
+
+                <optgroup label="Male Non-Diabetic Profiles">
+                  <option value="M40-NO-DM">Check Up program M40 No DM (4,925 THB)</option>
+                  <option value="M50-NO-DM">Check Up program M50 No DM (6,225 THB)</option>
+                  <option value="M60-NO-DM">Check Up program M60 No DM (7,425 THB)</option>
+                  <option value="M70-NO-DM">Check Up program M70 No DM (8,625 THB)</option>
+                </optgroup>
+
+                <optgroup label="Male Diabetic Profiles">
+                  <option value="M40-DM">Check Up program M40 DM (5,995 THB)</option>
+                  <option value="M50-DM">Check Up program M50 DM (7,295 THB)</option>
+                  <option value="M60-DM">Check Up program M60 DM (8,495 THB)</option>
+                  <option value="M70-DM">Check Up program M70 DM (9,695 THB)</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="appt-message" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Clinical
+                Notes / Concerns</label>
+              <textarea id="appt-message" rows="3"
+                class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white placeholder:text-slate-300"
+                placeholder="Please describe any symptoms, medication requirements, or general health goals."></textarea>
+            </div>
+
+            <button type="submit"
+              class="w-full py-4 bg-navy text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-navy-light shadow-md mt-2 flex items-center justify-center gap-2">
+              <i data-lucide="calendar" class="w-4 h-4"></i> Submit Booking
+            </button>
+          </form>
+        </div>
+
+        <div id="section-refill"
+          class="bg-navy-tint rounded-3xl border border-slate-100 p-8 shadow-sm flex flex-col gap-6 hidden">
+          <div>
+            <div
+              class="inline-flex items-center gap-1.5 text-accent-red text-[10px] font-bold uppercase tracking-wider mb-1">
+              <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i> Clinician Approval Required
+            </div>
+            <h3 class="text-xl font-extrabold text-navy">Pre-Order Refill Prescription</h3>
+            <p class="text-xs text-navy-slate mt-1">Submit current prescription details for review and pre-packaging.
+            </p>
+          </div>
+
+          <form id="refill-form" class="flex flex-col gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="flex flex-col gap-1.5">
+                <label for="refill-firstname"
+                  class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">First Name *</label>
+                <input type="text" id="refill-firstname" required
+                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="John">
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="refill-middlename"
+                  class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Middle Name</label>
+                <input type="text" id="refill-middlename"
+                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="Middle">
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="refill-lastname" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Last
+                  Name *</label>
+                <input type="text" id="refill-lastname" required
+                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="Doe">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div class="flex flex-col gap-1.5">
+                <label for="refill-email" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Email
+                  Address *</label>
+                <input type="email" id="refill-email" required
+                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white"
+                  placeholder="jane@example.com">
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="refill-phone" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Phone
+                  Number *</label>
+                <input type="tel" id="refill-phone" required
+                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white"
+                  placeholder="+66 80-987-6543">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div class="flex flex-col gap-1.5">
+                <label for="refill-id"
+                  class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Prescription ID</label>
+                <input type="text" id="refill-id"
+                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="HN123456">
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="refill-delivery"
+                  class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Receipt Option *</label>
+                <select id="refill-delivery" required
+                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white">
+                  <option value="pickup">Clinic Pick-up</option>
+                  <option value="delivery">Delivery</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- ค้นหาจุดเดิมที่เป็น <textarea id="refill-meds"> แล้วแทนที่ด้วยบล็อกนี้ครับ -->
+            <div class="flex flex-col gap-2">
+              <label class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Medication Details *</label>
+
+
+              <!-- หัวข้อคอลัมน์ (แสดงผลบน Desktop) -->
+              <div
+                class="hidden md:grid grid-cols-12 gap-3 px-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                <div class="col-span-6">Medicine</div>
+                <div class="col-span-3">Dosage</div>
+                <div class="col-span-2">Qty</div>
+                <div class="col-span-1 text-center">Delete</div>
+              </div>
+
+              <!-- กล่องบรรจุรายการยาที่จะเพิ่ม-ลดแบบอัตโนมัติ -->
+              <div id="medication-rows-container" class="flex flex-col gap-3">
+                <!-- แถวที่ 1 (เริ่มต้น) -->
+                <div
+                  class="medication-row grid grid-cols-1 md:grid-cols-12 gap-3 bg-white p-3 md:p-0 rounded-xl md:rounded-none border border-slate-100 md:border-none shadow-sm md:shadow-none">
+                  <div class="col-span-6">
+                    <input type="text" placeholder="e.g. Metformin" required
+                      class="med-name w-full px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white">
+                  </div>
+                  <div class="col-span-3">
+                    <input type="text" placeholder="e.g. 500mg" required
+                      class="med-dosage w-full px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white">
+                  </div>
+                  <div class="col-span-2">
+                    <input type="text" placeholder="e.g. 30 tablets" required
+                      class="med-qty w-full px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white">
+                  </div>
+                  <div class="col-span-1 flex items-center justify-center">
+                    <button type="button"
+                      class="remove-row-btn p-2 text-slate-300 hover:text-accent-red rounded-lg transition-colors"
+                      aria-label="Remove medication item" disabled>
+                      <i data-lucide="trash-2" class="w-4 h-4"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ปุ่มเพิ่มรายการยา -->
+              <button type="button" id="add-row-btn"
+                class="w-fit mt-1 px-4 py-2 border border-dashed border-navy text-navy rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-navy/5 transition-all flex items-center gap-1.5">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add Medicine
+              </button>
+            </div>
+
+            <button type="submit"
+              class="w-full py-4 bg-navy text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-navy-light shadow-md mt-2 flex items-center justify-center gap-2">
+              <i data-lucide="pill" class="w-4 h-4"></i> Submit Refill Pre-Order
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <footer id="contact" class="bg-navy text-white pt-20 pb-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-12 md:gap-16 pb-16 border-b border-slate-800">
+      <div class="md:col-span-4 flex flex-col gap-6">
+        <a href="#home" class="inline-block w-fit group">
+          <div class="bg-white/95 p-3 rounded-2xl shadow-md transition-all duration-300 group-hover:bg-white">
+            <img src="LOGO 2 Tran.png" alt="HCMC Footer Logo" class="h-9 md:h-11 w-auto">
+          </div>
+        </a>
+        <p class="text-xs md:text-sm text-slate-400 leading-relaxed">
+          Health Care Medical Clinic is a premier primary care and clinical diagnostics facility in Chiang Mai. Under
+          Dr. M, we specialize in high-resolution wellness panels.
+        </p>
+        <span class="text-xs text-slate-500 font-mono">© 2026 HCMC Clinic. All Rights Reserved.</span>
+      </div>
+
+      <div class="md:col-span-4 flex flex-col gap-6">
+        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-300">Clinic Location & Hours</h4>
+        <div class="flex flex-col gap-3.5 text-xs md:text-sm text-slate-400">
+          <div class="flex items-start gap-3">
+            <i data-lucide="map-pin" class="w-4 h-4 text-iceblue flex-shrink-0 mt-0.5"></i>
+            <span>
+              <strong>HCMC Clinic</strong><br>
+              275, Moo 6, Mae Hia Sub-district, Mueang Chiang Mai District, <br>Chiang Mai 50100, Thailand.
+            </span>
+          </div>
+          <div class="flex items-start gap-3">
+            <i data-lucide="clock" class="w-4 h-4 text-iceblue flex-shrink-0 mt-0.5"></i>
+            <span>
+              Monday – Friday: 08:00 – 17:00<br>
+              Saturday: 09:00 – 12:00<br>
+              Sunday: Closed
+            </span>
+          </div>
+          <div class="flex items-start gap-3">
+            <i data-lucide="phone" class="w-4 h-4 text-iceblue flex-shrink-0 mt-0.5"></i>
+            <span>+66 53 804 405 | info@healthcaremedicalclinic.com</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:col-span-4 flex flex-col gap-6">
+        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-300">Connect With Us</h4>
+        <div class="flex gap-4">
+          <button type="button" data-qr-target="line"
+            class="qr-trigger-btn w-12 h-12 rounded-xl bg-slate-800 hover:bg-emerald-600 flex items-center justify-center transition-all duration-300 relative group"
+            aria-label="Line QR Code">
+            <i data-lucide="message-square" class="w-5 h-5 text-white"></i>
+            <span
+              class="absolute bottom-full mb-2 bg-navy text-[10px] text-white px-2 py-1 rounded shadow opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-slate-700">LINE
+              QR</span>
+          </button>
+          <button type="button" data-qr-target="whatsapp"
+            class="qr-trigger-btn w-12 h-12 rounded-xl bg-slate-800 hover:bg-teal-600 flex items-center justify-center transition-all duration-300 relative group"
+            aria-label="WhatsApp QR Code">
+            <i data-lucide="phone" class="w-5 h-5 text-white"></i>
+            <span
+              class="absolute bottom-full mb-2 bg-navy text-[10px] text-white px-2 py-1 rounded shadow opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-slate-700">WhatsApp
+              QR</span>
+          </button>
+          <button type="button" data-qr-target="facebook"
+            class="qr-trigger-btn w-12 h-12 rounded-xl bg-slate-800 hover:bg-blue-600 flex items-center justify-center transition-all duration-300 relative group"
+            aria-label="Facebook QR Code">
+            <i data-lucide="facebook" class="w-5 h-5 text-white"></i>
+            <span
+              class="absolute bottom-full mb-2 bg-navy text-[10px] text-white px-2 py-1 rounded shadow opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-slate-700">Facebook
+              QR</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <div id="qr-modal"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div id="modal-backdrop" class="absolute inset-0"></div>
+    <div
+      class="bg-white rounded-3xl p-8 max-w-sm w-full mx-4 shadow-2xl relative z-10 transform scale-95 transition-transform duration-300 flex flex-col items-center gap-6">
+      <button id="modal-close-btn"
+        class="absolute top-4 right-4 p-2 rounded-full hover:bg-slate-100 text-navy-slate hover:text-navy transition-colors"
+        aria-label="Close modal">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div class="text-center flex flex-col gap-1">
+        <span class="text-[10px] text-navy-slate font-bold uppercase tracking-wider" id="modal-subtitle">Connect With
+          HCMC</span>
+        <h4 class="text-lg font-extrabold text-navy" id="modal-title">Scan QR Code</h4>
+      </div>
+      <div
+        class="w-64 h-64 border border-slate-100 rounded-2xl shadow-inner bg-slate-50 flex items-center justify-center overflow-hidden p-2">
+        <img id="modal-qr-image" src="" alt="QR Code" class="w-full h-full object-contain rounded-xl">
+      </div>
+      <div class="text-center flex flex-col gap-1 text-xs">
+        <p class="text-navy-slate">Scan with your smartphone camera or messenger app.</p>
+        <span class="font-bold text-navy" id="modal-channel-handle">@hcmc_clinic</span>
+      </div>
+    </div>
+  </div>
+
+
+  <script type="module">
+    import { packages } from './packages.js';
+
+    // Global Interactive Filter States
+    let currentFilters = {
+      gender: null,
+      ageGroup: null,
+      hasDiabetes: null
+    };
+
+    // Track chosen state for the Metabolic showcase module area
+    let activeHighlightId = "METABOLIC-FU45";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+
+      initMobileMenu();
+      initTabs();
+      setupFilters();
+      initModals();
+      initHighlightMetaTabs(); // Start metabolic showcase controller logic
+
+      // Load initial layout view setup text
+      evaluateAndRender();
+    });
+
+    // คอนโทรลเลอร์ควบคุมการเพิ่ม-ลดแถวรายการยา
+    const container = document.getElementById("medication-rows-container");
+    const addBtn = document.getElementById("add-row-btn");
+
+    if (addBtn && container) {
+      // ฟังก์ชันเช็กจำนวนแถวเพื่อเปิด/ปิดปุ่มลบ (ไม่ให้ลบแถวสุดท้ายจนหมด)
+      const updateRemoveButtons = () => {
+        const rows = container.querySelectorAll(".medication-row");
+        rows.forEach(row => {
+          const btn = row.querySelector(".remove-row-btn");
+          if (btn) btn.disabled = (rows.length <= 1);
+        });
+      };
+
+      // กดปุ่มเพิ่มแถว
+      addBtn.addEventListener("click", () => {
+        const firstRow = container.querySelector(".medication-row");
+        const newRow = firstRow.cloneNode(true);
+
+        // ล้างค่าใน Input ของแถวใหม่
+        newRow.querySelectorAll("input").forEach(input => input.value = "");
+        container.appendChild(newRow);
+
+        // ผูก Event ให้ปุ่มลบของแถวใหม่
+        newRow.querySelector(".remove-row-btn").addEventListener("click", () => {
+          newRow.remove();
+          updateRemoveButtons();
+        });
+
+        // สั่งให้ Lucide โหลดไอคอนถังขยะในแถวใหม่
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+        updateRemoveButtons();
+      });
+
+      // ผูก Event ให้แถวแรกที่ติดมากับระบบตอนเริ่มต้น
+      container.querySelector(".remove-row-btn").addEventListener("click", (e) => {
+        e.currentTarget.closest(".medication-row").remove();
+        updateRemoveButtons();
+      });
+    }
+
+    // 1. Mobile Menu Drawer Mechanism
+    function initMobileMenu() {
+      const btn = document.getElementById("mobile-menu-btn");
+      const drawer = document.getElementById("mobile-drawer");
+
+      if (btn && drawer) {
+        btn.addEventListener("click", () => {
+          drawer.classList.toggle("hidden");
+        });
+        drawer.querySelectorAll(".mobile-nav-link").forEach(link => {
+          link.addEventListener("click", () => {
+            drawer.classList.add("hidden");
+          });
+        });
+      }
+    }
+
+    // 2. Form Panels Switcher Navigation Engine
+    function initTabs() {
+      const tabAppt = document.getElementById("tab-appt");
+      const tabRefill = document.getElementById("tab-refill");
+      const sectAppt = document.getElementById("section-appt");
+      const sectRefill = document.getElementById("section-refill");
+
+      function switchToAppointment() {
+        tabAppt.className = "px-6 py-3 font-bold text-xs uppercase tracking-widest rounded-xl transition-all bg-navy text-white shadow-md";
+        tabRefill.className = "px-6 py-3 font-bold text-xs uppercase tracking-widest rounded-xl transition-all bg-white text-navy border border-navy hover:bg-slate-50";
+        sectAppt.classList.remove("hidden");
+        sectRefill.classList.add("hidden");
+      }
+
+      function switchToRefill() {
+        tabRefill.className = "px-6 py-3 font-bold text-xs uppercase tracking-widest rounded-xl transition-all bg-navy text-white shadow-md";
+        tabAppt.className = "px-6 py-3 font-bold text-xs uppercase tracking-widest rounded-xl transition-all bg-white text-navy border border-navy hover:bg-slate-50";
+        sectRefill.classList.remove("hidden");
+        sectAppt.classList.add("hidden");
+      }
+
+      if (tabAppt && tabRefill && sectAppt && sectRefill) {
+        tabAppt.addEventListener("click", switchToAppointment);
+        tabRefill.addEventListener("click", switchToRefill);
+      }
+
+      const crossTriggers = [
+        { id: "nav-btn-appt", action: switchToAppointment },
+        { id: "nav-btn-refill", action: switchToRefill },
+        { id: "drawer-btn-appt", action: switchToAppointment },
+        { id: "drawer-btn-refill", action: switchToRefill },
+        { id: "hero-book-btn", action: switchToAppointment },
+        { id: "vaccine-sched-btn", action: switchToAppointment }
+      ];
+
+      crossTriggers.forEach(t => {
+        const elem = document.getElementById(t.id);
+        if (elem) elem.addEventListener("click", t.action);
+      });
+    }
+
+    // 3. Showcase Dynamic Highlight Pill Tabs Module
+    function initHighlightMetaTabs() {
+      const tabs = document.querySelectorAll('[data-highlight-tab]');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => {
+            t.className = "flex-1 py-2.5 px-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all bg-transparent text-navy hover:bg-slate-50";
+          });
+          tab.className = "flex-1 py-2.5 px-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all bg-navy text-white shadow-sm";
+
+          activeHighlightId = tab.getAttribute('data-highlight-tab');
+          renderHighlightCard();
+        });
+      });
+
+      renderHighlightCard();
+
+      const bookBtn = document.getElementById("book-metabolic-btn");
+      if (bookBtn) {
+        bookBtn.addEventListener("click", () => {
+          selectPackageInForm(activeHighlightId);
+          scrollToSection("booking-section-anchor");
+        });
+      }
+    }
+
+    function renderHighlightCard() {
+      const metaPackage = packages.find(p => p.id === activeHighlightId);
+      if (!metaPackage) return;
+
+      const titleElem = document.getElementById("hl-package-title");
+      const descElem = document.getElementById("hl-package-desc");
+      const priceElem = document.getElementById("hl-package-price");
+      const itemsContainer = document.getElementById("hl-package-items");
+
+      if (titleElem) titleElem.innerText = metaPackage.name;
+      if (descElem) descElem.innerText = metaPackage.suitableFor;
+      if (priceElem) priceElem.innerText = Number(metaPackage.price).toLocaleString('en-US');
+
+      if (itemsContainer) {
+        itemsContainer.innerHTML = metaPackage.items.map(item => `
+          <li class="flex items-start gap-2 text-xs text-slate-600 leading-relaxed">
+            <span class="text-navy font-bold mt-0.5">•</span>
+            <span>${item}</span>
+          </li>
+        `).join("");
+      }
+    }
+
+    // 4. Wizard Steps Custom Search Filter Core
+    function setupFilters() {
+      const activeFilters = currentFilters;
+
+      const filterGroups = {
+        gender: document.querySelectorAll('[data-filter-gender]'),
+        age: document.querySelectorAll('[data-filter-age]'),
+        diabetes: document.querySelectorAll('[data-filter-diabetes]')
+      };
+
+      function highlightActiveButton(buttons, activeButton) {
+        buttons.forEach(btn => {
+          if (btn === activeButton) {
+            btn.classList.remove('border-navy', 'text-navy', 'bg-transparent', 'hover:bg-iceblue-light');
+            btn.classList.add('bg-navy', 'text-white', 'border-navy');
+          } else {
+            btn.classList.remove('bg-navy', 'text-white');
+            btn.classList.add('border-navy', 'text-navy', 'bg-transparent', 'hover:bg-iceblue-light');
+          }
+        });
+      }
+
+      filterGroups.gender.forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeFilters.gender = btn.getAttribute('data-filter-gender');
+          highlightActiveButton(filterGroups.gender, btn);
+          evaluateAndRender();
+        });
+      });
+
+      filterGroups.age.forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeFilters.ageGroup = btn.getAttribute('data-filter-age');
+          highlightActiveButton(filterGroups.age, btn);
+          evaluateAndRender();
+        });
+      });
+
+      filterGroups.diabetes.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const val = btn.getAttribute('data-filter-diabetes');
+          activeFilters.hasDiabetes = (val === 'yes');
+          highlightActiveButton(filterGroups.diabetes, btn);
+          evaluateAndRender();
+        });
+      });
+
+      const resetButton = document.getElementById("reset-filters");
+      if (resetButton) {
+        resetButton.addEventListener("click", () => {
+          Object.values(filterGroups).forEach(buttons => {
+            buttons.forEach(btn => {
+              btn.classList.remove('bg-navy', 'text-white');
+              btn.classList.add('border-navy', 'text-navy', 'bg-transparent', 'hover:bg-iceblue-light');
+            });
+          });
+
+          activeFilters.gender = null;
+          activeFilters.ageGroup = null;
+          activeFilters.hasDiabetes = null;
+
+          evaluateAndRender();
+        });
+      }
+    }
+
+    function evaluateAndRender() {
+      const resultsContainer = document.getElementById("filter-results");
+      if (!resultsContainer) return;
+
+      if (!currentFilters.gender || !currentFilters.ageGroup || currentFilters.hasDiabetes === null) {
+        resultsContainer.className = "grid grid-cols-1 w-full";
+        resultsContainer.innerHTML = `
+          <div class="text-center py-12 px-6 border-2 border-dashed border-slate-200 rounded-2xl text-navy-slate w-full">
+            <p class="text-sm font-medium">Please select your Gender, Age Group, and Diabetic Status above to load matching clinical screening programs.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const filtered = packages.filter(pkg => {
+        const matchGender = (pkg.filters.gender === 'all' || pkg.filters.gender === currentFilters.gender);
+        const matchAge = (pkg.filters.ageGroup === currentFilters.ageGroup);
+        const matchDM = (pkg.filters.hasDiabetes === currentFilters.hasDiabetes);
+        return matchGender && matchAge && matchDM;
+      });
+
+      if (filtered.length === 0) {
+        resultsContainer.className = "grid grid-cols-1 w-full";
+        resultsContainer.innerHTML = `
+          <div class="text-center py-12 px-6 border border-slate-200 rounded-2xl bg-white text-navy-slate w-full">
+            <p class="text-sm font-semibold mb-1">No custom packages found for this exact biological selection.</p>
+            <p class="text-xs text-slate-400">Please check alternative choices or contact our medical coordinator.</p>
+          </div>
+        `;
+        return;
+      }
+
+      resultsContainer.className = "grid grid-cols-1 md:grid-cols-2 gap-6 w-full";
+      renderPackages(filtered, resultsContainer);
+    }
+
+    function renderPackages(list, container) {
+      container.innerHTML = "";
+
+      list.forEach(pkg => {
+        const card = document.createElement("div");
+        card.className = `bg-white rounded-2xl shadow-sm border ${pkg.isHighlight ? 'border-2 border-navy ring-4 ring-iceblue/30' : 'border-slate-200'} p-6 transition-transform duration-200 hover:-translate-y-1 flex flex-col justify-between`;
+
+        const priceFormatted = Number(pkg.price).toLocaleString('en-US');
+        const listItemsHtml = pkg.items.map(item => `
+          <li class="flex items-start gap-2 text-xs text-slate-600 leading-relaxed">
+            <span class="text-navy font-bold mt-0.5">•</span>
+            <span>${item}</span>
+          </li>
+        `).join("");
+
+        card.innerHTML = `
+          <div>
+            ${pkg.isHighlight ? '<span class="inline-block bg-navy text-white text-[10px] font-extrabold uppercase px-2 py-0.5 rounded mb-3 tracking-widest">Recommended Profile</span>' : ''}
+            <h3 class="text-base font-bold text-navy mb-1.5">${pkg.name}</h3>
+            <p class="text-xs text-slate-400 mb-4 italic">${pkg.suitableFor}</p>
+            <div class="bg-slate-50 border border-slate-100 rounded-xl p-4 mb-4">
+              <div class="text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-2">Included Bio-Markers & Screenings</div>
+              <ul class="space-y-1.5 max-h-48 overflow-y-auto pr-1">
+                ${listItemsHtml}
+              </ul>
+            </div>
+          </div>
+          <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between gap-4">
+            <div>
+              <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Bespoke Rate</div>
+              <div class="text-xl font-black text-navy">${priceFormatted} <span class="text-xs font-normal text-slate-500">THB</span></div>
+            </div>
+            <button type="button" data-book-id="${pkg.id}" class="bg-navy hover:bg-navy/90 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-all">
+              Book Package
+            </button>
+          </div>
+        `;
+
+        card.querySelector(`[data-book-id="${pkg.id}"]`).addEventListener("click", () => {
+          selectPackageInForm(pkg.id);
+          scrollToSection("booking-section-anchor");
+        });
+
+        container.appendChild(card);
+      });
+    }
+
+    function selectPackageInForm(packageId) {
+      const selectElem = document.getElementById("appt-program");
+      if (selectElem) {
+        selectElem.value = packageId;
+      }
+    }
+
+    function scrollToSection(id) {
+      const target = document.getElementById(id);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    // 5. Channels Popup Modal Controller
+    function initModals() {
+      const modal = document.getElementById("qr-modal");
+      if (!modal) return;
+
+      const backdrop = document.getElementById("modal-backdrop");
+      const closeBtn = document.getElementById("modal-close-btn");
+      const triggerBtns = document.querySelectorAll("[data-qr-target]");
+
+      const title = document.getElementById("modal-title");
+      const subtitle = document.getElementById("modal-subtitle");
+      const handle = document.getElementById("modal-channel-handle");
+      const qrImage = document.getElementById("modal-qr-image");
+
+      const qrProfiles = {
+        line: {
+          title: "Line Official Account",
+          subtitle: "Scan to add HCMC official account",
+          handle: "ID: @hcmc.chiangmai",
+          file: "Line QR.png"
+        },
+        whatsapp: {
+          title: "WhatsApp Medical Contact",
+          subtitle: "Chat on WhatsApp",
+          handle: "Phone: +66 53 123 456",
+          file: "WhatsApp QR.png"
+        },
+        facebook: {
+          title: "Facebook Messenger",
+          subtitle: "Message us on Facebook",
+          handle: "FB Page: Health Care Medical Clinic (HCMC)",
+          file: "Facebook QR.png"
+        }
+      };
+
+      triggerBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const channel = btn.getAttribute("data-qr-target");
+          const profile = qrProfiles[channel];
+
+          if (profile) {
+            title.innerText = profile.title;
+            subtitle.innerText = profile.subtitle;
+            handle.innerText = profile.handle;
+            qrImage.src = profile.file;
+
+            modal.classList.remove("opacity-0", "pointer-events-none");
+            modal.querySelector(".transform").classList.remove("scale-95");
+            modal.querySelector(".transform").classList.add("scale-100");
+          }
+        });
+      });
+
+      const hideModal = () => {
+        modal.classList.add("opacity-0", "pointer-events-none");
+        modal.querySelector(".transform").classList.remove("scale-100");
+        modal.querySelector(".transform").classList.add("scale-95");
+      };
+
+      if (backdrop) backdrop.addEventListener("click", hideModal);
+      if (closeBtn) closeBtn.addEventListener("click", hideModal);
+    }
+    // ==================== BACKEND INTEGRATION ENGINE ====================
+
+    // ใส่ URL Webhook ที่ได้มาจาก Make.com ตรงนี้ (เดี๋ยวไปก๊อปปี้มาใส่ทีหลังครับ)
+    const MAKE_WEBHOOK_URL = "https://hook.us1.make.com/xxxxxxxxxxxxxxxxxxxxxxxx";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initFormSubmissions();
+    });
+
+    function initFormSubmissions() {
+      const apptForm = document.getElementById("appointment-form");
+      const refillForm = document.getElementById("refill-form");
+
+      // 1. ดักจับการส่งฟอร์มนัดหมาย (Appointment Form)
+      if (apptForm) {
+        apptForm.addEventListener("submit", async (e) => {
+          e.preventDefault(); // ป้องกันหน้าเว็บรีเฟรช
+
+          const formData = {
+            formType: "APPOINTMENT",
+            firstName: document.getElementById("appt-firstname").value,
+            middleName: document.getElementById("appt-middlename").value,
+            lastName: document.getElementById("appt-lastname").value,
+            email: document.getElementById("appt-email").value,
+            phone: document.getElementById("appt-phone").value,
+            preferredDate: document.getElementById("appt-date").value,
+            gender: document.getElementById("appt-gender").value,
+            dateOfBirth: document.getElementById("appt-dob").value, // 💡 เปลี่ยนจาก appt-age เป็นค่า DOB
+            programId: document.getElementById("appt-program").value,
+            clinicalNotes: document.getElementById("appt-message").value
+          };
+
+          await sendToBackend(formData, apptForm);
+        });
+      }
+
+      // 2. ดักจับการส่งฟอร์มสั่งยาซ้ำ (Refill Prescription Form)
+      // แก้ไขโค้ดในฝั่งคำสั่งส่งข้อมูลของ refillForm
+      if (refillForm) {
+        refillForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          // 💡 รวบรวมข้อมูลยาจากทุกแถวมาประกอบเป็นเนื้อหาข้อความผืนเดียว
+          const rowElements = document.querySelectorAll(".medication-row");
+          let formattedMedsText = "รายการยาที่ขอประวัติซ้ำ:\n";
+
+          rowElements.forEach((row, index) => {
+            const name = row.querySelector(".med-name").value;
+            const dosage = row.querySelector(".med-dosage").value;
+            const qty = row.querySelector(".med-qty").value;
+            formattedMedsText += `${index + 1}. ชื่อยา: ${name} | ขนาด: ${dosage} | จำนวน: ${qty}\n`;
+          });
+
+          const formData = {
+            formType: "REFILL",
+            firstName: document.getElementById("refill-firstname").value,
+            middleName: document.getElementById("refill-middlename").value,
+            lastName: document.getElementById("refill-lastname").value,
+            email: document.getElementById("refill-email").value,
+            phone: document.getElementById("refill-phone").value,
+            prescriptionId: document.getElementById("refill-id").value,
+            receiptOption: document.getElementById("refill-delivery").value,
+            medicationDetails: formattedMedsText // 💡 ส่งข้อความที่แปลงรูปแล้วเข้าฟิลด์เดิม
+          };
+
+          await sendToBackend(formData, refillForm);
+        });
+      }
+    }
+
+    // ฟังก์ชันยิงข้อมูลไปหลังบ้านผ่าน API Fetch
+    async function sendToBackend(data, formElement) {
+      const submitBtn = formElement.querySelector("button[type='submit']");
+      const originalBtnText = submitBtn.innerHTML;
+
+      try {
+        // เปลี่ยนสถานะปุ่มเป็นกำลังโหลด
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span class="animate-pulse">Processing...</span>`;
+
+        const response = await fetch(MAKE_WEBHOOK_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          showNotification("Submission Success", "Your medical request has been safely received.");
+          formElement.reset(); // ล้างข้อมูลในฟอร์มเมื่อสำเร็จ
+        } else {
+          throw new Error("Server error");
+        }
+      } catch (error) {
+        console.error("Backend Error:", error);
+        showNotification("Submission Error", "Something went wrong. Please contact the clinic directly.");
+      } finally {
+        // คืนค่าปุ่มกดกลับมาปกติ
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+      }
+    }
+
+    // ฟังก์ชันเปิดกล่องแจ้งเตือนความสำเร็จ (Toast Notification)
+    function showNotification(title, message) {
+      const notif = document.getElementById("success-notification");
+      const titleElem = document.getElementById("notif-title");
+      const msgElem = document.getElementById("notif-message");
+
+      if (notif && titleElem && msgElem) {
+        titleElem.innerText = title;
+        msgElem.innerText = message;
+
+        // แอนิเมชันสไลด์กล่องขึ้นมาแสดงผล
+        notif.classList.remove("translate-y-24", "opacity-0");
+        notif.classList.add("translate-y-0", "opacity-100");
+
+        // ซ่อนตัวอัตโนมัติภายใน 5 วินาที
+        setTimeout(() => {
+          notif.classList.remove("translate-y-0", "opacity-100");
+          notif.classList.add("translate-y-24", "opacity-0");
+        }, 5000);
+      }
+    }
+  </script>
+</body>
+
+</html>
