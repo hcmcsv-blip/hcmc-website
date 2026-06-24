@@ -1456,8 +1456,9 @@
         });
 
         if (response.ok) {
-          showNotification("Submission Success", "Your medical request has been safely received.");
-          formElement.reset(); // ล้างข้อมูลในฟอร์มเมื่อสำเร็จ
+          // 🟢 สั่งให้ป๊อบอัพแจ้งเตือนความสำเร็จทำงาน
+          showNotification("📋 Submission Successful!", "We have received your request. Please check your email.");
+          formElement.reset(); // ล้างข้อมูลในฟอร์มหลังส่งเสร็จ
         } else {
           throw new Error("Server error");
         }
@@ -1498,8 +1499,18 @@
           dateInput.min = today; 
       }
     });
-    
+
   </script> <!-- ปิดทีเดียวตอนท้ายสุด -->
+
+  <div id="success-notification" class="fixed bottom-5 right-5 z-[110] bg-slate-900 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center space-x-3 transform translate-y-24 opacity-0 transition-all duration-500 max-w-sm border border-slate-700">
+    <div class="p-2 bg-emerald-500 rounded-lg text-slate-950">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    </div>
+    <div>
+      <h4 id="notif-title" class="font-bold text-sm text-emerald-400"></h4>
+      <p id="notif-message" class="text-xs text-slate-300 mt-0.5"></p>
+    </div>
+  </div>
 </body>
 
 </html>
