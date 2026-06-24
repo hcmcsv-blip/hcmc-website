@@ -1368,8 +1368,9 @@
     }
     // ==================== BACKEND INTEGRATION ENGINE ====================
 
-    // ใส่ URL Webhook ที่ได้มาจาก Make.com ตรงนี้ (เดี๋ยวไปก๊อปปี้มาใส่ทีหลังครับ)
-    const MAKE_WEBHOOK_URL = "https://hook.us1.make.com/xxxxxxxxxxxxxxxxxxxxxxxx";
+    // 📍 ประกาศตัวแปรแยกลิงก์ Webhook ตาม Workspace ของ Make.com
+    const APPOINTMENT_WEBHOOK_URL = "https://hook.us1.make.com/xxxxxxxxxxxxxxxxxxxxx"; 
+    const REFILL_WEBHOOK_URL      = "https://hook.us1.make.com/yyyyyyyyyyyyyyyyyyyyy"; 
 
     document.addEventListener("DOMContentLoaded", () => {
       initFormSubmissions();
@@ -1379,10 +1380,10 @@
       const apptForm = document.getElementById("appointment-form");
       const refillForm = document.getElementById("refill-form");
 
-      // 1. ดักจับการส่งฟอร์มนัดหมาย (Appointment Form)
+      // 1. จัดการส่งข้อมูลฟอร์มนัดหมายตรวจสุขภาพ (Appointment)
       if (apptForm) {
         apptForm.addEventListener("submit", async (e) => {
-          e.preventDefault(); // ป้องกันหน้าเว็บรีเฟรช
+          e.preventDefault();
 
           const formData = {
             formType: "APPOINTMENT",
@@ -1393,30 +1394,32 @@
             phone: document.getElementById("appt-phone").value,
             preferredDate: document.getElementById("appt-date").value,
             gender: document.getElementById("appt-gender").value,
-            dateOfBirth: document.getElementById("appt-dob").value, // 💡 เปลี่ยนจาก appt-age เป็นค่า DOB
+            dateOfBirth: document.getElementById("appt-dob").value,
             programId: document.getElementById("appt-program").value,
             clinicalNotes: document.getElementById("appt-message").value
           };
 
-          await sendToBackend(formData, apptForm);
+          // 📍 ส่งไปที่สายงานนัดหมายตรวจสุขภาพ
+          await sendToBackend(APPOINTMENT_WEBHOOK_URL, formData, apptForm);
         });
       }
 
-      // 2. ดักจับการส่งฟอร์มสั่งยาซ้ำ (Refill Prescription Form)
-      // แก้ไขโค้ดในฝั่งคำสั่งส่งข้อมูลของ refillForm
+      // 2. จัดการส่งข้อมูลฟอร์มสั่งยาซ้ำ (Refill Prescription)
       if (refillForm) {
         refillForm.addEventListener("submit", async (e) => {
           e.preventDefault();
 
-          // 💡 รวบรวมข้อมูลยาจากทุกแถวมาประกอบเป็นเนื้อหาข้อความผืนเดียว
           const rowElements = document.querySelectorAll(".medication-row");
           let formattedMedsText = "รายการยาที่ขอประวัติซ้ำ:\n";
 
           rowElements.forEach((row, index) => {
-            const name = row.querySelector(".med-name").value;
-            const dosage = row.querySelector(".med-dosage").value;
-            const qty = row.querySelector(".med-qty").value;
-            formattedMedsText += `${index + 1}. ชื่อยา: ${name} | ขนาด: ${dosage} | จำนวน: ${qty}\n`;
+            const name = row.querySelector(".med-name").value.trim();
+            const dosage = row.querySelector(".med-dosage").value.trim();
+            const qty = row.querySelector(".med-qty").value.trim();
+            
+            if (name) {
+              formattedMedsText += `${index + 1}. ชื่อยา: ${name} | ขนาด: ${dosage} | จำนวน: ${qty}\n`;
+            }
           });
 
           const formData = {
@@ -1428,25 +1431,25 @@
             phone: document.getElementById("refill-phone").value,
             prescriptionId: document.getElementById("refill-id").value,
             receiptOption: document.getElementById("refill-delivery").value,
-            medicationDetails: formattedMedsText // 💡 ส่งข้อความที่แปลงรูปแล้วเข้าฟิลด์เดิม
+            medicationDetails: formattedMedsText
           };
 
-          await sendToBackend(formData, refillForm);
+          // 📍 ส่งไปที่สายงานสั่งยาซ้ำ
+          await sendToBackend(REFILL_WEBHOOK_URL, formData, refillForm);
         });
       }
     }
 
-    // ฟังก์ชันยิงข้อมูลไปหลังบ้านผ่าน API Fetch
-    async function sendToBackend(data, formElement) {
+    // 📍 ปรับฟังก์ชันส่งข้อมูลหลังบ้านให้เปิดรับพารามิเตอร์ url แยกปลายทางกันแบบอิสระ
+    async function sendToBackend(url, data, formElement) {
       const submitBtn = formElement.querySelector("button[type='submit']");
       const originalBtnText = submitBtn.innerHTML;
 
       try {
-        // เปลี่ยนสถานะปุ่มเป็นกำลังโหลด
         submitBtn.disabled = true;
         submitBtn.innerHTML = `<span class="animate-pulse">Processing...</span>`;
 
-        const response = await fetch(MAKE_WEBHOOK_URL, {
+        const response = await fetch(url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -1464,7 +1467,6 @@
         console.error("Backend Error:", error);
         showNotification("Submission Error", "Something went wrong. Please contact the clinic directly.");
       } finally {
-        // คืนค่าปุ่มกดกลับมาปกติ
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnText;
       }
