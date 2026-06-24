@@ -773,110 +773,88 @@
           <form id="refill-form" class="flex flex-col gap-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div class="flex flex-col gap-1.5">
-                <label for="refill-firstname"
-                  class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">First Name *</label>
-                <input type="text" id="refill-firstname" required
-                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="John">
+                <label for="refill-firstname" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">First Name *</label>
+                <input type="text" id="refill-firstname" required class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="John">
               </div>
               <div class="flex flex-col gap-1.5">
-                <label for="refill-middlename"
-                  class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Middle Name</label>
-                <input type="text" id="refill-middlename"
-                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="Middle">
+                <label for="refill-middlename" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Middle Name</label>
+                <input type="text" id="refill-middlename" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="Middle">
               </div>
               <div class="flex flex-col gap-1.5">
-                <label for="refill-lastname" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Last
-                  Name *</label>
-                <input type="text" id="refill-lastname" required
-                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="Doe">
+                <label for="refill-lastname" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Last Name *</label>
+                <input type="text" id="refill-lastname" required class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="Doe">
               </div>
             </div>
 
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="flex flex-col gap-1.5">
-                <label for="refill-email" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Email
-                  Address *</label>
-                <input type="email" id="refill-email" required
-                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white"
-                  placeholder="jane@example.com">
+                <label for="refill-email" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Email Address *</label>
+                <input type="email" id="refill-email" required class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="jane@example.com">
               </div>
               <div class="flex flex-col gap-1.5">
-                <label for="refill-phone" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Phone
-                  Number *</label>
-                <input type="tel" id="refill-phone" required
-                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white"
-                  placeholder="+66 80-987-6543">
+                <label for="refill-phone" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Phone Number *</label>
+                <input type="tel" id="refill-phone" required class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="+66 80-987-6543">
               </div>
             </div>
 
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="flex flex-col gap-1.5">
-                <label for="refill-id"
-                  class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Prescription ID</label>
-                <input type="text" id="refill-id"
-                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="HN123456">
+                <label for="refill-id" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Prescription ID</label>
+                <input type="text" id="refill-id" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="HN123456">
               </div>
               <div class="flex flex-col gap-1.5">
-                <label for="refill-delivery"
-                  class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Receipt Option *</label>
-                <select id="refill-delivery" required
-                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white">
+                <label for="refill-delivery" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Receipt Option *</label>
+                <select id="refill-delivery" required class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white">
                   <option value="pickup">Clinic Pick-up</option>
                   <option value="delivery">Delivery</option>
                 </select>
               </div>
             </div>
 
-            <!-- ค้นหาจุดเดิมที่เป็น <textarea id="refill-meds"> แล้วแทนที่ด้วยบล็อกนี้ครับ -->
             <div class="flex flex-col gap-2">
               <label class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Medication Details *</label>
 
-
-              <!-- หัวข้อคอลัมน์ (แสดงผลบน Desktop) -->
-              <div
-                class="hidden md:grid grid-cols-12 gap-3 px-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+              <div class="hidden md:grid grid-cols-12 gap-3 px-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">
                 <div class="col-span-6">Medicine</div>
                 <div class="col-span-3">Dosage</div>
                 <div class="col-span-2">Qty</div>
                 <div class="col-span-1 text-center">Delete</div>
               </div>
 
-              <!-- กล่องบรรจุรายการยาที่จะเพิ่ม-ลดแบบอัตโนมัติ -->
-              <div id="medication-rows-container" class="flex flex-col gap-3">
-                <!-- แถวที่ 1 (เริ่มต้น) -->
-                <div
-                  class="medication-row grid grid-cols-1 md:grid-cols-12 gap-3 bg-white p-3 md:p-0 rounded-xl md:rounded-none border border-slate-100 md:border-none shadow-sm md:shadow-none">
-                  <div class="col-span-6">
-                    <input type="text" placeholder="e.g. Metformin" required
-                      class="med-name w-full px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white">
+              <div id="medication-rows-container" class="flex flex-col gap-4 md:gap-3">
+                <div class="medication-row grid grid-cols-1 md:grid-cols-12 gap-3 bg-slate-50 md:bg-white p-4 md:p-0 rounded-xl md:rounded-none border border-slate-100 md:border-none shadow-sm md:shadow-none">
+                  
+                  <div class="md:col-span-6 flex flex-col gap-1">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 md:hidden">Medicine Name</span>
+                    <input type="text" placeholder="e.g. Metformin" required class="med-name w-full px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white">
                   </div>
-                  <div class="col-span-3">
-                    <input type="text" placeholder="e.g. 500mg" required
-                      class="med-dosage w-full px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white">
+                  
+                  <div class="md:col-span-3 flex flex-col gap-1">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 md:hidden">Dosage</span>
+                    <input type="text" placeholder="e.g. 500mg" required class="med-dosage w-full px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white">
                   </div>
-                  <div class="col-span-2">
-                    <input type="text" placeholder="e.g. 30 tablets" required
-                      class="med-qty w-full px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white">
+                  
+                  <div class="md:col-span-2 flex flex-col gap-1">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 md:hidden">Qty</span>
+                    <input type="text" placeholder="e.g. 30 tablets" required class="med-qty w-full px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white">
                   </div>
-                  <div class="col-span-1 flex items-center justify-center">
-                    <button type="button"
-                      class="remove-row-btn p-2 text-slate-300 hover:text-accent-red rounded-lg transition-colors"
-                      aria-label="Remove medication item" disabled>
+                  
+                  <div class="md:col-span-1 flex items-center justify-end md:justify-center mt-1 md:mt-0">
+                    <button type="button" class="remove-row-btn p-2 text-slate-300 hover:text-accent-red rounded-lg transition-colors flex items-center gap-1.5 text-xs md:text-sm" aria-label="Remove medication item" disabled>
                       <i data-lucide="trash-2" class="w-4 h-4"></i>
+                      <span class="md:hidden font-medium text-slate-400 hover:text-accent-red">Delete</span>
                     </button>
                   </div>
+
                 </div>
               </div>
 
-              <!-- ปุ่มเพิ่มรายการยา -->
-              <button type="button" id="add-row-btn"
-                class="w-fit mt-1 px-4 py-2 border border-dashed border-navy text-navy rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-navy/5 transition-all flex items-center gap-1.5">
+              <button type="button" id="add-row-btn" class="w-fit mt-1 px-4 py-2 border border-dashed border-navy text-navy rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-navy/5 transition-all flex items-center gap-1.5">
                 <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add Medicine
               </button>
             </div>
 
-            <button type="submit"
-              class="w-full py-4 bg-navy text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-navy-light shadow-md mt-2 flex items-center justify-center gap-2">
+            <button type="submit" class="w-full py-4 bg-navy text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-navy-light shadow-md mt-2 flex items-center justify-center gap-2">
               <i data-lucide="pill" class="w-4 h-4"></i> Submit Refill Pre-Order
             </button>
           </form>
