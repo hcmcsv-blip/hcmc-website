@@ -75,7 +75,6 @@
       </a>
 
       <nav class="hidden lg:flex items-center gap-8">
-        <a href="#home" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">Home</a>
         <a href="#about" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">About Dr.M</a>
         <a href="#checkup" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">Check-up</a>
         <a href="#vaccination"
@@ -1472,7 +1471,7 @@
       }
     }
 
-    // ฟังก์ชันเปิดกล่องแจ้งเตือนความสำเร็จ (Toast Notification)
+// ฟังก์ชันเปิดกล่องแจ้งเตือนความสำเร็จ (Toast Notification)
     function showNotification(title, message) {
       const notif = document.getElementById("success-notification");
       const titleElem = document.getElementById("notif-title");
@@ -1482,18 +1481,25 @@
         titleElem.innerText = title;
         msgElem.innerText = message;
 
-        // แอนิเมชันสไลด์กล่องขึ้นมาแสดงผล
         notif.classList.remove("translate-y-24", "opacity-0");
         notif.classList.add("translate-y-0", "opacity-100");
 
-        // ซ่อนตัวอัตโนมัติภายใน 5 วินาที
         setTimeout(() => {
           notif.classList.remove("translate-y-0", "opacity-100");
           notif.classList.add("translate-y-24", "opacity-0");
         }, 5000);
       }
     }
-  </script>
+
+    // โค้ดล็อกวันที่ย้อนหลัง (รวมไว้ในแท็กเดียวกันได้เลย)
+    document.addEventListener('DOMContentLoaded', () => {
+        const dateInput = document.getElementById('preferredDate'); 
+        if (dateInput) {
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.min = today; 
+        }
+    });
+  </script> <!-- ปิดทีเดียวตอนท้ายสุด -->
 </body>
 
 </html>
