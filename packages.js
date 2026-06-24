@@ -305,7 +305,7 @@ export const packages = [
     price: 5367.00, // แยกราคาจริงตามใบโบรชัวร์กลุ่มผู้ชาย
     filters: {
       gender: "male",
-      ageGroup: "all",
+      ageGroup: ["18-30", "30-40", "40-50", "50+"],
       hasDiabetes: false
     },
     items: [
