@@ -1410,7 +1410,7 @@
           e.preventDefault();
 
           const rowElements = document.querySelectorAll(".medication-row");
-          let formattedMedsText = "รายการยาที่ขอประวัติซ้ำ:\n";
+          let formattedMedsText = "Medication Refill List:\n";
 
           rowElements.forEach((row, index) => {
             const name = row.querySelector(".med-name").value.trim();
@@ -1418,7 +1418,7 @@
             const qty = row.querySelector(".med-qty").value.trim();
             
             if (name) {
-              formattedMedsText += `${index + 1}. ชื่อยา: ${name} | ขนาด: ${dosage} | จำนวน: ${qty}\n`;
+              formattedMedsText += `${index + 1}. Medicine: ${name} | Dosage: ${dosage} | Qty: ${qty}\n`;
             }
           });
 
