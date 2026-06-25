@@ -1457,7 +1457,7 @@
 
         if (response.ok) {
           // 🟢 สั่งให้ป๊อบอัพแจ้งเตือนความสำเร็จทำงาน
-          showNotification("📋 Submission Successful!", "We have received your request. Please check your email.");
+          showNotification("Submission Successful!", "We have received your request. Please check your email.");
           formElement.reset(); // ล้างข้อมูลในฟอร์มหลังส่งเสร็จ
         } else {
           throw new Error("Server error");
