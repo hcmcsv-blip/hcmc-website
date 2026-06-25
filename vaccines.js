@@ -39,7 +39,10 @@ export const vaccines = [
     protocol: "2 Doses",
     description: "Prevents severe dengue virus strains. Recommended for tropical residents.",
     hasPackage: true,
-    packageDetails: "Package of 2 Doses: 4,500 THB"
+    packageDetails: "Package of 2 Doses: 4,500 THB",
+    isPromoCard: true, // ⭐ เปิดแท็กให้เด้งไปฝั่งโปรโมชันขวามืออัตโนมัติ
+    promoLabel: "Dengue Prevention Program",
+    promoPriceDisplay: "4,500 THB / 2 Shots"
   },
   {
     id: "vac-verorab",
@@ -106,7 +109,10 @@ export const vaccines = [
     protocol: "2-3 Doses",
     description: "Comprehensive cervical and HPV-related cancer defense panel.",
     hasPackage: true,
-    packageDetails: "Package of 2: 12,800 THB | Package of 3: 17,100 THB"
+    packageDetails: "Package of 2: 12,800 THB | Package of 3: 17,100 THB",
+    isPromoCard: true, // ⭐ เปิดแท็กให้เด้งไปฝั่งโปรโมชันขวามืออัตโนมัติ
+    promoLabel: "HPV 9 Protection Package",
+    promoPriceDisplay: "Starting 12,800 THB"
   },
   {
     id: "vac-prevnar15",
@@ -176,7 +182,7 @@ export const vaccines = [
     name: "Td (Tetanus-Diptheria)",
     category: "routine",
     pricePerDose: 0,
-    status: "unavailable", // ตัวนี้คุณระบุว่า No available ระบบจะไม่แสดงผลหรือขึ้นว่าหมด
+    status: "unavailable",
     protocol: "-",
     description: "Basic Tetanus and Diphtheria booster."
   },
@@ -208,5 +214,21 @@ export const vaccines = [
     status: "available",
     protocol: "2 Doses",
     description: "Pediatric formulation for early childhood Hepatitis A immunization."
+  },
+
+  // === GROUP 4: Special Promotional Combos (แสดงฝั่งขวาเท่านั้น) ===
+  {
+    id: "promo-pneumo-flu",
+    name: "Pneumonia PCV15 + Quadrivalent Flu",
+    category: "promo-only", // ล็อกไว้ไม่ให้โชว์รายการยาวฝั่งซ้าย
+    pricePerDose: 3650,
+    status: "available",
+    protocol: "Co-administered (2 Shots)",
+    description: "Co-administered protection recommended for seniors (65+), asthma sufferers, or diabetics.",
+    hasPackage: true,
+    packageDetails: "Combined Price: 3,650 THB Net",
+    isPromoCard: true, // ⭐ เปิดแท็กให้เด้งไปฝั่งโปรโมชันขวามืออัตโนมัติ
+    promoLabel: "Duo Vaccination Promo",
+    promoPriceDisplay: "3,650 THB Net"
   }
 ];

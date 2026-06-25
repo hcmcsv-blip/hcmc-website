@@ -527,38 +527,8 @@
           </div>
         </div>
 
-        <div class="lg:col-span-5 flex flex-col gap-6">
-          <div class="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm flex flex-col justify-between min-h-[220px]">
-            <div class="flex flex-col gap-3">
-              <div class="flex items-center justify-between">
-                <span class="px-2.5 py-1 rounded bg-accent-red/10 text-accent-red text-[10px] font-bold uppercase tracking-wider">Duo Vaccination Promo</span>
-              </div>
-              <h4 class="font-extrabold text-base text-navy">Pneumonia PCV15 + Quadrivalent Flu</h4>
-              <p class="text-xs text-navy-slate leading-relaxed">Co-administered protection recommended for seniors (65+), asthma sufferers, or diabetics.</p>
-            </div>
-            <div class="flex items-baseline justify-between mt-6 pt-4 border-t border-slate-50">
-              <span class="text-xs text-navy-slate font-medium">Combined Price:</span>
-              <div class="flex items-baseline gap-1"><span class="text-2xl font-extrabold text-accent-red">3,650</span><span class="text-xs font-bold text-accent-red uppercase">THB Net</span></div>
-            </div>
+        <div id="promotions-container" class="lg:col-span-5 flex flex-col gap-6">
           </div>
-
-          <div class="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm flex flex-col justify-between min-h-[220px]">
-            <div class="flex flex-col gap-3">
-              <div class="flex items-center justify-between">
-                <span class="px-2.5 py-1 rounded bg-navy/10 text-navy text-[10px] font-bold uppercase tracking-wider">Qdenga Vaccine Package</span>
-              </div>
-              <h4 class="font-extrabold text-base text-navy">Dengue Fever Prevention Program</h4>
-              <p class="text-xs text-navy-slate leading-relaxed">New Qdenga 2-dose series (3 months interval). Prevents up to 80% of dengue fever hospitalizations.</p>
-            </div>
-            <div class="flex items-center justify-between mt-6 pt-4 border-t border-slate-50">
-              <span class="text-xs text-navy-slate font-medium">Pricing Plan:</span>
-              <div class="flex flex-col items-end">
-                <span class="text-base font-bold text-navy">2,400 <span class="text-[10px] text-navy-slate">THB / Single Shot</span></span>
-                <span class="text-lg font-extrabold text-accent-red">4,500 <span class="text-[10px] text-navy-slate">THB / Course (2 Shots)</span></span>
-              </div>
-            </div>
-          </div>
-        </div>
 
       </div>
     </div>
@@ -1506,35 +1476,58 @@
     // 1. สร้างตัวแปร Array เปล่าเพื่อเก็บ ID ของวัคซีนที่คนไข้คลิกเลือก
     let selectedVaccineIds = [];
 
-    // 2. ฟังก์ชันวาดรายการวัคซีน (Render) ออกมาเป็นการ์ดที่มี Checkbox
+    // ฟังก์ชันวาดรายการวัคซีนและกล่องโปรโมชันอัตโนมัติ
     function renderVaccines() {
       const travelContainer = document.getElementById('travel-vaccines-container');
       const routineContainer = document.getElementById('routine-vaccines-container');
+      const promotionsContainer = document.getElementById('promotions-container'); // ดึงกล่องขวามือมารอไว้
       
-      if (!travelContainer || !routineContainer) return;
+      if (!travelContainer || !routineContainer || !promotionsContainer) return;
 
+      // 1. ล้างข้อมูลเก่าก่อนเริ่มวาดใหม่
       travelContainer.innerHTML = '';
       routineContainer.innerHTML = '';
+      promotionsContainer.innerHTML = '';
 
+      // 2. วนลูปสร้างข้อมูลตามเงื่อนไข
       vaccines.forEach(vac => {
-        if (vac.status === 'unavailable') return; // ข้ามตัวที่หมด
+        if (vac.status === 'unavailable') return;
 
-        // เช็กว่าวัคซีนตัวนี้ถูกเลือกอยู่หรือไม่ (คืนค่าเป็น true / false)
+        // --- ส่วนที่ 2.1: ตรวจสอบและวาดการ์ดโปรโมชันฝั่งขวามือ ---
+        if (vac.isPromoCard) {
+          const promoCardHtml = `
+            <div class="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm flex flex-col justify-between hover-scale min-h-[220px]">
+              <div class="flex flex-col gap-3">
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-1 rounded bg-accent-red/10 text-accent-red text-[10px] font-bold uppercase tracking-wider">
+                    ${vac.promoLabel || 'Special Offer'}
+                  </span>
+                  <span class="text-[10px] text-slate-400 font-medium uppercase tracking-wider">Promo Package</span>
+                </div>
+                <h4 class="font-extrabold text-base text-navy">${vac.name}</h4>
+                <p class="text-xs text-navy-slate leading-relaxed">${vac.description}</p>
+              </div>
+              <div class="flex items-baseline justify-between mt-6 pt-4 border-t border-slate-50">
+                <span class="text-xs text-navy-slate font-medium">Package Value:</span>
+                <div class="flex items-baseline gap-1">
+                  <span class="text-xl font-extrabold text-accent-red">${vac.promoPriceDisplay || vac.pricePerDose}</span>
+                </div>
+              </div>
+            </div>
+          `;
+          promotionsContainer.insertAdjacentHTML('beforeend', promoCardHtml);
+        }
+
+        // --- ส่วนที่ 2.2: วาดรายการลงฝั่งซ้ายมือ (ยกเว้นตัวที่เป็นโปรโมชันล้วน) ---
+        if (vac.category === 'promo-only') return; // ตัวจับคู่ไม่ต้องโชว์ฝั่งซ้าย
+
         const isChecked = selectedVaccineIds.includes(vac.id);
-
-        // ปรับสไตล์สีการ์ด: ถ้าถูกติ๊กเลือก ให้เปลี่ยนขอบเป็นสีน้ำเงินเข้มและพื้นหลังฟ้าอ่อน
-        const cardStyle = isChecked 
-          ? 'border-navy bg-iceblue/20 shadow-sm' 
-          : 'border-slate-100 bg-slate-50 hover:bg-slate-100/70';
-
-        const packageBadge = vac.hasPackage 
-          ? `<span class="text-[10px] font-bold text-accent-red bg-accent-red/5 block mt-1.5 p-1 rounded border border-accent-red/10 text-center">${vac.packageDetails}</span>`
-          : '';
+        const cardStyle = isChecked ? 'border-navy bg-iceblue/20 shadow-sm' : 'border-slate-100 bg-slate-50 hover:bg-slate-100/70';
+        const packageBadge = vac.hasPackage ? `<span class="text-[10px] font-bold text-accent-red bg-accent-red/5 block mt-1.5 p-1 rounded border border-accent-red/10 text-center">${vac.packageDetails}</span>` : '';
 
         const cardHtml = `
           <div data-vac-id="${vac.id}" class="p-3.5 border rounded-xl flex items-start gap-3 cursor-pointer transition-all ${cardStyle}">
             <input type="checkbox" ${isChecked ? 'checked' : ''} class="mt-1 pointer-events-none accent-navy">
-            
             <div class="flex-1">
               <span class="font-bold text-xs md:text-sm text-navy block leading-tight">${vac.name}</span>
               <span class="text-[11px] text-navy-slate block mt-1 leading-relaxed">${vac.description}</span>
@@ -1551,7 +1544,6 @@
         }
       });
 
-      // ตั้งค่าดักจับการคลิกที่กล่องการ์ดแต่ละใบ
       setupVaccineClickEvents();
     }
 
