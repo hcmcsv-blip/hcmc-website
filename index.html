@@ -7,9 +7,9 @@
   <title>Health Care Medical Clinic (HCMC) - Chiang Mai</title>
   <link rel="icon" type="image/jpeg" href="HCMC Logo.jpg">
   <meta name="description"
-    content="HCMC Clinic in Chiang Mai provides bespoke medical check-ups, internist care, and travel vaccinations under Dr. M. Tailored health profiles for active lifestyles.">
+    content="HCMC Clinic in Chiang Mai provides bespoke medical check-ups, internist care, and travel vaccinations under Dr. Nisachon Morgan. Tailored health profiles for active lifestyles.">
   <meta name="keywords"
-    content="HCMC Chiang Mai, Dr. M Internist, Trail Runner Doctor, Health Check Up Chiang Mai, Travel Vaccines Chiang Mai, Prescription Refill Chiang Mai">
+    content="HCMC Chiang Mai, Dr. Nisachon Morgan Internist, Trail Runner Doctor, Health Check Up Chiang Mai, Travel Vaccines Chiang Mai, Prescription Refill Chiang Mai">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
@@ -160,7 +160,7 @@
           <div class="absolute -inset-4 bg-gradient-to-tr from-iceblue to-transparent rounded-[2rem] -rotate-2 -z-10 opacity-70"></div>
           <div class="absolute -inset-4 border border-white rounded-[2rem] rotate-3 -z-10 backdrop-blur-sm"></div>
 
-          <img src="images/dr_m_profile01.png" alt="Dr. M - Internist and Trail Runner" class="w-full object-cover rounded-3xl shadow-[0_20px_50px_rgba(15,23,42,0.08)] border-4 border-white aspect-[4/5] object-center">
+          <img src="images/dr_m_profile01.png" alt="Dr. Nisachon Morgan - Internist and Trail Runner" class="w-full object-cover rounded-3xl shadow-[0_20px_50px_rgba(15,23,42,0.08)] border-4 border-white aspect-[4/5] object-center">
 
           <div class="absolute bottom-4 left-4 right-4 bg-white/75 backdrop-blur-xl px-5 py-4 rounded-2xl shadow-xl border border-white/50 flex items-center justify-between">
             <div class="flex flex-col">
@@ -199,7 +199,7 @@
           <div class="absolute -top-6 -left-4 text-iceblue-dark/20 text-6xl font-serif select-none pointer-events-none">“</div>
           
           <h4 class="text-xs font-bold text-navy uppercase tracking-widest flex items-center gap-2">
-            The Dr. M Philosophy
+            The Dr. Nisachon Morgan Philosophy
           </h4>
           <p class="text-sm md:text-base text-navy leading-relaxed italic font-medium text-slate-700">
             "As an internist managing medical complexities and an ultra-marathoner navigating extreme mountain terrains, I understand how variables like stress, diet, and clinical markers impact daily vitality. We do not just run lab tests; we decipher your physiological data to help you move, heal, and live optimally."
@@ -544,7 +544,7 @@
           <span class="text-xs text-iceblue font-bold tracking-widest uppercase">Remote Healthcare</span>
           <h3 class="text-2xl md:text-3xl font-extrabold tracking-tight">Need a Virtual Consultation?</h3>
           <p class="text-slate-300 text-sm md:text-base leading-relaxed">
-            Expatriates and travelers can consult with Dr. M online from anywhere. Ideal for medical opinions,
+            Expatriates and travelers can consult with Dr. Nisachon Morgan online from anywhere. Ideal for medical opinions,
             laboratory reviews, and international prescription alignment.
           </p>
           <div class="flex flex-wrap gap-4 text-xs font-semibold mt-2">
@@ -584,7 +584,7 @@
           class="bg-navy-tint rounded-3xl border border-slate-100 p-8 shadow-sm flex flex-col gap-6">
           <div>
             <h3 class="text-xl font-extrabold text-navy">Make an Appointment</h3>
-            <p class="text-xs text-navy-slate mt-1">Book your wellness screening or clinic consultation with Dr. M</p>
+            <p class="text-xs text-navy-slate mt-1">Book your wellness screening or clinic consultation with Dr. Nisachon Morgan</p>
           </div>
 
           <form id="appointment-form" class="flex flex-col gap-4">
@@ -637,8 +637,9 @@
 
             <div class="grid grid-cols-2 gap-4">
               <div class="flex flex-col gap-1.5">
-                <label for="appt-gender" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Gender</label>
-                <select id="appt-gender" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white">
+                <label for="appt-gender" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Gender *</label>
+                <select id="appt-gender" required class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white">
+                  <option value="" disabled selected>-- Select Gender --</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                 </select>
