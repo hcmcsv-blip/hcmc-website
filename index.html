@@ -1366,7 +1366,14 @@
             gender: document.getElementById("appt-gender").value,
             dateOfBirth: document.getElementById("appt-dob").value,
             programId: document.getElementById("appt-program").value,
-            clinicalNotes: document.getElementById("appt-message").value
+            clinicalNotes: document.getElementById("appt-message").value, // <-- เติมเครื่องหมายคอมม่าตรงนี้ด้วยนะครับ
+
+            // ⭐ ใส่เพิ่มตรงนี้เลยครับ! 
+            // โค้ดนี้จะไปดึงรายชื่อวัคซีนที่เราติ๊กเลือกไว้ มารวมกันเป็นข้อความส่งไปหลังบ้าน
+            selectedVaccines: vaccines
+              .filter(v => selectedVaccineIds.includes(v.id))
+              .map(v => v.name)
+              .join(', ')
           };
 
           // 📍 ส่งไปที่สายงานนัดหมายตรวจสุขภาพ
