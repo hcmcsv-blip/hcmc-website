@@ -40,9 +40,13 @@ export const vaccines = [
     description: "Prevents severe dengue virus strains. Recommended for tropical residents.",
     hasPackage: true,
     packageDetails: "Package of 2 Doses: 4,500 THB",
-    isPromoCard: true, // ⭐ เปิดแท็กให้เด้งไปฝั่งโปรโมชันขวามืออัตโนมัติ
+    isPromoCard: true, 
     promoLabel: "Dengue Prevention Program",
-    promoPriceDisplay: "4,500 THB / 2 Shots"
+    // 💡 แยกรายละเอียดราคาทุกแบบเพื่อนำไปโชว์ฝั่งขวาให้ครบถ้วน
+    promoPrices: [
+      { label: "Single Dose", price: "2,400 THB" },
+      { label: "Package of 2", price: "4,500 THB", highlight: true }
+    ]
   },
   {
     id: "vac-verorab",
@@ -110,9 +114,14 @@ export const vaccines = [
     description: "Comprehensive cervical and HPV-related cancer defense panel.",
     hasPackage: true,
     packageDetails: "Package of 2: 12,800 THB | Package of 3: 17,100 THB",
-    isPromoCard: true, // ⭐ เปิดแท็กให้เด้งไปฝั่งโปรโมชันขวามืออัตโนมัติ
+    isPromoCard: true,
     promoLabel: "HPV 9 Protection Package",
-    promoPriceDisplay: "Starting 12,800 THB"
+    // 💡 แสดงราคาทั้งแบบ 1 เข็ม, 2 เข็ม, และ 3 เข็ม
+    promoPrices: [
+      { label: "Single Dose", price: "6,450 THB" },
+      { label: "Package of 2", price: "12,800 THB" },
+      { label: "Package of 3", price: "17,100 THB", highlight: true }
+    ]
   },
   {
     id: "vac-prevnar15",
@@ -220,15 +229,17 @@ export const vaccines = [
   {
     id: "promo-pneumo-flu",
     name: "Pneumonia PCV15 + Quadrivalent Flu",
-    category: "promo-only", // ล็อกไว้ไม่ให้โชว์รายการยาวฝั่งซ้าย
+    category: "promo-only", 
     pricePerDose: 3650,
     status: "available",
     protocol: "Co-administered (2 Shots)",
     description: "Co-administered protection recommended for seniors (65+), asthma sufferers, or diabetics.",
     hasPackage: true,
     packageDetails: "Combined Price: 3,650 THB Net",
-    isPromoCard: true, // ⭐ เปิดแท็กให้เด้งไปฝั่งโปรโมชันขวามืออัตโนมัติ
+    isPromoCard: true,
     promoLabel: "Duo Vaccination Promo",
-    promoPriceDisplay: "3,650 THB Net"
+    promoPrices: [
+      { label: "Combined Price", price: "3,650 THB Net", highlight: true }
+    ]
   }
 ];

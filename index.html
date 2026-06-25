@@ -1476,41 +1476,56 @@
     // 1. สร้างตัวแปร Array เปล่าเพื่อเก็บ ID ของวัคซีนที่คนไข้คลิกเลือก
     let selectedVaccineIds = [];
 
-    // ฟังก์ชันวาดรายการวัคซีนและกล่องโปรโมชันอัตโนมัติ
+    // ฟังก์ชันวาดรายการวัคซีนและกล่องโปรโมชันอัตโนมัติ (เวอร์ชันรองรับ Checkbox ฝั่งโปรโมชัน และซ่อนฝั่งซ้าย)
     function renderVaccines() {
       const travelContainer = document.getElementById('travel-vaccines-container');
       const routineContainer = document.getElementById('routine-vaccines-container');
-      const promotionsContainer = document.getElementById('promotions-container'); // ดึงกล่องขวามือมารอไว้
+      const promotionsContainer = document.getElementById('promotions-container');
       
       if (!travelContainer || !routineContainer || !promotionsContainer) return;
 
-      // 1. ล้างข้อมูลเก่าก่อนเริ่มวาดใหม่
+      // ล้างข้อมูลเก่า
       travelContainer.innerHTML = '';
       routineContainer.innerHTML = '';
       promotionsContainer.innerHTML = '';
 
-      // 2. วนลูปสร้างข้อมูลตามเงื่อนไข
       vaccines.forEach(vac => {
         if (vac.status === 'unavailable') return;
 
-        // --- ส่วนที่ 2.1: ตรวจสอบและวาดการ์ดโปรโมชันฝั่งขวามือ ---
+        // ตรวจสอบว่าวัคซีนไอดีนี้ถูกเลือกอยู่หรือไม่
+        const isChecked = selectedVaccineIds.includes(vac.id);
+
+        // --- ส่วนที่ 1: วาดการ์ดโปรโมชันฝั่งขวามือ (พร้อมช่องติ๊กเลือก และแสดงราคาทุกแพ็กเกจ) ---
         if (vac.isPromoCard) {
+          // ปรับเปลี่ยนสีขอบและการ์ดโปรโมชันเมื่อถูกติ๊กเลือกให้เด่นชัดขึ้น
+          const promoCardStyle = isChecked 
+            ? 'border-navy bg-iceblue/20 shadow-md scale-[1.01]' 
+            : 'border-slate-100 bg-white hover:bg-slate-50/80 shadow-sm';
+
+          // ลูปสร้างรายการราคาแต่ละบรรทัด (เช่น 1 dose, 2 doses, 3 doses)
+          const pricesHtml = vac.promoPrices.map(p => {
+            const textStyle = p.highlight 
+              ? 'text-sm font-extrabold text-accent-red' 
+              : 'text-xs text-slate-400 font-medium';
+            return `<span class="${textStyle}">${p.label}: ${p.price}</span>`;
+          }).join('');
+
           const promoCardHtml = `
-            <div class="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm flex flex-col justify-between hover-scale min-h-[220px]">
+            <div data-vac-id="${vac.id}" class="rounded-2xl border p-6 flex flex-col justify-between cursor-pointer transition-all min-h-[230px] ${promoCardStyle}">
               <div class="flex flex-col gap-3">
                 <div class="flex items-center justify-between">
                   <span class="px-2.5 py-1 rounded bg-accent-red/10 text-accent-red text-[10px] font-bold uppercase tracking-wider">
                     ${vac.promoLabel || 'Special Offer'}
                   </span>
-                  <span class="text-[10px] text-slate-400 font-medium uppercase tracking-wider">Promo Package</span>
+                  <input type="checkbox" ${isChecked ? 'checked' : ''} class="pointer-events-none accent-navy w-4 h-4">
                 </div>
                 <h4 class="font-extrabold text-base text-navy">${vac.name}</h4>
                 <p class="text-xs text-navy-slate leading-relaxed">${vac.description}</p>
               </div>
-              <div class="flex items-baseline justify-between mt-6 pt-4 border-t border-slate-50">
-                <span class="text-xs text-navy-slate font-medium">Package Value:</span>
-                <div class="flex items-baseline gap-1">
-                  <span class="text-xl font-extrabold text-accent-red">${vac.promoPriceDisplay || vac.pricePerDose}</span>
+              <div class="flex items-end justify-between mt-6 pt-4 border-t border-slate-50">
+                <span class="text-xs text-navy-slate font-semibold self-end mb-0.5">Pricing Options:</span>
+                <div class="flex flex-col text-right gap-0.5">
+                  ${pricesHtml}
                 </div>
               </div>
             </div>
@@ -1518,10 +1533,10 @@
           promotionsContainer.insertAdjacentHTML('beforeend', promoCardHtml);
         }
 
-        // --- ส่วนที่ 2.2: วาดรายการลงฝั่งซ้ายมือ (ยกเว้นตัวที่เป็นโปรโมชันล้วน) ---
-        if (vac.category === 'promo-only') return; // ตัวจับคู่ไม่ต้องโชว์ฝั่งซ้าย
+        // --- ส่วนที่ 2: วาดรายการลงฝั่งซ้ายมือ ---
+        // ข้อ 2: ถ้าตัวไหนเป็นโปรโมชัน (isPromoCard) หรือโปรคู่ (promo-only) ให้ข้ามไปเลย ไม่ต้องโชว์ซ้ำฝั่งซ้าย
+        if (vac.category === 'promo-only' || vac.isPromoCard) return;
 
-        const isChecked = selectedVaccineIds.includes(vac.id);
         const cardStyle = isChecked ? 'border-navy bg-iceblue/20 shadow-sm' : 'border-slate-100 bg-slate-50 hover:bg-slate-100/70';
         const packageBadge = vac.hasPackage ? `<span class="text-[10px] font-bold text-accent-red bg-accent-red/5 block mt-1.5 p-1 rounded border border-accent-red/10 text-center">${vac.packageDetails}</span>` : '';
 
@@ -1544,6 +1559,7 @@
         }
       });
 
+      // ผูกเหตุการณ์คลิกให้กับการ์ดทุกใบ (รวมทั้งฝั่งซ้ายและขวา)
       setupVaccineClickEvents();
     }
 
