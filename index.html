@@ -951,33 +951,34 @@
         </div>
       </div>
 
-      <div class="md:col-span-4 flex flex-col gap-6">
-        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-300">Connect With Us</h4>
-        <div class="flex gap-4">
-          <button type="button" data-qr-target="line"
-            class="qr-trigger-btn w-12 h-12 rounded-xl bg-slate-800 hover:bg-emerald-600 flex items-center justify-center transition-all duration-300 relative group"
-            aria-label="Line QR Code">
-            <i data-lucide="message-square" class="w-5 h-5 text-white"></i>
-            <span
-              class="absolute bottom-full mb-2 bg-navy text-[10px] text-white px-2 py-1 rounded shadow opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-slate-700">LINE
-              QR</span>
-          </button>
-          <button type="button" data-qr-target="whatsapp"
-            class="qr-trigger-btn w-12 h-12 rounded-xl bg-slate-800 hover:bg-teal-600 flex items-center justify-center transition-all duration-300 relative group"
-            aria-label="WhatsApp QR Code">
-            <i data-lucide="phone" class="w-5 h-5 text-white"></i>
-            <span
-              class="absolute bottom-full mb-2 bg-navy text-[10px] text-white px-2 py-1 rounded shadow opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-slate-700">WhatsApp
-              QR</span>
-          </button>
-          <button type="button" data-qr-target="facebook"
-            class="qr-trigger-btn w-12 h-12 rounded-xl bg-slate-800 hover:bg-blue-600 flex items-center justify-center transition-all duration-300 relative group"
-            aria-label="Facebook QR Code">
-            <i data-lucide="facebook" class="w-5 h-5 text-white"></i>
-            <span
-              class="absolute bottom-full mb-2 bg-navy text-[10px] text-white px-2 py-1 rounded shadow opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-slate-700">Facebook
-              QR</span>
-          </button>
+      <div class="flex flex-col gap-4">
+        <h4 class="text-xs font-bold text-navy uppercase tracking-widest">Connect With Us</h4>
+        <div class="flex items-center gap-3">
+          
+          <a href="https://line.me/R/ti/p/@YOUR_LINE_ID" target="_blank" rel="noopener noreferrer" 
+            class="w-10 h-10 rounded-xl bg-white border border-slate-200 text-navy hover:bg-[#06C755]/10 hover:border-[#06C755]/30 hover:text-[#06C755] hover:scale-105 flex items-center justify-center transition-all shadow-sm" 
+            title="Connect via LINE">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+              <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.058.592.121.303.079.778.038 1.084l-.171 1.021c-.052.308-.252 1.204 1.089.657 1.341-.548 7.237-4.261 9.871-7.298 2.052-2.322 3.079-4.817 3.079-7.664zm-14.582 3.251h-2.193c-.237 0-.43-.193-.43-.43v-4.379c0-.237.193-.43.43-.43h.43c.237 0 .43.193 .43.43v3.519h1.333c.237 0 .43.193 .43.43v.43c0 .237-.193.43-.43.43zm2.58 0h-.43c-.237 0-.43-.193-.43-.43v-4.379c0-.237.193-.43.43-.43h.43c.237 0 .43.193 .43.43v4.379c0 .237-.193.43-.43.43zm4.618 0h-2.223c-.237 0-.43-.193-.43-.43v-4.379c0-.237.193-.43.43-.43h.43c.237 0 .43.193 .43.43v2.859l1.455-2.973c.078-.16.241-.261.419-.261h.494c.319 0 .524.331.383.618l-1.127 2.221 1.241 2.502c.147.296-.068.646-.397.646h-.474c-.183 0-.35-.105-.429-.271l-.813-1.748-.521 1.062v.535c0 .237-.193.43-.43.43zm4.07 0h-2.133c-.237 0-.43-.193-.43-.43v-4.379c0-.237.193-.43.43-.43h2.133c.237 0 .43.193 .43.43v.43c0 .237-.193.43-.43.43h-1.703v1.077h1.49c.237 0 .43.193 .43.43v.43c0 .237-.193.43-.43.43h-1.49v1.144h1.703c.237 0 .43.193 .43.43v.43c0 .237-.193.43-.43.43z"/>
+            </svg>
+          </a>
+
+          <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank" rel="noopener noreferrer" 
+            class="w-10 h-10 rounded-xl bg-white border border-slate-200 text-navy hover:bg-[#25D366]/10 hover:border-[#25D366]/30 hover:text-[#25D366] hover:scale-105 flex items-center justify-center transition-all shadow-sm" 
+            title="Connect via WhatsApp">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="w-4.5 h-4.5">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.455L0 24zm6.59-4.846c1.66.986 3.296 1.48 4.93 1.481 5.425 0 9.835-4.41 9.839-9.84.002-2.634-1.024-5.111-2.892-6.98-1.866-1.868-4.343-2.894-6.984-2.895-5.43 0-9.84 4.411-9.844 9.843-.002 1.758.463 3.472 1.346 5.002l-.997 3.645 3.732-.979zm11.222-3.415c-.157-.261-.578-.419-1.21-.735-.63-.314-3.731-1.842-3.837-1.88-.105-.039-.183-.058-.261.059-.079.117-.303.419-.371.496-.068.078-.137.088-.294.01-.157-.079-.663-.245-1.263-.78-0.467-.416-.783-.93-.875-1.087-.092-.157-.01-.242.07-.32c.071-.07.157-.183.236-.275.079-.092.105-.157.157-.262.052-.105.026-.196-.013-.275-.039-.079-.371-.895-.509-1.227-.135-.325-.272-.281-.371-.285-.097-.004-.208-.004-.32-.004s-.294.042-.448.209c-.154.167-.588.575-.588 1.401 0 .826.6 1.622.683 1.735.083.117 1.181 1.803 2.862 2.528.401.173.714.276.958.353.404.128.771.11 1.062.067.324-.048 1.015-.415 1.157-.816.143-.401.143-.746.101-.817-.043-.072-.157-.117-.314-.197z"/>
+            </svg>
+          </a>
+
+          <a href="https://facebook.com/YOUR_PAGE_NAME" target="_blank" rel="noopener noreferrer" 
+            class="w-10 h-10 rounded-xl bg-white border border-slate-200 text-navy hover:bg-[#1877F2]/10 hover:border-[#1877F2]/30 hover:text-[#1877F2] hover:scale-105 flex items-center justify-center transition-all shadow-sm" 
+            title="Connect via Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+
         </div>
       </div>
     </div>
