@@ -1361,384 +1361,384 @@
       if (backdrop) backdrop.addEventListener("click", hideModal);
       if (closeBtn) closeBtn.addEventListener("click", hideModal);
     }
-  <script type="module">
-    // 📌 [1. IMPORTS] รวบรวมคำสั่งนำเข้าฐานข้อมูลจากไฟล์ภายนอกไว้ที่บนสุด
-    import { vaccines } from './vaccines.js';
+    <script type="module">
+      // 📌 [1. IMPORTS] รวบรวมคำสั่งนำเข้าฐานข้อมูลจากไฟล์ภายนอกไว้ที่บนสุด
+      import { vaccines } from './vaccines.js';
 
-    // 📌 [2. CONFIGURATION & CONSTANTS] ประกาศลิงก์ปลายทางระบบ Webhook ของ Make.com
-    const APPOINTMENT_WEBHOOK_URL = "https://hook.eu1.make.com/ebfhf5m9d1mpqmgwkm5wa4b6i1rbtv4i"; 
-    const REFILL_WEBHOOK_URL = "https://hook.eu1.make.com/1iy7ku6xsxo4p49irh4wo6p3yop2y9us"; 
+      // 📌 [2. CONFIGURATION & CONSTANTS] ประกาศลิงก์ปลายทางระบบ Webhook ของ Make.com
+      const APPOINTMENT_WEBHOOK_URL = "https://hook.eu1.make.com/ebfhf5m9d1mpqmgwkm5wa4b6i1rbtv4i"; 
+      const REFILL_WEBHOOK_URL = "https://hook.eu1.make.com/1iy7ku6xsxo4p49irh4wo6p3yop2y9us"; 
 
-    // 📌 [3. GLOBAL STATE] ตัวแปรส่วนกลางสำหรับเก็บข้อมูลวัคซีนที่คนไข้เลือก (แชร์ใช้ร่วมกันได้ทุกฟังก์ชัน)
-    let selectedVaccineIds = [];
-
-
-    // ========================================================================
-    // ⭐ CORE INITIALIZER: ศูนย์ควบคุมคำสั่งรันระบบทันทีที่เปิดหน้าเว็บขึ้นมาครั้งแรก (รวมไว้จุดเดียว)
-    // ========================================================================
-    document.addEventListener("DOMContentLoaded", () => {
-      initFormSubmissions();          // 1. เปิดระบบดักจับการส่งฟอร์ม (นัดหมาย & เติมยา)
-      renderVaccines();               // 2. สั่งวาดแผงผังรายการวัคซีนและกล่องโปรโมชัน
-      initVaccineReset();             // 3. เปิดระบบปุ่มกดรีเซ็ตวัคซีนทั้งหมด
-      initDeliveryToggle();           // 4. เปิดระบบเปิด-ปิดกล่องที่อยู่จัดส่งยาอัตโนมัติ
-      initNotificationClose();        // 5. เปิดระบบดักจับปุ่มกดปิดกล่องแจ้งเตือนสำเร็จ
-      lockPastDates();                // 6. เปิดระบบล็อกปฏิทินไม่ให้เลือกวันนัดหมายย้อนหลัง
-    });
+      // 📌 [3. GLOBAL STATE] ตัวแปรส่วนกลางสำหรับเก็บข้อมูลวัคซีนที่คนไข้เลือก (แชร์ใช้ร่วมกันได้ทุกฟังก์ชัน)
+      let selectedVaccineIds = [];
 
 
-    // ========================================================================
-    // 📑 CATEGORY A: ระบบแบบฟอร์มและการส่งข้อมูลหลังบ้าน (BACKEND SUBMISSIONS)
-    // ========================================================================
+      // ========================================================================
+      // ⭐ CORE INITIALIZER: ศูนย์ควบคุมคำสั่งรันระบบทันทีที่เปิดหน้าเว็บขึ้นมาครั้งแรก (รวมไว้จุดเดียว)
+      // ========================================================================
+      document.addEventListener("DOMContentLoaded", () => {
+        initFormSubmissions();          // 1. เปิดระบบดักจับการส่งฟอร์ม (นัดหมาย & เติมยา)
+        renderVaccines();               // 2. สั่งวาดแผงผังรายการวัคซีนและกล่องโปรโมชัน
+        initVaccineReset();             // 3. เปิดระบบปุ่มกดรีเซ็ตวัคซีนทั้งหมด
+        initDeliveryToggle();           // 4. เปิดระบบเปิด-ปิดกล่องที่อยู่จัดส่งยาอัตโนมัติ
+        initNotificationClose();        // 5. เปิดระบบดักจับปุ่มกดปิดกล่องแจ้งเตือนสำเร็จ
+        lockPastDates();                // 6. เปิดระบบล็อกปฏิทินไม่ให้เลือกวันนัดหมายย้อนหลัง
+      });
 
-    /**
-     * ฟังก์ชันเริ่มต้นระบบตรวจจับการ Submit ฟอร์มทั้งสองตัวบนหน้าเว็บไซต์
-     */
-    function initFormSubmissions() {
-      const apptForm = document.getElementById("appointment-form");
-      const refillForm = document.getElementById("refill-form");
 
-      // A1: ฟอร์มนัดหมายตรวจสุขภาพ (Appointment Form)
-      if (apptForm) {
-        apptForm.addEventListener("submit", async (e) => {
-          e.preventDefault();
+      // ========================================================================
+      // 📑 CATEGORY A: ระบบแบบฟอร์มและการส่งข้อมูลหลังบ้าน (BACKEND SUBMISSIONS)
+      // ========================================================================
 
-          const formData = {
-            formType: "APPOINTMENT",
-            firstName: document.getElementById("appt-firstname").value,
-            middleName: document.getElementById("appt-middlename").value,
-            lastName: document.getElementById("appt-lastname").value,
-            email: document.getElementById("appt-email").value,
-            phone: document.getElementById("appt-phone").value,
-            preferredDate: document.getElementById("appt-date").value,
-            preferredTime: document.getElementById("appt-time").value,
-            gender: document.getElementById("appt-gender").value,
-            dateOfBirth: document.getElementById("appt-dob").value,
-            returningPatient: document.getElementById("appt-returning").value,
-            programId: document.getElementById("appt-program").value,
-            clinicalNotes: document.getElementById("appt-message").value,
-            // รวมรายชื่อวัคซีนส่งไปด้วยใน Payload
-            selectedVaccines: vaccines
-              .filter(v => selectedVaccineIds.includes(v.id))
-              .map(v => v.name)
-              .join(', ')
-          };
+      /**
+       * ฟังก์ชันเริ่มต้นระบบตรวจจับการ Submit ฟอร์มทั้งสองตัวบนหน้าเว็บไซต์
+       */
+      function initFormSubmissions() {
+        const apptForm = document.getElementById("appointment-form");
+        const refillForm = document.getElementById("refill-form");
 
-          await sendToBackend(APPOINTMENT_WEBHOOK_URL, formData, apptForm);
-        });
+        // A1: ฟอร์มนัดหมายตรวจสุขภาพ (Appointment Form)
+        if (apptForm) {
+          apptForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const formData = {
+              formType: "APPOINTMENT",
+              firstName: document.getElementById("appt-firstname").value,
+              middleName: document.getElementById("appt-middlename").value,
+              lastName: document.getElementById("appt-lastname").value,
+              email: document.getElementById("appt-email").value,
+              phone: document.getElementById("appt-phone").value,
+              preferredDate: document.getElementById("appt-date").value,
+              preferredTime: document.getElementById("appt-time").value,
+              gender: document.getElementById("appt-gender").value,
+              dateOfBirth: document.getElementById("appt-dob").value,
+              returningPatient: document.getElementById("appt-returning").value,
+              programId: document.getElementById("appt-program").value,
+              clinicalNotes: document.getElementById("appt-message").value,
+              // รวมรายชื่อวัคซีนส่งไปด้วยใน Payload
+              selectedVaccines: vaccines
+                .filter(v => selectedVaccineIds.includes(v.id))
+                .map(v => v.name)
+                .join(', ')
+            };
+
+            await sendToBackend(APPOINTMENT_WEBHOOK_URL, formData, apptForm);
+          });
+        }
+
+        // A2: ฟอร์มสั่งยาผู้ป่วยเดิมล่วงหน้า (Prescription Refill Form)
+        if (refillForm) {
+          refillForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const rowElements = document.querySelectorAll(".medication-row");
+            let formattedMedsText = "Medication Refill List:\n";
+
+            // วนลูปกวาดเอาตัวยาทุกแถวที่คนไข้พิมพ์เพิ่มไว้มารวมกันเป็นชุดข้อความยาว
+            rowElements.forEach((row, index) => {
+              const name = row.querySelector(".med-name").value.trim();
+              const dosage = row.querySelector(".med-dosage").value.trim();
+              const qty = row.querySelector(".med-qty").value.trim();
+              if (name) {
+                formattedMedsText += `${index + 1}. Medicine: ${name} | Dosage: ${dosage} | Qty: ${qty}\n`;
+              }
+            });
+
+            const formData = {
+              formType: "REFILL",
+              firstName: document.getElementById("refill-firstname").value,
+              middleName: document.getElementById("refill-middlename").value,
+              lastName: document.getElementById("refill-lastname").value,
+              email: document.getElementById("refill-email").value,
+              phone: document.getElementById("refill-phone").value,
+              returningPatient: document.getElementById("refill-returning").value,
+              receiptOption: document.getElementById("refill-delivery").value,
+              deliveryAddress: document.getElementById("refill-address").value.trim(),
+              medicationDetails: formattedMedsText
+            };
+
+            await sendToBackend(REFILL_WEBHOOK_URL, formData, refillForm);
+          });
+        }
       }
 
-      // A2: ฟอร์มสั่งยาผู้ป่วยเดิมล่วงหน้า (Prescription Refill Form)
-      if (refillForm) {
-        refillForm.addEventListener("submit", async (e) => {
-          e.preventDefault();
+      /**
+       * ฟังก์ชันส่วนกลางสำหรับทำหน้าที่ยิงข้อมูล (Fetch API) ส่งตรงไปยัง Webhook ปลายทาง
+       */
+      async function sendToBackend(url, data, formElement) {
+        const submitBtn = formElement.querySelector("button[type='submit']");
+        const originalBtnText = submitBtn.innerHTML;
 
-          const rowElements = document.querySelectorAll(".medication-row");
-          let formattedMedsText = "Medication Refill List:\n";
+        try {
+          // เปลี่ยนสถานะปุ่มกดป้องกันการกดซ้ำซ้อนขณะประมวลผล
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = `<span class="animate-pulse">Processing...</span>`;
 
-          // วนลูปกวาดเอาตัวยาทุกแถวที่คนไข้พิมพ์เพิ่มไว้มารวมกันเป็นชุดข้อความยาว
-          rowElements.forEach((row, index) => {
-            const name = row.querySelector(".med-name").value.trim();
-            const dosage = row.querySelector(".med-dosage").value.trim();
-            const qty = row.querySelector(".med-qty").value.trim();
-            if (name) {
-              formattedMedsText += `${index + 1}. Medicine: ${name} | Dosage: ${dosage} | Qty: ${qty}\n`;
-            }
+          const response = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
           });
 
-          const formData = {
-            formType: "REFILL",
-            firstName: document.getElementById("refill-firstname").value,
-            middleName: document.getElementById("refill-middlename").value,
-            lastName: document.getElementById("refill-lastname").value,
-            email: document.getElementById("refill-email").value,
-            phone: document.getElementById("refill-phone").value,
-            returningPatient: document.getElementById("refill-returning").value,
-            receiptOption: document.getElementById("refill-delivery").value,
-            deliveryAddress: document.getElementById("refill-address").value.trim(),
-            medicationDetails: formattedMedsText
-          };
-
-          await sendToBackend(REFILL_WEBHOOK_URL, formData, refillForm);
-        });
-      }
-    }
-
-    /**
-     * ฟังก์ชันส่วนกลางสำหรับทำหน้าที่ยิงข้อมูล (Fetch API) ส่งตรงไปยัง Webhook ปลายทาง
-     */
-    async function sendToBackend(url, data, formElement) {
-      const submitBtn = formElement.querySelector("button[type='submit']");
-      const originalBtnText = submitBtn.innerHTML;
-
-      try {
-        // เปลี่ยนสถานะปุ่มกดป้องกันการกดซ้ำซ้อนขณะประมวลผล
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = `<span class="animate-pulse">Processing...</span>`;
-
-        const response = await fetch(url, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data)
-        });
-
-        if (response.ok) {
-          // สั่งเปิดป็อปอัปพร้อมระบุคำอธิบายแสดงความสำเร็จ
-          showNotification("Submission Successful!", "We have received your request. Please check your email.");
-          formElement.reset(); // ล้างข้อมูลเก่าออกจากช่องกรอกทั้งหมด
-          
-          // สั่งอัปเดตล้างป้ายวัคซีนฝั่งฟอร์มให้เคลียร์ว่างด้วย (ถ้ามี)
-          selectedVaccineIds = [];
-          if (typeof renderVaccines === "function") {
-            renderVaccines();
-            updateClinicalNotesWithVaccines();
+          if (response.ok) {
+            // สั่งเปิดป็อปอัปพร้อมระบุคำอธิบายแสดงความสำเร็จ
+            showNotification("Submission Successful!", "We have received your request. Please check your email.");
+            formElement.reset(); // ล้างข้อมูลเก่าออกจากช่องกรอกทั้งหมด
+            
+            // สั่งอัปเดตล้างป้ายวัคซีนฝั่งฟอร์มให้เคลียร์ว่างด้วย (ถ้ามี)
+            selectedVaccineIds = [];
+            if (typeof renderVaccines === "function") {
+              renderVaccines();
+              updateClinicalNotesWithVaccines();
+            }
+          } else {
+            throw new Error("Server response error");
           }
-        } else {
-          throw new Error("Server response error");
+        } catch (error) {
+          console.error("Backend Connection Error:", error);
+          showNotification("Submission Error", "Something went wrong. Please contact the clinic directly.");
+        } finally {
+          // คืนค่าปุ่มกดให้กลับมาทำงานปกติ
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnText;
         }
-      } catch (error) {
-        console.error("Backend Connection Error:", error);
-        showNotification("Submission Error", "Something went wrong. Please contact the clinic directly.");
-      } finally {
-        // คืนค่าปุ่มกดให้กลับมาทำงานปกติ
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnText;
       }
-    }
 
 
-    // ========================================================================
-    // 💉 CATEGORY B: ระบบบริการจัดการข้อมูลและการ์ดวัคซีน (VACCINES SYSTEM)
-    // ========================================================================
+      // ========================================================================
+      // 💉 CATEGORY B: ระบบบริการจัดการข้อมูลและการ์ดวัคซีน (VACCINES SYSTEM)
+      // ========================================================================
 
-    /**
-     * ฟังก์ชันหลักในการนำเอาอาเรย์จาก vaccines.js มาวาดลงฝั่งซ้าย (แยกกลุ่ม) และฝั่งขวา (โปรโมชัน)
-     */
-    function renderVaccines() {
-      const travelContainer = document.getElementById('travel-vaccines-container');
-      const routineContainer = document.getElementById('routine-vaccines-container');
-      const promotionsContainer = document.getElementById('promotions-container');
-      if (!travelContainer || !routineContainer || !promotionsContainer) return;
+      /**
+       * ฟังก์ชันหลักในการนำเอาอาเรย์จาก vaccines.js มาวาดลงฝั่งซ้าย (แยกกลุ่ม) และฝั่งขวา (โปรโมชัน)
+       */
+      function renderVaccines() {
+        const travelContainer = document.getElementById('travel-vaccines-container');
+        const routineContainer = document.getElementById('routine-vaccines-container');
+        const promotionsContainer = document.getElementById('promotions-container');
+        if (!travelContainer || !routineContainer || !promotionsContainer) return;
 
-      travelContainer.innerHTML = '';
-      routineContainer.innerHTML = '';
-      promotionsContainer.innerHTML = '';
+        travelContainer.innerHTML = '';
+        routineContainer.innerHTML = '';
+        promotionsContainer.innerHTML = '';
 
-      vaccines.forEach(vac => {
-        if (vac.status === 'unavailable') return;
+        vaccines.forEach(vac => {
+          if (vac.status === 'unavailable') return;
 
-        const isChecked = selectedVaccineIds.includes(vac.id);
+          const isChecked = selectedVaccineIds.includes(vac.id);
 
-        // B1: จัดการตรวจสอบและวาดการ์ดโปรโมชันเด่นฝั่งขวามือ
-        if (vac.isPromoCard) {
-          const promoCardStyle = isChecked 
-            ? 'border-navy bg-iceblue/20 shadow-md scale-[1.01]' 
-            : 'border-slate-100 bg-white hover:bg-slate-50/80 shadow-sm';
+          // B1: จัดการตรวจสอบและวาดการ์ดโปรโมชันเด่นฝั่งขวามือ
+          if (vac.isPromoCard) {
+            const promoCardStyle = isChecked 
+              ? 'border-navy bg-iceblue/20 shadow-md scale-[1.01]' 
+              : 'border-slate-100 bg-white hover:bg-slate-50/80 shadow-sm';
 
-          const pricesHtml = vac.promoPrices.map(p => {
-            const textStyle = p.highlight ? 'text-sm font-extrabold text-accent-red' : 'text-xs text-slate-400 font-medium';
-            return `<span class="${textStyle}">${p.label}: ${p.price}</span>`;
-          }).join('');
+            const pricesHtml = vac.promoPrices.map(p => {
+              const textStyle = p.highlight ? 'text-sm font-extrabold text-accent-red' : 'text-xs text-slate-400 font-medium';
+              return `<span class="${textStyle}">${p.label}: ${p.price}</span>`;
+            }).join('');
 
-          const promoCardHtml = `
-            <div data-vac-id="${vac.id}" class="rounded-2xl border p-6 flex flex-col justify-between cursor-pointer transition-all min-h-[230px] ${promoCardStyle}">
-              <div class="flex flex-col gap-3">
-                <div class="flex items-center justify-between">
-                  <span class="px-2.5 py-1 rounded bg-accent-red/10 text-accent-red text-[10px] font-bold uppercase tracking-wider">${vac.promoLabel || 'Special Offer'}</span>
-                  <input type="checkbox" ${isChecked ? 'checked' : ''} class="pointer-events-none accent-navy w-4 h-4">
+            const promoCardHtml = `
+              <div data-vac-id="${vac.id}" class="rounded-2xl border p-6 flex flex-col justify-between cursor-pointer transition-all min-h-[230px] ${promoCardStyle}">
+                <div class="flex flex-col gap-3">
+                  <div class="flex items-center justify-between">
+                    <span class="px-2.5 py-1 rounded bg-accent-red/10 text-accent-red text-[10px] font-bold uppercase tracking-wider">${vac.promoLabel || 'Special Offer'}</span>
+                    <input type="checkbox" ${isChecked ? 'checked' : ''} class="pointer-events-none accent-navy w-4 h-4">
+                  </div>
+                  <h4 class="font-extrabold text-base text-navy">${vac.name}</h4>
+                  <p class="text-xs text-navy-slate leading-relaxed">${vac.description}</p>
                 </div>
-                <h4 class="font-extrabold text-base text-navy">${vac.name}</h4>
-                <p class="text-xs text-navy-slate leading-relaxed">${vac.description}</p>
+                <div class="flex items-end justify-between mt-6 pt-4 border-t border-slate-50">
+                  <span class="text-xs text-navy-slate font-semibold self-end mb-0.5">Pricing Options:</span>
+                  <div class="flex flex-col text-right gap-0.5">${pricesHtml}</div>
+                </div>
               </div>
-              <div class="flex items-end justify-between mt-6 pt-4 border-t border-slate-50">
-                <span class="text-xs text-navy-slate font-semibold self-end mb-0.5">Pricing Options:</span>
-                <div class="flex flex-col text-right gap-0.5">${pricesHtml}</div>
+            `;
+            promotionsContainer.insertAdjacentHTML('beforeend', promoCardHtml);
+          }
+
+          // B2: จัดการกรองและวาดรายการปกติลงฝั่งซ้ายมือ
+          if (vac.category === 'promo-only' || vac.isPromoCard) return; // ไม่ให้โชว์ซ้ำฝั่งซ้าย
+
+          const cardStyle = isChecked ? 'border-navy bg-iceblue/20 shadow-sm' : 'border-slate-100 bg-slate-50 hover:bg-slate-100/70';
+          const packageBadge = vac.hasPackage ? `<span class="text-[10px] font-bold text-accent-red bg-accent-red/5 block mt-1.5 p-1 rounded border border-accent-red/10 text-center">${vac.packageDetails}</span>` : '';
+
+          const cardHtml = `
+            <div data-vac-id="${vac.id}" class="p-3.5 border rounded-xl flex items-start gap-3 cursor-pointer transition-all ${cardStyle}">
+              <input type="checkbox" ${isChecked ? 'checked' : ''} class="mt-1 pointer-events-none accent-navy">
+              <div class="flex-1">
+                <span class="font-bold text-xs md:text-sm text-navy block leading-tight">${vac.name}</span>
+                <span class="text-[11px] text-navy-slate block mt-1 leading-relaxed">${vac.description}</span>
+                ${packageBadge}
+                <span class="text-[10px] font-semibold text-navy bg-white border border-slate-200 w-fit px-1.5 py-0.5 rounded mt-2 block">Protocol: ${vac.protocol}</span>
               </div>
             </div>
           `;
-          promotionsContainer.insertAdjacentHTML('beforeend', promoCardHtml);
-        }
 
-        // B2: จัดการกรองและวาดรายการปกติลงฝั่งซ้ายมือ
-        if (vac.category === 'promo-only' || vac.isPromoCard) return; // ไม่ให้โชว์ซ้ำฝั่งซ้าย
-
-        const cardStyle = isChecked ? 'border-navy bg-iceblue/20 shadow-sm' : 'border-slate-100 bg-slate-50 hover:bg-slate-100/70';
-        const packageBadge = vac.hasPackage ? `<span class="text-[10px] font-bold text-accent-red bg-accent-red/5 block mt-1.5 p-1 rounded border border-accent-red/10 text-center">${vac.packageDetails}</span>` : '';
-
-        const cardHtml = `
-          <div data-vac-id="${vac.id}" class="p-3.5 border rounded-xl flex items-start gap-3 cursor-pointer transition-all ${cardStyle}">
-            <input type="checkbox" ${isChecked ? 'checked' : ''} class="mt-1 pointer-events-none accent-navy">
-            <div class="flex-1">
-              <span class="font-bold text-xs md:text-sm text-navy block leading-tight">${vac.name}</span>
-              <span class="text-[11px] text-navy-slate block mt-1 leading-relaxed">${vac.description}</span>
-              ${packageBadge}
-              <span class="text-[10px] font-semibold text-navy bg-white border border-slate-200 w-fit px-1.5 py-0.5 rounded mt-2 block">Protocol: ${vac.protocol}</span>
-            </div>
-          </div>
-        `;
-
-        if (vac.category === 'travel') {
-          travelContainer.insertAdjacentHTML('beforeend', cardHtml);
-        } else {
-          routineContainer.insertAdjacentHTML('beforeend', cardHtml);
-        }
-      });
-
-      setupVaccineClickEvents();
-    }
-
-    /**
-     * ผูกเหตุการณ์เหตุการณ์คลิกให้กับแผงการ์ดวัคซีนทุกใบ
-     */
-    function setupVaccineClickEvents() {
-      document.querySelectorAll('[data-vac-id]').forEach(card => {
-        card.addEventListener('click', () => {
-          const vacId = card.getAttribute('data-vac-id');
-          toggleVaccineSelection(vacId);
-        });
-      });
-    }
-
-    /**
-     * ฟังก์ชันทำการ ติ๊กเข้า / ติ๊กออก ข้อมูลไอดีลงอาเรย์คลังเลือก
-     */
-    function toggleVaccineSelection(id) {
-      if (selectedVaccineIds.includes(id)) {
-        selectedVaccineIds = selectedVaccineIds.filter(vacId => vacId !== id);
-      } else {
-        selectedVaccineIds.push(id);
-      }
-      renderVaccines();
-      updateClinicalNotesWithVaccines();
-    }
-
-    /**
-     * ฟังก์ชันแปลงค่าไอดีวัคซีนที่เลือกออกมาเป็นป้ายแท็กวงกลม (Badge) นำไปหย่อนโชว์เหนือฟอร์มนัดหมาย
-     */
-    function updateClinicalNotesWithVaccines() {
-      const badgeContainer = document.getElementById('vaccine-badges-container');
-      if (!badgeContainer) return;
-
-      if (selectedVaccineIds.length === 0) {
-        badgeContainer.innerHTML = `<span class="text-xs text-slate-400 self-center mx-auto italic">No vaccines selected yet. Click items above to add.</span>`;
-        return;
-      }
-
-      const selectedData = vaccines.filter(v => selectedVaccineIds.includes(v.id));
-
-      badgeContainer.innerHTML = selectedData.map(v => `
-        <span class="inline-flex items-center gap-1.5 bg-navy text-white text-xs font-medium px-2.5 py-1 rounded-full shadow-sm">
-          ${v.name}
-          <button type="button" data-remove-id="${v.id}" class="hover:bg-white/25 rounded-full w-4 h-4 inline-flex items-center justify-center font-bold text-[10px] transition-colors">&times;</button>
-        </span>
-      `).join('');
-
-      badgeContainer.querySelectorAll('[data-remove-id]').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation(); // ห้ามไม่ให้คำสั่งวิ่งลามไปกวนกล่องตัวอื่น
-          const removeId = btn.getAttribute('data-remove-id');
-          toggleVaccineSelection(removeId);
-        });
-      });
-    }
-
-    /**
-     * ติดตั้งปุ่มสำหรับล้างสถานะการเลือกวัคซีนทั้งหมดให้กลับเป็นศูนย์
-     */
-    function initVaccineReset() {
-      const btnReset = document.getElementById('btn-reset-vaccines');
-      if (btnReset) {
-        btnReset.addEventListener('click', () => {
-          selectedVaccineIds = [];
-          renderVaccines();
-          updateClinicalNotesWithVaccines();
-        });
-      }
-    }
-
-
-    // ========================================================================
-    // 🎨 CATEGORY C: ระบบตรรกะหน้าต่างแสดงผลและการควบคุม UI (UI & UTILITIES)
-    // ========================================================================
-
-    /**
-     * ระบบควบคุมสลับซ่อน/แสดงช่องใส่ที่อยู่จัดส่งยาอัตโนมัติของฟอร์มเติมยา
-     */
-    function initDeliveryToggle() {
-      const deliverySelect = document.getElementById("refill-delivery");
-      const addressBlock = document.getElementById("refill-address-block");
-      const addressInput = document.getElementById("refill-address");
-
-      if (deliverySelect && addressBlock && addressInput) {
-        deliverySelect.addEventListener("change", function() {
-          if (this.value === "delivery") {
-            addressBlock.classList.remove("hidden");
-            addressInput.required = true;
+          if (vac.category === 'travel') {
+            travelContainer.insertAdjacentHTML('beforeend', cardHtml);
           } else {
-            addressBlock.classList.add("hidden");
-            addressInput.required = false;
-            addressInput.value = "";
+            routineContainer.insertAdjacentHTML('beforeend', cardHtml);
           }
         });
+
+        setupVaccineClickEvents();
       }
-    }
 
-    /**
-     * ระบบล็อกปฏิทินช่องเลือกวันที่นัดหมาย โดยอ้างอิงและคำนวณจากวันปัจจุบันแบบ Real-time
-     */
-    function lockPastDates() {
-      const dateInput = document.getElementById('appt-date');
-      if (dateInput) {
-        const today = new Date().toISOString().split('T')[0];
-        dateInput.min = today; 
+      /**
+       * ผูกเหตุการณ์เหตุการณ์คลิกให้กับแผงการ์ดวัคซีนทุกใบ
+       */
+      function setupVaccineClickEvents() {
+        document.querySelectorAll('[data-vac-id]').forEach(card => {
+          card.addEventListener('click', () => {
+            const vacId = card.getAttribute('data-vac-id');
+            toggleVaccineSelection(vacId);
+          });
+        });
       }
-    }
 
-    /**
-     * ฟังก์ชันเปิดป็อปอัปแจ้งเตือนสำเร็จ (สั่งขยายสเกลขนาดและเปิดระดับความโปร่งใสแบบนุ่มนวล)
-     */
-    function showNotification(title, message) {
-      const notif = document.getElementById("success-notification");
-      const titleElem = document.getElementById("notif-title");
-      const msgElem = document.getElementById("notif-message");
-      const modalContent = notif ? notif.querySelector('.transform') : null;
+      /**
+       * ฟังก์ชันทำการ ติ๊กเข้า / ติ๊กออก ข้อมูลไอดีลงอาเรย์คลังเลือก
+       */
+      function toggleVaccineSelection(id) {
+        if (selectedVaccineIds.includes(id)) {
+          selectedVaccineIds = selectedVaccineIds.filter(vacId => vacId !== id);
+        } else {
+          selectedVaccineIds.push(id);
+        }
+        renderVaccines();
+        updateClinicalNotesWithVaccines();
+      }
 
-      if (notif && titleElem && msgElem) {
-        titleElem.innerText = title;
-        msgElem.innerText = message;
+      /**
+       * ฟังก์ชันแปลงค่าไอดีวัคซีนที่เลือกออกมาเป็นป้ายแท็กวงกลม (Badge) นำไปหย่อนโชว์เหนือฟอร์มนัดหมาย
+       */
+      function updateClinicalNotesWithVaccines() {
+        const badgeContainer = document.getElementById('vaccine-badges-container');
+        if (!badgeContainer) return;
 
-        // สั่งเคลียร์และเปิดสวิตช์อนิเมชั่นแสดงกล่องป็อปอัปขึ้นแผงหน้าจอ
-        notif.classList.remove("opacity-0", "pointer-events-none");
-        notif.classList.add("opacity-100", "pointer-events-auto");
-        if (modalContent) {
-          modalContent.classList.remove("scale-95");
-          modalContent.classList.add("scale-100");
+        if (selectedVaccineIds.length === 0) {
+          badgeContainer.innerHTML = `<span class="text-xs text-slate-400 self-center mx-auto italic">No vaccines selected yet. Click items above to add.</span>`;
+          return;
+        }
+
+        const selectedData = vaccines.filter(v => selectedVaccineIds.includes(v.id));
+
+        badgeContainer.innerHTML = selectedData.map(v => `
+          <span class="inline-flex items-center gap-1.5 bg-navy text-white text-xs font-medium px-2.5 py-1 rounded-full shadow-sm">
+            ${v.name}
+            <button type="button" data-remove-id="${v.id}" class="hover:bg-white/25 rounded-full w-4 h-4 inline-flex items-center justify-center font-bold text-[10px] transition-colors">&times;</button>
+          </span>
+        `).join('');
+
+        badgeContainer.querySelectorAll('[data-remove-id]').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation(); // ห้ามไม่ให้คำสั่งวิ่งลามไปกวนกล่องตัวอื่น
+            const removeId = btn.getAttribute('data-remove-id');
+            toggleVaccineSelection(removeId);
+          });
+        });
+      }
+
+      /**
+       * ติดตั้งปุ่มสำหรับล้างสถานะการเลือกวัคซีนทั้งหมดให้กลับเป็นศูนย์
+       */
+      function initVaccineReset() {
+        const btnReset = document.getElementById('btn-reset-vaccines');
+        if (btnReset) {
+          btnReset.addEventListener('click', () => {
+            selectedVaccineIds = [];
+            renderVaccines();
+            updateClinicalNotesWithVaccines();
+          });
         }
       }
-    }
 
-    /**
-     * ระบบดักจับการคลิกที่ปุ่ม Acknowledge เพื่อสั่งหดตัวกล่องแจ้งเตือนสำเร็จกลับไปซ่อนตามเดิม
-     */
-    function initNotificationClose() {
-      const closeBtn = document.getElementById("close-notif-btn");
-      const notification = document.getElementById("success-notification");
-      const modalContent = notification ? notification.querySelector('.transform') : null;
 
-      if (closeBtn && notification) {
-        closeBtn.addEventListener("click", () => {
-          // ซ่อนพื้นหลังเบลอโปร่งใส
-          notification.classList.add("opacity-0", "pointer-events-none");
-          notification.classList.remove("opacity-100", "pointer-events-auto");
-          // สั่งหดเนื้อหากล่องสีขาวกลับไปเล็กลงตามสไตล์คลาสแบรนด์คุณ
-          if (modalContent) {
-            modalContent.classList.add("scale-95");
-            modalContent.classList.remove("scale-100");
-          }
-        });
+      // ========================================================================
+      // 🎨 CATEGORY C: ระบบตรรกะหน้าต่างแสดงผลและการควบคุม UI (UI & UTILITIES)
+      // ========================================================================
+
+      /**
+       * ระบบควบคุมสลับซ่อน/แสดงช่องใส่ที่อยู่จัดส่งยาอัตโนมัติของฟอร์มเติมยา
+       */
+      function initDeliveryToggle() {
+        const deliverySelect = document.getElementById("refill-delivery");
+        const addressBlock = document.getElementById("refill-address-block");
+        const addressInput = document.getElementById("refill-address");
+
+        if (deliverySelect && addressBlock && addressInput) {
+          deliverySelect.addEventListener("change", function() {
+            if (this.value === "delivery") {
+              addressBlock.classList.remove("hidden");
+              addressInput.required = true;
+            } else {
+              addressBlock.classList.add("hidden");
+              addressInput.required = false;
+              addressInput.value = "";
+            }
+          });
+        }
       }
-    }
 
-  </script> <div id="success-notification" class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/40 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-500">
+      /**
+       * ระบบล็อกปฏิทินช่องเลือกวันที่นัดหมาย โดยอ้างอิงและคำนวณจากวันปัจจุบันแบบ Real-time
+       */
+      function lockPastDates() {
+        const dateInput = document.getElementById('appt-date');
+        if (dateInput) {
+          const today = new Date().toISOString().split('T')[0];
+          dateInput.min = today; 
+        }
+      }
+
+      /**
+       * ฟังก์ชันเปิดป็อปอัปแจ้งเตือนสำเร็จ (สั่งขยายสเกลขนาดและเปิดระดับความโปร่งใสแบบนุ่มนวล)
+       */
+      function showNotification(title, message) {
+        const notif = document.getElementById("success-notification");
+        const titleElem = document.getElementById("notif-title");
+        const msgElem = document.getElementById("notif-message");
+        const modalContent = notif ? notif.querySelector('.transform') : null;
+
+        if (notif && titleElem && msgElem) {
+          titleElem.innerText = title;
+          msgElem.innerText = message;
+
+          // สั่งเคลียร์และเปิดสวิตช์อนิเมชั่นแสดงกล่องป็อปอัปขึ้นแผงหน้าจอ
+          notif.classList.remove("opacity-0", "pointer-events-none");
+          notif.classList.add("opacity-100", "pointer-events-auto");
+          if (modalContent) {
+            modalContent.classList.remove("scale-95");
+            modalContent.classList.add("scale-100");
+          }
+        }
+      }
+
+      /**
+       * ระบบดักจับการคลิกที่ปุ่ม Acknowledge เพื่อสั่งหดตัวกล่องแจ้งเตือนสำเร็จกลับไปซ่อนตามเดิม
+       */
+      function initNotificationClose() {
+        const closeBtn = document.getElementById("close-notif-btn");
+        const notification = document.getElementById("success-notification");
+        const modalContent = notification ? notification.querySelector('.transform') : null;
+
+        if (closeBtn && notification) {
+          closeBtn.addEventListener("click", () => {
+            // ซ่อนพื้นหลังเบลอโปร่งใส
+            notification.classList.add("opacity-0", "pointer-events-none");
+            notification.classList.remove("opacity-100", "pointer-events-auto");
+            // สั่งหดเนื้อหากล่องสีขาวกลับไปเล็กลงตามสไตล์คลาสแบรนด์คุณ
+            if (modalContent) {
+              modalContent.classList.add("scale-95");
+              modalContent.classList.remove("scale-100");
+            }
+          });
+        }
+      }
+
+    </script> <div id="success-notification" class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/40 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-500">
     <div class="bg-white/75 backdrop-blur-xl p-8 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] max-w-sm w-full mx-4 border border-white/60 text-center flex flex-col items-center gap-4 transform scale-95 transition-transform duration-500">
       
       <div class="w-16 h-16 bg-emerald-500/20 text-emerald-600 rounded-full flex items-center justify-center border border-emerald-500/30">
