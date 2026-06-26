@@ -993,14 +993,14 @@
       lockPastDates();
       initPromoNavigation();
 
-      const availContainer = document.getElementById("available-vaccines-container");
-      if (availContainer) {
-        availContainer.addEventListener("wheel", (e) => {
+      const targetScrollBox = document.getElementById("available-vaccines-container");
+      if (targetScrollBox) {
+        targetScrollBox.addEventListener("wheel", (e) => {
           if (e.deltaY !== 0) {
-            e.preventDefault(); // ล็อกหน้าเว็บหลักไม่ให้เลื่อนไหลลงล่างขณะหมุนเมาส์ในโซนนี้
-            availContainer.scrollLeft += e.deltaY * 1.5; // แปลงแรงหมุนแนวตั้งไปเลื่อนซ้ายขวา (ปรับเป็น 1.5 เพื่อความไวสะใจขึ้น)
+            e.preventDefault(); // 🛡️ ล็อกหน้าเว็บหลักไม่ให้เลื่อนไหลลงล่างขณะหมุนเมาส์ในโซนนี้
+            targetScrollBox.scrollLeft += e.deltaY * 1.5; // แปลงแรงหมุนไปเลื่อนซ้าย-ขวาแบบสมูท (คูณ 1.5)
           }
-        }, { passive: false });
+        }, { passive: false }); // ปิด passive เพื่อให้ preventDefault ทำงานได้อย่างสมบูรณ์
       }
 
     }
