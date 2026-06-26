@@ -513,23 +513,15 @@
       <div class="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm flex flex-col gap-6">
         <div class="flex items-center justify-between border-b border-slate-100 pb-4">
           <h3 class="font-extrabold text-lg text-navy flex items-center gap-2">Available Vaccines</h3>
-          <span class="text-[10px] font-bold bg-slate-100 text-navy-slate px-2.5 py-1 rounded-full uppercase tracking-wider">Click to select items</span>
+          <span class="text-[10px] font-bold bg-slate-100 text-navy-slate px-2.5 py-1 rounded-full uppercase tracking-wider">
+            💡 Tip: Use your mouse wheel or swipe to explore
+          </span>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div>
-            <h4 class="text-xs font-bold text-navy-slate uppercase tracking-wider mb-4 flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-accent-red"></span> Core & Travel Vaccines
-            </h4>
-            <div id="travel-vaccines-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
-          </div>
-
-          <div>
-            <h4 class="text-xs font-bold text-navy-slate uppercase tracking-wider mb-4 flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Routine & Booster Vaccines
-            </h4>
-            <div id="routine-vaccines-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
-          </div>
+        <div class="relative">
+          <div id="available-vaccines-container" 
+            class="grid grid-rows-3 grid-flow-col md:grid-rows-2 gap-4 overflow-x-auto pb-2 pt-1 scroll-smooth snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            </div>
         </div>
       </div>
 
@@ -1000,6 +992,7 @@
       initNotificationClose();
       lockPastDates();
       initPromoNavigation();
+      initAvailScrollEngine();
     }
 
     // แก้บั๊กเรื่องจังหวะเวลาโหลดหน้าเว็บ: ถ้าเว็บเสร็จแล้วให้รันทันที ถ้ายังไม่เสร็จให้รอสัญญาณ DOMContentLoaded
@@ -1444,14 +1437,12 @@
     // ========================================================================
     
     function renderVaccines() {
-      const travelContainer = document.getElementById('travel-vaccines-container');
-      const routineContainer = document.getElementById('routine-vaccines-container');
       const promotionsContainer = document.getElementById('promotions-container');
-      if (!travelContainer || !routineContainer || !promotionsContainer) return;
+      const availContainer = document.getElementById('available-vaccines-container');
+      if (!promotionsContainer || !availContainer) return;
 
-      travelContainer.innerHTML = '';
-      routineContainer.innerHTML = '';
       promotionsContainer.innerHTML = '';
+      availContainer.innerHTML = '';
 
       if (!vaccines || !Array.isArray(vaccines)) return;
 
@@ -1491,24 +1482,27 @@
 
         const cardStyle = isChecked ? 'border-navy bg-iceblue/20 shadow-sm' : 'border-slate-100 bg-slate-50 hover:bg-slate-100/70';
         const packageBadge = vac.hasPackage ? `<span class="text-[10px] font-bold text-accent-red bg-accent-red/5 block mt-1.5 p-1 rounded border border-accent-red/10 text-center">${vac.packageDetails}</span>` : '';
-
+        const catBadge = vac.category === 'travel' 
+          ? '<span class="text-[9px] font-bold text-accent-red bg-accent-red/5 px-1.5 py-0.5 rounded border border-accent-red/10">Travel</span>'
+          : '<span class="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-100">Routine</span>';
+          
         const cardHtml = `
-          <div data-vac-id="${vac.id}" class="p-3.5 border rounded-xl flex items-start gap-3 cursor-pointer transition-all ${cardStyle}">
+          <div data-vac-id="${vac.id}" 
+            class="p-3.5 border rounded-xl flex items-start gap-3 cursor-pointer transition-all flex-shrink-0 snap-start w-[285px] sm:w-[340px] ${cardStyle}">
             <input type="checkbox" ${isChecked ? 'checked' : ''} class="mt-1 pointer-events-none accent-navy">
             <div class="flex-1">
-              <span class="font-bold text-xs md:text-sm text-navy block leading-tight">${vac.name}</span>
-              <span class="text-[11px] text-navy-slate block mt-1 leading-relaxed">${vac.description}</span>
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="font-bold text-xs md:text-sm text-navy block leading-tight truncate max-w-[170px] md:max-w-[220px]">${vac.name}</span>
+                ${catBadge}
+              </div>
+              <span class="text-[11px] text-navy-slate block mt-1 leading-relaxed line-clamp-2">${vac.description}</span>
               ${packageBadge}
               <span class="text-[10px] font-semibold text-navy bg-white border border-slate-200 w-fit px-1.5 py-0.5 rounded mt-2 block">Protocol: ${vac.protocol}</span>
             </div>
           </div>
         `;
 
-        if (vac.category === 'travel') {
-          travelContainer.insertAdjacentHTML('beforeend', cardHtml);
-        } else {
-          routineContainer.insertAdjacentHTML('beforeend', cardHtml);
-        }
+        availContainer.insertAdjacentHTML('beforeend', cardHtml);
       });
 
       setupVaccineClickEvents();
@@ -1657,6 +1651,22 @@
         prevBtn.addEventListener("click", () => {
           container.scrollLeft -= scrollAmount;
         });
+      }
+    }
+
+    /**
+     * เครื่องยนต์ดักจับการหมุนล้อเมาส์ (Mouse Wheel) ให้เปลี่ยนทิศทางสไลด์เป็นแนวนอนอัตโนมัติ
+     */
+    function initAvailScrollEngine() {
+      const container = document.getElementById("available-vaccines-container");
+      if (container) {
+        container.addEventListener("wheel", (e) => {
+          // ตรวจสอบว่าคนไข้ทำการหมุนล้อเมาส์แนวตั้งจริงหรือไม่
+          if (e.deltaY !== 0) {
+            e.preventDefault(); // 🛡️ ล็อกหน้าเว็บหลักไม่ให้เลื่อนไหลลงล่างขณะหมุนเมาส์ในกล่องนี้
+            container.scrollLeft += e.deltaY * 1.2; // ส่งแรงหมุนไปขับเคลื่อนการสไลด์ซ้าย-ขวาแทน (คูณ 1.2 เพื่อความสมูท)
+          }
+        }, { passive: false }); // ตั้งค่าปิด passive เพื่อให้ใช้คำสั่ง preventDefault ได้อย่างสมบูรณ์
       }
     }
 
