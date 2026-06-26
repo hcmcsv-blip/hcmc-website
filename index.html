@@ -970,39 +970,48 @@
     // ========================================================================
     // ⭐ SAFE SYSTEM INITIALIZER: ศูนย์ควบคุมคำสั่งรันระบบทันทีเมื่อโหลดหน้าเว็บสำเร็จ
     // ========================================================================
-    function startClinicSystem() {
-      // โหลดไออนจากคลัง Lucide Icons
+function startClinicSystem() {
+      // โหลดไอคอนจากคลัง Lucide Icons
       if (typeof lucide !== 'undefined') {
         lucide.createIcons();
       }
 
-      // ตื่นฟังก์ชันระบบ UI พื้นฐาน
+      // ระบบ UI พื้นฐาน
       initMobileMenu();
       initTabs();
       setupFilters();
       initModals();
-      initHighlightMetaTabs(); // คอนโทรลเลอร์แสดงแพ็กเกจ Metabolic
-      evaluateAndRender();    // คำนวณตัวกรองโปรแกรมตรวจสุขภาพขั้นต้น
+      initHighlightMetaTabs();
+      evaluateAndRender();
 
-      // ตื่นฟังก์ชันระบบวัคซีนและฟอร์มส่งข้อมูลหลังบ้าน
+      // ระบบวัคซีนและฟอร์มส่งข้อมูลหลังบ้าน
       initFormSubmissions();
-      renderVaccines();
+      renderVaccines(); // สั่งวาดการ์ดวัคซีนลงหน้าจอจนเสร็จ
       initVaccineReset();
       initDeliveryToggle();
       initNotificationClose();
       lockPastDates();
       initPromoNavigation();
-
-      const targetScrollBox = document.getElementById("available-vaccines-container");
-      if (targetScrollBox) {
-        targetScrollBox.addEventListener("wheel", (e) => {
+      
+      // ========================================================================
+      // 🟢 ENGINE FIXED: เครื่องยนต์ดักจับเมาส์สกรอลแนวตั้งให้เลื่อนแนวนอน (เวอร์ชันเสถียรที่สุด)
+      // ========================================================================
+      const scrollContainer = document.getElementById("available-vaccines-container");
+      if (scrollContainer) {
+        scrollContainer.addEventListener("wheel", (e) => {
+          // ตรวจสอบว่ามีแรงหมุนแนวตั้ง (deltaY) และไม่ได้กำลังหมุนเลื่อนหน้าจอหลัก
           if (e.deltaY !== 0) {
-            e.preventDefault(); // 🛡️ ล็อกหน้าเว็บหลักไม่ให้เลื่อนไหลลงล่างขณะหมุนเมาส์ในโซนนี้
-            targetScrollBox.scrollLeft += e.deltaY * 1.5; // แปลงแรงหมุนไปเลื่อนซ้าย-ขวาแบบสมูท (คูณ 1.5)
+            e.preventDefault(); // 🛡️ หยุดหน้าเว็บใหญ่ไม่ให้เลื่อนลงล่าง
+            
+            // ปรับระยะการสไลด์แนวนอนให้สมูทสอดรับกับสเกลหน้าจอคอมพิวเตอร์ของคุณ
+            scrollContainer.scrollTo({
+              left: scrollContainer.scrollLeft + (e.deltaY * 1.5),
+              behavior: "auto" // ใช้ auto ร่วมกับโครงสร้างสไลด์เพื่อให้ตอบสนองนิ้วทันที ไม่หน่วงค้าง
+            });
           }
-        }, { passive: false }); // ปิด passive เพื่อให้ preventDefault ทำงานได้อย่างสมบูรณ์
+        }, { passive: false }); // เปิดระบบป้องกันไม่ให้บราวเซอร์เพิกเฉยต่อคำสั่ง preventDefault
       }
-
+      // ========================================================================
     }
 
     // แก้บั๊กเรื่องจังหวะเวลาโหลดหน้าเว็บ: ถ้าเว็บเสร็จแล้วให้รันทันที ถ้ายังไม่เสร็จให้รอสัญญาณ DOMContentLoaded
