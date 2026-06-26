@@ -520,7 +520,7 @@
 
         <div class="relative">
           <div id="available-vaccines-container" 
-            class="grid grid-rows-3 grid-flow-col md:grid-rows-2 gap-4 overflow-x-auto pb-2 pt-1 scroll-smooth snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            class="grid grid-rows-3 grid-flow-col md:grid-rows-2 h-[540px] md:h-[340px] gap-4 overflow-x-auto overflow-y-hidden pb-2 pt-1 scroll-smooth snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             </div>
         </div>
       </div>
@@ -999,17 +999,11 @@ function startClinicSystem() {
       const scrollContainer = document.getElementById("available-vaccines-container");
       if (scrollContainer) {
         scrollContainer.addEventListener("wheel", (e) => {
-          // ตรวจสอบว่ามีแรงหมุนแนวตั้ง (deltaY) และไม่ได้กำลังหมุนเลื่อนหน้าจอหลัก
           if (e.deltaY !== 0) {
-            e.preventDefault(); // 🛡️ หยุดหน้าเว็บใหญ่ไม่ให้เลื่อนลงล่าง
-            
-            // ปรับระยะการสไลด์แนวนอนให้สมูทสอดรับกับสเกลหน้าจอคอมพิวเตอร์ของคุณ
-            scrollContainer.scrollTo({
-              left: scrollContainer.scrollLeft + (e.deltaY * 1.5),
-              behavior: "auto" // ใช้ auto ร่วมกับโครงสร้างสไลด์เพื่อให้ตอบสนองนิ้วทันที ไม่หน่วงค้าง
-            });
+            e.preventDefault(); // 🛡️ ล็อกหน้าเว็บใหญ่ไม่ให้เลื่อนไหลลงล่าง
+            scrollContainer.scrollLeft += e.deltaY * 1.5; // ยิงแรงหมุนตรงเข้าแกนสไลด์ซ้าย-ขวา
           }
-        }, { passive: false }); // เปิดระบบป้องกันไม่ให้บราวเซอร์เพิกเฉยต่อคำสั่ง preventDefault
+        }, { passive: false });
       }
       // ========================================================================
     }
@@ -1507,7 +1501,7 @@ function startClinicSystem() {
           
         const cardHtml = `
           <div data-vac-id="${vac.id}" 
-            class="p-3.5 border rounded-xl flex items-start gap-3 cursor-pointer transition-all flex-shrink-0 snap-start w-[285px] sm:w-[340px] ${cardStyle}">
+            class="p-3.5 border rounded-xl flex items-start gap-3 cursor-pointer transition-all flex-shrink-0 snap-start w-[285px] sm:w-[340px] h-[155px] md:h-[145px] ${cardStyle}">
             <input type="checkbox" ${isChecked ? 'checked' : ''} class="mt-1 pointer-events-none accent-navy">
             <div class="flex-1">
               <div class="flex items-center justify-between gap-2 mb-1">
