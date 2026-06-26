@@ -1524,7 +1524,7 @@
       promotionsContainer.innerHTML = '';
 
       vaccines.forEach(vac => {
-        
+        if (vac.status === 'unavailable') return;
 
         const isChecked = selectedVaccineIds.includes(vac.id);
 
@@ -1560,37 +1560,18 @@
 
         // B2: จัดการกรองและวาดรายการปกติลงฝั่งซ้ายมือ
         if (vac.category === 'promo-only' || vac.isPromoCard) return; // ไม่ให้โชว์ซ้ำฝั่งซ้าย
-        // 1. เช็กสถานะว่าของหมดชั่วคราวหรือไม่
-        const isUnavailable = vac.status === 'unavailable';
-        // 2. สร้างสไตล์พิเศษสำหรับของที่หมด: ให้การ์ดจางลง (opacity-40) สีซีดลง (grayscale) และห้ามคลิก (pointer-events-none)
-        const blurClass = isUnavailable ? 'opacity-40 pointer-events-none filter grayscale select-none' : '';
-        
-        // 3. ปรับสไตล์การ์ดปกติ (ถ้าถูกเลือกให้เป็นสีน้ำเงิน ถ้าหมดชั่วคราวให้สวมคลาสจางด้านบน)
-        let cardStyle = isChecked ? 'border-navy bg-iceblue/20 shadow-sm' : 'border-slate-100 bg-slate-50 hover:bg-slate-100/70';
-        cardStyle = `${cardStyle} ${blurClass}`; // มัดรวมสไตล์เข้าด้วยกัน
-        // 4. สั่งสร้างแท็กราคา (จะแสดงเฉพาะตัวที่มีการสั่ง showPrice: true และราคามากกว่า 0 เท่านั้น)
-        const priceBadge = (vac.showPrice && vac.pricePerDose > 0) 
-          ? `<span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-200/60 w-fit px-1.5 py-0.5 rounded mt-2 inline-block mr-1">Price: ${vac.pricePerDose.toLocaleString()} THB</span>` 
-          : '';
 
-        // 5. สั่งสร้างแท็ก "Not Available" สีแดงเด่นชัดเมื่อสถานะเป็น unavailable
-        const statusBadge = isUnavailable 
-          ? `<span class="text-[10px] font-extrabold text-rose-600 bg-rose-50 border border-rose-200 w-fit px-1.5 py-0.5 rounded mt-2 inline-block mr-1 uppercase tracking-wider">Not Available</span>` 
-          : '';
+        const cardStyle = isChecked ? 'border-navy bg-iceblue/20 shadow-sm' : 'border-slate-100 bg-slate-50 hover:bg-slate-100/70';
         const packageBadge = vac.hasPackage ? `<span class="text-[10px] font-bold text-accent-red bg-accent-red/5 block mt-1.5 p-1 rounded border border-accent-red/10 text-center">${vac.packageDetails}</span>` : '';
 
-        // นำเอาตัวแปรที่เราเตรียมไว้ด้านบน (priceBadge, statusBadge) มาหย่อนใส่ในโครงสร้าง HTML
         const cardHtml = `
           <div data-vac-id="${vac.id}" class="p-3.5 border rounded-xl flex items-start gap-3 cursor-pointer transition-all ${cardStyle}">
-            <input type="checkbox" ${isChecked ? 'checked' : ''} ${isUnavailable ? 'disabled' : ''} class="mt-1 pointer-events-none accent-navy">
+            <input type="checkbox" ${isChecked ? 'checked' : ''} class="mt-1 pointer-events-none accent-navy">
             <div class="flex-1">
               <span class="font-bold text-xs md:text-sm text-navy block leading-tight">${vac.name}</span>
               <span class="text-[11px] text-navy-slate block mt-1 leading-relaxed">${vac.description}</span>
               ${packageBadge}
-              
-              <div class="flex flex-wrap items-center gap-1">
-                <span class="text-[10px] font-semibold text-navy bg-white border border-slate-200 w-fit px-1.5 py-0.5 rounded mt-2 block">Protocol: ${vac.protocol}</span>
-                ${priceBadge}   ${statusBadge}  </div>
+              <span class="text-[10px] font-semibold text-navy bg-white border border-slate-200 w-fit px-1.5 py-0.5 rounded mt-2 block">Protocol: ${vac.protocol}</span>
             </div>
           </div>
         `;
