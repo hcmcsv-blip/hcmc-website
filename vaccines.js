@@ -22,15 +22,6 @@ export const vaccines = [
     description: "Protects against mosquito-borne brain inflammation in tropical regions."
   },
   {
-    id: "vac-typhim",
-    name: "Typhim (Typhoid)",
-    category: "travel",
-    pricePerDose: 850,
-    status: "available",
-    protocol: "Single Shot",
-    description: "Essential food and water safety protection for regional travel."
-  },
-  {
     id: "vac-qdenga",
     name: "Qdenga (Dengue fever)",
     category: "travel",
@@ -62,7 +53,7 @@ export const vaccines = [
     name: "Havrix 1440 (Hepatitis A, Adult)",
     category: "travel",
     pricePerDose: 1950,
-    status: "available",
+    status: "unavailable",
     protocol: "2 Doses",
     description: "Long-term protection against food-borne Hepatitis A."
   },
