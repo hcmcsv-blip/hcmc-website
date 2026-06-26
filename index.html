@@ -495,9 +495,19 @@
       </div>
 
       <div class="mb-12 relative group">
+        <button type="button" id="prev-promo-btn" 
+          class="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-white/95 border border-slate-200 shadow-lg items-center justify-center text-navy hover:bg-navy hover:text-white transition-all duration-300 hidden md:flex opacity-0 group-hover:opacity-100">
+          <i data-lucide="chevron-left" class="w-5 h-5"></i>
+        </button>
+
         <div id="promotions-container" 
           class="flex overflow-x-auto gap-6 pb-6 pt-2 scroll-smooth snap-x snap-mandatory scrollbar-thin scrollbar-thumb-slate-300/60 scrollbar-track-transparent">
           </div>
+        <button type="button" id="next-promo-btn" 
+          class="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-white/95 border border-slate-200 shadow-lg items-center justify-center text-navy hover:bg-navy hover:text-white transition-all duration-300 hidden md:flex opacity-0 group-hover:opacity-100">
+          <i data-lucide="chevron-right" class="w-5 h-5"></i>
+        </button>
+
       </div>
 
       <div class="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm flex flex-col gap-6">
@@ -989,6 +999,7 @@
       initDeliveryToggle();
       initNotificationClose();
       lockPastDates();
+      initPromoNavigation();
     }
 
     // แก้บั๊กเรื่องจังหวะเวลาโหลดหน้าเว็บ: ถ้าเว็บเสร็จแล้วให้รันทันที ถ้ายังไม่เสร็จให้รอสัญญาณ DOMContentLoaded
@@ -1624,6 +1635,31 @@
         });
       }
     }
+
+    /**
+     * ระบบปุ่มกดเลื่อนสไลด์โปรโมชันซ้าย-ขวา สำหรับหน้าจอเดสท็อป
+     */
+    function initPromoNavigation() {
+      const container = document.getElementById("promotions-container");
+      const prevBtn = document.getElementById("prev-promo-btn");
+      const nextBtn = document.getElementById("next-promo-btn");
+
+      if (container && prevBtn && nextBtn) {
+        // คำนวณระยะการเลื่อน: ความกว้างการ์ด (420px) + ระยะห่าง Gap (24px) = 444pxพอดี 1 ใบ
+        const scrollAmount = 444; 
+
+        // เมื่อคลิกปุ่มขวา ให้เลื่อนหน้าจอไปทางขวา (+)
+        nextBtn.addEventListener("click", () => {
+          container.scrollLeft += scrollAmount;
+        });
+
+        // เมื่อคลิกปุ่มซ้าย ให้เลื่อนหน้าจอไปทางซ้าย (-)
+        prevBtn.addEventListener("click", () => {
+          container.scrollLeft -= scrollAmount;
+        });
+      }
+    }
+
   </script> <div id="success-notification" class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/40 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-500">
     <div class="bg-white/75 backdrop-blur-xl p-8 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] max-w-sm w-full mx-4 border border-white/60 text-center flex flex-col items-center gap-4 transform scale-95 transition-transform duration-500">
       
