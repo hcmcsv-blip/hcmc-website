@@ -644,6 +644,17 @@
                   <option value="female">Female</option>
                 </select>
               </div>
+
+              <!-- เพิ่มช่องคัดกรองประวัติคนไข้เก่า/ใหม่ (Appointment) -->
+              <div class="flex flex-col gap-1.5">
+                <label for="appt-returning" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Have you visited HCMC before? *</label>
+                <select id="appt-returning" required class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white">
+                  <option value="" disabled selected>-- Select Patient Status --</option>
+                  <option value="yes">Yes, I have visited HCMC before</option>
+                  <option value="no">No, I am a new patient</option>
+                </select>
+              </div>
+
               <!-- จากเดิมที่เป็น Select Dropdown เปลี่ยนเป็น Input Date ครับ -->
               <div class="flex flex-col gap-1.5">
                 <label for="appt-dob" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Date of
@@ -766,9 +777,14 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- เปลี่ยนจากช่อง HN เดิม เป็นกล่องเลือกประวัติคนไข้ (Refill) -->
               <div class="flex flex-col gap-1.5">
-                <label for="refill-id" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Prescription ID</label>
-                <input type="text" id="refill-id" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="HN123456">
+                <label for="refill-returning" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Have you visited HCMC before? *</label>
+                <select id="refill-returning" required class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white">
+                  <option value="" disabled selected>-- Select Patient Status --</option>
+                  <option value="yes">Yes, I am an existing patient</option>
+                  <option value="no">No, I am a new patient requesting setup</option>
+                </select>
               </div>
               <div class="flex flex-col gap-1.5">
                 <label for="refill-delivery" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Receipt Option *</label>
@@ -778,6 +794,15 @@
                 </select>
               </div>
             </div>
+
+            <!-- ค้นหาบล็อกที่อยู่เดิมของคุณ แล้วปรับคลาสและไอดีตามนี้ได้เลยครับ -->
+            <div id="refill-address-block" class="flex flex-col gap-1.5 hidden"> <!-- 📍 เติม id และคลาส hidden -->
+              <label for="refill-address" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Delivery Address *</label>
+              <textarea id="refill-address" rows="2" 
+                class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white placeholder:text-slate-300" 
+                placeholder="Please enter your shipping address, district, province, and postal code..."></textarea>
+            </div>
+
 
             <div class="flex flex-col gap-2">
               <label class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Medication Details *</label>
@@ -959,6 +984,7 @@
 
       // Load initial layout view setup text
       evaluateAndRender();
+      initDeliveryToggle();
     });
 
     // คอนโทรลเลอร์ควบคุมการเพิ่ม-ลดแถวรายการยา
@@ -1365,6 +1391,7 @@
             preferredTime: document.getElementById("appt-time").value,
             gender: document.getElementById("appt-gender").value,
             dateOfBirth: document.getElementById("appt-dob").value,
+            returningPatient: document.getElementById("appt-returning").value,
             programId: document.getElementById("appt-program").value,
             clinicalNotes: document.getElementById("appt-message").value, // <-- เติมเครื่องหมายคอมม่าตรงนี้ด้วยนะครับ
 
@@ -1406,8 +1433,9 @@
             lastName: document.getElementById("refill-lastname").value,
             email: document.getElementById("refill-email").value,
             phone: document.getElementById("refill-phone").value,
-            prescriptionId: document.getElementById("refill-id").value,
+            returningPatient: document.getElementById("refill-returning").value,
             receiptOption: document.getElementById("refill-delivery").value,
+            deliveryAddress: document.getElementById("refill-address").value.trim(),
             medicationDetails: formattedMedsText
           };
 
@@ -1640,10 +1668,35 @@
       });
     }
 
+    // ฟังก์ชันสำหรับเปิด-ปิดกล่องที่อยู่อัตโนมัติ ตามเงื่อนไขการรับยา
+    function initDeliveryToggle() {
+      const deliverySelect = document.getElementById("refill-delivery");
+      const addressBlock = document.getElementById("refill-address-block");
+      const addressInput = document.getElementById("refill-address");
+
+      if (deliverySelect && addressBlock && addressInput) {
+        // ดักจับทุกครั้งที่คนไข้เปลี่ยนตัวเลือกในกล่อง Receipt Option
+        deliverySelect.addEventListener("change", function() {
+          if (this.value === "delivery") {
+            // 🟢 ถ้าเลือก Delivery: เอาคลาส hidden ออกเพื่อแสดงกล่อง และเปิดระบบบังคับกรอก (required)
+            addressBlock.classList.remove("hidden");
+            addressInput.required = true;
+          } else {
+            // 🔴 ถ้าเลือก Clinic Pick-up: ใส่คลาส hidden เพื่อซ่อนกล่อง และปิดระบบบังคับกรอก
+            addressBlock.classList.add("hidden");
+            addressInput.required = false;
+            addressInput.value = ""; // ล้างข้อมูลข้างในทิ้งเผื่อคนไข้เปลี่ยนใจ
+          }
+        });
+      }
+    }
+
     // 7. สั่งให้รันฟังก์ชันนี้ทันทีตอนเปิดหน้าเว็บครั้งแรก
     document.addEventListener('DOMContentLoaded', () => {
       renderVaccines();
     });
+
+    
 
   </script> <!-- ปิดทีเดียวตอนท้ายสุด -->
 
