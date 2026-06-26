@@ -953,24 +953,24 @@
 
 
   <script type="module">
-    // 📌 [1. IMPORTS] รวมคำสั่งนำเข้าฐานข้อมูลจากไฟล์ภายนอกไว้ที่บนสุดคู่กัน
-    import { packages } from './packages.js';
-    import { vaccines } from './vaccines.js';
+      // 📌 [1. IMPORTS] รวมคำสั่งนำเข้าฐานข้อมูลจากไฟล์ภายนอกไว้ที่บนสุดคู่กัน
+      import { packages } from './packages.js';
+      import { vaccines } from './vaccines.js';
 
-    // 📌 [2. CONFIGURATION & CONSTANTS] ประกาศลิงก์ Webhook ของ Make.com
-    const APPOINTMENT_WEBHOOK_URL = "https://hook.eu1.make.com/ebfhf5m9d1mpqmgwkm5wa4b6i1rbtv4i"; 
-    const REFILL_WEBHOOK_URL = "https://hook.eu1.make.com/1iy7ku6xsxo4p49irh4wo6p3yop2y9us"; 
+      // 📌 [2. CONFIGURATION & CONSTANTS] ประกาศลิงก์ Webhook ของ Make.com
+      const APPOINTMENT_WEBHOOK_URL = "https://hook.eu1.make.com/ebfhf5m9d1mpqmgwkm5wa4b6i1rbtv4i"; 
+      const REFILL_WEBHOOK_URL = "https://hook.eu1.make.com/1iy7ku6xsxo4p49irh4wo6p3yop2y9us"; 
 
-    // 📌 [3. GLOBAL STATES] ตัวแปรส่วนกลางสำหรับเก็บสถานะระบบ (แชร์ใช้ร่วมกันได้ทุกฟังก์ชัน)
-    let currentFilters = { gender: null, ageGroup: null, hasDiabetes: null }; // ระบบตัวกรองแพ็กเกจ
-    let activeHighlightId = "METABOLIC-FU45"; // ไอดีแพ็กเกจ Metabolic ที่กำลังแสดงผล
-    let selectedVaccineIds = []; // ระบบคลังเก็บไอดีวัคซีนที่คนไข้เลือก
+      // 📌 [3. GLOBAL STATES] ตัวแปรส่วนกลางสำหรับเก็บสถานะระบบ (แชร์ใช้ร่วมกันได้ทุกฟังก์ชัน)
+      let currentFilters = { gender: null, ageGroup: null, hasDiabetes: null }; // ระบบตัวกรองแพ็กเกจ
+      let activeHighlightId = "METABOLIC-FU45"; // ไอดีแพ็กเกจ Metabolic ที่กำลังแสดงผล
+      let selectedVaccineIds = []; // ระบบคลังเก็บไอดีวัคซีนที่คนไข้เลือก
 
 
-    // ========================================================================
-    // ⭐ SAFE SYSTEM INITIALIZER: ศูนย์ควบคุมคำสั่งรันระบบทันทีเมื่อโหลดหน้าเว็บสำเร็จ
-    // ========================================================================
-  function startClinicSystem() {
+      // ========================================================================
+      // ⭐ SAFE SYSTEM INITIALIZER: ศูนย์ควบคุมคำสั่งรันระบบทันทีเมื่อโหลดหน้าเว็บสำเร็จ
+      // ========================================================================
+    function startClinicSystem() {
       // โหลดไอคอนจากคลัง Lucide Icons
       if (typeof lucide !== 'undefined') {
         lucide.createIcons();
@@ -1654,6 +1654,34 @@
         prevBtn.addEventListener("click", () => { container.scrollLeft -= scrollAmount; });
       }
     }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuBtn = document.getElementById("mobile-menu-btn");
+      const closeBtn = document.getElementById("close-drawer-btn");
+      const mobileDrawer = document.getElementById("mobile-drawer");
+
+      // ฟังก์ชันสำหรับเปิดเมนู
+      if (menuBtn && mobileDrawer) {
+        menuBtn.addEventListener("click", () => {
+          mobileDrawer.classList.remove("hidden");
+        });
+      }
+
+      // ฟังก์ชันสำหรับปิดเมนู (เมื่อกดปุ่ม X หรือกดลิงก์เมนู)
+      if (closeBtn && mobileDrawer) {
+        closeBtn.addEventListener("click", () => {
+          mobileDrawer.classList.add("hidden");
+        });
+      }
+
+      // เพิ่มเติม: เมื่อคลิกลิงก์ในเมนูมือถือ ให้ปิดหน้าต่างเมนูอัตโนมัติด้วย
+      const drawerLinks = mobileDrawer ? mobileDrawer.querySelectorAll("a") : [];
+      drawerLinks.forEach(link => {
+        link.addEventListener("click", () => {
+          mobileDrawer.classList.add("hidden");
+        });
+      });
+    });
 
   </script> <div id="success-notification" class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/40 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-500">
     <div class="bg-white/75 backdrop-blur-xl p-8 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] max-w-sm w-full mx-4 border border-white/60 text-center flex flex-col items-center gap-4 transform scale-95 transition-transform duration-500">
