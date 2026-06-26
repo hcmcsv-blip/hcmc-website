@@ -1640,27 +1640,15 @@
       }
     }
 
-    /**
-     * ระบบปุ่มกดเลื่อนสไลด์โปรโมชันซ้าย-ขวา สำหรับหน้าจอเดสท็อป
-     */
     function initPromoNavigation() {
       const container = document.getElementById("promotions-container");
       const prevBtn = document.getElementById("prev-promo-btn");
       const nextBtn = document.getElementById("next-promo-btn");
 
       if (container && prevBtn && nextBtn) {
-        // คำนวณระยะการเลื่อน: ความกว้างการ์ด (420px) + ระยะห่าง Gap (24px) = 444pxพอดี 1 ใบ
         const scrollAmount = 444; 
-
-        // เมื่อคลิกปุ่มขวา ให้เลื่อนหน้าจอไปทางขวา (+)
-        nextBtn.addEventListener("click", () => {
-          container.scrollLeft += scrollAmount;
-        });
-
-        // เมื่อคลิกปุ่มซ้าย ให้เลื่อนหน้าจอไปทางซ้าย (-)
-        prevBtn.addEventListener("click", () => {
-          container.scrollLeft -= scrollAmount;
-        });
+        nextBtn.addEventListener("click", () => { container.scrollLeft += scrollAmount; });
+        prevBtn.addEventListener("click", () => { container.scrollLeft -= scrollAmount; });
       }
     }
 
