@@ -498,8 +498,6 @@
         <div id="promotions-container" 
           class="flex overflow-x-auto gap-6 pb-6 pt-2 scroll-smooth snap-x snap-mandatory scrollbar-thin scrollbar-thumb-slate-300/60 scrollbar-track-transparent">
           </div>
-        
-        <div class="absolute top-0 right-0 h-full w-16 bg-gradient-to-l from-iceblue/90 to-transparent pointer-events-none md:hidden"></div>
       </div>
 
       <div class="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm flex flex-col gap-6">
@@ -1460,7 +1458,7 @@
 
           const promoCardHtml = `
             <div data-vac-id="${vac.id}" 
-              class="flex-shrink-0 snap-start w-[85%] sm:w-[350px] rounded-2xl border p-6 flex flex-col justify-between cursor-pointer transition-all min-h-[230px] ${promoCardStyle}">
+              class="flex-shrink-0 snap-start w-[90%] sm:w-[420px] rounded-2xl border p-6 flex flex-col justify-between cursor-pointer transition-all min-h-[230px] ${promoCardStyle}">
               <div class="flex flex-col gap-3">
                 <div class="flex items-center justify-between">
                   <span class="px-2.5 py-1 rounded bg-accent-red/10 text-accent-red text-[10px] font-bold uppercase tracking-wider">${vac.promoLabel || 'Special Offer'}</span>
