@@ -953,7 +953,6 @@
       initMobileMenu();
       initTabs();
       setupFilters();
-      initModals();
       initHighlightMetaTabs();
       evaluateAndRender();
 
@@ -1373,50 +1372,6 @@
       const target = document.getElementById(id);
       if (target) target.scrollIntoView({ behavior: "smooth" });
     }
-
-    function initModals() {
-      const modal = document.getElementById("qr-modal");
-      if (!modal) return;
-
-      const backdrop = document.getElementById("modal-backdrop");
-      const closeBtn = document.getElementById("modal-close-btn");
-      const triggerBtns = document.querySelectorAll("[data-qr-target]");
-      const title = document.getElementById("modal-title");
-      const subtitle = document.getElementById("modal-subtitle");
-      const handle = document.getElementById("modal-channel-handle");
-      const qrImage = document.getElementById("modal-qr-image");
-
-      const qrProfiles = {
-        line: { title: "Line Official Account", subtitle: "Scan to add HCMC official account", handle: "Line ID: @hcmc", file: "Line QR.png" },
-        whatsapp: { title: "WhatsApp Medical Contact", subtitle: "Chat on WhatsApp", handle: "Phone: +66 82 766 8672", file: "WhatsApp QR.png" },
-        facebook: { title: "Facebook Messenger", subtitle: "Message us on Facebook", handle: "FB Page: Health Care Medical Clinic", file: "Facebook QR.png" }
-      };
-
-      triggerBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-          const channel = btn.getAttribute("data-qr-target");
-          const profile = qrProfiles[channel];
-          if (profile) {
-            title.innerText = profile.title;
-            subtitle.innerText = profile.subtitle;
-            handle.innerText = profile.handle;
-            qrImage.src = profile.file;
-            modal.classList.remove("opacity-0", "pointer-events-none");
-            modal.querySelector(".transform").classList.remove("scale-95");
-            modal.querySelector(".transform").classList.add("scale-100");
-          }
-        });
-      });
-
-      const hideModal = () => {
-        modal.classList.add("opacity-0", "pointer-events-none");
-        modal.querySelector(".transform").classList.remove("scale-100");
-        modal.querySelector(".transform").classList.add("scale-95");
-      };
-      if (backdrop) backdrop.addEventListener("click", hideModal);
-      if (closeBtn) closeBtn.addEventListener("click", hideModal);
-    }
-
 
     // ========================================================================
     // 💉 CATEGORY D: ระบบจัดการคลังข้อมูลและการ์ดวัคซีน (VACCINES PANEL LOGIC)
