@@ -1664,22 +1664,6 @@
       }
     }
 
-    /**
-     * เครื่องยนต์ดักจับการหมุนล้อเมาส์ (Mouse Wheel) ให้เปลี่ยนทิศทางสไลด์เป็นแนวนอนอัตโนมัติ
-     */
-    function initAvailScrollEngine() {
-      const container = document.getElementById("available-vaccines-container");
-      if (container) {
-        container.addEventListener("wheel", (e) => {
-          // ตรวจสอบว่าคนไข้ทำการหมุนล้อเมาส์แนวตั้งจริงหรือไม่
-          if (e.deltaY !== 0) {
-            e.preventDefault(); // 🛡️ ล็อกหน้าเว็บหลักไม่ให้เลื่อนไหลลงล่างขณะหมุนเมาส์ในกล่องนี้
-            container.scrollLeft += e.deltaY * 1.2; // ส่งแรงหมุนไปขับเคลื่อนการสไลด์ซ้าย-ขวาแทน (คูณ 1.2 เพื่อความสมูท)
-          }
-        }, { passive: false }); // ตั้งค่าปิด passive เพื่อให้ใช้คำสั่ง preventDefault ได้อย่างสมบูรณ์
-      }
-    }
-
   </script> <div id="success-notification" class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/40 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-500">
     <div class="bg-white/75 backdrop-blur-xl p-8 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] max-w-sm w-full mx-4 border border-white/60 text-center flex flex-col items-center gap-4 transform scale-95 transition-transform duration-500">
       
