@@ -520,7 +520,8 @@
 
         <div class="relative">
           <div id="available-vaccines-container" 
-            class="grid grid-rows-3 grid-flow-col md:grid-rows-2 h-[540px] md:h-[340px] gap-4 overflow-x-auto overflow-y-hidden pb-2 pt-1 scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            class="grid grid-rows-3 grid-flow-col md:grid-rows-2 h-[540px] md:h-[340px] gap-4 overflow-x-auto overflow-y-hidden pb-4 pt-1 scroll-smooth [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-slate-50 [&::-webkit-scrollbar-thumb]:bg-slate-200 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-300">
+            
             </div>
         </div>
       </div>
@@ -965,19 +966,6 @@
       lockPastDates();
       initPromoNavigation();
       
-      // ========================================================================
-      // 🟢 ENGINE FIXED: เครื่องยนต์ดักจับเมาส์สกรอลแนวตั้งให้เลื่อนแนวนอน (เวอร์ชันเสถียรที่สุด)
-      // ========================================================================
-      const scrollContainer = document.getElementById("available-vaccines-container");
-      if (scrollContainer) {
-        scrollContainer.addEventListener("wheel", (e) => {
-          if (e.deltaY !== 0) {
-            e.preventDefault(); // 🛡️ ล็อกหน้าเว็บใหญ่ไม่ให้เลื่อนไหลลงล่าง
-            scrollContainer.scrollLeft += e.deltaY * 1.5; // ยิงแรงหมุนตรงเข้าแกนสไลด์ซ้าย-ขวา
-          }
-        }, { passive: false });
-      }
-      // ========================================================================
     }
 
     // แก้บั๊กเรื่องจังหวะเวลาโหลดหน้าเว็บ: ถ้าเว็บเสร็จแล้วให้รันทันที ถ้ายังไม่เสร็จให้รอสัญญาณ DOMContentLoaded
