@@ -9,6 +9,7 @@ export const vaccines = [
     category: "travel",
     pricePerDose: 1500,
     status: "available",
+    showPrice: false,
     protocol: "3 Doses",
     description: "Combined active protection against major liver infections."
   },
@@ -18,6 +19,7 @@ export const vaccines = [
     category: "travel",
     pricePerDose: 960,
     status: "available",
+    showPrice: false,
     protocol: "Single Shot",
     description: "Protects against mosquito-borne brain inflammation in tropical regions."
   },
@@ -27,6 +29,7 @@ export const vaccines = [
     category: "travel",
     pricePerDose: 2400,
     status: "available",
+    showPrice: false,
     protocol: "2 Doses",
     description: "Prevents severe dengue virus strains. Recommended for tropical residents.",
     hasPackage: true,
@@ -45,6 +48,7 @@ export const vaccines = [
     category: "travel",
     pricePerDose: 750,
     status: "available",
+    showPrice: false,
     protocol: "2 Doses (Pre-Exp)",
     description: "Highly recommended for outdoor athletes and rural travel."
   },
@@ -54,6 +58,7 @@ export const vaccines = [
     category: "travel",
     pricePerDose: 1950,
     status: "out-of-stock",
+    showPrice: false,
     protocol: "2 Doses",
     description: "Long-term protection against food-borne Hepatitis A."
   },
@@ -63,6 +68,7 @@ export const vaccines = [
     category: "travel",
     pricePerDose: 3825,
     status: "available",
+    showPrice: false,
     protocol: "Single Shot",
     description: "Protection against bacterial meningitis. Required for certain visas/studies."
   },
@@ -74,6 +80,7 @@ export const vaccines = [
     category: "routine",
     pricePerDose: 1150,
     status: "available",
+    showPrice: false,
     protocol: "Booster Shot",
     description: "Protects against Tetanus, Diphtheria, and Pertussis. Every 10 years."
   },
@@ -83,6 +90,7 @@ export const vaccines = [
     category: "routine",
     pricePerDose: 850,
     status: "available",
+    showPrice: false,
     protocol: "3 Doses",
     description: "Standard immunization for blood-borne Hepatitis B protection."
   },
@@ -92,6 +100,7 @@ export const vaccines = [
     category: "routine",
     pricePerDose: 700,
     status: "available",
+    showPrice: false,
     protocol: "Annual Shot",
     description: "Annual seasonal flu shot protecting against four prevalent strains."
   },
@@ -101,6 +110,7 @@ export const vaccines = [
     category: "routine",
     pricePerDose: 6450,
     status: "available",
+    showPrice: false,
     protocol: "2-3 Doses",
     description: "Comprehensive cervical and HPV-related cancer defense panel.",
     hasPackage: true,
@@ -120,6 +130,7 @@ export const vaccines = [
     category: "routine",
     pricePerDose: 3150,
     status: "available",
+    showPrice: false,
     protocol: "Single Shot",
     description: "Advanced conjugate defense against invasive pneumococcal pneumonia."
   },
@@ -129,6 +140,7 @@ export const vaccines = [
     category: "routine",
     pricePerDose: 3140,
     status: "available",
+    showPrice: false,
     protocol: "Single Shot",
     description: "Next-gen expanded coverage against 20 pneumococcal serotypes."
   },
@@ -138,6 +150,7 @@ export const vaccines = [
     category: "routine",
     pricePerDose: 2100,
     status: "available",
+    showPrice: false,
     protocol: "Single Shot",
     description: "Polysaccharide vaccine booster for comprehensive lung protection."
   },
@@ -147,6 +160,7 @@ export const vaccines = [
     category: "routine",
     pricePerDose: 860,
     status: "available",
+    showPrice: false,
     protocol: "1-2 Doses",
     description: "Essential triple-virus protection package for adults and travelers."
   },
@@ -156,6 +170,7 @@ export const vaccines = [
     category: "routine",
     pricePerDose: 2530,
     status: "available",
+    showPrice: false,
     protocol: "2 Doses",
     description: "Combined immunity update for Measles, Mumps, Rubella, and Chickenpox."
   },
@@ -165,6 +180,7 @@ export const vaccines = [
     category: "routine",
     pricePerDose: 1640,
     status: "available",
+    showPrice: false,
     protocol: "2 Doses",
     description: "Targeted protection against chickenpox infection for non-immune adults."
   },
@@ -174,6 +190,7 @@ export const vaccines = [
     category: "routine",
     pricePerDose: 6350,
     status: "available",
+    showPrice: false,
     protocol: "2 Doses",
     description: "Highly effective non-live vaccine for shingles prevention (Age 50+)."
   },
@@ -182,7 +199,8 @@ export const vaccines = [
     name: "Td (Tetanus-Diptheria)",
     category: "routine",
     pricePerDose: 0,
-    status: "unavailable",
+    status: "out-of-stock",
+    showPrice: false,
     protocol: "-",
     description: "Basic Tetanus and Diphtheria booster."
   },
@@ -194,6 +212,7 @@ export const vaccines = [
     category: "routine",
     pricePerDose: 2500,
     status: "available",
+    showPrice: false,
     protocol: "Infant Series",
     description: "6-in-1 pediatric combination vaccine for comprehensive early childhood immunity."
   },
@@ -203,6 +222,7 @@ export const vaccines = [
     category: "routine",
     pricePerDose: 1200,
     status: "available",
+    showPrice: false,
     protocol: "3 Doses (Oral)",
     description: "Oral live vaccine to protect infants against severe rotavirus diarrhea."
   },
@@ -212,6 +232,7 @@ export const vaccines = [
     category: "routine",
     pricePerDose: 1350,
     status: "available",
+    showPrice: false,
     protocol: "2 Doses",
     description: "Pediatric formulation for early childhood Hepatitis A immunization."
   },
@@ -223,6 +244,7 @@ export const vaccines = [
     category: "promo-only", 
     pricePerDose: 3650,
     status: "available",
+    showPrice: false,
     protocol: "Co-administered (2 Shots)",
     description: "Co-administered protection recommended for seniors (65+), asthma sufferers, or diabetics.",
     hasPackage: true,
