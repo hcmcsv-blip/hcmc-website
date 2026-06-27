@@ -1376,9 +1376,26 @@
       if (!vaccines || !Array.isArray(vaccines)) return;
 
       vaccines.forEach(vac => {
-        if (vac.status === 'unavailable') return;
-        const isChecked = selectedVaccineIds.includes(vac.id);
+        // 💡 สมมุติค่าคงที่พื้นฐานของระบบเช็คการเลือก (คุณสามารถปรับเปลี่ยนตัวแปรนี้ตามระบบจริงของคุณได้)
+        const isChecked = typeof selectedVaccineIds !== 'undefined' && selectedVaccineIds.includes(vac.id);
 
+        // ==========================================
+        // ⚙️ [1. SYSTEM CHECK: เช็คสถานะสินค้าหมดชั่วคราว]
+        // ==========================================
+        let statusBadgeHTML = '';
+        let cardOpacityClass = 'opacity-100';
+        let pointerEventsClass = '';
+        
+        // 🔥 แก้บั๊คจาก vaccine.status เป็น vac.status และปิดปีกกาให้ครบถ้วนแล้ว
+        if (vac.status === 'out-of-stock') {
+          statusBadgeHTML = `<span class="absolute top-3 right-3 text-[9px] font-bold bg-rose-50 text-rose-600 px-2 py-0.5 rounded-full uppercase tracking-wider border border-rose-100 z-20">Not Available</span>`;
+          cardOpacityClass = 'opacity-50 blur-[0.3px]'; // ปรับจางลง 50% ให้เห็นชัดว่าหมด
+          pointerEventsClass = 'pointer-events-none select-none'; // ล็อกไม่ให้คลิกเลือกได้เลย
+        }
+
+        // ==========================================
+        // 🏷️ [2. CASE A: จัดการแสดงผลฝั่งการ์ด PROMOTION]
+        // ==========================================
         if (vac.isPromoCard) {
           const promoCardStyle = isChecked ? 'border-navy bg-iceblue/20 shadow-md scale-[1.01]' : 'border-slate-100 bg-white hover:bg-slate-50/80 shadow-sm';
           const prices = vac.promoPrices || [];
@@ -1389,11 +1406,14 @@
 
           const promoCardHtml = `
             <div data-vac-id="${vac.id}" 
-              class="flex-shrink-0 snap-start w-[90%] sm:w-[420px] rounded-2xl border p-6 flex flex-col justify-between cursor-pointer transition-all min-h-[230px] ${promoCardStyle}">
+              class="relative flex-shrink-0 snap-start w-[90%] sm:w-[420px] rounded-2xl border p-6 flex flex-col justify-between cursor-pointer transition-all min-h-[230px] ${promoCardStyle} ${cardOpacityClass} ${pointerEventsClass}">
+              
+              ${statusBadgeHTML}
+
               <div class="flex flex-col gap-3">
                 <div class="flex items-center justify-between">
                   <span class="px-2.5 py-1 rounded bg-accent-red/10 text-accent-red text-[10px] font-bold uppercase tracking-wider">${vac.promoLabel || 'Special Offer'}</span>
-                  <input type="checkbox" ${isChecked ? 'checked' : ''} class="pointer-events-none accent-navy w-4 h-4">
+                  <input type="checkbox" ${isChecked ? 'checked' : ''} ${vac.status === 'out-of-stock' ? 'class="hidden"' : 'class="pointer-events-none accent-navy w-4 h-4"'}>
                 </div>
                 <h4 class="font-extrabold text-base text-navy">${vac.name}</h4>
                 <p class="text-xs text-navy-slate leading-relaxed">${vac.description}</p>
@@ -1409,24 +1429,40 @@
 
         if (vac.category === 'promo-only' || vac.isPromoCard) return;
 
+        // ==========================================
+        // 💉 [3. CASE B: จัดการแสดงผลฝั่งการ์ด VACCINE ปกติ]
+        // ==========================================
         const cardStyle = isChecked ? 'border-navy bg-iceblue/20 shadow-sm' : 'border-slate-100 bg-slate-50 hover:bg-slate-100/70';
         const packageBadge = vac.hasPackage ? `<span class="text-[10px] font-bold text-accent-red bg-accent-red/5 block mt-1.5 p-1 rounded border border-accent-red/10 text-center">${vac.packageDetails}</span>` : '';
         const catBadge = vac.category === 'travel' 
           ? '<span class="text-[9px] font-bold text-accent-red bg-accent-red/5 px-1.5 py-0.5 rounded border border-accent-red/10">Travel</span>'
           : '<span class="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-100">Routine</span>';
           
+        // 💡 ฟังก์ชันจัดการเช็คการโชว์ราคา: ถ้าใส่ราคาเป็น 0 จะโชว์คำว่า Contact Clinic ทันที
+        const priceDisplayHTML = (vac.pricePerDose && vac.pricePerDose > 0)
+          ? `<span class="text-[11px] font-bold text-navy bg-white border border-slate-200 w-fit px-1.5 py-0.5 rounded mt-2 block">${vac.pricePerDose.toLocaleString()} THB / Dose</span>`
+          : `<span class="text-[11px] font-bold text-slate-400 italic bg-slate-100 w-fit px-1.5 py-0.5 rounded mt-2 block">Contact Clinic</span>`;
+
         const cardHtml = `
           <div data-vac-id="${vac.id}" 
-            class="p-3.5 border rounded-xl flex items-start gap-3 cursor-pointer transition-all flex-shrink-0 snap-start w-[285px] sm:w-[340px] h-[155px] md:h-[145px] ${cardStyle}">
-            <input type="checkbox" ${isChecked ? 'checked' : ''} class="mt-1 pointer-events-none accent-navy">
+            class="relative p-3.5 border rounded-xl flex items-start gap-3 cursor-pointer transition-all flex-shrink-0 snap-start w-[285px] sm:w-[340px] h-[165px] md:h-[155px] ${cardStyle} ${cardOpacityClass} ${pointerEventsClass}">
+            
+            ${statusBadgeHTML}
+
+            <input type="checkbox" ${isChecked ? 'checked' : ''} ${vac.status === 'out-of-stock' ? 'class="hidden"' : 'class="mt-1 pointer-events-none accent-navy"'}>
+            
             <div class="flex-1">
               <div class="flex items-center justify-between gap-2 mb-1">
-                <span class="font-bold text-xs md:text-sm text-navy block leading-tight truncate max-w-[170px] md:max-w-[220px]">${vac.name}</span>
+                <span class="font-bold text-xs md:text-sm text-navy block leading-tight truncate max-w-[140px] sm:max-w-[180px]">${vac.name}</span>
                 ${catBadge}
               </div>
               <span class="text-[11px] text-navy-slate block mt-1 leading-relaxed line-clamp-2">${vac.description}</span>
               ${packageBadge}
-              <span class="text-[10px] font-semibold text-navy bg-white border border-slate-200 w-fit px-1.5 py-0.5 rounded mt-2 block">Protocol: ${vac.protocol}</span>
+              
+              <div class="flex items-center gap-1.5 mt-1">
+                <span class="text-[10px] font-medium text-navy-slate bg-slate-100 w-fit px-1.5 py-0.5 rounded mt-2 block">Protocol: ${vac.protocol}</span>
+                ${priceDisplayHTML}
+              </div>
             </div>
           </div>
         `;
@@ -1434,7 +1470,9 @@
         availContainer.insertAdjacentHTML('beforeend', cardHtml);
       });
 
-      setupVaccineClickEvents();
+      if (typeof setupVaccineClickEvents === 'function') {
+        setupVaccineClickEvents();
+      }
     }
 
     function setupVaccineClickEvents() {

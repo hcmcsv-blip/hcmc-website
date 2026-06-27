@@ -53,7 +53,7 @@ export const vaccines = [
     name: "Havrix 1440 (Hepatitis A, Adult)",
     category: "travel",
     pricePerDose: 1950,
-    status: "unavailable",
+    status: "out-of-stock",
     protocol: "2 Doses",
     description: "Long-term protection against food-borne Hepatitis A."
   },
