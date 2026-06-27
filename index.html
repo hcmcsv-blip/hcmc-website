@@ -1375,7 +1375,7 @@
 
       if (!vaccines || !Array.isArray(vaccines)) return;
 
-      // 🪄 ปรับแต่ง Container แหล่งอุ้มวัคซีนบน Desktop ให้สูงขึ้นเป็น md:h-[370px] และเพิ่มระยะห่างแนวตั้ง gap-y-4 เพื่อไม่ให้กล่องบนล่างติดกัน
+      // 📐 ปรับ Container อุ้มวัคซีนบน Desktop ให้สูงขึ้น (md:h-[370px]) และเว้นระยะแนวตั้ง (gap-y-4) ไม่ให้กล่องชนกัน
       availContainer.className = "grid grid-rows-3 grid-flow-col md:grid-rows-2 h-[560px] md:h-[370px] gap-y-4 gap-x-5 overflow-x-auto overflow-y-hidden pb-4 pt-1 scroll-smooth [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-slate-50 [&::-webkit-scrollbar-thumb]:bg-slate-200 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-300";
 
       vaccines.forEach(vac => {
@@ -1386,22 +1386,22 @@
         // ==========================================================
         let cardOpacityClass = 'opacity-100';
         let pointerEventsClass = '';
-        let rightBottomHTML = ''; // ตัวแปรเก็บป้ายที่จะแสดงฝั่งขวาล่าง
+        let rightBottomHTML = ''; 
 
         if (vac.status === 'out-of-stock') {
           cardOpacityClass = 'opacity-50 blur-[0.2px]';
           pointerEventsClass = 'pointer-events-none select-none';
-          // 🎯 กฎข้อที่ 1: ถ้าของหมด ป้าย Not Available จะมาสถิตอยู่มุมขวาล่างแทนป้ายราคาทันที
+          // 🎯 กฎข้อที่ 1: ถ้าของหมด ป้าย Not Available จะมาอยู่มุมขวาล่างแทนป้ายราคาทันที ไม่ซ้อนทับใคร
           rightBottomHTML = `<span class="text-[10px] font-bold bg-rose-50 text-rose-600 px-2.5 py-1 rounded-full uppercase tracking-wider border border-rose-100 shrink-0 shadow-sm">Not Available</span>`;
         } else {
-          // 🎯 กฎข้อที่ 2: ปรับเงื่อนไขตามคุณสมบัติ showPrice (ถ้าไม่ระบุ หรือตั้งเป็น true จะโชว์ราคาปกติ)
+          // 🎯 กฎข้อที่ 2: ปรับเงื่อนไขตามคุณสมบัติ showPrice (หากไม่ระบุ หรือตั้งเป็น true จะโชว์ราคาปกติ)
           const isShowPrice = vac.showPrice !== false;
           
           if (isShowPrice) {
             const priceVal = vac.pricePerDose ? vac.pricePerDose.toLocaleString() : '0';
             rightBottomHTML = `<span class="text-[11px] font-bold text-navy bg-white border border-slate-200 px-2 py-0.5 rounded shrink-0 shadow-sm">${priceVal} THB</span>`;
           } else {
-            // ถ้าตั้ง showPrice: false จะโชว์คำว่า Contact Clinic โดยราคาจริงในไฟล์ไม่เสียหาย
+            // ถ้าตั้ง showPrice: false จะโชว์คำว่า Contact Clinic โดยราคาจริงในไฟล์ไม่เสียหาย และไม่ล้นกล่อง
             rightBottomHTML = `<span class="text-[11px] font-semibold text-slate-400 italic bg-slate-50 border border-slate-100 px-2 py-0.5 rounded shrink-0">Contact Clinic</span>`;
           }
         }
@@ -1483,6 +1483,16 @@
 
         availContainer.insertAdjacentHTML('beforeend', cardHtml);
       });
+
+      // 🔥 [RETURNED FIX] ย้ายระบบดักจับลูกกลิ้งเมาส์ มาฝังคืนไว้ที่ท้ายลูปสร้างการ์ดตรงนี้ให้เรียบร้อยแล้วครับ!
+      if (availContainer) {
+        availContainer.addEventListener("wheel", (e) => {
+          if (e.deltaY !== 0) {
+            e.preventDefault(); // 🛡️ บล็อกหน้าเว็บใหญ่ไม่ให้เลื่อนไหลทะลุลงด้านล่าง
+            availContainer.scrollLeft += e.deltaY * 1.5; // แปลงแรงสกรอลล์แนวตั้งไปขับเคลื่อนสไลด์แนวนอนแทน
+          }
+        }, { passive: false });
+      }
 
       if (typeof setupVaccineClickEvents === 'function') {
         setupVaccineClickEvents();
