@@ -965,16 +965,6 @@
       initNotificationClose();
       lockPastDates();
       initPromoNavigation();
-
-      const scrollContainer = document.getElementById("available-vaccines-container");
-      if (scrollContainer) {
-        scrollContainer.addEventListener("wheel", (e) => {
-          if (e.deltaY !== 0) {
-            e.preventDefault(); 
-            scrollContainer.scrollLeft += e.deltaY * 1.5; 
-          }
-        }, { passive: false });
-      }
       
     }
 
@@ -1479,6 +1469,19 @@
 
         availContainer.insertAdjacentHTML('beforeend', cardHtml);
       });
+
+      const scrollContainer = document.getElementById("available-vaccines-container");
+      if (scrollContainer) {
+        scrollContainer.addEventListener("wheel", (e) => {
+          // 1. เช็คว่าเป็นการหมุนลูกกลิ้งขึ้นหรือลงจริงไหม
+          if (e.deltaY !== 0) {
+            // 2. 🛡️ สั่งเบรกมือถือ ล็อกหน้าเว็บใหญ่ไม่ให้เลื่อนไหลทะลุลงล่าง
+            e.preventDefault(); 
+            // 3. ยิงแรงหมุนตรงเข้าแกนสไลด์ซ้าย-ขวาของกล่องวัคซีนแทน
+            scrollContainer.scrollLeft += e.deltaY * 1.5; 
+          }
+        }, { passive: false }); // บังคับ passive: false เพื่อให้เบราว์เซอร์ยอมรับการหยุดหน้าเว็บใหญ่ด้วย preventDefault
+      }
 
       if (typeof setupVaccineClickEvents === 'function') {
         setupVaccineClickEvents();
