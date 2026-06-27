@@ -1445,22 +1445,31 @@
 
         const cardHtml = `
           <div data-vac-id="${vac.id}" 
-            class="relative p-3.5 border rounded-xl flex items-start gap-3 cursor-pointer transition-all flex-shrink-0 snap-start w-[285px] sm:w-[340px] h-[165px] md:h-[155px] ${cardStyle} ${cardOpacityClass} ${pointerEventsClass}">
+            class="relative p-4 border rounded-xl flex items-start gap-3 cursor-pointer transition-all flex-shrink-0 snap-start 
+            /* 📱 ปรับความกว้างบนมือถือให้ยืดหยุ่นไม่ล้นขอบจอ (ใช้ w-[85vw] บนมือถือ และ w-[320px] บนคอม) */
+            w-[85vw] sm:w-[320px] 
+            /* 📐 ปรับความสูงให้ยืดหยุ่นตามเนื้อหา (เปลี่ยนจาก h-[165px] เป็น h-auto เพื่อให้ยืดตามชื่อที่ขึ้นบรรทัดใหม่ได้) */
+            h-auto min-h-[165px] 
+            ${cardStyle} ${cardOpacityClass} ${pointerEventsClass}">
             
             ${statusBadgeHTML}
 
             <input type="checkbox" ${isChecked ? 'checked' : ''} ${vac.status === 'out-of-stock' ? 'class="hidden"' : 'class="mt-1 pointer-events-none accent-navy"'}>
             
-            <div class="flex-1">
-              <div class="flex items-center justify-between gap-2 mb-1">
-                <span class="font-bold text-xs md:text-sm text-navy block leading-tight truncate max-w-[140px] sm:max-w-[180px]">${vac.name}</span>
-                ${catBadge}
+            <div class="flex-1 min-w-0"> <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-1.5 mb-2">
+                
+                <span class="font-bold text-xs md:text-sm text-navy block leading-tight whitespace-normal break-words pr-16 sm:pr-0">
+                  ${vac.name}
+                </span>
+                
+                <div class="flex-shrink-0 mt-0.5 sm:mt-0">${catBadge}</div>
               </div>
+              
               <span class="text-[11px] text-navy-slate block mt-1 leading-relaxed line-clamp-2">${vac.description}</span>
               ${packageBadge}
               
-              <div class="flex items-center gap-1.5 mt-1">
-                <span class="text-[10px] font-medium text-navy-slate bg-slate-100 w-fit px-1.5 py-0.5 rounded mt-2 block">Protocol: ${vac.protocol}</span>
+              <div class="flex flex-wrap items-center gap-1.5 mt-2 pt-1">
+                <span class="text-[10px] font-medium text-navy-slate bg-slate-100 px-1.5 py-0.5 rounded">Protocol: ${vac.protocol}</span>
                 ${priceDisplayHTML}
               </div>
             </div>
