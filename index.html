@@ -965,6 +965,16 @@
       initNotificationClose();
       lockPastDates();
       initPromoNavigation();
+
+      const scrollContainer = document.getElementById("available-vaccines-container");
+      if (scrollContainer) {
+        scrollContainer.addEventListener("wheel", (e) => {
+          if (e.deltaY !== 0) {
+            e.preventDefault(); 
+            scrollContainer.scrollLeft += e.deltaY * 1.5; 
+          }
+        }, { passive: false });
+      }
       
     }
 
