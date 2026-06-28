@@ -450,12 +450,12 @@
   </section>
 
   <!-- ======================================================================== -->
-  <!-- 📰 MEDICAL INSIGHTS & CLINIC UPDATES SECTION -->
+  <!-- 📰 MEDICAL INSIGHTS & CLINIC UPDATES SECTION (WITH IMAGES) -->
   <!-- ======================================================================== -->
   <section id="insights" class="py-24 bg-white border-b border-slate-100">
     <div class="max-w-7xl mx-auto px-6">
       
-      <!-- 📄 1. ส่วนหัวข้อของโซน (Section Header) -->
+      <!-- 📄 1. ส่วนหัวข้อของโซน -->
       <div class="max-w-2xl mb-16 flex flex-col gap-4">
         <span class="text-xs font-bold text-navy tracking-widest uppercase flex items-center gap-1.5">
           <i data-lucide="book-open" class="w-4 h-4 text-navy"></i>
@@ -469,78 +469,103 @@
         </p>
       </div>
 
-      <!-- 📦 2. ส่วนกล่องการ์ดเนื้อหา (3-Column Responsive Grid) -->
-      <!-- บนมือถือจะเรียงเดี่ยว (grid-cols-1) และบนคอมพิวเตอร์ขยายเป็น 3 กล่องขนานกันอัตโนมัติ (md:grid-cols-3) -->
+      <!-- 📦 2. ส่วนกล่องการ์ดเนื้อหาพร้อมรูปภาพ (3-Column Grid) -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         
-        <!-- --- กล่องที่ 1: หมวดข้อมูลสำหรับคนไข้ (ดาวเด่นของหน้าเพจ) --- -->
-        <!-- ใช้คลาส bg-navy-tint/40 เพื่อทำพื้นหลังเทาอมน้ำเงินจางๆ ให้ตัวบทความคนไข้ดูเด่นขึ้นจากกล่องอื่น -->
-        <div class="bg-navy-tint/40 border border-slate-100 rounded-3xl p-6 shadow-xs flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-          <div class="flex flex-col gap-4">
-            <!-- ป้ายหมวดหมู่และวันที่ -->
-            <div class="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider">
-              <span class="px-2.5 py-1 rounded-full bg-iceblue text-navy">Cellular Health</span>
-              <span class="text-slate-400 font-medium">June 28, 2026</span>
+        <!-- --- การ์ดที่ 1: NAD+ Cellular Health (เน้นคนไข้) --- -->
+        <!-- 💡 สังเกตว่ามีการเพิ่มคลาส 'group' และ 'overflow-hidden' ที่ตัวการ์ดหลัก -->
+        <div class="group bg-navy-tint/40 border border-slate-100 rounded-3xl overflow-hidden shadow-xs flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+          <div>
+            <!-- โซนรูปภาพ (คุณสามารถเปลี่ยนชื่อไฟล์รูปใน src="..." ได้ตามจริงเลยครับ) -->
+            <div class="h-48 overflow-hidden bg-slate-200 relative">
+              <img src="images/insight_nad.png" alt="NAD+ Therapy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
             </div>
-            <!-- หัวข้อบทความ -->
-            <h3 class="text-lg font-extrabold text-navy leading-snug hover:text-navy-slate transition-colors">
-              <a href="#">Unlock Cellular Energy: Why NAD+ Levels Decline and How to Restore Them</a>
-            </h3>
-            <!-- คำโปรยสั้น (ใช้ line-clamp-3 เพื่อตัดคำให้ยาวไม่เกิน 3 บรรทัด ป้องกันกล่องเบี้ยว) -->
-            <p class="text-xs md:text-sm text-navy-slate leading-relaxed line-clamp-3">
-              Learn how nicotinamide adenine dinucleotide (NAD+) powers your metabolism, sharpens focus, and repairs DNA naturally, and when direct therapies can help reverse chronic fatigue.
-            </p>
+            
+            <!-- โซนเนื้อหาข้อความ (ใส่ padding แยกพิกัด p-6 เพื่อไม่ให้ข้อความชนขอบรูป) -->
+            <div class="p-6 flex flex-col gap-4">
+              <div class="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider">
+                <span class="px-2.5 py-1 rounded-full bg-iceblue text-navy">Cellular Health</span>
+                <span class="text-slate-400 font-medium">June 28, 2026</span>
+              </div>
+              <h3 class="text-lg font-extrabold text-navy leading-snug hover:text-navy-slate transition-colors">
+                <a href="#">Unlock Cellular Energy: Why NAD+ Levels Decline and How to Restore Them</a>
+              </h3>
+              <p class="text-xs md:text-sm text-navy-slate leading-relaxed line-clamp-3">
+                Learn how nicotinamide adenine dinucleotide (NAD+) powers your metabolism, sharpens focus, and repairs DNA naturally, and when direct therapies can help reverse chronic fatigue.
+              </p>
+            </div>
           </div>
-          <!-- ปุ่มกดลิงก์ท้ายกล่อง -->
-          <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
-            <a href="#" class="text-xs font-bold uppercase tracking-wider text-navy hover:text-navy-slate flex items-center gap-1.5 group">
-              Read Insight 
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"></i>
-            </a>
+          
+          <!-- โซนปุ่มกดท้ายการ์ด -->
+          <div class="px-6 pb-6 mt-auto">
+            <div class="pt-4 border-t border-slate-200/60 flex items-center justify-between">
+              <a href="#" class="text-xs font-bold uppercase tracking-wider text-navy hover:text-navy-slate flex items-center gap-1.5">
+                Read Insight 
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"></i>
+              </a>
+            </div>
           </div>
         </div>
 
-        <!-- --- กล่องที่ 2: หมวดเทคโนโลยีและนวัตกรรม (ปรับข่าวสารภาพรวมให้เป็นมิตรกับคนไข้) --- -->
-        <div class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-xs flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-          <div class="flex flex-col gap-4">
-            <div class="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider">
-              <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100">MedTech Trends</span>
-              <span class="text-slate-400 font-medium">June 24, 2026</span>
+        <!-- --- การ์ดที่ 2: Glucose Tracking Tech --- -->
+        <div class="group bg-white border border-slate-200/80 rounded-3xl overflow-hidden shadow-xs flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+          <div>
+            <div class="h-48 overflow-hidden bg-slate-200 relative">
+              <img src="images/insight_glucose.png" alt="Glucose Tracking Sensors" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
             </div>
-            <h3 class="text-lg font-extrabold text-navy leading-snug hover:text-navy-slate transition-colors">
-              <a href="#">The Future of Glucose Tracking: 15-Day Continuous Glucose Monitors</a>
-            </h3>
-            <p class="text-xs md:text-sm text-navy-slate leading-relaxed line-clamp-3">
-              Discover how new biosensor technologies are offering intensive diabetes profiles and longer wear options to seamlessly integrate with your premium lifestyle setup.
-            </p>
+            
+            <div class="p-6 flex flex-col gap-4">
+              <div class="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider">
+                <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100">MedTech Trends</span>
+                <span class="text-slate-400 font-medium">June 24, 2026</span>
+              </div>
+              <h3 class="text-lg font-extrabold text-navy leading-snug hover:text-navy-slate transition-colors">
+                <a href="#">The Future of Glucose Tracking: 15-Day Continuous Glucose Monitors</a>
+              </h3>
+              <p class="text-xs md:text-sm text-navy-slate leading-relaxed line-clamp-3">
+                Discover how new biosensor technologies are offering intensive diabetes profiles and longer wear options to seamlessly integrate with your premium lifestyle setup.
+              </p>
+            </div>
           </div>
-          <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
-            <a href="#" class="text-xs font-bold uppercase tracking-wider text-navy hover:text-navy-slate flex items-center gap-1.5 group">
-              Read Insight 
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"></i>
-            </a>
+          
+          <div class="px-6 pb-6 mt-auto">
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+              <a href="#" class="text-xs font-bold uppercase tracking-wider text-navy hover:text-navy-slate flex items-center gap-1.5">
+                Read Insight 
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"></i>
+              </a>
+            </div>
           </div>
         </div>
 
-        <!-- --- กล่องที่ 3: ข่าวสารการพัฒนาของคลินิก (จัดวางเพื่อให้เห็นภาพรวมความน่าเชื่อถือ) --- -->
-        <div class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-xs flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-          <div class="flex flex-col gap-4">
-            <div class="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider">
-              <span class="px-2.5 py-1 rounded-full bg-accent-red/5 text-accent-red border border-accent-red/10">Clinic Update</span>
-              <span class="text-slate-400 font-medium">June 22, 2026</span>
+        <!-- --- การ์ดที่ 3: Clinic Update Focus --- -->
+        <div class="group bg-white border border-slate-200/80 rounded-3xl overflow-hidden shadow-xs flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+          <div>
+            <div class="h-48 overflow-hidden bg-slate-200 relative">
+              <img src="images/insight_clinic.png" alt="Clinic Diagnostic Lab" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
             </div>
-            <h3 class="text-lg font-extrabold text-navy leading-snug hover:text-navy-slate transition-colors">
-              <a href="#">HCMC R&D Focus: Enhancing Connected Diagnostics and Intelligent Imaging</a>
-            </h3>
-            <p class="text-xs md:text-sm text-navy-slate leading-relaxed line-clamp-3">
-              We are constantly refining our data logistics and diagnostic systems by integration of expert engineering software to accelerate precise preventative internal medicine.
-            </p>
+            
+            <div class="p-6 flex flex-col gap-4">
+              <div class="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider">
+                <span class="px-2.5 py-1 rounded-full bg-accent-red/5 text-accent-red border border-accent-red/10">Clinic Update</span>
+                <span class="text-slate-400 font-medium">June 22, 2026</span>
+              </div>
+              <h3 class="text-lg font-extrabold text-navy leading-snug hover:text-navy-slate transition-colors">
+                <a href="#">HCMC R&D Focus: Enhancing Connected Diagnostics and Intelligent Imaging</a>
+              </h3>
+              <p class="text-xs md:text-sm text-navy-slate leading-relaxed line-clamp-3">
+                We are constantly refining our data logistics and diagnostic systems by integration of expert engineering software to accelerate precise preventative internal medicine.
+              </p>
+            </div>
           </div>
-          <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
-            <a href="#" class="text-xs font-bold uppercase tracking-wider text-navy hover:text-navy-slate flex items-center gap-1.5 group">
-              Read Article 
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"></i>
-            </a>
+          
+          <div class="px-6 pb-6 mt-auto">
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+              <a href="#" class="text-xs font-bold uppercase tracking-wider text-navy hover:text-navy-slate flex items-center gap-1.5">
+                Read Article 
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"></i>
+              </a>
+            </div>
           </div>
         </div>
 
