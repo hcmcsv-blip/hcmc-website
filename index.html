@@ -67,7 +67,8 @@
 
 <body class="bg-navy-tint text-navy font-sans antialiased min-h-screen">
 
-  <header class="sticky top-0 z-50 glass-nav border-b border-slate-100 transition-all duration-300">
+  <!-- 🪄 ปรับเป็น fixed และตั้งค่าเริ่มต้นให้ bg/border โปร่งใส ทะลุเห็นภาพพื้นหลังด้านหลัง -->
+  <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-transparent border-b border-transparent transition-all duration-300">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       <a href="#home" class="flex items-center group">
         <img src="images/logo-2.png" alt="Health Care Medical Clinic"
@@ -101,6 +102,7 @@
       </button>
     </div>
 
+    <!-- กล่องเมนูดรอปดาวน์บนมือถือ (Mobile Drawer) -->
     <div id="mobile-drawer"
       class="hidden lg:hidden border-t border-slate-100 bg-white px-6 py-8 flex flex-col gap-6 shadow-lg">
       <a href="#about" class="mobile-nav-link font-semibold text-lg text-navy">About Dr.M</a>
@@ -1666,6 +1668,23 @@
           mobileDrawer.classList.add("hidden");
         });
       });
+    });
+
+    // --- สคริปต์ควบคุม Dynamic Navbar สลับโปร่งใส/กระจกฝ้า ---
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('main-header');
+      if (!header) return;
+
+      // ถ้าผู้ใช้เลื่อนจอลงมามากกว่า 20px
+      if (window.scrollY > 20) {
+        // 🔮 ใส่เอฟเฟกต์ขาวกระจกฝ้า (White Glassmorphism) และดึงขอบเส้นใต้ขึ้นมาโชว์
+        header.classList.add('bg-white/80', 'backdrop-blur-md', 'shadow-sm', 'border-slate-100');
+        header.classList.remove('bg-transparent', 'border-transparent');
+      } else {
+        // ❄️ ถ้าเลื่อนกลับไปบนสุด ให้เคลียร์สไตล์กลับเป็นโปร่งใสคลีน ๆ กลืนไปกับรูป Hero ตามเดิม
+        header.classList.remove('bg-white/80', 'backdrop-blur-md', 'shadow-sm', 'border-slate-100');
+        header.classList.add('bg-transparent', 'border-transparent');
+      }
     });
 
   </script> <div id="success-notification" class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/40 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-500">
