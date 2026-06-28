@@ -449,6 +449,105 @@
     </div>
   </section>
 
+  <!-- ======================================================================== -->
+  <!-- 📰 MEDICAL INSIGHTS & CLINIC UPDATES SECTION -->
+  <!-- ======================================================================== -->
+  <section id="insights" class="py-24 bg-white border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <!-- 📄 1. ส่วนหัวข้อของโซน (Section Header) -->
+      <div class="max-w-2xl mb-16 flex flex-col gap-4">
+        <span class="text-xs font-bold text-navy tracking-widest uppercase flex items-center gap-1.5">
+          <i data-lucide="book-open" class="w-4 h-4 text-navy"></i>
+          Knowledge Base
+        </span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-navy tracking-tight">
+          Medical Insights & Health Updates
+        </h2>
+        <p class="text-navy-slate text-sm md:text-base leading-relaxed">
+          Stay informed with evidence-based medical content, practical health optimization tips, and the latest diagnostic innovations curated by Dr. Nisachon Morgan.
+        </p>
+      </div>
+
+      <!-- 📦 2. ส่วนกล่องการ์ดเนื้อหา (3-Column Responsive Grid) -->
+      <!-- บนมือถือจะเรียงเดี่ยว (grid-cols-1) และบนคอมพิวเตอร์ขยายเป็น 3 กล่องขนานกันอัตโนมัติ (md:grid-cols-3) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- --- กล่องที่ 1: หมวดข้อมูลสำหรับคนไข้ (ดาวเด่นของหน้าเพจ) --- -->
+        <!-- ใช้คลาส bg-navy-tint/40 เพื่อทำพื้นหลังเทาอมน้ำเงินจางๆ ให้ตัวบทความคนไข้ดูเด่นขึ้นจากกล่องอื่น -->
+        <div class="bg-navy-tint/40 border border-slate-100 rounded-3xl p-6 shadow-xs flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+          <div class="flex flex-col gap-4">
+            <!-- ป้ายหมวดหมู่และวันที่ -->
+            <div class="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider">
+              <span class="px-2.5 py-1 rounded-full bg-iceblue text-navy">Cellular Health</span>
+              <span class="text-slate-400 font-medium">June 28, 2026</span>
+            </div>
+            <!-- หัวข้อบทความ -->
+            <h3 class="text-lg font-extrabold text-navy leading-snug hover:text-navy-slate transition-colors">
+              <a href="#">Unlock Cellular Energy: Why NAD+ Levels Decline and How to Restore Them</a>
+            </h3>
+            <!-- คำโปรยสั้น (ใช้ line-clamp-3 เพื่อตัดคำให้ยาวไม่เกิน 3 บรรทัด ป้องกันกล่องเบี้ยว) -->
+            <p class="text-xs md:text-sm text-navy-slate leading-relaxed line-clamp-3">
+              Learn how nicotinamide adenine dinucleotide (NAD+) powers your metabolism, sharpens focus, and repairs DNA naturally, and when direct therapies can help reverse chronic fatigue.
+            </p>
+          </div>
+          <!-- ปุ่มกดลิงก์ท้ายกล่อง -->
+          <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+            <a href="#" class="text-xs font-bold uppercase tracking-wider text-navy hover:text-navy-slate flex items-center gap-1.5 group">
+              Read Insight 
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- --- กล่องที่ 2: หมวดเทคโนโลยีและนวัตกรรม (ปรับข่าวสารภาพรวมให้เป็นมิตรกับคนไข้) --- -->
+        <div class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-xs flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider">
+              <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100">MedTech Trends</span>
+              <span class="text-slate-400 font-medium">June 24, 2026</span>
+            </div>
+            <h3 class="text-lg font-extrabold text-navy leading-snug hover:text-navy-slate transition-colors">
+              <a href="#">The Future of Glucose Tracking: 15-Day Continuous Glucose Monitors</a>
+            </h3>
+            <p class="text-xs md:text-sm text-navy-slate leading-relaxed line-clamp-3">
+              Discover how new biosensor technologies are offering intensive diabetes profiles and longer wear options to seamlessly integrate with your premium lifestyle setup.
+            </p>
+          </div>
+          <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+            <a href="#" class="text-xs font-bold uppercase tracking-wider text-navy hover:text-navy-slate flex items-center gap-1.5 group">
+              Read Insight 
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- --- กล่องที่ 3: ข่าวสารการพัฒนาของคลินิก (จัดวางเพื่อให้เห็นภาพรวมความน่าเชื่อถือ) --- -->
+        <div class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-xs flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider">
+              <span class="px-2.5 py-1 rounded-full bg-accent-red/5 text-accent-red border border-accent-red/10">Clinic Update</span>
+              <span class="text-slate-400 font-medium">June 22, 2026</span>
+            </div>
+            <h3 class="text-lg font-extrabold text-navy leading-snug hover:text-navy-slate transition-colors">
+              <a href="#">HCMC R&D Focus: Enhancing Connected Diagnostics and Intelligent Imaging</a>
+            </h3>
+            <p class="text-xs md:text-sm text-navy-slate leading-relaxed line-clamp-3">
+              We are constantly refining our data logistics and diagnostic systems by integration of expert engineering software to accelerate precise preventative internal medicine.
+            </p>
+          </div>
+          <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+            <a href="#" class="text-xs font-bold uppercase tracking-wider text-navy hover:text-navy-slate flex items-center gap-1.5 group">
+              Read Article 
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
 
   <!-- ABOUT DR.M SECTION -->
   <section id="about" class="py-20 md:py-28 bg-white relative border-b border-slate-100 overflow-hidden">
