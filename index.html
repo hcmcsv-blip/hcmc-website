@@ -1676,55 +1676,53 @@
       }
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const menuBtn = document.getElementById("mobile-menu-btn");
-      const mobileDrawer = document.getElementById("mobile-drawer");
+    // 🪄 [FIXED] ถอดปลอก DOMContentLoaded ออก เพื่อให้โค้ดทำงานและผูกอีเวนต์กับปุ่มทันทีโดยไม่พลาดคิว
+    const menuBtn = document.getElementById("mobile-menu-btn");
+    const mobileDrawer = document.getElementById("mobile-drawer");
 
-      if (menuBtn && mobileDrawer) {
-        menuBtn.addEventListener("click", (e) => {
-          e.stopPropagation(); // 🛡️ ป้องกันอีเวนต์ไหลไปทับส่วนอื่น
-          
-          // 🪄 เปลี่ยนจาก .remove() เป็น .toggle() เพื่อให้กดครั้งแรกเปิด กดอีกครั้งปิดทันที!
-          const isExpanded = mobileDrawer.classList.toggle("hidden");
-          
-          // 🔄 [PREMIUM FEATURE] สลับร่างไอคอนแฮมเบอร์เกอร์ <-> กากบาท (X) ตามสถานะการเปิดปิด
-          const icon = menuBtn.querySelector("i");
-          if (icon && typeof lucide !== 'undefined') {
-            // ถ้ามีคลาส hidden แปลว่าปิดอยู่ให้โชว์เมนูขีด ถ้าไม่มีแปลว่าเปิดอยู่ให้โชว์กากบาท
-            icon.setAttribute("data-lucide", isExpanded ? "menu" : "x");
-            lucide.createIcons(); // สั่งให้คลัง Lucide รีเฟรชรูปไอคอนใหม่ทันที
-          }
-        });
-      }
+    if (menuBtn && mobileDrawer) {
+      menuBtn.addEventListener("click", (e) => {
+        e.stopPropagation(); // 🛡️ บล็อกไม่ให้อีเวนต์ไหลซ้อนทับกัน
+        
+        // สลับสถานะเปิด/ปิดการแสดงผลแถบเมนู
+        const isHidden = mobileDrawer.classList.toggle("hidden");
+        
+        // 🔄 [FIXED] เปลี่ยนตัวเลือกไอคอนให้ฉลาดขึ้น มองหาทั้งแท็ก <i> หรือ แท็ก <svg> ที่โดน Lucide แปลงร่างไปแล้ว
+        const icon = menuBtn.querySelector("[data-lucide]") || menuBtn.querySelector("svg, i");
+        if (icon && typeof lucide !== 'undefined') {
+          // ถ้ามีคลาส hidden (ปิดอยู่) ให้เป็นรูปเมนูขีดขนาน / ถ้าไม่มี (เปิดอยู่) ให้เป็นกากบาท X
+          icon.setAttribute("data-lucide", isHidden ? "menu" : "x");
+          lucide.createIcons(); // สั่งคลังไอคอนอัปเดตรูปร่างเรียลไทม์
+        }
+      });
+    }
 
-      // ⚡ เมื่อคนไข้คลิกลิงก์เมนูย่อยเพื่อวาร์ปไปส่วนต่างๆ ให้ยุบแผงเมนูเก็บอัตโนมัติด้วย
-      const drawerLinks = mobileDrawer ? mobileDrawer.querySelectorAll("a") : [];
-      drawerLinks.forEach(link => {
-        link.addEventListener("click", () => {
+    // ⚡ เมื่อคนไข้คลิกลิงก์เมนูย่อย ให้ยุบแผงเมนูเก็บอัตโนมัติ
+    const drawerLinks = mobileDrawer ? mobileDrawer.querySelectorAll("a") : [];
+    drawerLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        mobileDrawer.classList.add("hidden");
+        
+        const icon = menuBtn ? (menuBtn.querySelector("[data-lucide]") || menuBtn.querySelector("svg, i")) : null;
+        if (icon && typeof lucide !== 'undefined') {
+          icon.setAttribute("data-lucide", "menu");
+          lucide.createIcons();
+        }
+      });
+    });
+
+    // 🛡️ กฎความพรีเมียม: ถ้าคลิกพื้นที่ว่างๆ ด้านนอกแถบเมนู ให้หุบแผงเมนูปิดเก็บทันที
+    document.addEventListener("click", (e) => {
+      if (mobileDrawer && !mobileDrawer.contains(e.target) && !menuBtn.contains(e.target)) {
+        if (!mobileDrawer.classList.contains("hidden")) {
           mobileDrawer.classList.add("hidden");
-          
-          // รีเซ็ตไอคอนที่ปุ่มหลักให้กลับมาเป็นขีดแฮมเบอร์เกอร์ปกติ
-          const icon = menuBtn ? menuBtn.querySelector("i") : null;
+          const icon = menuBtn ? (menuBtn.querySelector("[data-lucide]") || menuBtn.querySelector("svg, i")) : null;
           if (icon && typeof lucide !== 'undefined') {
             icon.setAttribute("data-lucide", "menu");
             lucide.createIcons();
           }
-        });
-      });
-
-      // 🛡️ [ADDITIONAL UX] กฎความพรีเมียม: ถ้าคนไข้เผลอไปคลิกพื้นที่ว่างๆ ข้างนอกแถบเมนู ให้หุบแผงเมนูปิดเก็บทันที
-      document.addEventListener("click", (e) => {
-        if (mobileDrawer && !mobileDrawer.contains(e.target) && !menuBtn.contains(e.target)) {
-          if (!mobileDrawer.classList.contains("hidden")) {
-            mobileDrawer.classList.add("hidden");
-            const icon = menuBtn ? menuBtn.querySelector("i") : null;
-            if (icon && typeof lucide !== 'undefined') {
-              icon.setAttribute("data-lucide", "menu");
-              lucide.createIcons();
-            }
-          }
         }
-      });
+      }
     });
 
     // --- สคริปต์ควบคุม Dynamic Navbar สลับโปร่งใส/กระจกฝ้า ---
