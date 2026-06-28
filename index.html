@@ -574,15 +574,25 @@
   </section>
 
 
-  <!-- ABOUT DR.M SECTION -->
+  <!-- ======================================================================== -->
+  <!-- 🩺 MEDICAL PHILOSOPHY / ABOUT DR.M SECTION (WITH FAINT BACKGROUND) -->
+  <!-- ======================================================================== -->
   <section id="about" class="py-20 md:py-28 bg-white relative border-b border-slate-100 overflow-hidden">
+    
+    <!-- 🖼️ [NEW] ภาพพื้นหลังจางๆ เพื่อเพิ่มมิติ (ปรับความจางไว้ที่ 5% เพื่อให้ตัวหนังสือสี Navy อ่านง่ายคมชัด) -->
+    <!-- คุณสามารถเปลี่ยนชื่อไฟล์ใน src="images/..." เป็นภาพลายเส้นแพทย์ หรือภาพวิวคลินิกที่เตรียมไว้ได้เลยครับ -->
+    <img src="images/hero_bg.png" class="absolute inset-0 w-full h-full object-cover opacity-[0.05] object-center pointer-events-none -z-10" alt="">
+    
+    <!-- แผ่นกรองแสงไล่เฉดสีฟ้านุ่มนวลจากโค้ดเดิมของคุณ -->
     <div class="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-iceblue/30 to-transparent blur-3xl -z-10"></div>
     
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-        <!-- Photo Side -->
+        
+        <!-- 📸 ฝั่งซ้าย: รูปภาพคุณหมอและเอฟเฟกต์กรอบดีไซน์ -->
         <div class="lg:col-span-5 relative flex justify-center">
           <div class="relative w-full max-w-sm lg:max-w-none group">
+            
             <div class="absolute -inset-4 bg-gradient-to-br from-iceblue/60 to-transparent rounded-[2.2rem] -rotate-2 -z-10 transition-transform duration-500 group-hover:rotate-0"></div>
             <div class="absolute -inset-4 border border-slate-100 rounded-[2.2rem] rotate-2 -z-10 backdrop-blur-xs"></div>
 
@@ -592,11 +602,13 @@
               <div class="w-2 h-2 rounded-full bg-navy"></div>
               <span class="text-[10px] font-bold text-navy uppercase tracking-wider">Clinical Director & Founder</span>
             </div>
+            
           </div>
         </div>
 
-        <!-- Text Side -->
+        <!-- 📄 ฝั่งขวา: ข้อความ Medical Philosophy และจุดเด่น 3 ด้าน -->
         <div class="lg:col-span-7 flex flex-col gap-6 relative">
+          
           <div class="absolute -top-10 -left-6 text-iceblue/50 text-[120px] font-serif select-none pointer-events-none leading-none">“</div>
           
           <div class="relative z-10 flex flex-col gap-3">
@@ -612,6 +624,7 @@
           </p>
 
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
+            
             <div class="bg-slate-50/60 border border-slate-100 rounded-xl p-3.5 flex flex-col gap-2 transition-all hover:bg-slate-50 hover:shadow-xs">
               <div class="w-7 h-7 rounded-lg bg-white shadow-xs border border-slate-100 flex items-center justify-center text-navy">
                 <i data-lucide="activity" class="w-3.5 h-3.5"></i>
@@ -632,8 +645,11 @@
               </div>
               <span class="text-[11px] font-extrabold text-navy uppercase tracking-wider leading-tight">Endurance Physiology</span>
             </div>
+
           </div>
+
         </div>
+
       </div>
     </div>
   </section>
