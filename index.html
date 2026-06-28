@@ -1026,7 +1026,6 @@
       }
 
       // ระบบ UI พื้นฐาน
-      initMobileMenu();
       initTabs();
       setupFilters();
       initHighlightMetaTabs();
@@ -1188,17 +1187,6 @@
     // ========================================================================
     // 💉 CATEGORY C: ระบบการกรองแพ็กเกจตรวจสุขภาพ (HEALTH CHECK-UP PACKAGES)
     // ========================================================================
-    
-    function initMobileMenu() {
-      const btn = document.getElementById("mobile-menu-btn");
-      const drawer = document.getElementById("mobile-drawer");
-      if (btn && drawer) {
-        btn.addEventListener("click", () => { drawer.classList.toggle("hidden"); });
-        drawer.querySelectorAll(".mobile-nav-link").forEach(link => {
-          link.addEventListener("click", () => { drawer.classList.add("hidden"); });
-        });
-      }
-    }
 
     function initTabs() {
       const tabAppt = document.getElementById("tab-appt");
