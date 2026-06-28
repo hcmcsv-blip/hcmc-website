@@ -1071,6 +1071,7 @@
     // 📌 [1. IMPORTS]
     import { packages } from './packages.js';
     import { vaccines } from './vaccines.js';
+    import { insights } from './insights.js';
 
     // 📌 [2. CONFIGURATION & CONSTANTS]
     const APPOINTMENT_WEBHOOK_URL = "https://hook.eu1.make.com/ebfhf5m9d1mpqmgwkm5wa4b6i1rbtv4i"; 
@@ -1094,7 +1095,8 @@
       initHighlightMetaTabs();
       evaluateAndRender();
       initFormSubmissions();
-      renderVaccines(); 
+      renderVaccines();
+      renderInsights(); 
       initVaccineReset();
       initDeliveryToggle();
       initNotificationClose();
@@ -1606,6 +1608,70 @@
       setupVaccineClickEvents();
     }
 
+    function renderInsights() {
+      const container = document.getElementById('insights-container');
+      if (!container) return;
+
+      container.innerHTML = insights.map(item => `
+        <div class="group rounded-3xl overflow-hidden shadow-xs flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-1 ${item.cardClass}">
+          <div>
+            <div class="h-48 overflow-hidden bg-slate-200 relative">
+              <img src="${item.imageUrl}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+            </div>
+            
+            <div class="p-6 flex flex-col gap-4">
+              <div class="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider">
+                <span class="${item.categoryColorClass}">${item.categoryName}</span>
+                <span class="text-slate-400 font-medium">${item.date}</span>
+              </div>
+              <h3 class="text-lg font-extrabold text-navy leading-snug hover:text-navy-slate transition-colors">
+                <a href="javascript:void(0)" class="open-insight-link" data-id="${item.id}">${item.title}</a>
+              </h3>
+              <p class="text-xs md:text-sm text-navy-slate leading-relaxed line-clamp-3">
+                ${item.excerpt}
+              </p>
+            </div>
+          </div>
+          
+          <div class="px-6 pb-6 mt-auto">
+            <div class="pt-4 border-t border-slate-200/60 flex items-center justify-between">
+              <button type="button" data-id="${item.id}" class="open-insight-btn text-xs font-bold uppercase tracking-wider text-navy hover:text-navy-slate flex items-center gap-1.5">
+                Read Insight 
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // ดักจับเหตุการณ์เมื่อคนไข้คลิกปุ่ม "อ่านเพิ่ม" หรือหัวข้อบทความ
+      const openModal = (id) => {
+        const item = insights.find(p => p.id == id);
+        if (!item) return;
+        
+        document.getElementById('modal-vac-category').innerText = item.categoryName;
+        document.getElementById('modal-vac-title').innerText = item.title;
+        document.getElementById('modal-vac-content').innerHTML = item.fullContent;
+        
+        const modal = document.getElementById('insight-modal');
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        modal.querySelector('.transform').classList.remove('scale-95');
+      };
+
+      container.querySelectorAll('.open-insight-btn, .open-insight-link').forEach(elem => {
+        elem.addEventListener('click', () => openModal(elem.getAttribute('data-id')));
+      });
+
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    // ฟังก์ชันสำหรับกดปิดหน้าต่างบทความฉบับเต็ม
+    window.closeInsightModal = function() {
+      const modal = document.getElementById('insight-modal');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modal.querySelector('.transform').classList.add('scale-95');
+    }
+
     function setupVaccineClickEvents() {
       document.querySelectorAll('[data-vac-id]').forEach(card => {
         card.addEventListener('click', () => {
@@ -1796,6 +1862,24 @@
       <button type="button" id="close-notif-btn" class="w-full mt-2 py-3 bg-navy text-white font-semibold text-xs uppercase tracking-widest rounded-xl hover:bg-navy-light transition-all shadow-lg">
         Acknowledge
       </button>
+    </div>
+  </div>
+
+  <div id="insight-modal" class="fixed inset-0 z-[110] flex items-center justify-center bg-slate-950/50 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+    <div class="bg-white p-6 md:p-8 rounded-3xl shadow-2xl max-w-2xl w-full mx-4 border border-slate-100 flex flex-col max-h-[85vh] transform scale-95 transition-transform duration-300">
+      
+      <div class="flex items-start justify-between border-b border-slate-100 pb-4 mb-4">
+        <div>
+          <span id="modal-vac-category" class="text-[10px] font-bold uppercase tracking-wider text-accent-red">Medical Insight</span>
+          <h3 id="modal-vac-title" class="font-extrabold text-xl md:text-2xl text-navy mt-1 leading-snug">Title</h3>
+        </div>
+        <button type="button" onclick="closeInsightModal()" class="p-2 text-slate-400 hover:text-navy hover:bg-slate-50 rounded-full transition-colors font-bold text-xl leading-none">&times;</button>
+      </div>
+
+      <div id="modal-vac-content" class="overflow-y-auto pr-2 max-h-[55vh] text-sm text-navy-slate">
+        Content goes here...
+      </div>
+      
     </div>
   </div>
 
