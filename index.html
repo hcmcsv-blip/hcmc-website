@@ -125,16 +125,21 @@
   </header>
 
 
-  <section id="home" class="relative z-0 pt-28 pb-24 md:pt-36 md:pb-32 overflow-hidden bg-slate-50 flex items-center min-h-[90vh]">
+  <!-- HERO SECTION: ปรับเต็มพอดีหน้าจอ (min-h-screen) เพื่อรองรับเมนูโปร่งใสอย่างสมบูรณ์ -->
+  <section id="home" class="relative z-0 min-h-screen flex items-center overflow-hidden bg-slate-50">
     
-    <div class="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-iceblue/60 to-transparent blur-3xl -z-10"></div>
-    <div class="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-iceblue/40 to-transparent blur-3xl -z-10"></div>
-    <img src="images/hero_bg.png" class="absolute inset-0 w-full h-full object-cover opacity-[0.08] mix-blend-multiply pointer-events-none -z-10" alt="">
+    <!-- 🖼️ ภาพพื้นหลังทำหน้าที่เป็นพระเอกเด่นชัด (เพิ่ม Opacity เป็น 85% และขยายเต็มจอ) -->
+    <img src="images/hero_bg.png" class="absolute inset-0 w-full h-full object-cover opacity-85 object-center pointer-events-none -z-10" alt="HCMC Hero Backdrop">
+    
+    <!-- 🎨 แผ่นกรองแสงไล่เฉด (Gradient Overlay) ฝั่งซ้าย เพื่อการันตีว่ากลุ่มตัวหนังสือสี Navy จะอ่านง่ายและคมชัดเสมอ -->
+    <div class="absolute inset-0 bg-gradient-to-r from-slate-50 via-slate-50/75 to-transparent -z-10"></div>
+    <div class="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-iceblue/40 to-transparent blur-3xl -z-10"></div>
 
-    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center w-full">
+    <div class="max-w-7xl mx-auto px-6 w-full relative z-10 grid lg:grid-cols-12 gap-12 items-center">
       
-      <div class="lg:col-span-6 flex flex-col gap-6 md:gap-8">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 backdrop-blur-md text-navy border border-white/60 font-bold text-[10px] uppercase tracking-widest w-fit shadow-sm">
+      <!-- 📄 กลุ่มข้อความจัดวางอยู่กึ่งกลางจอแนวดิ่ง และชิดฝั่งซ้ายอย่างสวยงาม -->
+      <div class="lg:col-span-8 flex flex-col gap-6 md:gap-8 justify-center py-24">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-navy border border-slate-200/60 font-bold text-[10px] uppercase tracking-widest w-fit shadow-sm">
           <i data-lucide="sparkles" class="w-4 h-4 text-navy"></i>
           Bespoke Clinical Excellence
         </div>
@@ -144,7 +149,7 @@
           <span class="bg-gradient-to-r from-navy via-navy-slate to-navy bg-clip-text text-transparent font-light italic">Your Active Life</span>
         </h1>
 
-        <p class="text-sm md:text-base text-navy-slate/90 leading-relaxed max-w-xl">
+        <p class="text-sm md:text-base text-navy-slate font-medium leading-relaxed max-w-xl">
           At Health Care Medical Clinic, we define healthcare through the lens of individual biology and daily realities. We bridge high-level diagnostic internal medicine with a practical understanding of physical performance and premium lifestyle optimization.
         </p>
 
@@ -158,53 +163,22 @@
           </a>
         </div>
       </div>
-
-      <div class="lg:col-span-6 relative flex justify-center items-center lg:justify-end mt-6 lg:mt-0">
-        <div class="relative w-full max-w-[460px] lg:max-w-[440px]">
-          
-          <div class="absolute -inset-4 bg-gradient-to-tr from-iceblue/70 to-transparent rounded-[2.5rem] -rotate-2 -z-10 opacity-80"></div>
-          <div class="absolute -inset-4 border border-white/60 rounded-[2.5rem] rotate-2 -z-10 backdrop-blur-sm"></div>
-
-          <img src="images/hero_lifestyle.png" alt="Premium Healthcare and Active Wellness Lifestyle" 
-            class="w-full object-cover rounded-[2.2rem] shadow-[0_25px_60px_rgba(15,23,42,0.1)] border-4 border-white aspect-[4/5] object-center">
-
-          <div class="absolute -top-5 -left-4 sm:-left-8 bg-white/70 backdrop-blur-md px-4 py-3 rounded-2xl shadow-lg border border-white/50 flex items-center gap-3 transition-transform hover:scale-[1.03] duration-300">
-            <div class="w-9 h-9 rounded-xl bg-navy text-white flex items-center justify-center shadow-md shadow-navy/10">
-              <i data-lucide="heart" class="w-4 h-4"></i>
-            </div>
-            <div class="flex flex-col">
-              <span class="text-[14px] font-extrabold text-navy leading-none">99%</span>
-              <span class="text-[9px] font-bold text-navy-slate/80 uppercase tracking-wider mt-0.5">Satisfaction</span>
-            </div>
-          </div>
-
-          <div class="absolute top-1/3 -right-4 sm:-right-6 bg-white/70 backdrop-blur-md px-4 py-3 rounded-2xl shadow-lg border border-white/50 flex items-center gap-3 transition-transform hover:scale-[1.03] duration-300">
-            <div class="w-9 h-9 rounded-xl bg-iceblue text-navy flex items-center justify-center border border-white/40">
-              <i data-lucide="shield-check" class="w-4 h-4"></i>
-            </div>
-            <div class="flex flex-col">
-              <span class="text-[11px] font-extrabold text-navy leading-none">Premium Care</span>
-              <span class="text-[9px] font-medium text-navy-slate/80 mt-0.5">Expert Network</span>
-            </div>
-          </div>
-
-          <div class="absolute bottom-5 left-4 right-4 bg-white/70 backdrop-blur-md px-5 py-4 rounded-2xl shadow-xl border border-white/50 flex items-center justify-between transition-transform hover:scale-[1.01] duration-300">
-            <div class="flex flex-col">
-              <span class="text-[9px] uppercase font-bold tracking-wider text-navy-slate/80">Clinic Status</span>
-              <span class="text-xs font-bold text-navy flex items-center gap-1.5 mt-1">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                Accepting Patients
-              </span>
-            </div>
-            <a href="#booking-section-anchor" class="px-4 py-2.5 text-[10px] font-bold uppercase tracking-widest bg-navy text-white rounded-xl hover:bg-navy-light transition-all shadow-md shadow-navy/10">
-              Book Now
-            </a>
-          </div>
-
-        </div>
-      </div>
-      
     </div>
+
+    <!-- 🟢 แถบสถานะคลินิกเวอร์ชันเรียลไทม์ จัดวางไว้ตำแหน่งขวาล่างอย่างเหมาะสมตามดีไซน์สากล -->
+    <div class="absolute bottom-8 right-6 md:right-12 bg-white/75 backdrop-blur-md px-5 py-3.5 rounded-2xl shadow-[0_15px_35px_rgba(15,23,42,0.08)] border border-white/60 flex items-center gap-4 transition-all duration-300 hover:scale-[1.02]">
+      <div class="flex flex-col">
+        <span class="text-[9px] uppercase font-bold tracking-wider text-navy-slate/80">Clinic Status</span>
+        <span id="realtime-status" class="text-xs font-extrabold text-navy flex items-center gap-1.5 mt-1">
+          <!-- ไฟสถานะและข้อความจะสลับสีและเปลี่ยนคำอัตโนมัติด้วย JavaScript ด้านล่าง -->
+          <span class="w-2 h-2 rounded-full bg-slate-300 animate-pulse"></span> Loading Status...
+        </span>
+      </div>
+      <a href="#booking-section-anchor" class="px-4 py-2.5 text-[10px] font-bold uppercase tracking-widest bg-navy text-white rounded-xl hover:bg-navy-light transition-all shadow-md shadow-navy/10 shrink-0">
+        Book Now
+      </a>
+    </div>
+
   </section>
 
   <section class="py-24 bg-iceblue/50 border-y border-iceblue-dark/20">
@@ -1745,6 +1719,40 @@
         header.classList.remove('bg-white/80', 'backdrop-blur-md', 'shadow-sm', 'border-slate-100');
         header.classList.add('bg-transparent', 'border-transparent');
       }
+    });
+
+    // --- สคริปต์คำนวณและอัปเดตสถานะคลินิกแบบเรียลไทม์ ---
+    function updateClinicRealtimeStatus() {
+      const statusContainer = document.getElementById('realtime-status');
+      if (!statusContainer) return;
+
+      const now = new Date();
+      const day = now.getDay();      // 0 = วันอาทิตย์, 1 = จันทร์, ..., 6 = เสาร์
+      const hour = now.getHours();   // ดึงชั่วโมงปัจจุบัน (0 - 23)
+
+      // 🕒 ตั้งค่าเวลาทำการคลินิก: วันจันทร์ - วันเสาร์ เวลา 09:00 น. ถึง 20:00 น. (หยุดวันอาทิตย์)
+      const isWorkingDay = day >= 1 && day <= 6;
+      const isWorkingHour = hour >= 9 && hour < 20;
+
+      if (isWorkingDay && isWorkingHour) {
+        // 🟢 ช่วงเวลาเปิดทำการปกติ
+        statusContainer.innerHTML = `
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> 
+          Open Now <span class="text-slate-400 font-normal text-[11px] ml-0.5">(Accepting Patients)</span>
+        `;
+      } else {
+        // 🟠 ช่วงเวลานอกเวลาทำการ / คลินิกปิด
+        statusContainer.innerHTML = `
+          <span class="w-2 h-2 rounded-full bg-amber-500"></span> 
+          Closed <span class="text-slate-400 font-normal text-[11px] ml-0.5">(Appointments Only)</span>
+        `;
+      }
+    }
+
+    // สั่งให้ระบบทำงานทันทีที่โหลดหน้าเว็บ และอัปเดตตัวเองตรวจสอบเวลาใหม่ทุกๆ 30 วินาที
+    document.addEventListener("DOMContentLoaded", () => {
+      updateClinicRealtimeStatus();
+      setInterval(updateClinicRealtimeStatus, 30000);
     });
 
   </script> <div id="success-notification" class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/40 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-500">
