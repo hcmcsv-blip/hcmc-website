@@ -1677,71 +1677,57 @@
       }
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
+    // 🪄 [SUPER FIX] สคริปต์ควบคุมแผงเมนูมือถือฉบับปลอดภัยสูงสุด ทำงานทันทีและไม่ต้องแก้ HTML เดิม
+    (function initMobileMenuSystem() {
       const menuBtn = document.getElementById("mobile-menu-btn");
       const mobileDrawer = document.getElementById("mobile-drawer");
 
-      if (menuBtn && mobileDrawer) {
-        menuBtn.addEventListener("click", (e) => {
-          e.stopPropagation(); // 🛡️ ป้องกันอีเวนต์ทำงานซ้อนทับกัน
-          
-          // 1. สลับคลาสการแสดงผลของแผงเมนูดรอปดาวน์มือถือ
-          const isMenuOpen = !mobileDrawer.classList.toggle("hidden");
-          
-          // 2. ดึงตำแหน่งไอคอนทั้งสองตัวออกมาเพื่อสลับคลาสเปิด-ปิด
-          const openIcon = menuBtn.querySelector(".mobile-menu-open-icon");
-          const closeIcon = menuBtn.querySelector(".mobile-menu-close-icon");
-          
-          if (openIcon && closeIcon) {
-            if (isMenuOpen) {
-              // ถ้าแผงเมนูกางออก: ซ่อนไอคอนขีด -> แสดงไอคอนกากบาท X
-              openIcon.classList.remove("block");
-              openIcon.classList.add("hidden");
-              closeIcon.classList.remove("hidden");
-              closeIcon.classList.add("block");
-            } else {
-              // ถ้าแผงเมนูหุบเก็บ: แสดงไอคอนขีด -> ซ่อนไอคอนกากบาท X
-              openIcon.classList.remove("hidden");
-              openIcon.classList.add("block");
-              closeIcon.classList.remove("block");
-              closeIcon.classList.add("hidden");
-            }
-          }
-        });
-      }
+      if (!menuBtn || !mobileDrawer) return;
 
-      // ⚡ เมื่อคนไข้คลิกลิงก์เมนูย่อย ให้ยุบแผงเมนูและรีเซ็ตไอคอนกลับเป็นปกติ
-      const drawerLinks = mobileDrawer ? mobileDrawer.querySelectorAll("a") : [];
+      // ⚡ อีเวนต์เมื่อกดปุ่มแฮมเบอร์เกอร์หลัก
+      menuBtn.addEventListener("click", (e) => {
+        e.stopPropagation(); // 🛡️ บล็อกไม่ให้อีเวนต์ไหลซ้อนทับกัน
+        
+        // สลับสถานะเปิด/ปิดการแสดงผลแถบเมนูมือถือ
+        const isMenuOpen = !mobileDrawer.classList.toggle("hidden");
+        
+        if (typeof lucide !== 'undefined') {
+          if (isMenuOpen) {
+            // ถ้าเปิดเมนู: สาดแท็ก <i> คลีนตัวใหม่รูปกากบาท X ให้ Lucide วาดร่างใหม่ทันที
+            menuBtn.innerHTML = '<i data-lucide="x" class="w-6 h-6"></i>';
+          } else {
+            // ถ้าปิดเมนู: สาดแท็ก <i> คลีนตัวใหม่รูปสามขีดเมนู ให้ Lucide วาดร่างใหม่ทันที
+            menuBtn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+          }
+          lucide.createIcons(); // บังคับให้คลังไอคอนทำงานสแกนจุดนี้ใหม่ทันที
+        }
+      });
+
+      // ⚡ เมื่อคนไข้คลิกลิงก์เมนูย่อย ให้ยุบแผงเมนูปิดเก็บอัตโนมัติ
+      const drawerLinks = mobileDrawer.querySelectorAll("a");
       drawerLinks.forEach(link => {
         link.addEventListener("click", () => {
           mobileDrawer.classList.add("hidden");
-          resetMenuIcons(menuBtn);
+          if (typeof lucide !== 'undefined') {
+            menuBtn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+            lucide.createIcons();
+          }
         });
       });
 
-      // 🛡️ กฎความพรีเมียม: ถ้าคลิกพื้นที่ว่างด้านนอก ให้ปิดแผงเมนูและรีเซ็ตไอคอน
+      // 🛡️ กฎความพรีเมียม: ถ้าคลิกพื้นที่ว่างด้านนอกแผงเมนู ให้หุบแผงเมนูปิดเก็บทันที
       document.addEventListener("click", (e) => {
-        if (mobileDrawer && !mobileDrawer.contains(e.target) && !menuBtn.contains(e.target)) {
+        if (!mobileDrawer.contains(e.target) && !menuBtn.contains(e.target)) {
           if (!mobileDrawer.classList.contains("hidden")) {
             mobileDrawer.classList.add("hidden");
-            resetMenuIcons(menuBtn);
+            if (typeof lucide !== 'undefined') {
+              menuBtn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+              lucide.createIcons();
+            }
           }
         }
       });
-    });
-
-    // 🪄 ฟังก์ชันส่วนกลางสำหรับรีเซ็ตหน้าตาปุ่มไอคอนให้กลับสู่สภาพเริ่มต้น (โชว์ขีด ซ่อนกากบาท)
-    function resetMenuIcons(menuBtn) {
-      if (!menuBtn) return;
-      const openIcon = menuBtn.querySelector(".mobile-menu-open-icon");
-      const closeIcon = menuBtn.querySelector(".mobile-menu-close-icon");
-      if (openIcon && closeIcon) {
-        openIcon.classList.remove("hidden");
-        openIcon.classList.add("block");
-        closeIcon.classList.remove("block");
-        closeIcon.classList.add("hidden");
-      }
-    }
+    })();
 
     // --- สคริปต์ควบคุม Dynamic Navbar สลับโปร่งใส/กระจกฝ้า ---
     window.addEventListener('scroll', () => {
