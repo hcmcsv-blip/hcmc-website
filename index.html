@@ -6,14 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Health Care Medical Clinic (HCMC) - Chiang Mai</title>
   <link rel="icon" type="image/png" href="images/hcmc-logo.png">
-  <meta name="description"
-    content="HCMC Clinic in Chiang Mai provides bespoke medical check-ups, General practitioner care, and travel vaccinations under Dr. Nisachon Morgan. Tailored health profiles for active lifestyles.">
-  <meta name="keywords"
-    content="HCMC Chiang Mai, Dr. Nisachon Morgan General practitioner, Trail Runner Doctor, Health Check Up Chiang Mai, Travel Vaccines Chiang Mai, Prescription Refill Chiang Mai">
+  <meta name="description" content="HCMC Clinic in Chiang Mai provides bespoke medical check-ups, General practitioner care, and travel vaccinations under Dr. Nisachon Morgan. Tailored health profiles for active lifestyles.">
+  <meta name="keywords" content="HCMC Chiang Mai, Dr. Nisachon Morgan General practitioner, Trail Runner Doctor, Health Check Up Chiang Mai, Travel Vaccines Chiang Mai, Prescription Refill Chiang Mai">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -67,41 +64,38 @@
 
 <body class="bg-navy-tint text-navy font-sans antialiased min-h-screen">
 
-  <!-- 🪄 ปรับเป็น fixed และตั้งค่าเริ่มต้นให้ bg/border โปร่งใส ทะลุเห็นภาพพื้นหลังด้านหลัง -->
+  <!-- HEADER / NAVIGATION -->
   <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-transparent border-b border-transparent transition-all duration-300">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       <a href="#home" class="flex items-center group">
-        <img src="images/logo-2.png" alt="Health Care Medical Clinic"
-          class="h-12 md:h-16 w-auto transition-transform duration-300 group-hover:scale-[1.02]">
+        <img src="images/logo-2.png" alt="Health Care Medical Clinic" class="h-12 md:h-16 w-auto transition-transform duration-300 group-hover:scale-[1.02]">
       </a>
 
+      <!-- Desktop Navigation -->
       <nav class="hidden lg:flex items-center gap-8">
         <a href="#about" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">About Dr.M</a>
         <a href="#checkup" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">Check-up</a>
-        <a href="#vaccination"
-          class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">Vaccination</a>
-        <a href="#consultation" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">Online
-          Consultation</a>
+        <a href="#vaccination" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">Vaccination</a>
+        <a href="#consultation" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">Online Consultation</a>
         <a href="#contact" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">Contact</a>
       </nav>
 
       <div class="hidden lg:flex items-center gap-4">
-        <a href="#booking-section-anchor" id="nav-btn-refill"
-          class="px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-navy border border-navy rounded-lg hover:bg-navy hover:text-white transition-all duration-300">
+        <a href="#booking-section-anchor" id="nav-btn-refill" class="px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-navy border border-navy rounded-lg hover:bg-navy hover:text-white transition-all duration-300">
           Refill Prescription
         </a>
-        <a href="#booking-section-anchor" id="nav-btn-appt"
-          class="px-5 py-2.5 text-xs font-semibold uppercase tracking-wider bg-navy text-white rounded-lg hover:bg-navy-light shadow-md transition-all duration-300">
+        <a href="#booking-section-anchor" id="nav-btn-appt" class="px-5 py-2.5 text-xs font-semibold uppercase tracking-wider bg-navy text-white rounded-lg hover:bg-navy-light shadow-md transition-all duration-300">
           Book Appointment
         </a>
       </div>
 
-      <button id="mobile-menu-btn" onclick="toggleMobileMenu(this)" class="lg:hidden p-2 text-navy hover:bg-slate-100 rounded-lg transition-colors"
-        aria-label="Toggle Menu">
+      <!-- Mobile Menu Button (ส่ง event เข้าไปเพื่อแก้บั๊ค) -->
+      <button id="mobile-menu-btn" onclick="toggleMobileMenu(event, this)" class="lg:hidden p-2 text-navy hover:bg-slate-100 rounded-lg transition-colors" aria-label="Toggle Menu">
         <i data-lucide="menu" class="w-6 h-6"></i>
       </button>
     </div>
 
+    <!-- Mobile Drawer -->
     <div id="mobile-drawer" class="hidden lg:hidden border-t border-slate-100 bg-white px-6 py-8 flex flex-col gap-6 shadow-lg">
       <a href="#about" onclick="closeMobileMenu()" class="mobile-nav-link font-semibold text-lg text-navy">About Dr.M</a>
       <a href="#checkup" onclick="closeMobileMenu()" class="mobile-nav-link font-semibold text-lg text-navy">Check-up</a>
@@ -110,12 +104,10 @@
       <a href="#contact" onclick="closeMobileMenu()" class="mobile-nav-link font-semibold text-lg text-navy">Contact</a>
       <div class="h-px bg-slate-100 my-2"></div>
       <div class="flex flex-col gap-4">
-        <a href="#booking-section-anchor" id="drawer-btn-refill" onclick="closeMobileMenu()"
-          class="mobile-nav-link text-center py-3 text-sm font-semibold uppercase tracking-wider text-navy border border-navy rounded-lg hover:bg-navy hover:text-white transition-colors">
+        <a href="#booking-section-anchor" id="drawer-btn-refill" onclick="closeMobileMenu()" class="mobile-nav-link text-center py-3 text-sm font-semibold uppercase tracking-wider text-navy border border-navy rounded-lg hover:bg-navy hover:text-white transition-colors">
           Refill Prescription
         </a>
-        <a href="#booking-section-anchor" id="drawer-btn-appt" onclick="closeMobileMenu()"
-          class="mobile-nav-link text-center py-3 text-sm font-semibold uppercase tracking-wider bg-navy text-white rounded-lg hover:bg-navy-light transition-colors">
+        <a href="#booking-section-anchor" id="drawer-btn-appt" onclick="closeMobileMenu()" class="mobile-nav-link text-center py-3 text-sm font-semibold uppercase tracking-wider bg-navy text-white rounded-lg hover:bg-navy-light transition-colors">
           Book Appointment
         </a>
       </div>
@@ -123,7 +115,10 @@
   </header>
 
   <script>
-    function toggleMobileMenu(btn) {
+    function toggleMobileMenu(event, btn) {
+      // 🪄 หยุดความถี่ของสัญญาณคลิก ไม่ให้กระดอนไปโดนคำสั่งปิดข้างนอก
+      if (event) event.stopPropagation();
+
       const drawer = document.getElementById("mobile-drawer");
       if (!drawer) return;
 
@@ -153,7 +148,7 @@
       }
     }
 
-    // 🛡️ กฎความพรีเมียม: ถ้าเปิดเมนูค้างไว้ แล้วนิ้วไปจิ้มพื้นที่ว่างข้างนอก ให้หุบเมนูกลับทันที
+    // ถ้าเปิดเมนูค้างไว้ แล้วจิ้มพื้นที่ว่างข้างนอก ให้หุบเมนูกลับทันที
     document.addEventListener("click", function (e) {
       const drawer = document.getElementById("mobile-drawer");
       const btn = document.getElementById("mobile-menu-btn");
@@ -166,19 +161,16 @@
   </script>
 
 
-  <!-- HERO SECTION: ปรับเต็มพอดีหน้าจอ (min-h-screen) เพื่อรองรับเมนูโปร่งใสอย่างสมบูรณ์ -->
+  <!-- HERO SECTION -->
   <section id="home" class="relative z-0 min-h-screen flex items-center overflow-hidden bg-slate-50">
-    
-    <!-- 🖼️ ภาพพื้นหลังทำหน้าที่เป็นพระเอกเด่นชัด (เพิ่ม Opacity เป็น 85% และขยายเต็มจอ) -->
+    <!-- ภาพพื้นหลัง -->
     <img src="images/hero_bg.png" class="absolute inset-0 w-full h-full object-cover opacity-85 object-center pointer-events-none -z-10" alt="HCMC Hero Backdrop">
     
-    <!-- 🎨 แผ่นกรองแสงไล่เฉด (Gradient Overlay) ฝั่งซ้าย เพื่อการันตีว่ากลุ่มตัวหนังสือสี Navy จะอ่านง่ายและคมชัดเสมอ -->
+    <!-- แผ่นกรองแสงไล่เฉด (Gradient Overlay) -->
     <div class="absolute inset-0 bg-gradient-to-r from-slate-50 via-slate-50/75 to-transparent -z-10"></div>
     <div class="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-iceblue/40 to-transparent blur-3xl -z-10"></div>
 
     <div class="max-w-7xl mx-auto px-6 w-full relative z-10 grid lg:grid-cols-12 gap-12 items-center">
-      
-      <!-- 📄 กลุ่มข้อความจัดวางอยู่กึ่งกลางจอแนวดิ่ง และชิดฝั่งซ้ายอย่างสวยงาม -->
       <div class="lg:col-span-8 flex flex-col gap-6 md:gap-8 justify-center py-24">
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-navy border border-slate-200/60 font-bold text-[10px] uppercase tracking-widest w-fit shadow-sm">
           <i data-lucide="sparkles" class="w-4 h-4 text-navy"></i>
@@ -206,12 +198,11 @@
       </div>
     </div>
 
-    <!-- 🟢 แถบสถานะคลินิกเวอร์ชันเรียลไทม์ จัดวางไว้ตำแหน่งขวาล่างอย่างเหมาะสมตามดีไซน์สากล -->
+    <!-- แถบสถานะคลินิกเรียลไทม์ -->
     <div class="absolute bottom-8 right-6 md:right-12 bg-white/75 backdrop-blur-md px-5 py-3.5 rounded-2xl shadow-[0_15px_35px_rgba(15,23,42,0.08)] border border-white/60 flex items-center gap-4 transition-all duration-300 hover:scale-[1.02]">
       <div class="flex flex-col">
         <span class="text-[9px] uppercase font-bold tracking-wider text-navy-slate/80">Clinic Status</span>
         <span id="realtime-status" class="text-xs font-extrabold text-navy flex items-center gap-1.5 mt-1">
-          <!-- ไฟสถานะและข้อความจะสลับสีและเปลี่ยนคำอัตโนมัติด้วย JavaScript ด้านล่าง -->
           <span class="w-2 h-2 rounded-full bg-slate-300 animate-pulse"></span> Loading Status...
         </span>
       </div>
@@ -219,43 +210,38 @@
         Book Now
       </a>
     </div>
-
   </section>
 
+
+  <!-- METABOLIC HEALTH ASSESSMENT SECTION -->
   <section class="py-24 bg-iceblue/50 border-y border-iceblue-dark/20">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center max-w-2xl mx-auto mb-12 flex flex-col gap-4">
         <span class="text-xs font-bold text-accent-red tracking-widest uppercase">Specialist Screening Focus</span>
         <h2 class="text-3xl md:text-4xl font-extrabold text-navy tracking-tight">Metabolic Health Assessment</h2>
         <p class="text-navy-slate text-sm md:text-base">
-          Metabolic disorders represent the silent precursor to cardiovascular complications and diabetes. Select your
-          profile below to view the customized biomarker tracking panels.
+          Metabolic disorders represent the silent precursor to cardiovascular complications and diabetes. Select your profile below to view the customized biomarker tracking panels.
         </p>
       </div>
 
-      <div
-        class="flex justify-center gap-3 mb-8 max-w-md mx-auto bg-white p-1.5 rounded-2xl shadow-sm border border-slate-100">
-        <button type="button" data-highlight-tab="METABOLIC-FU45"
-          class="hl-tab-btn flex-1 py-2.5 px-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all bg-navy text-white shadow-sm">
-          Female U45 </button>
-            <button type="button" data-highlight-tab="METABOLIC-FO45"
-              class="hl-tab-btn flex-1 py-2.5 px-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all bg-transparent text-navy hover:bg-slate-50">
-              Female 45+
-            </button>
-            <button type="button" data-highlight-tab="METABOLIC-MALE"
-              class="hl-tab-btn flex-1 py-2.5 px-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all bg-transparent text-navy hover:bg-slate-50">
-              Male Profile
-            </button>
+      <!-- จัดเรียงย่อหน้าปุ่มเลือกแท็บระบบประเมินโรคเมแทบอลิซึมให้เสมอกัน -->
+      <div class="flex justify-center gap-3 mb-8 max-w-md mx-auto bg-white p-1.5 rounded-2xl shadow-sm border border-slate-100">
+        <button type="button" data-highlight-tab="METABOLIC-FU45" class="hl-tab-btn flex-1 py-2.5 px-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all bg-navy text-white shadow-sm">
+          Female U45
+        </button>
+        <button type="button" data-highlight-tab="METABOLIC-FO45" class="hl-tab-btn flex-1 py-2.5 px-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all bg-transparent text-navy hover:bg-slate-50">
+          Female 45+
+        </button>
+        <button type="button" data-highlight-tab="METABOLIC-MALE" class="hl-tab-btn flex-1 py-2.5 px-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all bg-transparent text-navy hover:bg-slate-50">
+          Male Profile
+        </button>
       </div>
 
-      <div
-        class="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 grid md:grid-cols-12 hover-scale">
-        <div
-          class="md:col-span-7 p-8 md:p-12 flex flex-col gap-6 justify-between border-b md:border-b-0 md:border-r border-slate-100">
+      <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 grid md:grid-cols-12 hover-scale">
+        <div class="md:col-span-7 p-8 md:p-12 flex flex-col gap-6 justify-between border-b md:border-b-0 md:border-r border-slate-100">
           <div class="flex flex-col gap-4">
             <div class="flex items-center gap-2">
-              <span
-                class="px-3 py-1 rounded-full bg-accent-red/10 text-accent-red text-xs font-bold uppercase tracking-wider">
+              <span class="px-3 py-1 rounded-full bg-accent-red/10 text-accent-red text-xs font-bold uppercase tracking-wider">
                 Doctor's Recommendation
               </span>
               <span class="px-3 py-1 rounded-full bg-navy/5 text-navy text-xs font-semibold uppercase tracking-wider">
@@ -272,32 +258,28 @@
 
           <div class="grid grid-cols-2 gap-4 my-2">
             <div class="flex items-start gap-2.5">
-              <div class="p-1 rounded-lg bg-emerald-50 text-emerald-600 mt-0.5"><i data-lucide="check"
-                  class="w-4 h-4"></i></div>
+              <div class="p-1 rounded-lg bg-emerald-50 text-emerald-600 mt-0.5"><i data-lucide="check" class="w-4 h-4"></i></div>
               <div class="flex flex-col">
                 <span class="font-bold text-xs text-navy">HOMA-IR Score</span>
                 <span class="text-[10px] text-navy-slate">Insulin Resistance Index</span>
               </div>
             </div>
             <div class="flex items-start gap-2.5">
-              <div class="p-1 rounded-lg bg-emerald-50 text-emerald-600 mt-0.5"><i data-lucide="check"
-                  class="w-4 h-4"></i></div>
+              <div class="p-1 rounded-lg bg-emerald-50 text-emerald-600 mt-0.5"><i data-lucide="check" class="w-4 h-4"></i></div>
               <div class="flex flex-col">
                 <span class="font-bold text-xs text-navy">Thyroid (TSH)</span>
                 <span class="text-[10px] text-navy-slate">Metabolic Regulation</span>
               </div>
             </div>
             <div class="flex items-start gap-2.5">
-              <div class="p-1 rounded-lg bg-emerald-50 text-emerald-600 mt-0.5"><i data-lucide="check"
-                  class="w-4 h-4"></i></div>
+              <div class="p-1 rounded-lg bg-emerald-50 text-emerald-600 mt-0.5"><i data-lucide="check" class="w-4 h-4"></i></div>
               <div class="flex flex-col">
                 <span class="font-bold text-xs text-navy">HbA1C Marker</span>
                 <span class="text-[10px] text-navy-slate">Glycemic Control mapping</span>
               </div>
             </div>
             <div class="flex items-start gap-2.5">
-              <div class="p-1 rounded-lg bg-emerald-50 text-emerald-600 mt-0.5"><i data-lucide="check"
-                  class="w-4 h-4"></i></div>
+              <div class="p-1 rounded-lg bg-emerald-50 text-emerald-600 mt-0.5"><i data-lucide="check" class="w-4 h-4"></i></div>
               <div class="flex flex-col">
                 <span class="font-bold text-xs text-navy">Inflammation Panel</span>
                 <span class="text-[10px] text-navy-slate">C-Reactive Protein Lab</span>
@@ -306,8 +288,7 @@
           </div>
 
           <div class="flex items-center gap-6 mt-4">
-            <button id="book-metabolic-btn"
-              class="px-6 py-3.5 bg-navy text-white rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-navy-light transition-all flex items-center gap-2">
+            <button id="book-metabolic-btn" class="px-6 py-3.5 bg-navy text-white rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-navy-light transition-all flex items-center gap-2">
               Book This Package
               <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </button>
@@ -317,15 +298,13 @@
         <div class="md:col-span-5 bg-navy-tint/50 p-8 md:p-12 flex flex-col justify-between gap-8">
           <div class="flex flex-col gap-4">
             <span class="text-xs text-navy-slate font-medium uppercase tracking-wider">Included Lab Tests:</span>
-            <ul id="hl-package-items" class="flex flex-col gap-2.5 text-xs text-navy max-h-60 overflow-y-auto pr-1">
-            </ul>
+            <ul id="hl-package-items" class="flex flex-col gap-2.5 text-xs text-navy max-h-60 overflow-y-auto pr-1"></ul>
           </div>
 
           <div class="flex flex-col gap-2 pt-6 border-t border-slate-200">
             <span class="text-xs text-navy-slate font-medium">All-Inclusive Package Price:</span>
             <div class="flex items-baseline gap-2">
-              <span id="hl-package-price"
-                class="text-3xl md:text-4xl font-extrabold text-accent-red transition-all duration-300">0</span>
+              <span id="hl-package-price" class="text-3xl md:text-4xl font-extrabold text-accent-red transition-all duration-300">0</span>
               <span class="text-sm font-semibold text-accent-red">THB</span>
               <span class="text-xs text-navy-slate ml-2 font-medium">Net Rate</span>
             </div>
@@ -335,107 +314,97 @@
     </div>
   </section>
 
+
+  <!-- INTERACTIVE CHECK-UP FILTER SECTION -->
   <section id="checkup" class="py-24 bg-white">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center max-w-2xl mx-auto mb-16 flex flex-col gap-4">
         <span class="text-xs font-bold text-navy tracking-widest uppercase">Wellness Matching Tool</span>
         <h2 class="text-3xl md:text-4xl font-extrabold text-navy tracking-tight">Interactive Check-up Filter</h2>
         <p class="text-navy-slate text-sm md:text-base">
-          Select your demographics and health concerns to find the screening packages tailored for your specific
-          physiological profile.
+          Select your demographics and health concerns to find the screening packages tailored for your specific physiological profile.
         </p>
       </div>
 
-      <div
-        class="max-w-3xl mx-auto bg-navy-tint rounded-2xl border border-slate-100 p-6 md:p-8 flex flex-col gap-8 shadow-sm">
+      <div class="max-w-3xl mx-auto bg-navy-tint rounded-2xl border border-slate-100 p-6 md:p-8 flex flex-col gap-8 shadow-sm">
+        <!-- 1. Select Gender -->
         <div class="flex flex-col gap-3">
           <label class="text-xs font-bold uppercase tracking-wider text-navy-slate flex items-center gap-1.5">
-            <span
-              class="w-4 h-4 rounded-full bg-navy text-white text-[10px] flex items-center justify-center font-bold">1</span>
+            <span class="w-4 h-4 rounded-full bg-navy text-white text-[10px] flex items-center justify-center font-bold">1</span>
             Select Gender
           </label>
           <div class="grid grid-cols-2 gap-4">
-            <button type="button" data-filter-gender="male"
-              class="gender-btn py-4 px-6 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-sm flex items-center justify-center gap-3 transition-all duration-200">
+            <button type="button" data-filter-gender="male" class="gender-btn py-4 px-6 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-sm flex items-center justify-center gap-3 transition-all duration-200">
               <i data-lucide="user" class="w-4 h-4"></i> Male
             </button>
-            <button type="button" data-filter-gender="female"
-              class="gender-btn py-4 px-6 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-sm flex items-center justify-center gap-3 transition-all duration-200">
+            <button type="button" data-filter-gender="female" class="gender-btn py-4 px-6 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-sm flex items-center justify-center gap-3 transition-all duration-200">
               <i data-lucide="user" class="w-4 h-4"></i> Female
             </button>
           </div>
         </div>
 
+        <!-- 2. Select Age Group -->
         <div class="flex flex-col gap-3">
           <label class="text-xs font-bold uppercase tracking-wider text-navy-slate flex items-center gap-1.5">
-            <span
-              class="w-4 h-4 rounded-full bg-navy text-white text-[10px] flex items-center justify-center font-bold">2</span>
+            <span class="w-4 h-4 rounded-full bg-navy text-white text-[10px] flex items-center justify-center font-bold">2</span>
             Select Age Group
           </label>
           <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
-            <button type="button" data-filter-age="under-40"
-              class="age-btn py-3.5 px-4 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-xs md:text-sm transition-all duration-200">
+            <button type="button" data-filter-age="under-40" class="age-btn py-3.5 px-4 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-xs md:text-sm transition-all duration-200">
               Under 40
             </button>
-            <button type="button" data-filter-age="40-49"
-              class="age-btn py-3.5 px-4 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-xs md:text-sm transition-all duration-200">
+            <button type="button" data-filter-age="40-49" class="age-btn py-3.5 px-4 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-xs md:text-sm transition-all duration-200">
               40 - 49 Yrs
             </button>
-            <button type="button" data-filter-age="50-59"
-              class="age-btn py-3.5 px-4 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-xs md:text-sm transition-all duration-200">
+            <button type="button" data-filter-age="50-59" class="age-btn py-3.5 px-4 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-xs md:text-sm transition-all duration-200">
               50 - 59 Yrs
             </button>
-            <button type="button" data-filter-age="60-69"
-              class="age-btn py-3.5 px-4 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-xs md:text-sm transition-all duration-200">
+            <button type="button" data-filter-age="60-69" class="age-btn py-3.5 px-4 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-xs md:text-sm transition-all duration-200">
               60 - 69 Yrs
             </button>
-            <button type="button" data-filter-age="70+"
-              class="age-btn py-3.5 px-4 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-xs md:text-sm transition-all duration-200">
+            <button type="button" data-filter-age="70+" class="age-btn py-3.5 px-4 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-xs md:text-sm transition-all duration-200">
               70+ Yrs
             </button>
           </div>
         </div>
 
+        <!-- 3. Diabetic Status -->
         <div class="flex flex-col gap-3">
           <label class="text-xs font-bold uppercase tracking-wider text-navy-slate flex items-center gap-1.5">
-            <span
-              class="w-4 h-4 rounded-full bg-navy text-white text-[10px] flex items-center justify-center font-bold">3</span>
+            <span class="w-4 h-4 rounded-full bg-navy text-white text-[10px] flex items-center justify-center font-bold">3</span>
             Diabetic Status
           </label>
           <div class="grid grid-cols-2 gap-4">
-            <button type="button" data-filter-diabetes="no"
-              class="diabetes-btn py-4 px-6 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-sm flex items-center justify-center gap-3 transition-all duration-200">
+            <button type="button" data-filter-diabetes="no" class="diabetes-btn py-4 px-6 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-sm flex items-center justify-center gap-3 transition-all duration-200">
               <i data-lucide="check" class="w-4 h-4"></i> Non-Diabetic
             </button>
-            <button type="button" data-filter-diabetes="yes"
-              class="diabetes-btn py-4 px-6 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-sm flex items-center justify-center gap-3 transition-all duration-200">
+            <button type="button" data-filter-diabetes="yes" class="diabetes-btn py-4 px-6 rounded-xl border border-navy text-navy bg-transparent hover:bg-iceblue-light font-semibold text-sm flex items-center justify-center gap-3 transition-all duration-200">
               <i data-lucide="alert-circle" class="w-4 h-4"></i> Diabetic
             </button>
           </div>
         </div>
 
         <div class="flex justify-end border-t border-slate-200 pt-4">
-          <button id="reset-filters"
-            class="flex items-center gap-2 text-xs font-semibold text-navy-slate hover:text-navy transition-colors py-2 px-4 rounded-lg">
+          <button id="reset-filters" class="flex items-center gap-2 text-xs font-semibold text-navy-slate hover:text-navy transition-colors py-2 px-4 rounded-lg">
             <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Reset Choices
           </button>
         </div>
       </div>
 
+      <!-- Filter Results Container -->
       <div class="mt-16 max-w-4xl mx-auto">
         <h3 class="text-xs font-bold text-navy-slate uppercase tracking-wider mb-6 flex items-center gap-2">
           <i data-lucide="activity" class="w-4 h-4"></i> Recommended Programs
         </h3>
-        <div id="filter-results" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        </div>
+        <div id="filter-results" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
       </div>
     </div>
   </section>
 
 
+  <!-- VACCINATION SECTION -->
   <section id="vaccination" class="py-24 bg-iceblue/30 border-y border-iceblue-dark/20">
     <div class="max-w-7xl mx-auto px-6">
-      
       <div class="flex flex-col lg:flex-row justify-between items-start gap-8 mb-12">
         <div class="max-w-2xl flex flex-col gap-4">
           <span class="text-xs font-bold text-navy tracking-widest uppercase">Immunization & Protection</span>
@@ -445,29 +414,26 @@
           </p>
         </div>
         <div class="flex gap-4">
-          <button type="button" id="btn-reset-vaccines"
-            class="px-4 py-2.5 border border-slate-300 text-slate-600 rounded-lg text-xs font-semibold uppercase tracking-wider bg-white hover:bg-slate-50 transition-all flex items-center gap-2">
+          <button type="button" id="btn-reset-vaccines" class="px-4 py-2.5 border border-slate-300 text-slate-600 rounded-lg text-xs font-semibold uppercase tracking-wider bg-white hover:bg-slate-50 transition-all flex items-center gap-2">
             Reset Selection
           </button>
         </div>
       </div>
 
+      <!-- Promotions Swiper Container -->
       <div class="mb-12 relative group">
-        <button type="button" id="prev-promo-btn" 
-          class="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-white/95 border border-slate-200 shadow-lg items-center justify-center text-navy hover:bg-navy hover:text-white transition-all duration-300 hidden md:flex opacity-0 group-hover:opacity-100">
+        <button type="button" id="prev-promo-btn" class="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-white/95 border border-slate-200 shadow-lg items-center justify-center text-navy hover:bg-navy hover:text-white transition-all duration-300 hidden md:flex opacity-0 group-hover:opacity-100">
           <i data-lucide="chevron-left" class="w-5 h-5"></i>
         </button>
 
-        <div id="promotions-container" 
-          class="flex overflow-x-auto gap-6 pb-4 pt-2 scroll-smooth snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-          </div>
-        <button type="button" id="next-promo-btn" 
-          class="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-white/95 border border-slate-200 shadow-lg items-center justify-center text-navy hover:bg-navy hover:text-white transition-all duration-300 hidden md:flex opacity-0 group-hover:opacity-100">
+        <div id="promotions-container" class="flex overflow-x-auto gap-6 pb-4 pt-2 scroll-smooth snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"></div>
+        
+        <button type="button" id="next-promo-btn" class="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-white/95 border border-slate-200 shadow-lg items-center justify-center text-navy hover:bg-navy hover:text-white transition-all duration-300 hidden md:flex opacity-0 group-hover:opacity-100">
           <i data-lucide="chevron-right" class="w-5 h-5"></i>
         </button>
-
       </div>
 
+      <!-- Available Vaccines List -->
       <div class="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm flex flex-col gap-6">
         <div class="flex items-center justify-between border-b border-slate-100 pb-4">
           <h3 class="font-extrabold text-lg text-navy flex items-center gap-2">Available Vaccines</h3>
@@ -477,42 +443,36 @@
         </div>
 
         <div class="relative">
-          <div id="available-vaccines-container" 
-            class="grid grid-rows-3 grid-flow-col md:grid-rows-2 h-[540px] md:h-[340px] gap-4 overflow-x-auto overflow-y-hidden pb-4 pt-1 scroll-smooth [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-slate-50 [&::-webkit-scrollbar-thumb]:bg-slate-200 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-300">
-            
-            </div>
+          <div id="available-vaccines-container" class="grid grid-rows-3 grid-flow-col md:grid-rows-2 h-[540px] md:h-[340px] gap-4 overflow-x-auto overflow-y-hidden pb-4 pt-1 scroll-smooth [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-slate-50 [&::-webkit-scrollbar-thumb]:bg-slate-200 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-300"></div>
         </div>
       </div>
-
     </div>
   </section>
 
+
+  <!-- ABOUT DR.M SECTION -->
   <section id="about" class="py-20 md:py-28 bg-white relative border-b border-slate-100 overflow-hidden">
-    
     <div class="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-iceblue/30 to-transparent blur-3xl -z-10"></div>
     
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-        
+        <!-- Photo Side -->
         <div class="lg:col-span-5 relative flex justify-center">
           <div class="relative w-full max-w-sm lg:max-w-none group">
-            
             <div class="absolute -inset-4 bg-gradient-to-br from-iceblue/60 to-transparent rounded-[2.2rem] -rotate-2 -z-10 transition-transform duration-500 group-hover:rotate-0"></div>
             <div class="absolute -inset-4 border border-slate-100 rounded-[2.2rem] rotate-2 -z-10 backdrop-blur-xs"></div>
 
-            <img src="images/nursing_clinic_bg02.png" alt="Dr. Nisachon Morgan, MD - HCMC Clinical Director" 
-              class="w-full object-cover rounded-[2rem] shadow-[0_20px_45px_rgba(15,23,42,0.06)] border-4 border-white aspect-[4/5] object-center transition-all duration-500 group-hover:scale-[1.01]">
+            <img src="images/nursing_clinic_bg02.png" alt="Dr. Nisachon Morgan, MD - HCMC Clinical Director" class="w-full object-cover rounded-[2rem] shadow-[0_20px_45px_rgba(15,23,42,0.06)] border-4 border-white aspect-[4/5] object-center transition-all duration-500 group-hover:scale-[1.01]">
 
             <div class="absolute bottom-4 left-4 bg-white/80 backdrop-blur-md px-4 py-2.5 rounded-xl shadow-md border border-white/40 flex items-center gap-2">
               <div class="w-2 h-2 rounded-full bg-navy"></div>
               <span class="text-[10px] font-bold text-navy uppercase tracking-wider">Clinical Director & Founder</span>
             </div>
-            
           </div>
         </div>
 
+        <!-- Text Side -->
         <div class="lg:col-span-7 flex flex-col gap-6 relative">
-          
           <div class="absolute -top-10 -left-6 text-iceblue/50 text-[120px] font-serif select-none pointer-events-none leading-none">“</div>
           
           <div class="relative z-10 flex flex-col gap-3">
@@ -528,7 +488,6 @@
           </p>
 
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
-            
             <div class="bg-slate-50/60 border border-slate-100 rounded-xl p-3.5 flex flex-col gap-2 transition-all hover:bg-slate-50 hover:shadow-xs">
               <div class="w-7 h-7 rounded-lg bg-white shadow-xs border border-slate-100 flex items-center justify-center text-navy">
                 <i data-lucide="activity" class="w-3.5 h-3.5"></i>
@@ -549,26 +508,24 @@
               </div>
               <span class="text-[11px] font-extrabold text-navy uppercase tracking-wider leading-tight">Endurance Physiology</span>
             </div>
-
           </div>
-
         </div>
-
       </div>
     </div>
   </section>
 
+
+  <!-- CONSULTATION & BOOKING FORMS SECTION -->
   <section id="consultation" class="py-24 bg-white">
     <div class="max-w-7xl mx-auto px-6">
-      <div
-        class="bg-navy rounded-3xl p-8 md:p-12 text-white flex flex-col lg:flex-row items-center justify-between gap-8 mb-20 shadow-xl relative overflow-hidden">
+      <!-- CTA Banner -->
+      <div class="bg-navy rounded-3xl p-8 md:p-12 text-white flex flex-col lg:flex-row items-center justify-between gap-8 mb-20 shadow-xl relative overflow-hidden">
         <div class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-navy-light/20 -z-0"></div>
         <div class="flex flex-col gap-4 max-w-2xl relative z-10">
           <span class="text-xs text-iceblue font-bold tracking-widest uppercase">Remote Healthcare</span>
           <h3 class="text-2xl md:text-3xl font-extrabold tracking-tight">Need a Virtual Consultation?</h3>
           <p class="text-slate-300 text-sm md:text-base leading-relaxed">
-            Expatriates and travelers can consult with Dr. Nisachon Morgan online from anywhere. Ideal for medical opinions,
-            laboratory reviews, and international prescription alignment.
+            Expatriates and travelers can consult with Dr. Nisachon Morgan online from anywhere. Ideal for medical opinions, laboratory reviews, and international prescription alignment.
           </p>
           <div class="flex flex-wrap gap-4 text-xs font-semibold mt-2">
             <span class="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-full text-slate-200">
@@ -583,28 +540,26 @@
           </div>
         </div>
         <div class="relative z-10 flex-shrink-0">
-          <a href="#contact"
-            class="px-6 py-4 bg-iceblue text-navy rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-white transition-all shadow-lg flex items-center gap-2">
+          <a href="#contact" class="px-6 py-4 bg-iceblue text-navy rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-white transition-all shadow-lg flex items-center gap-2">
             Initiate Virtual Request
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </a>
         </div>
       </div>
 
+      <!-- Forms Dynamic Layout Anchor -->
       <div id="booking-section-anchor" class="scroll-mt-24 max-w-4xl mx-auto">
         <div class="flex items-center justify-center gap-4 mb-8">
-          <button type="button" id="tab-appt"
-            class="px-6 py-3 font-bold text-xs uppercase tracking-widest rounded-xl transition-all bg-navy text-white shadow-md">
+          <button type="button" id="tab-appt" class="px-6 py-3 font-bold text-xs uppercase tracking-widest rounded-xl transition-all bg-navy text-white shadow-md">
             <i data-lucide="calendar" class="w-4 h-4 inline-block mr-1"></i> Appointment Form
           </button>
-          <button type="button" id="tab-refill"
-            class="px-6 py-3 font-bold text-xs uppercase tracking-widest rounded-xl transition-all bg-white text-navy border border-navy hover:bg-slate-50">
+          <button type="button" id="tab-refill" class="px-6 py-3 font-bold text-xs uppercase tracking-widest rounded-xl transition-all bg-white text-navy border border-navy hover:bg-slate-50">
             <i data-lucide="pill" class="w-4 h-4 inline-block mr-1"></i> Refill Prescription
           </button>
         </div>
 
-        <div id="section-appt"
-          class="bg-navy-tint rounded-3xl border border-slate-100 p-8 shadow-sm flex flex-col gap-6">
+        <!-- Tab 1: Appointment Form -->
+        <div id="section-appt" class="bg-navy-tint rounded-3xl border border-slate-100 p-8 shadow-sm flex flex-col gap-6">
           <div>
             <h3 class="text-xl font-extrabold text-navy">Make an Appointment</h3>
             <p class="text-xs text-navy-slate mt-1">Book your wellness screening or clinic consultation with Dr. Nisachon Morgan</p>
@@ -614,29 +569,21 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div class="flex flex-col gap-1.5">
                 <label for="appt-firstname" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">First Name *</label>
-                <input type="text" id="appt-firstname" required
-                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="John">
+                <input type="text" id="appt-firstname" required class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="John">
               </div>
               <div class="flex flex-col gap-1.5">
-                <label for="appt-middlename"
-                  class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Middle Name</label>
-                <input type="text" id="appt-middlename"
-                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="Middle">
+                <label for="appt-middlename" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Middle Name</label>
+                <input type="text" id="appt-middlename" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="Middle">
               </div>
               <div class="flex flex-col gap-1.5">
-                <label for="appt-lastname" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Last
-                  Name *</label>
-                <input type="text" id="appt-lastname" required
-                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="Doe">
+                <label for="appt-lastname" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Last Name *</label>
+                <input type="text" id="appt-lastname" required class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="Doe">
               </div>
             </div>
 
             <div class="flex flex-col gap-1.5">
-              <label for="appt-email" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Email
-                Address *</label>
-              <input type="email" id="appt-email" required
-                class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white"
-                placeholder="john@example.com">
+              <label for="appt-email" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Email Address *</label>
+              <input type="email" id="appt-email" required class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white" placeholder="john@example.com">
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -668,7 +615,6 @@
                 </select>
               </div>
 
-              <!-- เพิ่มช่องคัดกรองประวัติคนไข้เก่า/ใหม่ (Appointment) -->
               <div class="flex flex-col gap-1.5">
                 <label for="appt-returning" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Have you visited HCMC before? *</label>
                 <select id="appt-returning" required class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white">
@@ -678,34 +624,27 @@
                 </select>
               </div>
 
-              <!-- จากเดิมที่เป็น Select Dropdown เปลี่ยนเป็น Input Date ครับ -->
               <div class="flex flex-col gap-1.5">
-                <label for="appt-dob" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Date of
-                  Birth *</label>
-                <input type="date" id="appt-dob" required
-                  class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white">
+                <label for="appt-dob" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Date of Birth *</label>
+                <input type="date" id="appt-dob" required class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white">
               </div>
             </div>
 
             <div class="flex flex-col gap-1.5">
-              <label for="appt-program" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Target
-                Program / Purpose of Visit</label>
+              <label for="appt-program" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Target Program / Purpose of Visit</label>
               <select id="appt-program" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white">
                 <option value="" disabled selected>-- Select Purpose of Visit / Health Profile --</option>
 
                 <optgroup label="General Clinic Services">
-                  <option value="GENERAL-CONSULT">Consult a Doctor / General Medical Care
-                  </option>
+                  <option value="GENERAL-CONSULT">Consult a Doctor / General Medical Care</option>
                   <option value="travel-vaccine">Travel Vaccine Administration</option>
                   <option value="custom">Custom Customized Plan</option>
                 </optgroup>
 
                 <optgroup label="Special Programs">
                   <option value="UNDER-40">Check Up program for under 40 (4,270 THB)</option>
-                  <option value="METABOLIC-FU45">Check Up - Female Under 45 with Metabolic disorder (4,717 THB)
-                  </option>
-                  <option value="METABOLIC-FO45">Check Up - Female Over 45 with Metabolic disorder (5,267 THB)
-                  </option>
+                  <option value="METABOLIC-FU45">Check Up - Female Under 45 with Metabolic disorder (4,717 THB)</option>
+                  <option value="METABOLIC-FO45">Check Up - Female Over 45 with Metabolic disorder (5,267 THB)</option>
                   <option value="METABOLIC-MALE">Check Up - Men with Metabolic disorder (5,367 THB)</option>
                 </optgroup>
 
@@ -740,36 +679,29 @@
             </div>
 
             <div class="flex flex-col gap-1.5">
-              <label for="appt-message" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">
-                Clinical Notes / Concerns
-              </label>
-
+              <label for="appt-message" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Clinical Notes / Concerns</label>
+              
               <div id="vaccine-badges-container" class="flex flex-wrap gap-2 p-2.5 bg-slate-50 border border-slate-200 rounded-xl min-h-[42px] my-1 flex-shrink-0">
                 <span class="text-xs text-slate-400 self-center mx-auto italic">No vaccines selected yet. Click items above to add.</span>
               </div>
 
-              <textarea id="appt-message" rows="3"
-                class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white placeholder:text-slate-300"
-                placeholder="Please describe any symptoms, medication requirements, or general health goals."></textarea>
+              <textarea id="appt-message" rows="3" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white placeholder:text-slate-300" placeholder="Please describe any symptoms, medication requirements, or general health goals."></textarea>
             </div>
 
-            <button type="submit"
-              class="w-full py-4 bg-navy text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-navy-light shadow-md mt-2 flex items-center justify-center gap-2">
+            <button type="submit" class="w-full py-4 bg-navy text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-navy-light shadow-md mt-2 flex items-center justify-center gap-2">
               <i data-lucide="calendar" class="w-4 h-4"></i> Submit Booking
             </button>
           </form>
         </div>
 
-        <div id="section-refill"
-          class="bg-navy-tint rounded-3xl border border-slate-100 p-8 shadow-sm flex flex-col gap-6 hidden">
+        <!-- Tab 2: Refill Prescription Form -->
+        <div id="section-refill" class="bg-navy-tint rounded-3xl border border-slate-100 p-8 shadow-sm flex flex-col gap-6 hidden">
           <div>
-            <div
-              class="inline-flex items-center gap-1.5 text-accent-red text-[10px] font-bold uppercase tracking-wider mb-1">
+            <div class="inline-flex items-center gap-1.5 text-accent-red text-[10px] font-bold uppercase tracking-wider mb-1">
               <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i> Clinician Approval Required
             </div>
             <h3 class="text-xl font-extrabold text-navy">Pre-Order Refill Prescription</h3>
-            <p class="text-xs text-navy-slate mt-1">Submit current prescription details for review and pre-packaging.
-            </p>
+            <p class="text-xs text-navy-slate mt-1">Submit current prescription details for review and pre-packaging.</p>
           </div>
 
           <form id="refill-form" class="flex flex-col gap-4">
@@ -800,7 +732,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <!-- เปลี่ยนจากช่อง HN เดิม เป็นกล่องเลือกประวัติคนไข้ (Refill) -->
               <div class="flex flex-col gap-1.5">
                 <label for="refill-returning" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Have you visited HCMC before? *</label>
                 <select id="refill-returning" required class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white">
@@ -818,15 +749,13 @@
               </div>
             </div>
 
-            <!-- ค้นหาบล็อกที่อยู่เดิมของคุณ แล้วปรับคลาสและไอดีตามนี้ได้เลยครับ -->
-            <div id="refill-address-block" class="flex flex-col gap-1.5 hidden"> <!-- 📍 เติม id และคลาส hidden -->
+            <!-- Shipping Address Block -->
+            <div id="refill-address-block" class="flex flex-col gap-1.5 hidden">
               <label for="refill-address" class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Delivery Address *</label>
-              <textarea id="refill-address" rows="2" 
-                class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white placeholder:text-slate-300" 
-                placeholder="Please enter your shipping address, district, province, and postal code..."></textarea>
+              <textarea id="refill-address" rows="2" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm bg-white placeholder:text-slate-300" placeholder="Please enter your shipping address, district, province, and postal code..."></textarea>
             </div>
 
-
+            <!-- Medicine Repeat Items List -->
             <div class="flex flex-col gap-2">
               <label class="text-[10px] font-bold uppercase tracking-wider text-navy-slate">Medication Details *</label>
 
@@ -839,7 +768,6 @@
 
               <div id="medication-rows-container" class="flex flex-col gap-4 md:gap-3">
                 <div class="medication-row grid grid-cols-1 md:grid-cols-12 gap-3 bg-slate-50 md:bg-white p-4 md:p-0 rounded-xl md:rounded-none border border-slate-100 md:border-none shadow-sm md:shadow-none">
-                  
                   <div class="md:col-span-6 flex flex-col gap-1">
                     <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 md:hidden">Medicine Name</span>
                     <input type="text" placeholder="e.g. Metformin" required class="med-name w-full px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white">
@@ -861,7 +789,6 @@
                       <span class="md:hidden font-medium text-slate-400 hover:text-accent-red">Delete</span>
                     </button>
                   </div>
-
                 </div>
               </div>
 
@@ -879,10 +806,11 @@
     </div>
   </section>
 
-    <section class="relative z-0 py-24 bg-slate-50 overflow-hidden border-b border-slate-100">
+
+  <!-- TEAM / EXCELLENCE SECTION -->
+  <section class="relative z-0 py-24 bg-slate-50 overflow-hidden border-b border-slate-100">
     <img src="images/nursing_clinic_bg02.png" class="absolute inset-0 w-full h-full object-cover opacity-[0.08] mix-blend-multiply pointer-events-none -z-10" alt="">
     <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-      
       <div class="lg:col-span-5 flex flex-col gap-6">
         <span class="text-xs font-bold text-navy tracking-widest uppercase">Clinical Excellence</span>
         <h2 class="text-3xl md:text-4xl font-extrabold text-navy tracking-tight leading-tight">
@@ -923,10 +851,11 @@
           </div>
         </div>
       </div>
-
     </div>
   </section>
 
+
+  <!-- FOOTER SECTION -->
   <footer id="contact" class="bg-navy text-white pt-20 pb-12 border-t border-slate-800">
     <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-12 md:gap-16 pb-16 border-b border-slate-800">
       <div class="md:col-span-4 flex flex-col gap-6">
@@ -936,8 +865,7 @@
           </div>
         </a>
         <p class="text-xs md:text-sm text-slate-400 leading-relaxed">
-          Health Care Medical Clinic is a premier primary care and clinical diagnostics facility in Chiang Mai. Under
-          Dr. Nisachon Morgan, we specialize in high-resolution wellness panels.
+          Health Care Medical Clinic is a premier primary care and clinical diagnostics facility in Chiang Mai. Under Dr. Nisachon Morgan, we specialize in high-resolution wellness panels.
         </p>
         <span class="text-xs text-slate-500 font-mono">© 2026 HCMC Clinic. All Rights Reserved.</span>
       </div>
@@ -970,88 +898,76 @@
       <div class="flex flex-col gap-4">
         <h4 class="text-xs font-bold text-slate-200 uppercase tracking-widest">Connect With Us</h4>
         <div class="flex items-center gap-3">
-          
-          <a href="https://line.me/R/ti/p/@HCMC" target="_blank" rel="noopener noreferrer" 
-            class="w-10 h-10 flex-shrink-0 rounded-xl bg-white border text-slate-900 hover:bg-[#06C755]/10 hover:border-[#06C755]/30 hover:text-[#06C755] hover:scale-105 flex items-center justify-center transition-all shadow-sm" 
-            title="Connect via LINE">
+          <!-- LINE -->
+          <a href="https://line.me/R/ti/p/@HCMC" target="_blank" rel="noopener noreferrer" class="w-10 h-10 flex-shrink-0 rounded-xl bg-white border text-slate-900 hover:bg-[#06C755]/10 hover:border-[#06C755]/30 hover:text-[#06C755] hover:scale-105 flex items-center justify-center transition-all shadow-sm" title="Connect via LINE">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
               <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.058.592.121.303.079.778.038 1.084l-.171 1.021c-.052.308-.252 1.204 1.089.657 1.341-.548 7.237-4.261 9.871-7.298 2.052-2.322 3.079-4.817 3.079-7.664zm-14.582 3.251h-2.193c-.237 0-.43-.193-.43-.43v-4.379c0-.237.193-.43.43-.43h.43c.237 0 .43.193 .43.43v3.519h1.333c.237 0 .43.193 .43.43v.43c0 .237-.193.43-.43.43zm2.58 0h-.43c-.237 0-.43-.193-.43-.43v-4.379c0-.237.193-.43.43-.43h.43c.237 0 .43.193 .43.43v4.379c0 .237-.193.43-.43.43zm4.618 0h-2.223c-.237 0-.43-.193-.43-.43v-4.379c0-.237.193-.43.43-.43h.43c.237 0 .43.193 .43.43v2.859l1.455-2.973c.078-.16.241-.261.419-.261h.494c.319 0 .524.331.383.618l-1.127 2.221 1.241 2.502c.147.296-.068.646-.397.646h-.474c-.183 0-.35-.105-.429-.271l-.813-1.748-.521 1.062v.535c0 .237-.193.43-.43.43zm4.07 0h-2.133c-.237 0-.43-.193-.43-.43v-4.379c0-.237.193-.43.43-.43h2.133c.237 0 .43.193 .43.43v.43c0 .237-.193.43-.43.43h-1.703v1.077h1.49c.237 0 .43.193 .43.43v.43c0 .237-.193.43-.43.43h-1.49v1.144h1.703c.237 0 .43.193 .43.43v.43c0 .237-.193.43-.43.43z"/>
             </svg>
           </a>
 
-          <a href="https://wa.me/+66827668672" target="_blank" rel="noopener noreferrer" 
-            class="w-10 h-10 flex-shrink-0 rounded-xl bg-white border text-slate-900 hover:bg-[#25D366]/10 hover:border-[#25D366]/30 hover:text-[#25D366] hover:scale-105 flex items-center justify-center transition-all shadow-sm" 
-            title="Connect via WhatsApp">
+          <!-- WhatsApp -->
+          <a href="https://wa.me/+66827668672" target="_blank" rel="noopener noreferrer" class="w-10 h-10 flex-shrink-0 rounded-xl bg-white border text-slate-900 hover:bg-[#25D366]/10 hover:border-[#25D366]/30 hover:text-[#25D366] hover:scale-105 flex items-center justify-center transition-all shadow-sm" title="Connect via WhatsApp">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="w-4.5 h-4.5">
               <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.455L0 24zm6.59-4.846c1.66.986 3.296 1.48 4.93 1.481 5.425 0 9.835-4.41 9.839-9.84.002-2.634-1.024-5.111-2.892-6.98-1.866-1.868-4.343-2.894-6.984-2.895-5.43 0-9.84 4.411-9.844 9.843-.002 1.758.463 3.472 1.346 5.002l-.997 3.645 3.732-.979zm11.222-3.415c-.157-.261-.578-.419-1.21-.735-.63-.314-3.731-1.842-3.837-1.88-.105-.039-.183-.058-.261.059-.079.117-.303.419-.371.496-.068.078-.137.088-.294.01-.157-.079-.663-.245-1.263-.78-0.467-.416-.783-.93-.875-1.087-.092-.157-.01-.242.07-.32c.071-.07.157-.183.236-.275.079-.092.105-.157.157-.262.052-.105.026-.196-.013-.275-.039-.079-.371-.895-.509-1.227-.135-.325-.272-.281-.371-.285-.097-.004-.208-.004-.32-.004s-.294.042-.448.209c-.154.167-.588.575-.588 1.401 0 .826.6 1.622.683 1.735.083.117 1.181 1.803 2.862 2.528.401.173.714.276.958.353.404.128.771.11 1.062.067.324-.048 1.015-.415 1.157-.816.143-.401.143-.746.101-.817-.043-.072-.157-.117-.314-.197z"/>
             </svg>
           </a>
 
-          <a href="https://www.facebook.com/HCMCdrM" target="_blank" rel="noopener noreferrer" 
-            class="w-10 h-10 flex-shrink-0 rounded-xl bg-white border text-slate-900 hover:bg-[#1877F2]/10 hover:border-[#1877F2]/30 hover:text-[#1877F2] hover:scale-105 flex items-center justify-center transition-all shadow-sm" 
-            title="Connect via Facebook">
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/HCMCdrM" target="_blank" rel="noopener noreferrer" class="w-10 h-10 flex-shrink-0 rounded-xl bg-white border text-slate-900 hover:bg-[#1877F2]/10 hover:border-[#1877F2]/30 hover:text-[#1877F2] hover:scale-105 flex items-center justify-center transition-all shadow-sm" title="Connect via Facebook">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
               <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
             </svg>
           </a>
-
         </div>
       </div>
     </div>
   </footer>
 
 
+  <!-- MAIN BACKEND JAVASCRIPT LOGIC -->
   <script type="module">
-      // 📌 [1. IMPORTS] รวมคำสั่งนำเข้าฐานข้อมูลจากไฟล์ภายนอกไว้ที่บนสุดคู่กัน
-      import { packages } from './packages.js';
-      import { vaccines } from './vaccines.js';
+    // 📌 [1. IMPORTS]
+    import { packages } from './packages.js';
+    import { vaccines } from './vaccines.js';
 
-      // 📌 [2. CONFIGURATION & CONSTANTS] ประกาศลิงก์ Webhook ของ Make.com
-      const APPOINTMENT_WEBHOOK_URL = "https://hook.eu1.make.com/ebfhf5m9d1mpqmgwkm5wa4b6i1rbtv4i"; 
-      const REFILL_WEBHOOK_URL = "https://hook.eu1.make.com/1iy7ku6xsxo4p49irh4wo6p3yop2y9us"; 
+    // 📌 [2. CONFIGURATION & CONSTANTS]
+    const APPOINTMENT_WEBHOOK_URL = "https://hook.eu1.make.com/ebfhf5m9d1mpqmgwkm5wa4b6i1rbtv4i"; 
+    const REFILL_WEBHOOK_URL = "https://hook.eu1.make.com/1iy7ku6xsxo4p49irh4wo6p3yop2y9us"; 
 
-      // 📌 [3. GLOBAL STATES] ตัวแปรส่วนกลางสำหรับเก็บสถานะระบบ (แชร์ใช้ร่วมกันได้ทุกฟังก์ชัน)
-      let currentFilters = { gender: null, ageGroup: null, hasDiabetes: null }; // ระบบตัวกรองแพ็กเกจ
-      let activeHighlightId = "METABOLIC-FU45"; // ไอดีแพ็กเกจ Metabolic ที่กำลังแสดงผล
-      let selectedVaccineIds = []; // ระบบคลังเก็บไอดีวัคซีนที่คนไข้เลือก
+    // 📌 [3. GLOBAL STATES]
+    let currentFilters = { gender: null, ageGroup: null, hasDiabetes: null }; 
+    let activeHighlightId = "METABOLIC-FU45"; 
+    let selectedVaccineIds = []; 
 
-
-      // ========================================================================
-      // ⭐ SAFE SYSTEM INITIALIZER: ศูนย์ควบคุมคำสั่งรันระบบทันทีเมื่อโหลดหน้าเว็บสำเร็จ
-      // ========================================================================
+    // ========================================================================
+    // ⭐ SAFE SYSTEM INITIALIZER
+    // ========================================================================
     function startClinicSystem() {
-      // โหลดไอคอนจากคลัง Lucide Icons
       if (typeof lucide !== 'undefined') {
         lucide.createIcons();
       }
 
-      // ระบบ UI พื้นฐาน
       initTabs();
       setupFilters();
       initHighlightMetaTabs();
       evaluateAndRender();
-
-      // ระบบวัคซีนและฟอร์มส่งข้อมูลหลังบ้าน
       initFormSubmissions();
-      renderVaccines(); // สั่งวาดการ์ดวัคซีนลงหน้าจอจนเสร็จ
+      renderVaccines(); 
       initVaccineReset();
       initDeliveryToggle();
       initNotificationClose();
       lockPastDates();
       initPromoNavigation();
-      
     }
 
-    // แก้บั๊กเรื่องจังหวะเวลาโหลดหน้าเว็บ: ถ้าเว็บเสร็จแล้วให้รันทันที ถ้ายังไม่เสร็จให้รอสัญญาณ DOMContentLoaded
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", startClinicSystem);
     } else {
       startClinicSystem();
     }
 
-
     // ========================================================================
-    // 📑 CATEGORY A: ระบบควบคุมฟอร์มสั่งยาซ้ำ (MEDICATION REFILL ROWS CONTROLLER)
+    // 📑 CATEGORY A: MEDICATION REFILL ROWS CONTROLLER
     // ========================================================================
     const container = document.getElementById("medication-rows-container");
     const addBtn = document.getElementById("add-row-btn");
@@ -1086,11 +1002,9 @@
       });
     }
 
-
     // ========================================================================
-    // 📑 CATEGORY B: ระบบแบบฟอร์มและการส่งข้อมูลหลังบ้าน (BACKEND SUBMISSIONS)
+    // 📑 CATEGORY B: BACKEND SUBMISSIONS
     // ========================================================================
-    
     function initFormSubmissions() {
       const apptForm = document.getElementById("appointment-form");
       const refillForm = document.getElementById("refill-form");
@@ -1183,11 +1097,9 @@
       }
     }
 
-
     // ========================================================================
-    // 💉 CATEGORY C: ระบบการกรองแพ็กเกจตรวจสุขภาพ (HEALTH CHECK-UP PACKAGES)
+    // 💉 CATEGORY C: HEALTH CHECK-UP PACKAGES & FILTERS
     // ========================================================================
-
     function initTabs() {
       const tabAppt = document.getElementById("tab-appt");
       const tabRefill = document.getElementById("tab-refill");
@@ -1425,9 +1337,8 @@
     }
 
     // ========================================================================
-    // 💉 CATEGORY D: ระบบจัดการคลังข้อมูลและการ์ดวัคซีน (VACCINES PANEL LOGIC)
+    // 💉 CATEGORY D: VACCINES PANEL LOGIC
     // ========================================================================
-    
     function renderVaccines() {
       const promotionsContainer = document.getElementById('promotions-container');
       const availContainer = document.getElementById('available-vaccines-container');
@@ -1438,18 +1349,12 @@
 
       if (!vaccines || !Array.isArray(vaccines)) return;
 
-      // 🪄 [NEW] ตั้งค่าคลาสให้ฝั่งกล่อง PROMOTION แสดงแถบบาร์มินิมอลสีเทาบางเฉียบด้านล่าง เพื่อบอกคนบนมือถือว่ามีโปรโมชันมากกว่า 1 รายการ
       promotionsContainer.className = "flex gap-5 overflow-x-auto overflow-y-hidden pb-4 pt-1 scroll-smooth [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-slate-50 [&::-webkit-scrollbar-thumb]:bg-slate-200 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-300";
-
-      // 📐 ปรับ Container อุ้มวัคซีนปกติบน Desktop ให้สูงขึ้น และเว้นระยะแนวตั้งไม่ให้กล่องชนกัน (โค้ดเดิมที่แก้ไขไว้)
       availContainer.className = "grid grid-rows-3 grid-flow-col md:grid-rows-2 h-[560px] md:h-[370px] gap-y-4 gap-x-5 overflow-x-auto overflow-y-hidden pb-4 pt-1 scroll-smooth [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-slate-50 [&::-webkit-scrollbar-thumb]:bg-slate-200 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-300";
 
       vaccines.forEach(vac => {
         const isChecked = typeof selectedVaccineIds !== 'undefined' && selectedVaccineIds.includes(vac.id);
 
-        // ==========================================================
-        // ⚙️ [SYSTEM LOGIC: จัดการระบบสถานะ และเงื่อนไขการแสดงราคา]
-        // ==========================================================
         let cardOpacityClass = 'opacity-100';
         let pointerEventsClass = '';
         let rightBottomHTML = ''; 
@@ -1468,9 +1373,7 @@
           }
         }
 
-        // ==========================================================
-        // 🏷️ [CASE A: การ์ด PROMOTION (ฝั่งขวา / กล่องโปรโมชัน)]
-        // ==========================================================
+        // CASE A: PROMOTION CARD
         if (vac.isPromoCard) {
           const promoCardStyle = isChecked ? 'border-navy bg-iceblue/20 shadow-md scale-[1.01]' : 'border-slate-100 bg-white hover:bg-slate-50/80 shadow-sm';
           
@@ -1508,9 +1411,7 @@
 
         if (vac.category === 'promo-only' || vac.isPromoCard) return;
 
-        // ==========================================================
-        // 💉 [CASE B: การ์ด VACCINE ปกติ]
-        // ==========================================================
+        // CASE B: ROUTINE VACCINE CARD
         const cardStyle = isChecked ? 'border-navy bg-iceblue/20 shadow-sm' : 'border-slate-100 bg-white hover:bg-slate-50/80 shadow-sm';
         const packageBadge = vac.hasPackage ? `<span class="text-[9px] font-bold text-accent-red bg-accent-red/5 px-2 py-0.5 rounded border border-accent-red/10 block text-center mt-1 w-fit truncate">${vac.packageDetails}</span>` : '';
         const catBadge = vac.category === 'travel' 
@@ -1520,9 +1421,7 @@
         const cardHtml = `
           <div data-vac-id="${vac.id}" 
             class="relative p-4 border rounded-2xl flex gap-3 items-start cursor-pointer transition-all flex-shrink-0 w-[82vw] sm:w-[330px] h-[165px] ${cardStyle} ${cardOpacityClass} ${pointerEventsClass}">
-            
             <input type="checkbox" ${isChecked ? 'checked' : ''} ${vac.status === 'out-of-stock' ? 'class="hidden"' : 'class="mt-1 pointer-events-none accent-navy shrink-0"'}>
-            
             <div class="flex-1 flex flex-col h-full min-w-0 justify-between">
               <div>
                 <div class="flex items-start justify-between gap-2 mb-1">
@@ -1534,7 +1433,6 @@
                 <span class="text-[11px] text-navy-slate/90 block leading-normal line-clamp-2">${vac.description}</span>
                 ${packageBadge}
               </div>
-              
               <div class="flex items-center justify-between gap-2 pt-2 border-t border-slate-100/80 mt-auto">
                 <span class="text-[10px] font-semibold text-navy-slate bg-slate-100 px-2 py-0.5 rounded shrink-0">Protocol: ${vac.protocol}</span>
                 ${rightBottomHTML}
@@ -1542,11 +1440,9 @@
             </div>
           </div>
         `;
-
         availContainer.insertAdjacentHTML('beforeend', cardHtml);
       });
 
-      // 🖱️ ระบบดักจับลูกกลิ้งเมาส์สไลด์ซ้าย-ขวา สำหรับกล่องวัคซีนปกติ (โค้ดเดิมทำงานได้ดีอยู่แล้ว)
       if (availContainer) {
         availContainer.addEventListener("wheel", (e) => {
           if (e.deltaY !== 0) {
@@ -1556,7 +1452,6 @@
         }, { passive: false });
       }
 
-      // 🖱️ [ADDITIONAL] เพิ่มระบบลูกกลิ้งเมาส์ให้ฝั่งกล่องโปรโมชันด้วย เผื่อคนใช้เดสก์ท็อปเอาเมาส์ไปหมุนบนโซนโปรโมชัน จะได้ไม่ติดขัด
       if (promotionsContainer) {
         promotionsContainer.addEventListener("wheel", (e) => {
           if (e.deltaY !== 0) {
@@ -1566,9 +1461,7 @@
         }, { passive: false });
       }
 
-      if (typeof setupVaccineClickEvents === 'function') {
-        setupVaccineClickEvents();
-      }
+      setupVaccineClickEvents();
     }
 
     function setupVaccineClickEvents() {
@@ -1627,11 +1520,9 @@
       }
     }
 
-
     // ========================================================================
-    // 🎨 CATEGORY E: ระบบควบคุมการแสดงผลส่วนหน้าบ้าน (UI UTILITIES & MODALS)
+    // 🎨 CATEGORY E: UI UTILITIES & MODALS
     // ========================================================================
-    
     function initDeliveryToggle() {
       const deliverySelect = document.getElementById("refill-delivery");
       const addressBlock = document.getElementById("refill-address-block");
@@ -1705,44 +1596,38 @@
       }
     }
 
-    // --- สคริปต์ควบคุม Dynamic Navbar สลับโปร่งใส/กระจกฝ้า ---
+    // Dynamic Navbar Scroll Effect
     window.addEventListener('scroll', () => {
       const header = document.getElementById('main-header');
       if (!header) return;
 
-      // ถ้าผู้ใช้เลื่อนจอลงมามากกว่า 20px
       if (window.scrollY > 20) {
-        // 🔮 ใส่เอฟเฟกต์ขาวกระจกฝ้า (White Glassmorphism) และดึงขอบเส้นใต้ขึ้นมาโชว์
         header.classList.add('bg-white/80', 'backdrop-blur-md', 'shadow-sm', 'border-slate-100');
         header.classList.remove('bg-transparent', 'border-transparent');
       } else {
-        // ❄️ ถ้าเลื่อนกลับไปบนสุด ให้เคลียร์สไตล์กลับเป็นโปร่งใสคลีน ๆ กลืนไปกับรูป Hero ตามเดิม
         header.classList.remove('bg-white/80', 'backdrop-blur-md', 'shadow-sm', 'border-slate-100');
         header.classList.add('bg-transparent', 'border-transparent');
       }
     });
 
-    // --- สคริปต์คำนวณและอัปเดตสถานะคลินิกแบบเรียลไทม์ ---
+    // Realtime Clinic Hours Status Tracker
     function updateClinicRealtimeStatus() {
       const statusContainer = document.getElementById('realtime-status');
       if (!statusContainer) return;
 
       const now = new Date();
-      const day = now.getDay();      // 0 = วันอาทิตย์, 1 = จันทร์, ..., 6 = เสาร์
-      const hour = now.getHours();   // ดึงชั่วโมงปัจจุบัน (0 - 23)
+      const day = now.getDay();      
+      const hour = now.getHours();   
 
-      // 🕒 ตั้งค่าเวลาทำการคลินิก: วันจันทร์ - วันเสาร์ เวลา 09:00 น. ถึง 20:00 น. (หยุดวันอาทิตย์)
       const isWorkingDay = day >= 1 && day <= 6;
       const isWorkingHour = hour >= 9 && hour < 20;
 
       if (isWorkingDay && isWorkingHour) {
-        // 🟢 ช่วงเวลาเปิดทำการปกติ
         statusContainer.innerHTML = `
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> 
           Open Now <span class="text-slate-400 font-normal text-[11px] ml-0.5">(Accepting Patients)</span>
         `;
       } else {
-        // 🟠 ช่วงเวลานอกเวลาทำการ / คลินิกปิด
         statusContainer.innerHTML = `
           <span class="w-2 h-2 rounded-full bg-amber-500"></span> 
           Closed <span class="text-slate-400 font-normal text-[11px] ml-0.5">(Appointments Only)</span>
@@ -1750,28 +1635,25 @@
       }
     }
 
-    // สั่งให้ระบบทำงานทันทีที่โหลดหน้าเว็บ และอัปเดตตัวเองตรวจสอบเวลาใหม่ทุกๆ 30 วินาที
     document.addEventListener("DOMContentLoaded", () => {
       updateClinicRealtimeStatus();
       setInterval(updateClinicRealtimeStatus, 30000);
     });
+  </script> 
 
-  </script> <div id="success-notification" class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/40 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-500">
+  <!-- SUCCESS POPUP MODAL NOTIFICATION -->
+  <div id="success-notification" class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/40 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-500">
     <div class="bg-white/75 backdrop-blur-xl p-8 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] max-w-sm w-full mx-4 border border-white/60 text-center flex flex-col items-center gap-4 transform scale-95 transition-transform duration-500">
-      
       <div class="w-16 h-16 bg-emerald-500/20 text-emerald-600 rounded-full flex items-center justify-center border border-emerald-500/30">
         <i data-lucide="check-circle" class="w-8 h-8"></i>
       </div>
-      
       <div>
         <h4 id="notif-title" class="font-bold text-xl text-navy"></h4>
         <p id="notif-message" class="text-sm text-navy-slate mt-2 leading-relaxed"></p>
       </div>
-      
       <button type="button" id="close-notif-btn" class="w-full mt-2 py-3 bg-navy text-white font-semibold text-xs uppercase tracking-widest rounded-xl hover:bg-navy-light transition-all shadow-lg">
         Acknowledge
       </button>
-      
     </div>
   </div>
 
