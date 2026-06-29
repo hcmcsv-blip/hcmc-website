@@ -451,8 +451,8 @@
     </div>
   </section>
 
-  <section id="insights" class="py-24 bg-white border-b border-slate-100">
-    <div class="max-w-7xl mx-auto px-6 relative group/section">
+  <section id="insights" class="py-24 bg-white border-b border-slate-100 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 relative">
       
       <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-12">
         <div class="max-w-2xl flex flex-col gap-4">
@@ -468,7 +468,7 @@
           </p>
         </div>
         
-        <div class="hidden md:flex items-center gap-3">
+        <div class="flex items-center gap-3 mt-4 lg:mt-0">
           <button type="button" id="prev-insight-btn" class="w-11 h-11 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center text-navy hover:bg-navy hover:text-white transition-all duration-300">
             <i data-lucide="chevron-left" class="w-5 h-5"></i>
           </button>
@@ -478,14 +478,11 @@
         </div>
       </div>
 
-      <div class="relative -mx-6 px-6">
+      <div class="relative w-full h-[530px] mx-auto mt-8 flex justify-center items-start">
         
-        <div class="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-white via-white/70 to-transparent z-10 pointer-events-none"></div>
-        
-        <div class="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white via-white/70 to-transparent z-10 pointer-events-none"></div>
-
-        <div id="insights-container" class="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-6 pt-2 scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div id="insights-container" class="relative w-full h-full max-w-md md:max-w-xl">
           </div>
+
       </div>
 
     </div>
@@ -997,6 +994,7 @@
     let currentFilters = { gender: null, ageGroup: null, hasDiabetes: null }; 
     let activeHighlightId = "METABOLIC-FU45"; 
     let selectedVaccineIds = []; 
+    let currentInsightIndex = 0; // เริ่มต้นที่บทความใบแรกสุด (ใบที่ 0)
 
     // ========================================================================
     // ⭐ SAFE SYSTEM INITIALIZER
@@ -1529,16 +1527,17 @@
       const container = document.getElementById('insights-container');
       if (!container) return;
 
-      // สั่งวาดการ์ดทั้ง 6 ใบออกมาเรียงหน้ากระดาน
-      container.innerHTML = insights.map(item => `
-        <div class="group rounded-3xl overflow-hidden shadow-xs flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-1 w-[82vw] md:w-[45%] lg:w-[calc((100%-3rem)/3)] shrink-0 snap-center lg:snap-start ${item.cardClass}">
+      // 1. วาดการ์ดทั้ง 6 ใบลงไปใน DOM ก่อน (กำหนดให้เป็น absolute ยึดแกนกลางจอ)
+      container.innerHTML = insights.map((item, index) => `
+        <div id="insight-card-${index}" 
+          class="absolute top-0 left-1/2 w-[90vw] max-w-[360px] md:max-w-[420px] h-[490px] rounded-3xl overflow-hidden flex flex-col justify-between transition-all duration-500 ease-in-out select-none ${item.cardClass}">
           <div>
-            <div class="h-48 overflow-hidden bg-slate-200 relative">
-              <img src="${item.imageUrl}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+            <div class="h-44 overflow-hidden bg-slate-200 relative">
+              <img src="${item.imageUrl}" alt="${item.title}" class="w-full h-full object-cover">
             </div>
             
-            <div class="p-6 flex flex-col gap-4">
-              <div class="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider">
+            <div class="p-6 flex flex-col gap-3">
+              <div class="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider">
                 <span class="${item.categoryColorClass}">${item.categoryName}</span>
                 <span class="text-slate-400 font-medium">${item.date}</span>
               </div>
@@ -1552,25 +1551,23 @@
           </div>
           
           <div class="px-6 pb-6 mt-auto">
-            <div class="pt-4 border-t border-slate-200/60 flex items-center justify-between">
+            <div class="pt-3 border-t border-slate-200/60 flex items-center justify-between">
               <button type="button" data-id="${item.id}" class="open-insight-btn text-xs font-bold uppercase tracking-wider text-navy hover:text-navy-slate flex items-center gap-1.5">
                 Read Insight 
-                <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"></i>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
               </button>
             </div>
           </div>
         </div>
       `).join('');
 
-      // กลไกคำสั่งเปิดหน้าต่างป๊อปอัปฉบับเต็ม
+      // ผูกปุ่มเปิดหน้าต่างป๊อปอัปอ่านเนื้อหาฉบับเต็ม
       const openModal = (id) => {
         const item = insights.find(p => p.id == id);
         if (!item) return;
-        
         document.getElementById('modal-vac-category').innerText = item.categoryName;
         document.getElementById('modal-vac-title').innerText = item.title;
         document.getElementById('modal-vac-content').innerHTML = item.fullContent;
-        
         const modal = document.getElementById('insight-modal');
         modal.classList.remove('opacity-0', 'pointer-events-none');
         modal.querySelector('.transform').classList.remove('scale-95');
@@ -1580,7 +1577,75 @@
         elem.addEventListener('click', () => openModal(elem.getAttribute('data-id')));
       });
 
+      // 2. เรียกคำสั่งคำนวณตำแหน่งการซ้อนชั้นของกองไพ่ทันที
+      updateCardDeckLayout();
+    }
+
+    // 🪄 ฟังก์ชันอัจฉริยะ: คำนวณเลเยอร์ ความเอียง ขนาด และระยะเยื้องซ้าย-ขวา ของกองไพ่
+    function updateCardDeckLayout() {
+      insights.forEach((item, index) => {
+        const card = document.getElementById(`insight-card-${index}`);
+        if (!card) return;
+
+        // คำนวณระยะห่างระหว่างการ์ดใบนี้ กับใบที่กำลังโชว์เด่นอยู่ตรงกลาง (currentInsightIndex)
+        const offset = index - currentInsightIndex;
+
+        if (offset === 0) {
+          // 👑 ใบที่กำลังโชว์เด่นตรงกลาง
+          card.style.transform = "translate(-50%, 0) scale(1) rotate(0deg)";
+          card.style.zIndex = "40";
+          card.style.opacity = "1";
+          card.style.pointerEvents = "auto";
+        } 
+        else if (offset > 0) {
+          // ➡️ มีไอเทมฝั่งขวา -> ให้การ์ดซ้อนเยื้องไปฝั่งขวา (ยิ่งห่าง ยิ่งเล็กลง และร่นไปอยู่เลเยอร์ล่าง)
+          const layerFactor = Math.min(offset, 3); // แสดงผลแง้มซ้อนกันสูงสุด 3 ชั้นพอเพื่อความสะอาดสายตา
+          const shiftX = layerFactor * 24; // ระยะเยื้องไปทางขวา (พิกเซล)
+          const scaleVal = 1 - (layerFactor * 0.05); // ย่อขนาดลงชั้นละ 5%
+          
+          card.style.transform = `translate(calc(-50% + ${shiftX}px), ${layerFactor * 6}px) scale(${scaleVal}) rotate(${layerFactor * 1}deg)`;
+          card.style.zIndex = `${40 - layerFactor}`;
+          card.style.opacity = offset === 1 ? "0.85" : offset === 2 ? "0.45" : "0"; // ใบที่ห่างเกินไปจะซ่อนตัวเนียนๆ
+          card.style.pointerEvents = "none"; // ป้องกันไม่ให้เผลอไปกดโดนใบที่ซ่อนอยู่ข้างหลัง
+        } 
+        else {
+          // ⬅️ มีไอเทมฝั่งซ้าย -> ให้การ์ดที่สไลด์ผ่านไปแล้ว ถูกเก็บเข้ากองซ้อนฝั่งซ้าย
+          const layerFactor = Math.min(Math.abs(offset), 3);
+          const shiftX = layerFactor * 24; // ระยะเยื้องไปทางซ้าย
+          const scaleVal = 1 - (layerFactor * 0.05);
+          
+          card.style.transform = `translate(calc(-50% - ${shiftX}px), ${layerFactor * 6}px) scale(${scaleVal}) rotate(-${layerFactor * 1}deg)`;
+          card.style.zIndex = `${40 - layerFactor}`;
+          card.style.opacity = Math.abs(offset) === 1 ? "0.85" : Math.abs(offset) === 2 ? "0.45" : "0";
+          card.style.pointerEvents = "none";
+        }
+      });
+
       if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    // ฟังก์ชันควบคุมปุ่มลูกศรกดสลับหน้าไพ่ถัดไป
+    function initInsightNavigation() {
+      const prevBtn = document.getElementById("prev-insight-btn");
+      const nextBtn = document.getElementById("next-insight-btn");
+
+      if (prevBtn && nextBtn) {
+        nextBtn.addEventListener("click", () => {
+          // หากยังไม่ถึงใบสุดท้าย ให้ขยับหน้าไพ่ไปทางขวา
+          if (currentInsightIndex < insights.length - 1) {
+            currentInsightIndex++;
+            updateCardDeckLayout();
+          }
+        });
+
+        prevBtn.addEventListener("click", () => {
+          // หากไม่ได้อยู่ใบแรกสุด ให้ดึงไพ่ใบก่อนหน้ากลับมาโชว์
+          if (currentInsightIndex > 0) {
+            currentInsightIndex--;
+            updateCardDeckLayout();
+          }
+        });
+      }
     }
 
     // ฟังก์ชันสำหรับกดปิดหน้าต่างบทความฉบับเต็ม
@@ -1758,19 +1823,6 @@
           <span class="w-2 h-2 rounded-full bg-amber-500"></span> 
           Closed <span class="text-slate-400 font-normal text-[11px] ml-0.5">(Appointments Only)</span>
         `;
-      }
-    }
-
-    function initInsightNavigation() {
-      const container = document.getElementById("insights-container");
-      const prevBtn = document.getElementById("prev-insight-btn");
-      const nextBtn = document.getElementById("next-insight-btn");
-
-      if (container && prevBtn && nextBtn) {
-        // คำนวณระยะเลื่อนให้พอดีทีละกล่องบทความเมื่อผู้ใช้กดลูกศร
-        const scrollAmount = container.clientWidth / 2; 
-        nextBtn.addEventListener("click", () => { container.scrollLeft += scrollAmount; });
-        prevBtn.addEventListener("click", () => { container.scrollLeft -= scrollAmount; });
       }
     }
 
