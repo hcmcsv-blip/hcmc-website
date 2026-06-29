@@ -468,7 +468,7 @@
           </p>
         </div>
         
-        <div class="hidden md:flex items-center gap-3">
+        <div class="flex items-center gap-3 mt-4 lg:mt-0">
           <button type="button" id="prev-insight-btn" class="w-11 h-11 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center text-navy hover:bg-navy hover:text-white transition-all duration-300">
             <i data-lucide="chevron-left" class="w-5 h-5"></i>
           </button>
@@ -478,14 +478,11 @@
         </div>
       </div>
 
-      <div class="relative -mx-6 px-6">
+      <div class="relative w-full h-[510px] mx-auto mt-8 flex justify-center items-start touch-pan-y">
         
-        <div class="absolute left-0 top-0 bottom-0 w-12 sm:w-20 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none"></div>
-        
-        <div class="absolute right-0 top-0 bottom-0 w-12 sm:w-20 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none"></div>
-
-        <div id="insights-container" class="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-6 pt-2 scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div id="insights-container" class="relative w-full h-full max-w-sm md:max-w-xl lg:max-w-none">
           </div>
+
       </div>
 
     </div>
@@ -1530,17 +1527,18 @@
       const container = document.getElementById('insights-container');
       if (!container) return;
 
-      // วาดการ์ดทั้ง 6 ใบออกมาเรียงหน้ากระดาน 
-      // บนมือถือกว้าง w-[82vw] (โชว์ใบเดียว+เห็นขอบใบถัดไปแง้มๆ) บนเดสก์ท็อปกว้างคำนวณแบ่ง 3 กล่องพอดี
-      container.innerHTML = insights.map(item => `
-        <div class="group rounded-3xl overflow-hidden shadow-xs flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-1 w-[82vw] md:w-[45%] lg:w-[calc((100%-3rem)/3)] shrink-0 snap-center lg:snap-start ${item.cardClass}">
+      // 1. วาดโครงสร้างการ์ดทั้ง 6 ใบแบบ Absolute ตรึงพิกเซลกึ่งกลางจอไว้ล่วงหน้า
+      container.innerHTML = insights.map((item, index) => `
+        <div id="insight-card-${index}" 
+          class="absolute top-0 left-1/2 w-[85vw] max-w-[350px] h-[480px] rounded-3xl overflow-hidden flex flex-col justify-between transition-all duration-500 ease-out select-none ${item.cardClass}"
+          style="cursor: grab;">
           <div>
-            <div class="h-48 overflow-hidden bg-slate-200 relative">
-              <img src="${item.imageUrl}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+            <div class="h-44 overflow-hidden bg-slate-200 relative pointer-events-none">
+              <img src="${item.imageUrl}" alt="${item.title}" class="w-full h-full object-cover">
             </div>
             
-            <div class="p-6 flex flex-col gap-4">
-              <div class="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider">
+            <div class="p-6 flex flex-col gap-3">
+              <div class="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider">
                 <span class="${item.categoryColorClass}">${item.categoryName}</span>
                 <span class="text-slate-400 font-medium">${item.date}</span>
               </div>
@@ -1554,25 +1552,23 @@
           </div>
           
           <div class="px-6 pb-6 mt-auto">
-            <div class="pt-4 border-t border-slate-200/60 flex items-center justify-between">
+            <div class="pt-3 border-t border-slate-200/60 flex items-center justify-between">
               <button type="button" data-id="${item.id}" class="open-insight-btn text-xs font-bold uppercase tracking-wider text-navy hover:text-navy-slate flex items-center gap-1.5">
                 Read Insight 
-                <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"></i>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
               </button>
             </div>
           </div>
         </div>
       `).join('');
 
-      // ระบบตรวจจับเพื่อเปิดหน้าต่างป๊อปอัปอ่านเนื้อหาฉบับเต็ม
+      // ผูกระบบเปิดหน้าต่างป๊อปอัปเมื่อคลิกอ่านข้อมูลฉบับเต็มความยาว 1 หน้า A4
       const openModal = (id) => {
         const item = insights.find(p => p.id == id);
         if (!item) return;
-        
         document.getElementById('modal-vac-category').innerText = item.categoryName;
         document.getElementById('modal-vac-title').innerText = item.title;
         document.getElementById('modal-vac-content').innerHTML = item.fullContent;
-        
         const modal = document.getElementById('insight-modal');
         modal.classList.remove('opacity-0', 'pointer-events-none');
         modal.querySelector('.transform').classList.remove('scale-95');
@@ -1582,28 +1578,161 @@
         elem.addEventListener('click', () => openModal(elem.getAttribute('data-id')));
       });
 
+      // เรียกฟังก์ชันจัดระเบียบเลเยอร์กองไพ่ทันที
+      updateCardDeckLayout();
+    }
+
+    // 🪄 ฟังก์ชันคำนวณคณิตศาสตร์สลับชั้นกองไพ่ (เดสท็อปโชว์ 3 ใบเรียงคู่ / มือถือโชว์ 1 ใบและแง้มกองซ้อนหลัง)
+    function updateCardDeckLayout() {
+      const isDesktop = window.innerWidth >= 1024;
+      const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+
+      insights.forEach((item, index) => {
+        const card = document.getElementById(`insight-card-${index}`);
+        if (!card) return;
+
+        if (isDesktop) {
+          // 🖥️ โหมดคอมพิวเตอร์เดสท็อป: แสดงผลพร้อมกัน 3 ไอเทมเรียงขนานกันเป็นหน้ากระดาน
+          if (index < currentInsightIndex) {
+            // การ์ดที่เลื่อนผ่านไปแล้ว -> วิ่งสไลด์ไปซ่อนเข้า Deck กองฝั่งซ้าย
+            const factor = currentInsightIndex - index;
+            const shiftX = -390 - (factor * 20);
+            card.style.transform = `translate(calc(-50% + ${shiftX}px), ${factor * 8}px) scale(${1 - factor * 0.05}) rotate(-${factor * 1.5}deg)`;
+            card.style.zIndex = `${30 - factor}`;
+            card.style.opacity = factor === 1 ? "0.7" : "0";
+            card.style.pointerEvents = "none";
+          } else if (index > currentInsightIndex + 2) {
+            // การ์ดลำดับท้าย ๆ ที่ยังไม่ถึงคิว -> สแต็กซ้อนเตรียมพร้อมไว้ที่ Deck กองฝั่งขวา
+            const factor = index - (currentInsightIndex + 2);
+            const shiftX = 390 + (factor * 20);
+            card.style.transform = `translate(calc(-50% + ${shiftX}px), ${factor * 8}px) scale(${1 - factor * 0.05}) rotate(${factor * 1.5}deg)`;
+            card.style.zIndex = `${30 - factor}`;
+            card.style.opacity = factor === 1 ? "0.7" : "0";
+            card.style.pointerEvents = "none";
+          } else {
+            // กลุ่มการ์ดดาวเด่น 3 ใบหลักที่ต้องแสดงผลให้เห็นชัดเจนบนจอคอม
+            const slot = index - currentInsightIndex; // ช่องคอลัมน์ที่ 0, 1, 2
+            const shiftX = (slot - 1) * 390; // จัดระยะห่างระหว่างการ์ดใบละ 390 พิกเซลพอดีคำสั่งคุณหมอ
+            card.style.transform = `translate(calc(-50% + ${shiftX}px), 0) scale(1) rotate(0deg)`;
+            card.style.zIndex = "40";
+            card.style.opacity = "1";
+            card.style.pointerEvents = "auto";
+          }
+        } else if (isTablet) {
+          // ธรรมดาของแท็บเล็ต: แสดงผลพร้อมกัน 2 ไอเทม
+          if (index < currentInsightIndex) {
+            const factor = currentInsightIndex - index;
+            card.style.transform = `translate(calc(-50% - ${200 + factor * 15}px), ${factor * 6}px) scale(${1 - factor * 0.05}) rotate(-${factor}deg)`;
+            card.style.zIndex = `${30 - factor}`;
+            card.style.opacity = factor === 1 ? "0.6" : "0";
+            card.style.pointerEvents = "none";
+          } else if (index > currentInsightIndex + 1) {
+            const factor = index - (currentInsightIndex + 1);
+            card.style.transform = `translate(calc(-50% + ${200 + factor * 15}px), ${factor * 6}px) scale(${1 - factor * 0.05}) rotate(${factor}deg)`;
+            card.style.zIndex = `${30 - factor}`;
+            card.style.opacity = factor === 1 ? "0.6" : "0";
+            card.style.pointerEvents = "none";
+          } else {
+            const slot = index - currentInsightIndex;
+            const shiftX = slot === 0 ? -190 : 190;
+            card.style.transform = `translate(calc(-50% + ${shiftX}px), 0) scale(1) rotate(0deg)`;
+            card.style.zIndex = "40";
+            card.style.opacity = "1";
+            card.style.pointerEvents = "auto";
+          }
+        } else {
+          // 📱 โหมดสมาร์ทโฟนมือถือ: แสดงผลทีละ 1 ไอเทมเด่นตรงกลางจอ และซ้อนเยื้องหลบเข้า Deck ซ้าย-ขวา
+          const offset = index - currentInsightIndex;
+          if (offset === 0) {
+            card.style.transform = "translate(-50%, 0) scale(1) rotate(0deg)";
+            card.style.zIndex = "40";
+            card.style.opacity = "1";
+            card.style.pointerEvents = "auto";
+          } else if (offset > 0) {
+            const factor = Math.min(offset, 3);
+            const shiftX = factor * 22; // แง้มเหลื่อมไปฝั่งขวา
+            card.style.transform = `translate(calc(-50% + ${shiftX}px), ${factor * 8}px) scale(${1 - factor * 0.06}) rotate(${factor * 1.5}deg)`;
+            card.style.zIndex = `${40 - factor}`;
+            card.style.opacity = factor === 1 ? "0.8" : factor === 2 ? "0.3" : "0";
+            card.style.pointerEvents = "none";
+          } else {
+            const factor = Math.min(Math.abs(offset), 3);
+            const shiftX = -factor * 22; // แง้มเหลื่อมไปฝั่งซ้าย
+            card.style.transform = `translate(calc(-50% + ${shiftX}px), ${factor * 8}px) scale(${1 - factor * 0.06}) rotate(-${factor * 1.5}deg)`;
+            card.style.zIndex = `${40 - factor}`;
+            card.style.opacity = factor === 1 ? "0.8" : factor === 2 ? "0.3" : "0";
+            card.style.pointerEvents = "none";
+          }
+        }
+      });
+
       if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
+    // 📱 กลไกการตรวจจับคำสั่งปุ่มกด + ระบบปัดนิ้วสัมผัสซ้ายขวา (Touch Swipe) บนหน้าจอมือถือ
     function initInsightNavigation() {
       const container = document.getElementById("insights-container");
       const prevBtn = document.getElementById("prev-insight-btn");
       const nextBtn = document.getElementById("next-insight-btn");
+      if (!container) return;
 
-      if (container && prevBtn && nextBtn) {
-        // คำนวณระยะการเลื่อนสไลด์เมื่อกดลูกศรบนคอมพิวเตอร์
+      // ตัวดักจับความเคลื่อนไหวของนิ้วสัมผัส
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      container.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      container.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipeLogic();
+      }, { passive: true });
+
+      function handleSwipeLogic() {
+        const threshold = 40; // ระยะการลากนิ้วเป็นพิกเซลเพื่อสั่งเปลี่ยนแผ่นไพ่
+        const isDesktop = window.innerWidth >= 1024;
+        const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+        const maxLimit = insights.length - (isDesktop ? 3 : isTablet ? 2 : 1);
+
+        if (touchEndX < touchStartX - threshold) {
+          // นิ้วปัดไปทางซ้าย -> เปิดไพ่ใบถัดไป (Next)
+          if (currentInsightIndex < maxLimit) {
+            currentInsightIndex++;
+            updateCardDeckLayout();
+          }
+        }
+        if (touchEndX > touchStartX + threshold) {
+          // นิ้วปัดไปทางขวา -> ดึงไพ่ใบก่อนหน้ากลับมาโชว์ (Prev)
+          if (currentInsightIndex > 0) {
+            currentInsightIndex--;
+            updateCardDeckLayout();
+          }
+        }
+      }
+
+      // ระบบสั่งงานผ่านปุ่มลูกศรควบคุม
+      if (nextBtn && prevBtn) {
         nextBtn.addEventListener("click", () => {
-          const firstCard = container.querySelector('.group');
-          const scrollAmount = firstCard ? firstCard.offsetWidth + 24 : container.clientWidth;
-          container.scrollLeft += scrollAmount;
+          const isDesktop = window.innerWidth >= 1024;
+          const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+          const maxLimit = insights.length - (isDesktop ? 3 : isTablet ? 2 : 1);
+          if (currentInsightIndex < maxLimit) {
+            currentInsightIndex++;
+            updateCardDeckLayout();
+          }
         });
 
         prevBtn.addEventListener("click", () => {
-          const firstCard = container.querySelector('.group');
-          const scrollAmount = firstCard ? firstCard.offsetWidth + 24 : container.clientWidth;
-          container.scrollLeft -= scrollAmount;
+          if (currentInsightIndex > 0) {
+            currentInsightIndex--;
+            updateCardDeckLayout();
+          }
         });
       }
+
+      // ตรวจจับกรณีคนไข้ขยายขนาดเบราว์เซอร์หรือหมุนหน้าจอโทรศัพท์ ให้กองไพ่จัดเลเยอร์ใหม่ให้สมส่วนทันที
+      window.addEventListener('resize', updateCardDeckLayout);
     }
 
     // ฟังก์ชันสำหรับกดปิดหน้าต่างบทความฉบับเต็ม
