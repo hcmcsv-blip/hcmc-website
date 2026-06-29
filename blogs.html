@@ -39,7 +39,6 @@
       </a>
       
       <nav class="hidden lg:flex items-center gap-8">
-        <a href="index03.html#home" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">Home</a>
         <a href="index03.html#about" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">About Dr.M</a>
         <a href="index03.html#checkup" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">Check-up</a>
         <a href="index03.html#vaccination" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">Vaccination</a>
@@ -59,7 +58,6 @@
     </div>
 
     <div id="mobile-menu" class="fixed inset-x-0 top-20 bg-white/95 backdrop-blur-md border-b border-slate-100 flex flex-col p-6 gap-5 transition-all duration-300 transform -translate-y-full opacity-0 pointer-events-none lg:hidden shadow-lg">
-      <a href="index03.html#home" class="mobile-menu-link font-semibold text-base text-navy-slate hover:text-navy py-1">Home</a>
       <a href="index03.html#about" class="mobile-menu-link font-semibold text-base text-navy-slate hover:text-navy py-1">About Dr.M</a>
       <a href="index03.html#checkup" class="mobile-menu-link font-semibold text-base text-navy-slate hover:text-navy py-1">Check-up</a>
       <a href="index03.html#vaccination" class="mobile-menu-link font-semibold text-base text-navy-slate hover:text-navy py-1">Vaccination</a>
@@ -237,21 +235,17 @@
           const icon = menuToggle.querySelector('i');
           
           if (isOpen) {
-            // สั่งปิดเมนู (ร่อนกลับขึ้นด้านบน)
             mobileMenu.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
             mobileMenu.classList.remove('translate-y-0', 'opacity-100');
             if (icon) icon.setAttribute('data-lucide', 'menu');
           } else {
-            // สั่งเปิดเมนู (เลื่อนลงมาด้านล่างอย่างนุ่มนวล)
             mobileMenu.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
             mobileMenu.classList.add('translate-y-0', 'opacity-100');
             if (icon) icon.setAttribute('data-lucide', 'x');
           }
-          // สั่งให้คลังไอคอน Lucide เปลี่ยนหน้ากากไอคอนตามจริง
           if (typeof lucide !== 'undefined') lucide.createIcons();
         });
 
-        // หากคนไข้กดคลิกเมนูลิงก์ย่อย ให้สั่งปิดตัว Drawer ทันที
         mobileMenu.querySelectorAll('.mobile-menu-link').forEach(link => {
           link.addEventListener('click', () => {
             mobileMenu.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
@@ -264,19 +258,15 @@
       }
     }
 
-    // ฟังก์ชันสั่งปิดหน้าต่างโมเดลป๊อปอัปอ่านเนื้อหา 1 หน้า A4
     window.closeInsightModal = function() {
       const modal = document.getElementById('insight-modal');
       modal.classList.add('opacity-0', 'pointer-events-none');
       modal.querySelector('.transform').classList.add('scale-95');
     }
 
-    // สั่งรันระบบทั้งหมดทันทีเมื่อหน้าเว็บโหลดเสร็จสมบูรณ์
     document.addEventListener("DOMContentLoaded", () => {
       renderArchiveInsights();
-      initMobileMenu(); // 🪄 เปิดสวิตช์ระบบเมนูมือถือ
-      
-      // ดึงไอคอนกลุ่มแรกบน Header และ Footer ให้แสดงผลครบถ้วน
+      initMobileMenu();
       if (typeof lucide !== 'undefined') lucide.createIcons();
     });
   </script>
