@@ -13,6 +13,7 @@ export const insights = [
     
     // 📄 เนื้อหาแบบยาวฉบับเต็ม (ความยาวประมาณ 1 หน้ากระดาษ A4 สำหรับแสดงในหน้าต่างอ่านเพิ่ม)
     fullContent: `
+      <img src="images/NAD.png" class="w-full h-64 object-cover rounded-2xl mb-6 shadow-xs" alt="NAD+ Deep Dive">
       <p class="mb-4 text-base leading-relaxed text-navy-slate">NAD+ หรือ Nicotinamide Adenine Dinucleotide คือโมเลกุลมหัศจรรย์ที่มีอยู่ในทุกเซลล์ของร่างกาย ทำหน้าที่เป็นเปรียบเสมือน 'โมเลกุลผู้ช่วย' ตัวสำคัญที่ทำให้โรงงานผลิตพลังงานในเซลล์ (Mitochondria) สามารถทำงานได้ หากไม่มี NAD+ ร่างกายของเราจะไม่สามารถเปลี่ยนอาหารให้กลายเป็นพลังงาน ซ่อมแซมตัวเอง หรือแม้กระทั่งมีชีวิตอยู่ได้เลย</p>
       
       <h4 class="text-lg font-bold text-navy mt-6 mb-2">ทำไมระดับ NAD+ ถึงลดลงเมื่อเราอายุมากขึ้น?</h4>
@@ -47,6 +48,7 @@ export const insights = [
     cardClass: "bg-white border border-slate-200/80",
     
     fullContent: `
+      <img src="images/MiniMed_2.webp" class="w-full h-64 object-cover rounded-2xl mb-6 shadow-xs" alt="Clinic Lab R&D">
       <p class="mb-4 text-base leading-relaxed text-navy-slate">สำหรับกลุ่มคนที่ออกกำลังกายเป็นประจำ หรือผู้ที่กำลังควบคุมภาวะดื้ออินซูลิน (Insulin Resistance) ปัญหาที่พบบ่อยคืออาการ 'พลังงานหมดหลอด' หรือน้ำตาลตกเฉียบพลันระหว่างวัน นวัตกรรมเครื่องตรวจวัดระดับน้ำตาลในเลือดชนิดต่อเนื่อง (Continuous Glucose Monitoring - CGM) รุ่นใหม่ล่าสุดที่ใช้งานได้ยาวนานถึง 15 วัน กำลังเข้ามาเปลี่ยนเกมการดูแลสุขภาพเชิงป้องกัน</p>
       
       <h4 class="text-lg font-bold text-navy mt-6 mb-2">เรียนรู้แนวโน้มร่างกายโดยไม่ต้องเจาะเลือดที่ปลายนิ้ว</h4>
@@ -65,6 +67,7 @@ export const insights = [
     cardClass: "bg-white border border-slate-200/80",
     
     fullContent: `
+      <img src="images/pexels-photo.jpg" class="w-full h-64 object-cover rounded-2xl mb-6 shadow-xs" alt="Clinic Lab R&D">
       <p class="mb-4 text-base leading-relaxed text-navy-slate">ที่ Health Care Medical Clinic (HCMC) เราเชื่อว่าข้อมูลการวินิจฉัยที่รวดเร็วและแม่นยำคือหัวใจของการรักษา คลินิกจึงได้ทำการอัปเกรดระบบจัดเก็บและวิเคราะห์ข้อมูลทางการแพทย์ (Clinical Data Logistics) เชื่อมต่อตรงกับระบบจำลองภาพอัจฉริยะ (Intelligent Imaging)</p>
       
       <h4 class="text-lg font-bold text-navy mt-6 mb-2">ยกระดับมาตรฐานความปลอดภัย สู่การวิเคราะห์โรคเชิงป้องกัน</h4>
