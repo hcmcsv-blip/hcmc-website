@@ -7,7 +7,7 @@ export const insights = [
     date: "June 28, 2026",
     title: "Unlock Cellular Energy: Why NAD+ Levels Decline and How to Restore Them Effectively",
     excerpt: "Learn how nicotinamide adenine dinucleotide (NAD+) powers your metabolism, sharpens focus, and repairs DNA naturally, and when direct therapies can help reverse chronic fatigue.",
-    imageUrl: "https://images.unsplash.com/photo-1532187863486-abf9d39d6618?w=600&auto=format&fit=crop",
+    imageUrl: "images/NAD.png",
     slug: "unlock-cellular-energy-nad",
     cardClass: "bg-navy-tint/40 border border-slate-100",
     
@@ -42,7 +42,7 @@ export const insights = [
     date: "June 24, 2026",
     title: "Continuous Glucose Monitors: Managing Energy Crashes for Peak Physical Performance",
     excerpt: "Discover how new 15-day continuous biosensor technologies help active individuals and metabolic patients track blood sugar trends seamlessly to prevent mid-day energy crashes.",
-    imageUrl: "https://images.unsplash.com/photo-1504813184591-01552a31c33f?w=600&auto=format&fit=crop",
+    imageUrl: "images/MiniMed_2.webp",
     slug: "future-of-glucose-tracking",
     cardClass: "bg-white border border-slate-200/80",
     
