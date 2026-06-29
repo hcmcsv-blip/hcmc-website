@@ -33,9 +33,11 @@
 
   <header id="main-header" class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-slate-100 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      
       <a href="index03.html" class="flex items-center group">
         <img src="images/logo-2.png" alt="Health Care Medical Clinic" class="h-12 md:h-16 w-auto">
       </a>
+      
       <nav class="hidden lg:flex items-center gap-8">
         <a href="index03.html#home" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">Home</a>
         <a href="index03.html#about" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">About Dr.M</a>
@@ -43,11 +45,28 @@
         <a href="index03.html#vaccination" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">Vaccination</a>
         <a href="index03.html#contact" class="font-medium text-sm text-navy-slate hover:text-navy transition-colors">Contact</a>
       </nav>
+      
       <div class="flex items-center gap-4">
-        <a href="index03.html#booking-section-anchor" class="px-5 py-2.5 text-xs font-semibold uppercase tracking-wider bg-navy text-white rounded-lg hover:bg-navy-light shadow-md transition-all">
+        <a href="index03.html#booking-section-anchor" class="hidden sm:inline-block px-5 py-2.5 text-xs font-semibold uppercase tracking-wider bg-navy text-white rounded-lg hover:bg-navy-light shadow-md transition-all">
           Book Appointment
         </a>
+        
+        <button type="button" id="mobile-menu-toggle" class="block lg:hidden p-2 text-navy hover:text-navy-slate transition-colors focus:outline-none" aria-label="Toggle Menu">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
       </div>
+
+    </div>
+
+    <div id="mobile-menu" class="fixed inset-x-0 top-20 bg-white/95 backdrop-blur-md border-b border-slate-100 flex flex-col p-6 gap-5 transition-all duration-300 transform -translate-y-full opacity-0 pointer-events-none lg:hidden shadow-lg">
+      <a href="index03.html#home" class="mobile-menu-link font-semibold text-base text-navy-slate hover:text-navy py-1">Home</a>
+      <a href="index03.html#about" class="mobile-menu-link font-semibold text-base text-navy-slate hover:text-navy py-1">About Dr.M</a>
+      <a href="index03.html#checkup" class="mobile-menu-link font-semibold text-base text-navy-slate hover:text-navy py-1">Check-up</a>
+      <a href="index03.html#vaccination" class="mobile-menu-link font-semibold text-base text-navy-slate hover:text-navy py-1">Vaccination</a>
+      <a href="index03.html#contact" class="mobile-menu-link font-semibold text-base text-navy-slate hover:text-navy py-1">Contact</a>
+      <a href="index03.html#booking-section-anchor" class="mobile-menu-link mt-2 w-full py-3 text-center text-xs font-bold uppercase tracking-wider bg-navy text-white rounded-xl shadow-md">
+        Book Appointment
+      </a>
     </div>
   </header>
 
@@ -87,11 +106,10 @@
     </div>
   </div>
 
-  <!-- FOOTER SECTION -->
   <footer id="contact" class="bg-navy text-white pt-20 pb-12 border-t border-slate-800">
     <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-12 md:gap-16 pb-16 border-b border-slate-800">
       <div class="md:col-span-4 flex flex-col gap-6">
-        <a href="#home" class="inline-block w-fit group">
+        <a href="index03.html#home" class="inline-block w-fit group">
           <div class="bg-white/95 p-3 rounded-2xl shadow-md transition-all duration-300 group-hover:bg-white">
             <img src="images/logo-2.png" alt="HCMC Footer Logo" class="h-20 md:h-11 w-auto">
           </div>
@@ -130,21 +148,18 @@
       <div class="flex flex-col gap-4">
         <h4 class="text-xs font-bold text-slate-200 uppercase tracking-widest">Connect With Us</h4>
         <div class="flex items-center gap-3">
-          <!-- LINE -->
           <a href="https://line.me/R/ti/p/@HCMC" target="_blank" rel="noopener noreferrer" class="w-10 h-10 flex-shrink-0 rounded-xl bg-white border text-slate-900 hover:bg-[#06C755]/10 hover:border-[#06C755]/30 hover:text-[#06C755] hover:scale-105 flex items-center justify-center transition-all shadow-sm" title="Connect via LINE">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
               <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.058.592.121.303.079.778.038 1.084l-.171 1.021c-.052.308-.252 1.204 1.089.657 1.341-.548 7.237-4.261 9.871-7.298 2.052-2.322 3.079-4.817 3.079-7.664zm-14.582 3.251h-2.193c-.237 0-.43-.193-.43-.43v-4.379c0-.237.193-.43.43-.43h.43c.237 0 .43.193 .43.43v3.519h1.333c.237 0 .43.193 .43.43v.43c0 .237-.193.43-.43.43zm2.58 0h-.43c-.237 0-.43-.193-.43-.43v-4.379c0-.237.193-.43.43-.43h.43c.237 0 .43.193 .43.43v4.379c0 .237-.193.43-.43.43zm4.618 0h-2.223c-.237 0-.43-.193-.43-.43v-4.379c0-.237.193-.43.43-.43h.43c.237 0 .43.193 .43.43v2.859l1.455-2.973c.078-.16.241-.261.419-.261h.494c.319 0 .524.331.383.618l-1.127 2.221 1.241 2.502c.147.296-.068.646-.397.646h-.474c-.183 0-.35-.105-.429-.271l-.813-1.748-.521 1.062v.535c0 .237-.193.43-.43.43zm4.07 0h-2.133c-.237 0-.43-.193-.43-.43v-4.379c0-.237.193-.43.43-.43h2.133c.237 0 .43.193 .43.43v.43c0 .237-.193.43-.43.43h-1.703v1.077h1.49c.237 0 .43.193 .43.43v.43c0 .237-.193.43-.43.43h-1.49v1.144h1.703c.237 0 .43.193 .43.43v.43c0 .237-.193.43-.43.43z"/>
             </svg>
           </a>
 
-          <!-- WhatsApp -->
           <a href="https://wa.me/+66827668672" target="_blank" rel="noopener noreferrer" class="w-10 h-10 flex-shrink-0 rounded-xl bg-white border text-slate-900 hover:bg-[#25D366]/10 hover:border-[#25D366]/30 hover:text-[#25D366] hover:scale-105 flex items-center justify-center transition-all shadow-sm" title="Connect via WhatsApp">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="w-4.5 h-4.5">
               <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.455L0 24zm6.59-4.846c1.66.986 3.296 1.48 4.93 1.481 5.425 0 9.835-4.41 9.839-9.84.002-2.634-1.024-5.111-2.892-6.98-1.866-1.868-4.343-2.894-6.984-2.895-5.43 0-9.84 4.411-9.844 9.843-.002 1.758.463 3.472 1.346 5.002l-.997 3.645 3.732-.979zm11.222-3.415c-.157-.261-.578-.419-1.21-.735-.63-.314-3.731-1.842-3.837-1.88-.105-.039-.183-.058-.261.059-.079.117-.303.419-.371.496-.068.078-.137.088-.294.01-.157-.079-.663-.245-1.263-.78-0.467-.416-.783-.93-.875-1.087-.092-.157-.01-.242.07-.32c.071-.07.157-.183.236-.275.079-.092.105-.157.157-.262.052-.105.026-.196-.013-.275-.039-.079-.371-.895-.509-1.227-.135-.325-.272-.281-.371-.285-.097-.004-.208-.004-.32-.004s-.294.042-.448.209c-.154.167-.588.575-.588 1.401 0 .826.6 1.622.683 1.735.083.117 1.181 1.803 2.862 2.528.401.173.714.276.958.353.404.128.771.11 1.062.067.324-.048 1.015-.415 1.157-.816.143-.401.143-.746.101-.817-.043-.072-.157-.117-.314-.197z"/>
             </svg>
           </a>
 
-          <!-- Facebook -->
           <a href="https://www.facebook.com/HCMCdrM" target="_blank" rel="noopener noreferrer" class="w-10 h-10 flex-shrink-0 rounded-xl bg-white border text-slate-900 hover:bg-[#1877F2]/10 hover:border-[#1877F2]/30 hover:text-[#1877F2] hover:scale-105 flex items-center justify-center transition-all shadow-sm" title="Connect via Facebook">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
               <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -158,11 +173,11 @@
   <script type="module">
     import { insights } from './insights.js';
 
+    // 1. ฟังก์ชันดึงบทความทั้งหมดมาแสดงผลในแบบ Grid
     function renderArchiveInsights() {
       const container = document.getElementById('archive-insights-container');
       if (!container) return;
 
-      // วาดบทความทั้งหมดที่มีใน insights.js (ไม่มีการจำกัดจำนวนแถวและไม่มีสไลเดอร์)
       container.innerHTML = insights.map(item => `
         <div class="group bg-white border border-slate-200/80 rounded-3xl overflow-hidden shadow-xs flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-1">
           <div>
@@ -192,7 +207,7 @@
         </div>
       `).join('');
 
-      // ฟังก์ชันเปิดป๊อปอัปอ่านบทความฉบับเต็ม
+      // ฟังก์ชันเปิดป๊อปอัปอ่านเนื้อหาฉบับเต็ม
       const openModal = (id) => {
         const item = insights.find(p => p.id == id);
         if (!item) return;
@@ -211,15 +226,58 @@
       if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
+    // 2. ฟังก์ชันควบคุมการเปิด-ปิดเมนูบนหน้าจอมือถือ
+    function initMobileMenu() {
+      const menuToggle = document.getElementById('mobile-menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+          const isOpen = mobileMenu.classList.contains('opacity-100');
+          const icon = menuToggle.querySelector('i');
+          
+          if (isOpen) {
+            // สั่งปิดเมนู (ร่อนกลับขึ้นด้านบน)
+            mobileMenu.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
+            mobileMenu.classList.remove('translate-y-0', 'opacity-100');
+            if (icon) icon.setAttribute('data-lucide', 'menu');
+          } else {
+            // สั่งเปิดเมนู (เลื่อนลงมาด้านล่างอย่างนุ่มนวล)
+            mobileMenu.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
+            mobileMenu.classList.add('translate-y-0', 'opacity-100');
+            if (icon) icon.setAttribute('data-lucide', 'x');
+          }
+          // สั่งให้คลังไอคอน Lucide เปลี่ยนหน้ากากไอคอนตามจริง
+          if (typeof lucide !== 'undefined') lucide.createIcons();
+        });
+
+        // หากคนไข้กดคลิกเมนูลิงก์ย่อย ให้สั่งปิดตัว Drawer ทันที
+        mobileMenu.querySelectorAll('.mobile-menu-link').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
+            mobileMenu.classList.remove('translate-y-0', 'opacity-100');
+            const icon = menuToggle.querySelector('i');
+            if (icon) icon.setAttribute('data-lucide', 'menu');
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+          });
+        });
+      }
+    }
+
+    // ฟังก์ชันสั่งปิดหน้าต่างโมเดลป๊อปอัปอ่านเนื้อหา 1 หน้า A4
     window.closeInsightModal = function() {
       const modal = document.getElementById('insight-modal');
       modal.classList.add('opacity-0', 'pointer-events-none');
       modal.querySelector('.transform').classList.add('scale-95');
     }
 
-    // สั่งรันระบบเมื่อโหลดหน้าเว็บสำเร็จ
+    // สั่งรันระบบทั้งหมดทันทีเมื่อหน้าเว็บโหลดเสร็จสมบูรณ์
     document.addEventListener("DOMContentLoaded", () => {
       renderArchiveInsights();
+      initMobileMenu(); // 🪄 เปิดสวิตช์ระบบเมนูมือถือ
+      
+      // ดึงไอคอนกลุ่มแรกบน Header และ Footer ให้แสดงผลครบถ้วน
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     });
   </script>
 
