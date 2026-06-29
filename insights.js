@@ -9,7 +9,7 @@ export const insights = [
     excerpt: "Learn how nicotinamide adenine dinucleotide (NAD+) powers your metabolism, sharpens focus, and repairs DNA naturally, and when direct therapies can help reverse chronic fatigue.",
     imageUrl: "images/NAD.png",
     slug: "unlock-cellular-energy-nad",
-    cardClass: "bg-navy-tint/40 border border-slate-100",
+    cardClass: "bg-white border border-slate-200/80",
     fullContent: `
       <img src="images/NAD.png" class="w-full h-64 object-cover rounded-2xl mb-6 shadow-xs" alt="NAD+ Deep Dive">
       
