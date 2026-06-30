@@ -71,13 +71,14 @@ function startClinicSystem() {
     evaluateAndRender();
     initFormSubmissions();
     renderVaccines();
+    initPromoNavigation()
+
     renderInsights();
     initInsightNavigation(); 
     initVaccineReset();
     initDeliveryToggle();
     initNotificationClose();
     lockPastDates();
-    initPromoNavigation();
     initRealtimeStatus();
 }
 
@@ -460,130 +461,224 @@ function scrollToSection(id) {
 // ========================================================================
 // 💉 CATEGORY D: VACCINES PANEL LOGIC
 // ========================================================================
+let currentPromoIndex = 0;
+let promoItems = [];
+let currentVacFilter = 'all';
+
 function renderVaccines() {
-    const promotionsContainer = document.getElementById('promotions-container');
-    const availContainer = document.getElementById('available-vaccines-container');
-    if (!promotionsContainer || !availContainer) return;
+    // 1. แยกข้อมูลโปรโมชัน และ วัคซีนทั่วไป
+    promoItems = vaccines.filter(v => v.isPromoCard);
+    const regularVaccines = vaccines.filter(v => !v.isPromoCard && v.category !== 'promo-only');
 
-    promotionsContainer.innerHTML = '';
-    availContainer.innerHTML = '';
+    // 2. Render ส่วนโปรโมชันแบบ 3D Stack
+    renderPromotionsDeck();
 
-    if (!vaccines || !Array.isArray(vaccines)) return;
+    // 3. Render ส่วน Matrix
+    renderVaccinesMatrix(regularVaccines);
+}
 
-    promotionsContainer.className = "flex gap-5 overflow-x-auto overflow-y-hidden pb-4 pt-1 scroll-smooth [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-slate-50 [&::-webkit-scrollbar-thumb]:bg-slate-200 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-300";
-    availContainer.className = "grid grid-rows-3 grid-flow-col md:grid-rows-2 h-[560px] md:h-[370px] gap-y-4 gap-x-5 overflow-x-auto overflow-y-hidden pb-4 pt-1 scroll-smooth [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-slate-50 [&::-webkit-scrollbar-thumb]:bg-slate-200 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-300";
+// --- ส่วนที่ 1: 3D PROMOTIONS DECK LOGIC ---
+function renderPromotionsDeck() {
+    const container = document.getElementById('promotions-deck-container');
+    if (!container || promoItems.length === 0) return;
 
-    vaccines.forEach(vac => {
-    const isChecked = typeof selectedVaccineIds !== 'undefined' && selectedVaccineIds.includes(vac.id);
-
-    let cardOpacityClass = 'opacity-100';
-    let pointerEventsClass = '';
-    let rightBottomHTML = ''; 
-
+    container.innerHTML = promoItems.map((vac, index) => {
+    const isChecked = selectedVaccineIds.includes(vac.id);
+    const cardStyle = isChecked ? 'border-navy bg-iceblue/30 ring-2 ring-navy shadow-md' : 'border-slate-200 bg-white shadow-sm';
+    
+    let promoPricingHTML = '';
     if (vac.status === 'out-of-stock') {
-        cardOpacityClass = 'opacity-50 blur-[0.2px]';
-        pointerEventsClass = 'pointer-events-none select-none';
-        rightBottomHTML = `<span class="text-[10px] font-bold bg-rose-50 text-rose-600 px-2.5 py-1 rounded-full uppercase tracking-wider border border-rose-100 shrink-0 shadow-sm">Not Available</span>`;
+        promoPricingHTML = `<span class="text-[10px] font-bold bg-rose-50 text-rose-600 px-2 py-1 rounded-md uppercase border border-rose-100">Not Available</span>`;
     } else {
-        const isShowPrice = vac.showPrice !== false;
-        if (isShowPrice) {
-        const priceVal = vac.pricePerDose ? vac.pricePerDose.toLocaleString() : '0';
-        rightBottomHTML = `<span class="text-[11px] font-bold text-navy bg-white border border-slate-200 px-2 py-0.5 rounded shrink-0 shadow-sm">${priceVal} THB</span>`;
-        } else {
-        rightBottomHTML = `<span class="text-[11px] font-semibold text-slate-400 italic bg-slate-50 border border-slate-100 px-2 py-0.5 rounded shrink-0">Contact Clinic</span>`;
-        }
-    }
-
-    // CASE A: PROMOTION CARD
-    if (vac.isPromoCard) {
-        const promoCardStyle = isChecked ? 'border-navy bg-iceblue/20 shadow-md scale-[1.01]' : 'border-slate-100 bg-white hover:bg-slate-50/80 shadow-sm';
-        
-        let promoPricingHTML = '';
-        if (vac.status === 'out-of-stock') {
-        promoPricingHTML = rightBottomHTML;
-        } else {
-        const prices = vac.promoPrices || [];
-        const pricesHtml = prices.map(p => {
-            const textStyle = p.highlight ? 'text-sm font-extrabold text-accent-red' : 'text-xs text-slate-400 font-medium';
-            return `<span class="${textStyle}">${p.label}: ${p.price}</span>`;
-        }).join('');
+        const pricesHtml = (vac.promoPrices || []).map(p => 
+        `<span class="${p.highlight ? 'text-sm font-extrabold text-accent-red' : 'text-xs text-slate-500 font-medium'}">${p.label}: ${p.price}</span>`
+        ).join('');
         promoPricingHTML = `<div class="flex flex-col text-right gap-0.5">${pricesHtml}</div>`;
-        }
-
-        const promoCardHtml = `
-        <div data-vac-id="${vac.id}" 
-            class="relative flex-shrink-0 snap-start w-[82vw] sm:w-[420px] rounded-2xl border p-5 flex flex-col justify-between cursor-pointer transition-all min-h-[230px] ${promoCardStyle} ${cardOpacityClass} ${pointerEventsClass}">
-            <div class="flex flex-col gap-3">
-            <div class="flex items-center justify-between">
-                <span class="px-2.5 py-1 rounded bg-accent-red/10 text-accent-red text-[10px] font-bold uppercase tracking-wider">${vac.promoLabel || 'Special Offer'}</span>
-                <input type="checkbox" ${isChecked ? 'checked' : ''} ${vac.status === 'out-of-stock' ? 'class="hidden"' : 'class="pointer-events-none accent-navy w-4 h-4"'}>
-            </div>
-            <h4 class="font-extrabold text-base text-navy whitespace-normal break-words">${vac.name}</h4>
-            <p class="text-xs text-navy-slate leading-relaxed">${vac.description}</p>
-            </div>
-            <div class="flex items-end justify-between mt-6 pt-4 border-t border-slate-50">
-            <span class="text-xs text-navy-slate font-semibold self-end mb-0.5">Pricing Options:</span>
-            ${promoPricingHTML}
-            </div>
-        </div>
-        `;
-        promotionsContainer.insertAdjacentHTML('beforeend', promoCardHtml);
     }
 
-    if (vac.category === 'promo-only' || vac.isPromoCard) return;
-
-    // CASE B: ROUTINE VACCINE CARD
-    const cardStyle = isChecked ? 'border-navy bg-iceblue/20 shadow-sm' : 'border-slate-100 bg-white hover:bg-slate-50/80 shadow-sm';
-    const packageBadge = vac.hasPackage ? `<span class="text-[9px] font-bold text-accent-red bg-accent-red/5 px-2 py-0.5 rounded border border-accent-red/10 block text-center mt-1 w-fit truncate">${vac.packageDetails}</span>` : '';
-    const catBadge = vac.category === 'travel' 
-        ? '<span class="text-[9px] font-bold text-accent-red bg-accent-red/5 px-2 py-0.5 rounded border border-accent-red/10 shrink-0">Travel</span>'
-        : '<span class="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100 shrink-0">Routine</span>';
-        
-    const cardHtml = `
-        <div data-vac-id="${vac.id}" 
-        class="relative p-4 border rounded-2xl flex gap-3 items-start cursor-pointer transition-all flex-shrink-0 w-[82vw] sm:w-[330px] h-[165px] ${cardStyle} ${cardOpacityClass} ${pointerEventsClass}">
-        <input type="checkbox" ${isChecked ? 'checked' : ''} ${vac.status === 'out-of-stock' ? 'class="hidden"' : 'class="mt-1 pointer-events-none accent-navy shrink-0"'}>
-        <div class="flex-1 flex flex-col h-full min-w-0 justify-between">
-            <div>
-            <div class="flex items-start justify-between gap-2 mb-1">
-                <span class="font-extrabold text-xs sm:text-sm text-navy block leading-tight whitespace-normal break-words">
-                ${vac.name}
-                </span>
-                ${catBadge}
+    return `
+        <div id="promo-card-${index}" data-vac-id="${vac.id}" 
+        class="absolute top-0 left-1/2 w-[85vw] max-w-[400px] h-[240px] rounded-3xl p-6 flex flex-col justify-between cursor-pointer transition-all duration-500 ease-out select-none border ${cardStyle}"
+        style="cursor: grab;">
+        <div class="flex flex-col gap-3">
+            <div class="flex items-center justify-between">
+            <span class="px-2.5 py-1 rounded-md bg-accent-red/10 text-accent-red text-[10px] font-bold uppercase tracking-wider">${vac.promoLabel || 'Special Offer'}</span>
+            <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center ${isChecked ? 'bg-navy border-navy' : 'border-slate-300 bg-white'}">
+                ${isChecked ? '<i data-lucide="check" class="w-3 h-3 text-white"></i>' : ''}
             </div>
-            <span class="text-[11px] text-navy-slate/90 block leading-normal line-clamp-2">${vac.description}</span>
-            ${packageBadge}
             </div>
-            <div class="flex items-center justify-between gap-2 pt-2 border-t border-slate-100/80 mt-auto">
-            <span class="text-[10px] font-semibold text-navy-slate bg-slate-100 px-2 py-0.5 rounded shrink-0">Protocol: ${vac.protocol}</span>
-            ${rightBottomHTML}
-            </div>
+            <h4 class="font-extrabold text-lg text-navy leading-tight">${vac.name}</h4>
+            <p class="text-xs text-navy-slate leading-relaxed line-clamp-2">${vac.description}</p>
+        </div>
+        <div class="flex items-end justify-between mt-4 pt-4 border-t border-slate-100">
+            <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Pricing</span>
+            ${promoPricingHTML}
         </div>
         </div>
     `;
-    availContainer.insertAdjacentHTML('beforeend', cardHtml);
+    }).join('');
+
+    updatePromoDeckLayout();
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+function updatePromoDeckLayout() {
+    const isDesktop = window.innerWidth >= 1024;
+    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+
+    promoItems.forEach((item, index) => {
+    const card = document.getElementById(`promo-card-${index}`);
+    if (!card) return;
+
+    if (isDesktop) {
+        // โชว์ 3 ใบ แนวนอน
+        if (index < currentPromoIndex) {
+        const factor = currentPromoIndex - index;
+        card.style.transform = `translate(calc(-50% + ${-420 - (factor * 20)}px), ${factor * 8}px) scale(${1 - factor * 0.05}) rotate(-${factor * 2}deg)`;
+        card.style.zIndex = `${30 - factor}`;
+        card.style.opacity = factor === 1 ? "0.5" : "0";
+        card.style.pointerEvents = "none";
+        } else if (index > currentPromoIndex + 2) {
+        const factor = index - (currentPromoIndex + 2);
+        card.style.transform = `translate(calc(-50% + ${420 + (factor * 20)}px), ${factor * 8}px) scale(${1 - factor * 0.05}) rotate(${factor * 2}deg)`;
+        card.style.zIndex = `${30 - factor}`;
+        card.style.opacity = factor === 1 ? "0.5" : "0";
+        card.style.pointerEvents = "none";
+        } else {
+        const slot = index - currentPromoIndex;
+        const shiftX = (slot - 1) * 420; // ระยะห่าง
+        card.style.transform = `translate(calc(-50% + ${shiftX}px), 0) scale(1) rotate(0deg)`;
+        card.style.zIndex = "40";
+        card.style.opacity = "1";
+        card.style.pointerEvents = "auto";
+        }
+    } else {
+        // มือถือ โชว์ทีละใบซ้อนกัน
+        const offset = index - currentPromoIndex;
+        if (offset === 0) {
+        card.style.transform = "translate(-50%, 0) scale(1) rotate(0deg)";
+        card.style.zIndex = "40";
+        card.style.opacity = "1";
+        card.style.pointerEvents = "auto";
+        } else if (offset > 0) {
+        const factor = Math.min(offset, 3);
+        card.style.transform = `translate(calc(-50% + ${factor * 15}px), ${factor * 10}px) scale(${1 - factor * 0.05}) rotate(${factor * 1.5}deg)`;
+        card.style.zIndex = `${40 - factor}`;
+        card.style.opacity = factor === 1 ? "0.8" : factor === 2 ? "0.3" : "0";
+        card.style.pointerEvents = "none";
+        } else {
+        const factor = Math.min(Math.abs(offset), 3);
+        card.style.transform = `translate(calc(-50% - ${factor * 15}px), ${factor * 10}px) scale(${1 - factor * 0.05}) rotate(-${factor * 1.5}deg)`;
+        card.style.zIndex = `${40 - factor}`;
+        card.style.opacity = factor === 1 ? "0.8" : factor === 2 ? "0.3" : "0";
+        card.style.pointerEvents = "none";
+        }
+    }
     });
+}
 
-    if (availContainer) {
-    availContainer.addEventListener("wheel", (e) => {
-        if (e.deltaY !== 0) {
-        e.preventDefault(); 
-        availContainer.scrollLeft += e.deltaY * 1.5; 
+function initPromoNavigation() {
+    const container = document.getElementById("promotions-deck-container");
+    const prevBtn = document.getElementById("prev-promo-btn");
+    const nextBtn = document.getElementById("next-promo-btn");
+    
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    if (container) {
+    container.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+    container.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        const isDesktop = window.innerWidth >= 1024;
+        const maxLimit = promoItems.length - (isDesktop ? 3 : 1);
+        if (touchEndX < touchStartX - 40 && currentPromoIndex < maxLimit) {
+        currentPromoIndex++; updatePromoDeckLayout();
         }
-    }, { passive: false });
+        if (touchEndX > touchStartX + 40 && currentPromoIndex > 0) {
+        currentPromoIndex--; updatePromoDeckLayout();
+        }
+    }, { passive: true });
     }
 
-    if (promotionsContainer) {
-    promotionsContainer.addEventListener("wheel", (e) => {
-        if (e.deltaY !== 0) {
-        e.preventDefault();
-        promotionsContainer.scrollLeft += e.deltaY * 1.5;
-        }
-    }, { passive: false });
+    if (nextBtn && prevBtn) {
+    nextBtn.addEventListener("click", () => {
+        const isDesktop = window.innerWidth >= 1024;
+        const maxLimit = promoItems.length - (isDesktop ? 3 : 1);
+        if (currentPromoIndex < maxLimit) { currentPromoIndex++; updatePromoDeckLayout(); }
+    });
+    prevBtn.addEventListener("click", () => {
+        if (currentPromoIndex > 0) { currentPromoIndex--; updatePromoDeckLayout(); }
+    });
     }
+    window.addEventListener('resize', updatePromoDeckLayout);
+}
+
+// --- ส่วนที่ 2: VACCINE SELECTION MATRIX LOGIC ---
+function renderVaccinesMatrix(regularVaccines) {
+    const matrixContainer = document.getElementById('vaccines-matrix-container');
+    if (!matrixContainer) return;
+
+    // กรองข้อมูลตามหมวดหมู่ที่กดปุ่ม
+    const filteredVaccines = regularVaccines.filter(v => 
+    currentVacFilter === 'all' || v.category === currentVacFilter
+    );
+
+    matrixContainer.innerHTML = filteredVaccines.map(vac => {
+    const isChecked = selectedVaccineIds.includes(vac.id);
+    const cardClass = isChecked 
+        ? 'bg-iceblue/20 border-navy ring-1 ring-navy shadow-sm' 
+        : 'bg-slate-50 hover:bg-white border-slate-200 hover:border-slate-300 hover:shadow-sm';
+    
+    const catBadge = vac.category === 'travel' 
+        ? '<span class="text-[9px] font-bold text-accent-red bg-accent-red/5 px-2 py-0.5 rounded border border-accent-red/10">Travel</span>'
+        : '<span class="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">Routine</span>';
+
+    const priceHTML = (vac.showPrice !== false && vac.pricePerDose)
+        ? `<span class="text-xs font-bold text-navy">${vac.pricePerDose.toLocaleString()} THB</span>`
+        : `<span class="text-[10px] font-semibold text-slate-400 italic">Contact Clinic</span>`;
+
+    return `
+        <div data-vac-id="${vac.id}" class="flex flex-col justify-between p-4 rounded-2xl border transition-all cursor-pointer ${cardClass} ${vac.status === 'out-of-stock' ? 'opacity-50 pointer-events-none' : ''}">
+        <div>
+            <div class="flex items-start justify-between gap-2 mb-2">
+            <h4 class="font-bold text-sm text-navy leading-tight">${vac.name}</h4>
+            <div class="shrink-0 w-4 h-4 rounded border flex items-center justify-center ${isChecked ? 'bg-navy border-navy' : 'bg-white border-slate-300'}">
+                ${isChecked ? '<i data-lucide="check" class="w-3 h-3 text-white"></i>' : ''}
+            </div>
+            </div>
+            <div class="flex items-center gap-2 mb-2">${catBadge} ${vac.hasPackage ? `<span class="text-[9px] font-bold text-slate-500 bg-slate-200 px-2 py-0.5 rounded">${vac.packageDetails}</span>` : ''}</div>
+            <p class="text-[11px] text-navy-slate line-clamp-2">${vac.description}</p>
+        </div>
+        <div class="flex items-center justify-between mt-4 pt-3 border-t border-slate-200/60">
+            <span class="text-[10px] font-semibold text-slate-500">Protocol: ${vac.protocol}</span>
+            ${priceHTML}
+        </div>
+        </div>
+    `;
+    }).join('');
 
     setupVaccineClickEvents();
+    if (typeof lucide !== 'undefined') lucide.createIcons();
 }
+
+// จัดการปุ่ม Filter Matrix
+document.querySelectorAll('.vac-filter-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+    // อัปเดตสีปุ่ม
+    document.querySelectorAll('.vac-filter-btn').forEach(b => {
+        b.classList.remove('bg-navy', 'text-white');
+        b.classList.add('bg-slate-100', 'text-navy-slate');
+    });
+    e.target.classList.remove('bg-slate-100', 'text-navy-slate');
+    e.target.classList.add('bg-navy', 'text-white');
+    
+    currentVacFilter = e.target.getAttribute('data-filter');
+    
+    // สั่งวาด Matrix ใหม่
+    const regularVaccines = vaccines.filter(v => !v.isPromoCard && v.category !== 'promo-only');
+    renderVaccinesMatrix(regularVaccines);
+    });
+});
 
 function renderInsights() {
     const container = document.getElementById('insights-container');
@@ -924,17 +1019,6 @@ function initNotificationClose() {
     }
 }
 
-function initPromoNavigation() {
-    const container = document.getElementById("promotions-container");
-    const prevBtn = document.getElementById("prev-promo-btn");
-    const nextBtn = document.getElementById("next-promo-btn");
-
-    if (container && prevBtn && nextBtn) {
-    const scrollAmount = 444; 
-    nextBtn.addEventListener("click", () => { container.scrollLeft += scrollAmount; });
-    prevBtn.addEventListener("click", () => { container.scrollLeft -= scrollAmount; });
-    }
-}
 
 // Dynamic Navbar Scroll Effect
 window.addEventListener('scroll', () => {
