@@ -14,7 +14,10 @@ export const vaccines = [
     description: "Combined active protection against major liver infections.",
     isPromoCard: true,
     hasPackage: true,
-    packageDetails: "Combined Price: 1,500 THB Net"
+    packageDetails: "Combined Price: 1,500 THB Net",
+    promoPrices: [
+      { label: "Combined Price", price: "1,500 THB Net", highlight: true }
+    ]
   },
   {
     id: "vac-imojev",
