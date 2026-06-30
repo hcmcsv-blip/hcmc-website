@@ -609,49 +609,66 @@
 
 
   <!-- VACCINATION SECTION -->
-  <section id="vaccination" class="py-24 bg-iceblue/30 border-y border-iceblue-dark/20">
+  <section id="vaccination" class="py-24 bg-iceblue/30 border-y border-iceblue-dark/20 overflow-hidden">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="flex flex-col lg:flex-row justify-between items-start gap-8 mb-12">
+      
+      <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-12">
         <div class="max-w-2xl flex flex-col gap-4">
-          <span class="text-xs font-bold text-navy tracking-widest uppercase">Immunization & Protection</span>
-          <h2 class="text-3xl md:text-4xl font-extrabold text-navy tracking-tight">Vaccines & Promotions</h2>
+          <span class="text-xs font-bold text-navy tracking-widest uppercase flex items-center gap-1.5">
+            <i data-lucide="shield-check" class="w-4 h-4 text-navy"></i>
+            Immunization & Protection
+          </span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-navy tracking-tight">
+            Vaccines & Promotions
+          </h2>
           <p class="text-navy-slate text-sm md:text-base leading-relaxed">
-            Comprehensive immunization protection for active lifestyles, international travelers, long-term expats, and corporate wellness. Select your preferred vaccines below to add them directly to your appointment notes.
+            Comprehensive immunization protection tailored for active lifestyles, international travelers, long-term expats, and proactive longevity. Select your vaccines below to add them directly to your appointment.
           </p>
         </div>
-        <div class="flex gap-4">
-          <button type="button" id="btn-reset-vaccines" class="px-4 py-2.5 border border-slate-300 text-slate-600 rounded-lg text-xs font-semibold uppercase tracking-wider bg-white hover:bg-slate-50 transition-all flex items-center gap-2">
-            Reset Selection
+        
+        <div class="flex items-center justify-between w-full lg:w-auto gap-4 mt-2 lg:mt-0">
+          <button type="button" id="btn-reset-vaccines" class="px-4 py-2.5 border border-slate-200/80 text-slate-600 rounded-xl text-xs font-bold uppercase tracking-wider bg-white hover:bg-slate-50 transition-all flex items-center gap-2 shadow-xs">
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Reset Selection
           </button>
+          
+          <div class="hidden md:flex items-center gap-3">
+            <button type="button" id="prev-promo-btn" class="w-11 h-11 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center text-navy hover:bg-navy hover:text-white transition-all duration-300">
+              <i data-lucide="chevron-left" class="w-5 h-5"></i>
+            </button>
+            <button type="button" id="next-promo-btn" class="w-11 h-11 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center text-navy hover:bg-navy hover:text-white transition-all duration-300">
+              <i data-lucide="chevron-right" class="w-5 h-5"></i>
+            </button>
+          </div>
         </div>
       </div>
 
-      <!-- Promotions Swiper Container -->
-      <div class="mb-12 relative group">
-        <button type="button" id="prev-promo-btn" class="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-white/95 border border-slate-200 shadow-lg items-center justify-center text-navy hover:bg-navy hover:text-white transition-all duration-300 hidden md:flex opacity-0 group-hover:opacity-100">
-          <i data-lucide="chevron-left" class="w-5 h-5"></i>
-        </button>
-
-        <div id="promotions-container" class="flex overflow-x-auto gap-6 pb-4 pt-2 scroll-smooth snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"></div>
-        
-        <button type="button" id="next-promo-btn" class="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-white/95 border border-slate-200 shadow-lg items-center justify-center text-navy hover:bg-navy hover:text-white transition-all duration-300 hidden md:flex opacity-0 group-hover:opacity-100">
-          <i data-lucide="chevron-right" class="w-5 h-5"></i>
-        </button>
+      <div class="relative w-full h-[470px] mx-auto mb-16 flex justify-center items-start touch-pan-y">
+        <div id="promotions-container" class="relative w-full h-full max-w-sm md:max-w-xl lg:max-w-none">
+          </div>
       </div>
 
-      <!-- Available Vaccines List -->
-      <div class="bg-white rounded-2xl border border-slate-100 p-6 md:p-8 shadow-sm flex flex-col gap-6">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-4">
-          <h3 class="font-extrabold text-lg text-navy flex items-center gap-2">Available Vaccines</h3>
-          <span class="text-[10px] font-bold bg-slate-100 text-navy-slate px-2.5 py-1 rounded-full uppercase tracking-wider">
-            Click to select
-          </span>
+      <div class="bg-white rounded-3xl border border-slate-100 p-6 md:p-8 shadow-xs flex flex-col gap-6">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-6">
+          <div class="flex items-center gap-2">
+            <h3 class="font-extrabold text-lg text-navy">Available Vaccines</h3>
+            <span class="text-[9px] font-bold bg-iceblue text-navy px-2 py-0.5 rounded-md uppercase tracking-wider">Click to select</span>
+          </div>
+          
+          <div class="bg-slate-100 p-1 rounded-xl flex items-center gap-1 self-start sm:self-auto">
+            <button type="button" data-filter="all" class="vac-filter-btn px-4 py-1.5 text-xs font-bold rounded-lg transition-all bg-white text-navy shadow-xs">All</button>
+            <button type="button" data-filter="routine" class="vac-filter-btn px-4 py-1.5 text-xs font-semibold rounded-lg transition-all text-navy-slate hover:text-navy">Routine</button>
+            <button type="button" data-filter="recommend" class="vac-filter-btn px-4 py-1.5 text-xs font-semibold rounded-lg transition-all text-navy-slate hover:text-navy">Recommended</button>
+          </div>
         </div>
 
         <div class="relative">
-          <div id="available-vaccines-container" class="grid grid-rows-3 grid-flow-col md:grid-rows-2 h-[540px] md:h-[340px] gap-4 overflow-x-auto overflow-y-hidden pb-4 pt-1 scroll-smooth [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-slate-50 [&::-webkit-scrollbar-thumb]:bg-slate-200 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-300"></div>
+          <div id="available-vaccines-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pb-2 pt-1">
+            </div>
         </div>
+
       </div>
+
     </div>
   </section>
 
@@ -1207,6 +1224,7 @@
     let activeHighlightId = "METABOLIC-FU45"; 
     let selectedVaccineIds = []; 
     let currentInsightIndex = 0; // เริ่มต้นที่บทความใบแรกสุด (ใบที่ 0)
+    let currentPromoIndex = 0; // ประกาศตัวแปรเพื่อจดจำหน้าการ์ดโปรโมชันปัจจุบัน
 
 
     // 🪄 ฟังก์ชันคำนวณสถานะคลินิกแบบเรียลไทม์ (ล็อกโซนเวลาประเทศไทย 100%)
@@ -2145,19 +2163,38 @@
       }
     });
 
-    // Realtime Clinic Hours Status Tracker
+
+    // 🪄 Realtime Clinic Hours Status Tracker (เวอร์ชันอัปเดตความแม่นยำสูงสุด + ข้อความที่คุณหมอชอบ)
     function updateClinicRealtimeStatus() {
       const statusContainer = document.getElementById('realtime-status');
       if (!statusContainer) return;
 
-      const now = new Date();
-      const day = now.getDay();      
-      const hour = now.getHours();   
+      // 👑 ล็อกเขตเวลาประเทศไทย (Asia/Bangkok) เสมอ เพื่อรองรับคนไข้จากทั่วโลก
+      const thailandTime = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Bangkok" }));
+      const day = thailandTime.getDay();     // 0 = อาทิตย์, 1 = จันทร์, ..., 6 = เสาร์
+      const hour = thailandTime.getHours();
+      const minute = thailandTime.getMinutes();
+      
+      // แปลงเวลาปัจจุบันเป็นนาทีรวมของวัน เพื่อการคำนวณที่เสถียร
+      const currentMinutes = (hour * 60) + minute;
+      let isOpen = false;
 
-      const isWorkingDay = day >= 1 && day <= 6;
-      const isWorkingHour = hour >= 9 && hour < 20;
+      // ⏱️ เงื่อนไขที่ 1: วันจันทร์ - วันศุกร์ (เปิด 08:00 - 18:00) -> 480 นาที ถึง 1080 นาที
+      if (day >= 1 && day <= 5) {
+        if (currentMinutes >= 480 && currentMinutes < 1080) {
+          isOpen = true;
+        }
+      }
+      // ⏱️ เงื่อนไขที่ 2: วันเสาร์ (เปิด 08:00 - 12:00) -> 480 นาที ถึง 720 นาที
+      else if (day === 6) {
+        if (currentMinutes >= 480 && currentMinutes < 720) {
+          isOpen = true;
+        }
+      }
+      // วันอาทิตย์ (day === 0) จะปิด (Closed) โดยอัตโนมัติ
 
-      if (isWorkingDay && isWorkingHour) {
+      // 🎨 แสดงผลหน้าต่าง UI พร้อมสไตล์ข้อความและสีสันที่คุณหมอออกแบบไว้
+      if (isOpen) {
         statusContainer.innerHTML = `
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> 
           Open Now <span class="text-slate-400 font-normal text-[11px] ml-0.5">(Accepting Patients)</span>
@@ -2170,11 +2207,12 @@
       }
     }
 
-
+    // 🔄 ตัวรันระบบเมื่อโหลดหน้าเว็บ + ตั้งเวลารีเฟรชอัตโนมัติ (คงไว้ตามเดิมของคุณหมอได้เลยครับ)
     document.addEventListener("DOMContentLoaded", () => {
       updateClinicRealtimeStatus();
-      setInterval(updateClinicRealtimeStatus, 30000);
+      setInterval(updateClinicRealtimeStatus, 30000); // อัปเดตสถานะทุกๆ 30 วินาทีแบบเรียลไทม์
     });
+
   </script> 
 
   <!-- SUCCESS POPUP MODAL NOTIFICATION -->
