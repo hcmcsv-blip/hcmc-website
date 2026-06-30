@@ -13,7 +13,7 @@ export const vaccines = [
     protocol: "3 Doses",
     description: "Combined active protection against major liver infections.",
     isPromoCard: false,
-    hasPackage: true,
+    hasPackage: false,
     packageDetails: "Combined Price: 1,500 THB Net",
     promoPrices: [
       { label: "Combined Price", price: "1,500 THB Net", highlight: true }
