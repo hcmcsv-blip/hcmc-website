@@ -231,7 +231,7 @@
   </section>
 
   <section id="services" class="py-24 bg-navy-tint relative">
-    <div class="max-w-3xl mx-auto px-6">
+    <div class="max-w-7xl mx-auto px-6">
       <div class="mb-12">
         <span class="text-xs font-bold text-navy tracking-widest uppercase flex items-center gap-1.5 mb-4">
           <i data-lucide="stethoscope" class="w-4 h-4 text-navy"></i> Our Clinical Scope
@@ -239,46 +239,66 @@
         <h2 class="text-3xl md:text-4xl font-extrabold text-navy tracking-tight">Comprehensive Care</h2>
       </div>
 
-      <div class="space-y-3">
+      <!-- Grid Container: 1 Col บนมือถือ, 2 Col บน Tablet, 4 Col บน Desktop -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <!-- รายการที่ 1 -->
         <div class="bg-white rounded-2xl border border-white/80 shadow-sm overflow-hidden">
-          <button onclick="toggleScope('scope-1', this)" class="w-full p-5 flex justify-between items-center font-bold text-navy hover:bg-slate-50 transition-colors">
-            <span>Primary & Acute Care</span>
-            <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-300"></i>
+          <button onclick="toggleScope('scope-1', this)" class="w-full p-5 flex justify-between items-center font-bold text-navy hover:bg-slate-50 transition-colors lg:cursor-default lg:hover:bg-transparent">
+            <div class="flex items-center gap-3">
+              <i data-lucide="activity" class="w-5 h-5 text-navy"></i>
+              <span>Primary & Acute Care</span>
+            </div>
+            <i data-lucide="chevron-down" class="w-5 h-5 lg:hidden transition-transform duration-300"></i>
           </button>
-          <div id="scope-1" class="hidden px-5 pb-5 text-xs text-navy-slate leading-relaxed border-t border-slate-50 pt-3">
+          <!-- เนื้อหา: บน Desktop ใช้ lg:block เพื่อให้โชว์ตลอด, บนมือถือซ่อนไว้ตาม Accordion -->
+          <div id="scope-1" class="hidden lg:block px-5 pb-5 lg:pt-0 text-xs text-navy-slate leading-relaxed lg:border-t-0 border-t border-slate-50 pt-3">
             Expert diagnosis for common ailments, seasonal illnesses, and long-term management of chronic conditions like hypertension and diabetes.
           </div>
         </div>
 
+        <!-- รายการที่ 2 -->
         <div class="bg-white rounded-2xl border border-white/80 shadow-sm overflow-hidden">
-          <button onclick="toggleScope('scope-2', this)" class="w-full p-5 flex justify-between items-center font-bold text-navy hover:bg-slate-50 transition-colors">
-            <span>Clinical Diagnostics</span>
-            <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-300"></i>
+          <button onclick="toggleScope('scope-2', this)" class="w-full p-5 flex justify-between items-center font-bold text-navy hover:bg-slate-50 transition-colors lg:cursor-default lg:hover:bg-transparent">
+            <div class="flex items-center gap-3">
+              <i data-lucide="microscope" class="w-5 h-5 text-navy"></i>
+              <span>Clinical Diagnostics</span>
+            </div>
+            <i data-lucide="chevron-down" class="w-5 h-5 lg:hidden transition-transform duration-300"></i>
           </button>
-          <div id="scope-2" class="hidden px-5 pb-5 text-xs text-navy-slate leading-relaxed border-t border-slate-50 pt-3">
+          <div id="scope-2" class="hidden lg:block px-5 pb-5 lg:pt-0 text-xs text-navy-slate leading-relaxed lg:border-t-0 border-t border-slate-50 pt-3">
             Precision lab work, biomarker tracking, and advanced body composition analysis to uncover the invisible roots of your health.
           </div>
         </div>
 
+        <!-- รายการที่ 3 -->
         <div class="bg-white rounded-2xl border border-white/80 shadow-sm overflow-hidden">
-          <button onclick="toggleScope('scope-3', this)" class="w-full p-5 flex justify-between items-center font-bold text-navy hover:bg-slate-50 transition-colors">
-            <span>Longevity & IV Therapy</span>
-            <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-300"></i>
+          <button onclick="toggleScope('scope-3', this)" class="w-full p-5 flex justify-between items-center font-bold text-navy hover:bg-slate-50 transition-colors lg:cursor-default lg:hover:bg-transparent">
+            <div class="flex items-center gap-3">
+              <i data-lucide="droplet" class="w-5 h-5 text-navy"></i>
+              <span>Longevity & IV Therapy</span>
+            </div>
+            <i data-lucide="chevron-down" class="w-5 h-5 lg:hidden transition-transform duration-300"></i>
           </button>
-          <div id="scope-3" class="hidden px-5 pb-5 text-xs text-navy-slate leading-relaxed border-t border-slate-50 pt-3">
+          <div id="scope-3" class="hidden lg:block px-5 pb-5 lg:pt-0 text-xs text-navy-slate leading-relaxed lg:border-t-0 border-t border-slate-50 pt-3">
             Evidence-based NAD+ infusions and personalized nutrient therapies designed to optimize cellular repair and systemic vitality.
           </div>
         </div>
         
+        <!-- รายการที่ 4 -->
         <div class="bg-white rounded-2xl border border-white/80 shadow-sm overflow-hidden">
-          <button onclick="toggleScope('scope-4', this)" class="w-full p-5 flex justify-between items-center font-bold text-navy hover:bg-slate-50 transition-colors">
-            <span>Travel & Prevention</span>
-            <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-300"></i>
+          <button onclick="toggleScope('scope-4', this)" class="w-full p-5 flex justify-between items-center font-bold text-navy hover:bg-slate-50 transition-colors lg:cursor-default lg:hover:bg-transparent">
+            <div class="flex items-center gap-3">
+              <i data-lucide="plane" class="w-5 h-5 text-navy"></i>
+              <span>Travel & Prevention</span>
+            </div>
+            <i data-lucide="chevron-down" class="w-5 h-5 lg:hidden transition-transform duration-300"></i>
           </button>
-          <div id="scope-4" class="hidden px-5 pb-5 text-xs text-navy-slate leading-relaxed border-t border-slate-50 pt-3">
+          <div id="scope-4" class="hidden lg:block px-5 pb-5 lg:pt-0 text-xs text-navy-slate leading-relaxed lg:border-t-0 border-t border-slate-50 pt-3">
             Specialized immunization protocols and preventative travel health screenings tailored to your international itinerary and personal immunity profile.
           </div>
         </div>
+        
       </div>
     </div>
   </section>

@@ -1011,15 +1011,16 @@ function updateClinicRealtimeStatus() {
   }
 }
 
-// Function สำหรับ Accordion ของ Clinical Scope
 window.toggleScope = function(id, btn) {
+  // เช็คว่าถ้าจอใหญ่กว่า 1024px (Desktop) ให้ไม่ต้องทำอะไร
+  if (window.innerWidth >= 1024) return;
+
   const content = document.getElementById(id);
-  const icon = btn.querySelector('i');
+  const icon = btn.querySelector('.lg\\:hidden'); // เลือกเฉพาะไอคอนที่ซ่อนบนเดสก์ท็อป
+  if(!icon) return; // กัน error
   
-  // เปิด/ปิด content
   content.classList.toggle('hidden');
   
-  // หมุนไอคอน
   if (!content.classList.contains('hidden')) {
     icon.style.transform = 'rotate(180deg)';
   } else {
