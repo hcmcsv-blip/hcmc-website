@@ -1011,6 +1011,22 @@ function updateClinicRealtimeStatus() {
   }
 }
 
+// Function สำหรับ Accordion ของ Clinical Scope
+window.toggleScope = function(id, btn) {
+  const content = document.getElementById(id);
+  const icon = btn.querySelector('i');
+  
+  // เปิด/ปิด content
+  content.classList.toggle('hidden');
+  
+  // หมุนไอคอน
+  if (!content.classList.contains('hidden')) {
+    icon.style.transform = 'rotate(180deg)';
+  } else {
+    icon.style.transform = 'rotate(0deg)';
+  }
+};
+
 // ========================================================================
 // ⚡ [5. BOOTSTRAP]
 // ========================================================================
