@@ -7,11 +7,11 @@ export const insights = [
     date: "June 28, 2026",
     title: "Unlock Cellular Energy: Why NAD+ Levels Decline and How to Restore Them Effectively",
     excerpt: "Learn how nicotinamide adenine dinucleotide (NAD+) powers your metabolism, sharpens focus, and repairs DNA naturally, and when direct therapies can help reverse chronic fatigue.",
-    imageUrl: "images/NAD.png",
+    imageUrl: "images/NAD.webp",
     slug: "unlock-cellular-energy-nad",
     cardClass: "bg-white border border-slate-200/80",
     fullContent: `
-      <img src="images/NAD.png" class="w-full h-64 object-cover rounded-2xl mb-6 shadow-xs" alt="NAD+ Deep Dive">
+      <img src="images/NAD.webp" class="w-full h-64 object-cover rounded-2xl mb-6 shadow-xs" alt="NAD+ Deep Dive">
       
       <p class="mb-4 text-base leading-relaxed text-navy-slate">NAD+ หรือ Nicotinamide Adenine Dinucleotide คือโมเลกุลมหัศจรรย์ที่มีอยู่ในทุกเซลล์ของร่างกาย ทำหน้าที่เป็นเปรียบเสมือน 'โมเลกุลผู้ช่วย' ตัวสำคัญที่ทำให้โรงงานผลิตพลังงานในเซลล์ (Mitochondria) สามารถทำงานได้ หากไม่มี NAD+ ร่างกายของเราจะไม่สามารถเปลี่ยนอาหารให้กลายเป็นพลังงาน ซ่อมแซมตัวเอง หรือแม้กระทั่งมีชีวิตอยู่ได้เลย</p>
       
