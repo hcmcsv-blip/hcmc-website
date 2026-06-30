@@ -1292,6 +1292,9 @@
       lockPastDates();
       initPromoNavigation();
       initRealtimeStatus();
+      updateClinicRealtimeStatus();
+
+      setInterval(updateClinicRealtimeStatus, 30000);
     }
 
     if (document.readyState === "loading") {
@@ -2206,12 +2209,6 @@
         `;
       }
     }
-
-    // 🔄 ตัวรันระบบเมื่อโหลดหน้าเว็บ + ตั้งเวลารีเฟรชอัตโนมัติ (คงไว้ตามเดิมของคุณหมอได้เลยครับ)
-    document.addEventListener("DOMContentLoaded", () => {
-      updateClinicRealtimeStatus();
-      setInterval(updateClinicRealtimeStatus, 30000); // อัปเดตสถานะทุกๆ 30 วินาทีแบบเรียลไทม์
-    });
 
   </script> 
 
