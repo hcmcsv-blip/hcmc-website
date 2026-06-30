@@ -1223,7 +1223,8 @@
       initFormSubmissions();
       renderVaccines();
       renderInsights();
-      initInsightNavigation(); 
+      initInsightNavigation();
+      initRealtimeStatus(); 
       initVaccineReset();
       initDeliveryToggle();
       initNotificationClose();
@@ -2121,6 +2122,50 @@
         statusContainer.innerHTML = `
           <span class="w-2 h-2 rounded-full bg-amber-500"></span> 
           Closed <span class="text-slate-400 font-normal text-[11px] ml-0.5">(Appointments Only)</span>
+        `;
+      }
+    }
+
+    function initRealtimeStatus() {
+      const statusElement = document.getElementById('realtime-status');
+      if (!statusElement) return;
+
+      const now = new Date();
+      const day = now.getDay();     // 0 = อาทิตย์, 1 = จันทร์, ..., 6 = เสาร์
+      const hour = now.getHours();
+      const minute = now.getMinutes();
+      
+      // แปลงเวลาปัจจุบันทั้งหมดให้เป็น "นาที" เพื่อให้คณิตศาสตร์คำนวณช่วงเวลาได้ง่ายและแม่นยำ
+      const currentMinutesInDay = (hour * 60) + minute;
+      
+      let isOpen = false;
+
+      // ⏱️ เงื่อนไขที่ 1: วันจันทร์ - วันศุกร์ (เปิด 08:00 - 18:00)
+      // 08:00 = 480 นาที / 18:00 = 1080 นาที
+      if (day >= 1 && day <= 5) {
+        if (currentMinutesInDay >= 480 && currentMinutesInDay < 1080) {
+          isOpen = true;
+        }
+      }
+      // ⏱️ เงื่อนไขที่ 2: วันเสาร์ (เปิด 08:00 - 12:00)
+      // 12:00 = 720 นาที
+      else if (day === 6) {
+        if (currentMinutesInDay >= 480 && currentMinutesInDay < 720) {
+          isOpen = true;
+        }
+      }
+      // วันอาทิตย์ (day === 0) จะข้ามไปค่าเริ่มต้นคือ Closed ทันที
+
+      // 🎯 ทำการ Render หน้าตาตามสถานะจริง
+      if (isOpen) {
+        statusElement.innerHTML = `
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> 
+          <span class="text-emerald-600 font-extrabold">Open Now</span>
+        `;
+      } else {
+        statusElement.innerHTML = `
+          <span class="w-2 h-2 rounded-full bg-rose-500"></span> 
+          <span class="text-slate-400 font-bold">Closed Now</span>
         `;
       }
     }
