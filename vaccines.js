@@ -9,7 +9,7 @@ export const vaccines = [
     category: "travel",
     pricePerDose: 1500,
     status: "available",
-    showPrice: false,
+    showPrice: true,
     protocol: "3 Doses",
     description: "Combined active protection against major liver infections.",
     isPromoCard: true
