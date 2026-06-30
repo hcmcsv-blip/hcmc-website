@@ -12,6 +12,7 @@ export const vaccines = [
     showPrice: false,
     protocol: "3 Doses",
     description: "Combined active protection against major liver infections."
+    isPromoCard: true,
   },
   {
     id: "vac-imojev",
