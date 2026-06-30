@@ -2286,36 +2286,6 @@
       }
     });
 
-    // Realtime Clinic Hours Status Tracker
-    function updateClinicRealtimeStatus() {
-      const statusContainer = document.getElementById('realtime-status');
-      if (!statusContainer) return;
-
-      const now = new Date();
-      const day = now.getDay();      
-      const hour = now.getHours();   
-
-      const isWorkingDay = day >= 1 && day <= 6;
-      const isWorkingHour = hour >= 9 && hour < 20;
-
-      if (isWorkingDay && isWorkingHour) {
-        statusContainer.innerHTML = `
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> 
-          Open Now <span class="text-slate-400 font-normal text-[11px] ml-0.5">(Accepting Patients)</span>
-        `;
-      } else {
-        statusContainer.innerHTML = `
-          <span class="w-2 h-2 rounded-full bg-amber-500"></span> 
-          Closed <span class="text-slate-400 font-normal text-[11px] ml-0.5">(Appointments Only)</span>
-        `;
-      }
-    }
-
-
-    document.addEventListener("DOMContentLoaded", () => {
-      updateClinicRealtimeStatus();
-      setInterval(updateClinicRealtimeStatus, 30000);
-    });
   </script> 
 
   <!-- SUCCESS POPUP MODAL NOTIFICATION -->
