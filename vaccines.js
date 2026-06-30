@@ -9,10 +9,12 @@ export const vaccines = [
     category: "travel",
     pricePerDose: 1500,
     status: "available",
-    showPrice: true,
+    showPrice: false,
     protocol: "3 Doses",
     description: "Combined active protection against major liver infections.",
-    isPromoCard: true
+    isPromoCard: true,
+    hasPackage: true,
+    packageDetails: "Combined Price: 1,500 THB Net"
   },
   {
     id: "vac-imojev",
