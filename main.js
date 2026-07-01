@@ -561,7 +561,7 @@ function updatePromoDeckLayout() {
 
     if (isDesktop) {
       // 🟩 คืนค่าเริ่มต้นของเนื้อหาสำหรับ Desktop เผื่อสลับหน้าจอไปมา
-      card.style.backgroundColor = ""; // ปล่อยให้ใช้คลาส Tailwind bg-gradient ตามเดิม
+      card.style.backgroundColor = "#0f172a"; // ปล่อยให้ใช้คลาส Tailwind bg-gradient ตามเดิม
       innerContents.forEach(el => el.style.visibility = "visible");
 
       if (index < currentPromoIndex) {
