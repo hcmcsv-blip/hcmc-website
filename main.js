@@ -486,35 +486,45 @@ function renderPromotionsDeck() {
   container.innerHTML = promoItems.map((vac, index) => {
     const isChecked = selectedVaccineIds.includes(vac.id);
     
-    const cardBaseClasses = "bg-gradient-to-br from-white via-white to-iceblue-light/30";
-    const cardCheckedClasses = "border-navy ring-2 ring-navy shadow-lg shadow-navy/20";
-    const cardUncheckedClasses = "border-slate-100 shadow-xl shadow-slate-200/50";
+    // 🎨 ปรับเฉดสีตามสีโลโก้และแบรนด์คลินิก (เข้ม เด่น พรีเมียม)
+    // การ์ดพื้นฐาน: ใช้ Gradient สีน้ำเงินกรมท่าเข้ม ไล่เฉดไปทางน้ำเงินสว่างแฝงมิติ
+    const cardBaseClasses = "bg-gradient-to-br from-navy via-[#1e293b] to-navy-slate text-white";
+    
+    // เมื่อถูกเลือก (Checked): เพิ่มขอบแดงสว่าง (Accent Red) พร้อมเงาเรืองแสงสีแดง/ฟ้า
+    const cardCheckedClasses = "border-accent-red ring-2 ring-accent-red/50 shadow-[0_20px_40px_rgba(239,68,68,0.25)] scale-[1.01]";
+    
+    // เมื่อไม่ได้เลือก (Unchecked): ใช้ขอบฟ้าไอซ์บลูจางๆ ตัดกับพื้นเว็บสีสว่าง และใช้เงานุ่มๆ
+    const cardUncheckedClasses = "border-iceblue/20 shadow-[0_20px_40px_rgba(15,23,42,0.3)]";
 
     let promoPricingHTML = '';
     if (vac.status === 'out-of-stock') {
-      promoPricingHTML = `<span class="text-[10px] font-bold bg-rose-50 text-rose-600 px-2 py-1 rounded-md uppercase border border-rose-100">Not Available</span>`;
+      promoPricingHTML = `<span class="text-[10px] font-bold bg-rose-950/50 text-rose-400 px-2 py-1 rounded-md uppercase border border-rose-800/50">Not Available</span>`;
     } else {
+      // ⚡ ปรับสีตัวหนังสือราคาให้เข้ากับพื้นหลังสีเข้ม (ใช้สีฟ้าอ่อน/ทอง/ขาว)
       const pricesHtml = (vac.promoPrices || []).map(p => 
-        `<span class="${p.highlight ? 'text-sm font-extrabold text-accent-red' : 'text-xs text-slate-500 font-medium'}">${p.label}: ${p.price}</span>`
+        `<span class="${p.highlight ? 'text-sm font-black text-emerald-400' : 'text-xs text-slate-300 font-medium'}">${p.label}: ${p.price}</span>`
       ).join('');
       promoPricingHTML = `<div class="flex flex-col text-right gap-0.5">${pricesHtml}</div>`;
     }
 
     return `
       <div id="promo-card-${index}" data-vac-id="${vac.id}" 
-        class="absolute top-0 left-1/2 w-[85vw] max-w-[400px] h-[240px] rounded-3xl p-6 flex flex-col justify-between cursor-pointer transition-[shadow,background-color,border-color] duration-150 ease-in-out select-none border ${cardBaseClasses} ${isChecked ? cardCheckedClasses : cardUncheckedClasses}"
+        class="absolute top-0 left-1/2 w-[85vw] max-w-[400px] h-[240px] rounded-3xl p-6 flex flex-col justify-between cursor-pointer transition-[shadow,background-color,border-color,transform] duration-150 ease-in-out select-none border ${cardBaseClasses} ${isChecked ? cardCheckedClasses : cardUncheckedClasses}"
         style="cursor: grab;">
         <div class="flex flex-col gap-3">
           <div class="flex items-center justify-between">
-            <span class="px-2.5 py-1 rounded-md bg-accent-red/10 text-accent-red text-[10px] font-bold uppercase tracking-wider">${vac.promoLabel || 'Special Offer'}</span>
-            <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center ${isChecked ? 'bg-navy border-navy' : 'border-slate-300 bg-white'}">
+            <span class="px-2.5 py-1 rounded-md bg-accent-red text-white text-[10px] font-extrabold uppercase tracking-wider">${vac.promoLabel || 'Special Offer'}</span>
+            
+            <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center ${isChecked ? 'bg-accent-red border-accent-red' : 'border-slate-400 bg-navy/50'}">
               ${isChecked ? '<i data-lucide="check" class="w-3 h-3 text-white"></i>' : ''}
             </div>
           </div>
-          <h4 class="font-extrabold text-lg text-navy leading-tight">${vac.name}</h4>
-          <p class="text-xs text-navy-slate leading-relaxed line-clamp-2">${vac.description}</p>
+          
+          <h4 class="font-extrabold text-lg text-white leading-tight">${vac.name}</h4>
+          <p class="text-xs text-slate-300 leading-relaxed line-clamp-2">${vac.description}</p>
         </div>
-        <div class="flex items-end justify-between mt-4 pt-4 border-t border-slate-100">
+        
+        <div class="flex items-end justify-between mt-4 pt-4 border-t border-slate-700/60">
           <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Pricing</span>
           ${promoPricingHTML}
         </div>
@@ -522,7 +532,6 @@ function renderPromotionsDeck() {
     `;
   }).join('');
 
-  // ⚡ ต้องคงบรรทัดนี้ไว้ เพื่อให้การ์ดเรียงซ้อนกันเป็นเลเยอร์สวยงามตอนโหลดหน้าเว็บและตอนสไลด์
   if (typeof updatePromoDeckLayout === 'function') {
     updatePromoDeckLayout();
   }
@@ -531,6 +540,7 @@ function renderPromotionsDeck() {
 
   if (typeof lucide !== 'undefined') lucide.createIcons();
 }
+
 
 
 
@@ -594,7 +604,7 @@ function updatePromoDeckLayout() {
         
         // ⚡ ปรับตรงนี้: ให้ทึบ 100% (opacity = 1) และเป็นสีขาวเพื่อบังใบข้างหลัง แต่ซ่อนข้อความ
         card.style.opacity = factor === 3 ? "0" : "1"; 
-        card.style.backgroundColor = "#ffffff"; 
+        card.style.backgroundColor = "#0f172a"; 
         card.style.pointerEvents = "none";
         
         innerContents.forEach(el => el.style.visibility = "hidden");
@@ -605,7 +615,7 @@ function updatePromoDeckLayout() {
         
         // ⚡ ปรับตรงนี้เช่นกัน: การ์ดฝั่งซ้ายที่ล้นไปแล้ว ก็ให้ทึบและซ่อนข้อความ
         card.style.opacity = factor === 3 ? "0" : "1";
-        card.style.backgroundColor = "#ffffff";
+        card.style.backgroundColor = "#0f172a";
         card.style.pointerEvents = "none";
         
         innerContents.forEach(el => el.style.visibility = "hidden");
