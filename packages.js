@@ -256,6 +256,12 @@ export const packages = [
       ageGroup: "under-40",
       hasDiabetes: false
     },
+    keyHighlights: [
+      { label: "HOMA-IR Score", subLabel: "Insulin Resistance Index" },
+      { label: "Thyroid (TSH)", subLabel: "Metabolic Regulation" },
+      { label: "HbA1C Marker", subLabel: "Glycemic Control mapping" },
+      { label: "Inflammation Panel", subLabel: "C-Reactive Protein Lab" }
+    ],
     items: [
       "Complete Physical Examination",
       "BP/PR/RR/BT/Weight/Height/BMI",
@@ -282,6 +288,12 @@ export const packages = [
       ageGroup: "50-59",
       hasDiabetes: false
     },
+    keyHighlights: [
+      { label: "HOMA-IR Score", subLabel: "Insulin Resistance Index" },
+      { label: "Thyroid (TSH)", subLabel: "Metabolic Regulation" },
+      { label: "HbA1C Marker", subLabel: "Glycemic Control mapping" },
+      { label: "Inflammation Panel", subLabel: "C-Reactive Protein Lab" }
+    ],
     items: [
       "Complete Physical Examination",
       "BP/PR/RR/BT/Weight/Height/BMI",
@@ -310,6 +322,12 @@ export const packages = [
       ageGroup: "all",
       hasDiabetes: false
     },
+    keyHighlights: [
+      { label: "HOMA-IR Score", subLabel: "Insulin Resistance Index" },
+      { label: "Thyroid (TSH)", subLabel: "Metabolic Regulation" },
+      { label: "HbA1C Marker", subLabel: "Glycemic Control mapping" },
+      { label: "Inflammation Panel", subLabel: "C-Reactive Protein Lab" }
+    ],
     items: [
       "Complete Physical Examination",
       "BP/PR/RR/BT/Weight/Height/BMI",

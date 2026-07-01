@@ -271,22 +271,41 @@ function initHighlightMetaTabs() {
 }
 
 function renderHighlightCard() {
-  // 1. หาข้อมูลแพ็กเกจจาก activeHighlightId
+  // 1. หาข้อมูลแพ็กเกจ
   const metaPackage = packages.find(p => p.id === activeHighlightId);
   if (!metaPackage) return;
 
+  // 2. ประกาศตัวแปร DOM elements
   const titleElem = document.getElementById("hl-package-title");
   const descElem = document.getElementById("hl-package-desc");
   const priceElem = document.getElementById("hl-package-price");
   const itemsContainer = document.getElementById("hl-package-items");
+  const highlightsContainer = document.getElementById("hl-key-highlights");
 
-  // 2. อัปเดตข้อมูล
+  // 3. อัปเดตเนื้อหา (ทำรอบเดียว)
   if (titleElem) titleElem.innerText = metaPackage.name;
   if (descElem) descElem.innerText = metaPackage.suitableFor;
-  
-  // ใช้ toLocaleString เพื่อโชว์ราคาให้สวยงาม
   if (priceElem) priceElem.innerText = Number(metaPackage.price).toLocaleString('en-US');
-  
+
+  // 4. อัปเดต Key Highlights Grid
+  if (highlightsContainer && metaPackage.keyHighlights) {
+    highlightsContainer.innerHTML = metaPackage.keyHighlights.map(h => `
+      <div class="flex items-start gap-2.5">
+        <div class="p-1 rounded-lg bg-emerald-50 text-emerald-600 mt-0.5">
+          <i data-lucide="check" class="w-4 h-4"></i>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-bold text-xs text-navy">${h.label}</span>
+          <span class="text-[10px] text-navy-slate">${h.subLabel}</span>
+        </div>
+      </div>
+    `).join("");
+    
+    // เรียกให้ไอคอนโหลดใหม่หลังจากเปลี่ยน HTML
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+  }
+
+  // 5. อัปเดตรายการตรวจยาวๆ (List Items)
   if (itemsContainer) {
     itemsContainer.innerHTML = metaPackage.items.map(item => `
       <li class="flex items-start gap-2 text-xs text-navy leading-relaxed">
@@ -295,8 +314,6 @@ function renderHighlightCard() {
       </li>
     `).join("");
   }
-  
-  // 3. (Optional) ถ้าอยากให้เปลี่ยนสีไอคอนหรือรายละเอียดอื่นๆ ตามแพ็กเกจ ก็ใส่เพิ่มตรงนี้ได้ครับ
 }
 
 function setupFilters() {
