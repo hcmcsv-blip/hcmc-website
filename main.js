@@ -327,11 +327,14 @@ function setupFilters() {
   function highlightActiveButton(buttons, activeButton) {
     buttons.forEach(btn => {
       if (btn === activeButton) {
-        btn.classList.remove('border-navy', 'text-navy', 'bg-transparent', 'hover:bg-iceblue-light');
+        // ⚡ [ACTIVE STATE]: เมื่อถูกกดเลือก -> เปลี่ยนเป็นกล่องสีกรมท่าเข้ม (Navy แท้) และตัวหนังสือสีขาว คมชัด 100%
+        btn.className = btn.className.replace(/bg-\S+|text-\S+|border-\S+/g, ''); // ล้างคลาสสีเดิมออกก่อนอย่างปลอดภัย
+        btn.classList.remove('bg-white/40', 'text-navy', 'border-navy/30');
         btn.classList.add('bg-navy', 'text-white', 'border-navy');
       } else {
+        // 💤 [INACTIVE STATE]: เมื่อไม่ได้เลือก -> ปล่อยให้โปร่งแสงลางๆ กลมกลืนไปกับพื้นหลังกระจกฝ้า
         btn.classList.remove('bg-navy', 'text-white');
-        btn.classList.add('border-navy', 'text-navy', 'bg-transparent', 'hover:bg-iceblue-light');
+        btn.classList.add('border-navy/30', 'text-navy', 'bg-white/40', 'hover:bg-iceblue-light');
       }
     });
   }
@@ -418,7 +421,9 @@ function renderPackages(list, container) {
   container.innerHTML = "";
   list.forEach(pkg => {
     const card = document.createElement("div");
-    card.className = `bg-white rounded-2xl shadow-sm border ${pkg.isHighlight ? 'border-2 border-navy ring-4 ring-iceblue/30' : 'border-slate-200'} p-6 transition-transform duration-200 hover:-translate-y-1 flex flex-col justify-between`;
+    
+    // ⚡ ปรับตรงนี้: เปลี่ยนการ์ดหลักเป็น bg-white/70 + backdrop-blur-md เพื่อให้โปร่งแสงลางๆ เห็นพื้นหลังภาพ
+    card.className = `bg-white/70 backdrop-blur-md rounded-3xl shadow-lg border ${pkg.isHighlight ? 'border-2 border-navy ring-4 ring-iceblue/30' : 'border-white/80'} p-6 transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between`;
 
     const priceFormatted = Number(pkg.price).toLocaleString('en-US');
     const listItemsHtml = pkg.items.map(item => `
@@ -433,14 +438,16 @@ function renderPackages(list, container) {
         ${pkg.isHighlight ? '<span class="inline-block bg-navy text-white text-[10px] font-extrabold uppercase px-2 py-0.5 rounded mb-3 tracking-widest">Recommended Profile</span>' : ''}
         <h3 class="text-base font-bold text-navy mb-1.5">${pkg.name}</h3>
         <p class="text-xs text-slate-400 mb-4 italic">${pkg.suitableFor}</p>
-        <div class="bg-slate-50 border border-slate-100 rounded-xl p-4 mb-4">
+        
+        <div class="bg-white border border-slate-100 rounded-2xl p-4 mb-4 shadow-2xs">
           <div class="text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-2">Included Bio-Markers & Screenings</div>
           <ul class="space-y-1.5 max-h-48 overflow-y-auto pr-1">
             ${listItemsHtml}
           </ul>
         </div>
       </div>
-      <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between gap-4">
+      
+      <div class="mt-4 pt-4 border-t border-slate-200/60 flex items-center justify-between gap-4">
         <div>
           <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Bespoke Rate</div>
           <div class="text-xl font-black text-navy">${priceFormatted} <span class="text-xs font-normal text-slate-500">THB</span></div>
@@ -450,6 +457,7 @@ function renderPackages(list, container) {
         </button>
       </div>
     `;
+    
     card.querySelector(`[data-book-id="${pkg.id}"]`).addEventListener("click", () => {
       selectPackageInForm(pkg.id);
       scrollToSection("booking-section-anchor");
@@ -457,6 +465,7 @@ function renderPackages(list, container) {
     container.appendChild(card);
   });
 }
+
 
 function selectPackageInForm(packageId) {
   const selectElem = document.getElementById("appt-program");
