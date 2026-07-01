@@ -258,9 +258,9 @@ export const packages = [
     },
     keyHighlights: [
       { label: "HOMA-IR Score", subLabel: "Insulin Resistance Index" },
+      { label: "HbA1C Marker", subLabel: "Glycemic Control" },
       { label: "Thyroid (TSH)", subLabel: "Metabolic Regulation" },
-      { label: "HbA1C Marker", subLabel: "Glycemic Control mapping" },
-      { label: "Inflammation Panel", subLabel: "C-Reactive Protein Lab" }
+      { label: "Lipid Panel", subLabel: "Cardiovascular Health" }
     ],
     items: [
       "Complete Physical Examination",
@@ -290,9 +290,9 @@ export const packages = [
     },
     keyHighlights: [
       { label: "HOMA-IR Score", subLabel: "Insulin Resistance Index" },
-      { label: "Thyroid (TSH)", subLabel: "Metabolic Regulation" },
-      { label: "HbA1C Marker", subLabel: "Glycemic Control mapping" },
-      { label: "Inflammation Panel", subLabel: "C-Reactive Protein Lab" }
+      { label: "HbA1C Marker", subLabel: "Glycemic Control" },
+      { label: "Estradiol (E2)", subLabel: "Menopause Tracking" },
+      { label: "FSH", subLabel: "Hormonal Profile" }
     ],
     items: [
       "Complete Physical Examination",
@@ -324,9 +324,9 @@ export const packages = [
     },
     keyHighlights: [
       { label: "HOMA-IR Score", subLabel: "Insulin Resistance Index" },
-      { label: "Thyroid (TSH)", subLabel: "Metabolic Regulation" },
-      { label: "HbA1C Marker", subLabel: "Glycemic Control mapping" },
-      { label: "Inflammation Panel", subLabel: "C-Reactive Protein Lab" }
+      { label: "Total Testosterone", subLabel: "Androgen Status" },
+      { label: "PSA", subLabel: "Prostate Health" },
+      { label: "Lipid Panel", subLabel: "Cardiovascular Health" }
     ],
     items: [
       "Complete Physical Examination",
