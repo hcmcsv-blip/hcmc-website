@@ -489,7 +489,7 @@ function renderPromotionsDeck() {
     // ตั้งค่าเฉดสีและการไล่แสงเงาแบบพรีเมียม
     const cardBaseClasses = "bg-gradient-to-br from-white via-white to-iceblue-light/30";
     const cardCheckedClasses = "border-navy ring-2 ring-navy shadow-lg shadow-navy/20";
-    const cardUncheckedClasses = "border-sky-100/70 shadow-xl shadow-slate-200/40";
+    const cardUncheckedClasses = "border-slate-100 shadow-xl shadow-slate-200/50";
 
     let promoPricingHTML = '';
     if (vac.status === 'out-of-stock') {
