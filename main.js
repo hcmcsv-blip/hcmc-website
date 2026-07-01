@@ -486,7 +486,6 @@ function renderPromotionsDeck() {
   container.innerHTML = promoItems.map((vac, index) => {
     const isChecked = selectedVaccineIds.includes(vac.id);
     
-    // ตั้งค่าเฉดสีและการไล่แสงเงาแบบพรีเมียม
     const cardBaseClasses = "bg-gradient-to-br from-white via-white to-iceblue-light/30";
     const cardCheckedClasses = "border-navy ring-2 ring-navy shadow-lg shadow-navy/20";
     const cardUncheckedClasses = "border-slate-100 shadow-xl shadow-slate-200/50";
@@ -523,12 +522,16 @@ function renderPromotionsDeck() {
     `;
   }).join('');
 
-  
-  // เรียกใช้งาน Click Event เฉพาะใน container นี้ ป้องกันบั๊กทับซ้อน
+  // ⚡ ต้องคงบรรทัดนี้ไว้ เพื่อให้การ์ดเรียงซ้อนกันเป็นเลเยอร์สวยงามตอนโหลดหน้าเว็บและตอนสไลด์
+  if (typeof updatePromoDeckLayout === 'function') {
+    updatePromoDeckLayout();
+  }
+
   setupVaccineClickEvents(container); 
 
   if (typeof lucide !== 'undefined') lucide.createIcons();
 }
+
 
 
 function updatePromoDeckLayout() {
