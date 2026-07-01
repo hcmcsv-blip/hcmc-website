@@ -423,7 +423,7 @@ function renderPackages(list, container) {
     const card = document.createElement("div");
     
     // ⚡ ปรับตรงนี้: เปลี่ยนการ์ดหลักเป็น bg-white/70 + backdrop-blur-md เพื่อให้โปร่งแสงลางๆ เห็นพื้นหลังภาพ
-    card.className = `bg-white/70 backdrop-blur-md rounded-3xl shadow-lg border ${pkg.isHighlight ? 'border-2 border-navy ring-4 ring-iceblue/30' : 'border-white/80'} p-6 transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between`;
+    card.className = `bg-white/40 backdrop-blur-md rounded-3xl shadow-lg border ${pkg.isHighlight ? 'border-2 border-navy ring-4 ring-iceblue/30' : 'border-white/80'} p-6 transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between`;
 
     const priceFormatted = Number(pkg.price).toLocaleString('en-US');
     const listItemsHtml = pkg.items.map(item => `
