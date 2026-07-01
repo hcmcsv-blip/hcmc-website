@@ -536,7 +536,6 @@ function renderPromotionsDeck() {
 
 function updatePromoDeckLayout() {
   const isDesktop = window.innerWidth >= 1024;
-  const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
   
   // ป้องกัน index ทะลุเวลาลูกค้าหมุนหน้าจอ (บั๊ก Resize Out of Bounds)
   let maxLimit = promoItems.length - (isDesktop ? 3 : 1);
@@ -547,7 +546,14 @@ function updatePromoDeckLayout() {
     const card = document.getElementById(`promo-card-${index}`);
     if (!card) return;
 
+    // หา Element เนื้อหาภายในเพื่อเปิด-ปิดการมองเห็น
+    const innerContents = card.querySelectorAll('h4, p, div, span');
+
     if (isDesktop) {
+      // 🟩 คืนค่าเริ่มต้นของเนื้อหาสำหรับ Desktop เผื่อสลับหน้าจอไปมา
+      card.style.backgroundColor = ""; // ปล่อยให้ใช้คลาส Tailwind bg-gradient ตามเดิม
+      innerContents.forEach(el => el.style.visibility = "visible");
+
       if (index < currentPromoIndex) {
         const factor = currentPromoIndex - index;
         card.style.transform = `translate(calc(-50% + ${-420 - (factor * 20)}px), ${factor * 8}px) scale(${1 - factor * 0.05}) rotate(-${factor * 2}deg)`;
@@ -569,28 +575,45 @@ function updatePromoDeckLayout() {
         card.style.pointerEvents = "auto";
       }
     } else {
+      // 📱 ลอจิกสำหรับมือถือ (Mobile)
       const offset = index - currentPromoIndex;
+
       if (offset === 0) {
+        // การ์ดใบหน้าสุด: ทึบ 100%, โชว์เนื้อหาครบถ้วน
         card.style.transform = "translate(-50%, 0) scale(1) rotate(0deg)";
         card.style.zIndex = "40";
         card.style.opacity = "1";
         card.style.pointerEvents = "auto";
+        card.style.backgroundColor = ""; // แสดงสี Gradient ตาม Tailwind ปกติ
+        
+        innerContents.forEach(el => el.style.visibility = "visible");
       } else if (offset > 0) {
         const factor = Math.min(offset, 3);
         card.style.transform = `translate(calc(-50% + ${factor * 15}px), ${factor * 10}px) scale(${1 - factor * 0.05}) rotate(${factor * 1.5}deg)`;
         card.style.zIndex = `${40 - factor}`;
-        card.style.opacity = factor === 1 ? "0.8" : factor === 2 ? "0.3" : "0";
+        
+        // ⚡ ปรับตรงนี้: ให้ทึบ 100% (opacity = 1) และเป็นสีขาวเพื่อบังใบข้างหลัง แต่ซ่อนข้อความ
+        card.style.opacity = factor === 3 ? "0" : "1"; 
+        card.style.backgroundColor = "#ffffff"; 
         card.style.pointerEvents = "none";
+        
+        innerContents.forEach(el => el.style.visibility = "hidden");
       } else {
         const factor = Math.min(Math.abs(offset), 3);
         card.style.transform = `translate(calc(-50% - ${factor * 15}px), ${factor * 10}px) scale(${1 - factor * 0.05}) rotate(-${factor * 1.5}deg)`;
         card.style.zIndex = `${40 - factor}`;
-        card.style.opacity = factor === 1 ? "0.8" : factor === 2 ? "0.3" : "0";
+        
+        // ⚡ ปรับตรงนี้เช่นกัน: การ์ดฝั่งซ้ายที่ล้นไปแล้ว ก็ให้ทึบและซ่อนข้อความ
+        card.style.opacity = factor === 3 ? "0" : "1";
+        card.style.backgroundColor = "#ffffff";
         card.style.pointerEvents = "none";
+        
+        innerContents.forEach(el => el.style.visibility = "hidden");
       }
     }
   });
 }
+
 
 function initPromoNavigation() {
   const container = document.getElementById("promotions-deck-container");
