@@ -485,8 +485,12 @@ function renderPromotionsDeck() {
 
   container.innerHTML = promoItems.map((vac, index) => {
     const isChecked = selectedVaccineIds.includes(vac.id);
-    const cardStyle = isChecked ? 'border-navy bg-iceblue/30 ring-2 ring-navy shadow-md' : 'border-slate-200 bg-white shadow-sm';
     
+    // ตั้งค่าเฉดสีและการไล่แสงเงาแบบพรีเมียม
+    const cardBaseClasses = "bg-gradient-to-br from-white via-white to-iceblue-light/30";
+    const cardCheckedClasses = "border-navy ring-2 ring-navy shadow-lg shadow-navy/20";
+    const cardUncheckedClasses = "border-slate-100 shadow-xl shadow-slate-200/50";
+
     let promoPricingHTML = '';
     if (vac.status === 'out-of-stock') {
       promoPricingHTML = `<span class="text-[10px] font-bold bg-rose-50 text-rose-600 px-2 py-1 rounded-md uppercase border border-rose-100">Not Available</span>`;
@@ -499,7 +503,7 @@ function renderPromotionsDeck() {
 
     return `
       <div id="promo-card-${index}" data-vac-id="${vac.id}" 
-        class="absolute top-0 left-1/2 w-[85vw] max-w-[400px] h-[240px] rounded-3xl p-6 flex flex-col justify-between cursor-pointer transition-all duration-500 ease-out select-none border ${cardStyle}"
+        class="absolute top-0 left-1/2 w-[85vw] max-w-[400px] h-[240px] rounded-3xl p-6 flex flex-col justify-between cursor-pointer transition-all duration-500 ease-out select-none border ${cardBaseClasses} ${isChecked ? cardCheckedClasses : cardUncheckedClasses}"
         style="cursor: grab;">
         <div class="flex flex-col gap-3">
           <div class="flex items-center justify-between">
@@ -523,8 +527,10 @@ function renderPromotionsDeck() {
   
   // เรียกใช้งาน Click Event เฉพาะใน container นี้ ป้องกันบั๊กทับซ้อน
   setupVaccineClickEvents(container); 
+
   if (typeof lucide !== 'undefined') lucide.createIcons();
 }
+
 
 function updatePromoDeckLayout() {
   const isDesktop = window.innerWidth >= 1024;
