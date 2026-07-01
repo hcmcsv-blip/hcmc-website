@@ -233,8 +233,21 @@ function initTabs() {
 }
 
 function initHighlightMetaTabs() {
+  // 1. หาตัวที่ตั้งค่า isHighlight: true เพื่อเป็นค่าเริ่มต้น
+  const defaultHighlight = packages.find(p => p.isHighlight) || packages[0];
+  activeHighlightId = defaultHighlight.id;
+
+  // 2. ปรับ UI ปุ่มกดให้ Active ตั้งแต่เริ่มต้น
   const tabs = document.querySelectorAll('[data-highlight-tab]');
   tabs.forEach(tab => {
+    // เช็คว่าปุ่มไหนตรงกับ defaultHighlight
+    if (tab.getAttribute('data-highlight-tab') === activeHighlightId) {
+       tab.className = "flex-1 py-2.5 px-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all bg-navy text-white shadow-sm";
+    } else {
+       tab.className = "flex-1 py-2.5 px-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all bg-transparent text-navy hover:bg-slate-50";
+    }
+
+    // ใส่ Event Listener ให้ทุกปุ่ม
     tab.addEventListener('click', () => {
       tabs.forEach(t => {
         t.className = "flex-1 py-2.5 px-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all bg-transparent text-navy hover:bg-slate-50";
@@ -245,7 +258,9 @@ function initHighlightMetaTabs() {
     });
   });
 
+  // 3. Render ค่าเริ่มต้น
   renderHighlightCard();
+  
   const bookBtn = document.getElementById("book-metabolic-btn");
   if (bookBtn) {
     bookBtn.addEventListener("click", () => {
@@ -256,6 +271,7 @@ function initHighlightMetaTabs() {
 }
 
 function renderHighlightCard() {
+  // 1. หาข้อมูลแพ็กเกจจาก activeHighlightId
   const metaPackage = packages.find(p => p.id === activeHighlightId);
   if (!metaPackage) return;
 
@@ -264,17 +280,23 @@ function renderHighlightCard() {
   const priceElem = document.getElementById("hl-package-price");
   const itemsContainer = document.getElementById("hl-package-items");
 
+  // 2. อัปเดตข้อมูล
   if (titleElem) titleElem.innerText = metaPackage.name;
   if (descElem) descElem.innerText = metaPackage.suitableFor;
+  
+  // ใช้ toLocaleString เพื่อโชว์ราคาให้สวยงาม
   if (priceElem) priceElem.innerText = Number(metaPackage.price).toLocaleString('en-US');
+  
   if (itemsContainer) {
     itemsContainer.innerHTML = metaPackage.items.map(item => `
-      <li class="flex items-start gap-2 text-xs text-slate-600 leading-relaxed">
-        <span class="text-navy font-bold mt-0.5">•</span>
+      <li class="flex items-start gap-2 text-xs text-navy leading-relaxed">
+        <span class="text-navy font-bold">•</span>
         <span>${item}</span>
       </li>
     `).join("");
   }
+  
+  // 3. (Optional) ถ้าอยากให้เปลี่ยนสีไอคอนหรือรายละเอียดอื่นๆ ตามแพ็กเกจ ก็ใส่เพิ่มตรงนี้ได้ครับ
 }
 
 function setupFilters() {

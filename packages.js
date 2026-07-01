@@ -276,6 +276,7 @@ export const packages = [
     name: "Check Up - Female Over 45 with Metabolic disorder",
     suitableFor: "Suitable for Female Over 45 with Metabolic disorder",
     price: 5267.00, // แยกราคาจริงตามใบโบรชัวร์กลุ่มผู้หญิงอายุ 45+
+    isHighlight: true,
     filters: {
       gender: "female",
       ageGroup: "50-59",
@@ -303,6 +304,7 @@ export const packages = [
     name: "Check Up - Men with Metabolic disorder",
     suitableFor: "Suitable for Men of all ages with Metabolic disorder",
     price: 5367.00, // แยกราคาจริงตามใบโบรชัวร์กลุ่มผู้ชาย
+    isHighlight: true,
     filters: {
       gender: "male",
       ageGroup: "all",
