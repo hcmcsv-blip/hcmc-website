@@ -410,99 +410,95 @@
           </div>
 
           <!-- 🍱 COMPACT APPLE BENTO MATRIX (3-Column Layout with custom tight row heights) -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 auto-rows-[160px]">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:auto-rows-[155px]">
             
-            <!-- Box 1: Muscle & Fat Balance (Hero Item - Spans 2 Columns, 2 Rows) -->
-            <div class="sm:col-span-2 sm:row-span-2 bg-white/40 border border-white/60 backdrop-blur-xl rounded-3xl p-6 flex flex-col justify-between shadow-xs hover:shadow-md transition-all duration-300">
+            <div class="sm:col-span-2 sm:row-span-2 bg-white/50 border border-white/80 backdrop-blur-xl rounded-3xl p-5 sm:p-6 flex flex-col justify-between shadow-xs hover:shadow-md transition-all duration-300 h-auto">
               <div class="flex flex-col gap-1.5">
-                <div class="w-8 h-8 rounded-xl bg-white/80 backdrop-blur-xs flex items-center justify-center text-navy border border-white/50 shadow-xs">
+                <div class="w-8 h-8 rounded-xl bg-white/90 backdrop-blur-xs flex items-center justify-center text-navy border border-white/60 shadow-xs">
                   <i data-lucide="activity" class="w-4 h-4"></i>
                 </div>
-                <h3 class="text-sm font-extrabold text-navy mt-2">Muscle & Fat Distribution</h3>
-                <p class="text-[11px] text-navy-slate leading-relaxed">Simultaneous quantification of active skeletal tissue versus systemic adipose volume to benchmark your baseline power.</p>
+                <h3 class="text-sm font-extrabold text-navy mt-1.5">Muscle & Fat Distribution</h3>
+                <p class="text-[11px] text-navy-slate leading-relaxed hidden sm:block">Simultaneous quantification of active skeletal tissue versus systemic adipose volume to benchmark your baseline power.</p>
               </div>
               
-              <!-- Core Data Metrics -->
-              <div class="grid grid-cols-2 gap-3 mt-3">
-                <div class="bg-white/70 backdrop-blur-xs p-3 rounded-2xl border border-white/40">
+              <div class="grid grid-cols-2 gap-3 mt-4 sm:mt-2">
+                <div class="bg-white/80 backdrop-blur-xs p-3 rounded-2xl border border-white/50 shadow-2xs">
                   <span class="text-[9px] uppercase font-bold tracking-wider text-slate-400 block">Muscle Mass</span>
-                  <div class="text-lg font-black text-navy mt-0.5">29.9 kg</div>
+                  <div class="text-base sm:text-lg font-black text-navy mt-0.5">29.9 kg</div>
                   <span class="text-[9px] text-emerald-600 font-semibold mt-0.5 block">Target Met 73.6%</span>
                 </div>
-                <div class="bg-white/70 backdrop-blur-xs p-3 rounded-2xl border border-white/40">
+                <div class="bg-white/80 backdrop-blur-xs p-3 rounded-2xl border border-white/50 shadow-2xs">
                   <span class="text-[9px] uppercase font-bold tracking-wider text-slate-400 block">Total Body Fat</span>
-                  <div class="text-lg font-black text-navy mt-0.5">22.3%</div>
+                  <div class="text-base sm:text-lg font-black text-navy mt-0.5">22.3%</div>
                   <span class="text-[9px] text-navy-slate font-medium mt-0.5 block">Optimal Range</span>
                 </div>
               </div>
             </div>
 
-            <!-- Box 2: Metabolic Age & Vitality (Spans 1 Column, 2 Rows) -->
-            <div class="sm:col-span-1 sm:row-span-2 bg-white/40 border border-white/60 backdrop-blur-xl rounded-3xl p-6 flex flex-col justify-between shadow-xs hover:shadow-md transition-all duration-300">
+            <div class="sm:col-span-1 sm:row-span-2 bg-white/50 border border-white/80 backdrop-blur-xl rounded-3xl p-5 sm:p-6 flex flex-col justify-between shadow-xs hover:shadow-md transition-all duration-300 h-auto">
               <div class="flex flex-col gap-1.5">
-                <div class="w-8 h-8 rounded-xl bg-iceblue/50 flex items-center justify-center text-navy border border-white/30">
+                <div class="w-8 h-8 rounded-xl bg-iceblue/60 flex items-center justify-center text-navy border border-white/40">
                   <i data-lucide="zap" class="w-4 h-4"></i>
                 </div>
-                <h3 class="text-sm font-extrabold text-navy mt-2">Metabolic Age</h3>
-                <p class="text-[11px] text-navy-slate leading-relaxed">Mapping cellular engine speed against chronological limits.</p>
+                <h3 class="text-sm font-extrabold text-navy mt-1.5">Metabolic Age</h3>
+                <p class="text-[11px] text-navy-slate leading-relaxed hidden sm:block">Mapping cellular engine speed against chronological limits.</p>
               </div>
-              
-              <div class="mt-4 bg-iceblue/30 backdrop-blur-xs rounded-2xl p-3 border border-iceblue-dark/20 text-center">
+              <div class="mt-4 sm:mt-2 bg-iceblue/40 backdrop-blur-xs rounded-2xl p-3.5 border border-iceblue-dark/20 text-center shadow-2xs">
                 <span class="text-[9px] uppercase font-bold tracking-wider text-navy block">Biological Score</span>
-                <div class="text-3xl font-black text-navy my-0.5">24</div>
+                <div class="text-2xl sm:text-3xl font-black text-navy my-0.5">24</div>
                 <p class="text-[9px] text-navy-slate font-medium">BMR: 900 kcal / Day</p>
               </div>
             </div>
 
-            <!-- Box 3: Visceral Fat Rating (Spans 1 Column, 1 Row) -->
-            <div class="sm:col-span-1 sm:row-span-1 bg-white/40 border border-white/60 backdrop-blur-xl rounded-3xl p-5 flex flex-col justify-between shadow-xs hover:shadow-md transition-all duration-300">
-              <div class="flex items-center justify-between">
-                <h3 class="text-xs font-extrabold text-navy">Visceral Fat</h3>
-                <div class="w-6 h-6 rounded-lg bg-red-50 text-accent-red flex items-center justify-center">
-                  <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:col-span-3 sm:gap-0 sm:contents">
+              
+              <div class="bg-white/50 border border-white/80 backdrop-blur-xl rounded-3xl p-4 sm:p-5 flex flex-col justify-between shadow-xs hover:shadow-md transition-all duration-300 h-auto sm:h-full">
+                <div class="flex items-center justify-between w-full">
+                  <h3 class="text-xs font-extrabold text-navy">Visceral Fat</h3>
+                  <div class="w-5 h-5 rounded-lg bg-red-50 text-accent-red flex items-center justify-center">
+                    <i data-lucide="shield-alert" class="w-3 h-3"></i>
+                  </div>
+                </div>
+                <div class="flex items-baseline gap-1.5 my-2 sm:my-1">
+                  <span class="text-xl sm:text-2xl font-black text-navy">2</span>
+                  <span class="px-1.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 font-extrabold text-[8px] uppercase border border-emerald-100">Low Risk</span>
+                </div>
+                <p class="text-[10px] text-navy-slate leading-tight hidden sm:block">Screening internal organ lipids to preemptively block chronic conditions.</p>
+              </div>
+
+              <div class="bg-white/50 border border-white/80 backdrop-blur-xl rounded-3xl p-4 sm:p-5 flex flex-col justify-between shadow-xs hover:shadow-md transition-all duration-300 h-auto sm:h-full">
+                <div class="flex items-center justify-between w-full">
+                  <h3 class="text-xs font-extrabold text-navy">Fluid Volume</h3>
+                  <div class="w-5 h-5 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+                    <i data-lucide="droplet" class="w-3 h-3"></i>
+                  </div>
+                </div>
+                <div class="my-2 sm:my-1">
+                  <div class="text-xs sm:text-sm font-extrabold text-navy">TBW: 53.4%</div>
+                  <span class="text-[8px] text-slate-400 font-mono block hidden sm:block">Multi-Freq BIA Metrics</span>
+                </div>
+                <p class="text-[10px] text-navy-slate leading-tight hidden sm:block">Tracking fluid distribution profiles to intercept hydration gaps.</p>
+              </div>
+
+              <div class="col-span-2 sm:col-span-1 bg-white/50 border border-white/80 backdrop-blur-xl rounded-3xl p-4 sm:p-5 flex flex-col justify-between shadow-xs hover:shadow-md transition-all duration-300 h-auto sm:h-full">
+                <div class="flex items-center justify-between w-full">
+                  <h3 class="text-xs font-extrabold text-navy">Progress History</h3>
+                  <div class="w-5 h-5 rounded-lg bg-slate-100 text-navy flex items-center justify-center">
+                    <i data-lucide="history" class="w-3 h-3"></i>
+                  </div>
+                </div>
+                <p class="text-[10px] text-navy-slate leading-relaxed mt-1 hidden sm:block">HCMC maps and overlays every body scan across consultation milestones.</p>
+                
+                <div class="text-[8px] text-navy font-bold font-mono bg-white/70 p-1.5 rounded-xl border border-white/50 flex items-center justify-between mt-2 sm:mt-1">
+                  <span>Initial: 41.5kg</span>
+                  <i data-lucide="arrow-right" class="w-2 h-2 text-slate-400"></i>
+                  <span class="text-emerald-600">Current: 40.6kg</span>
                 </div>
               </div>
-              <div class="flex items-baseline gap-1.5 my-1">
-                <span class="text-2xl font-black text-navy">2</span>
-                <span class="px-1.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 font-bold text-[8px] uppercase border border-emerald-100">Low Risk</span>
-              </div>
-              <p class="text-[10px] text-navy-slate leading-tight">Screening internal organ lipids to preemptively block chronic systemic conditions.</p>
-            </div>
-
-            <!-- Box 4: Cellular Hydration (Spans 1 Column, 1 Row) -->
-            <div class="sm:col-span-1 sm:row-span-1 bg-white/40 border border-white/60 backdrop-blur-xl rounded-3xl p-5 flex flex-col justify-between shadow-xs hover:shadow-md transition-all duration-300">
-              <div class="flex items-center justify-between">
-                <h3 class="text-xs font-extrabold text-navy">Fluid Volume</h3>
-                <div class="w-6 h-6 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
-                  <i data-lucide="droplet" class="w-3.5 h-3.5"></i>
-                </div>
-              </div>
-              <div class="my-1">
-                <div class="text-sm font-extrabold text-navy">TBW: 53.4%</div>
-                <span class="text-[8px] text-slate-400 font-mono block">Multi-Freq BIA Metrics</span>
-              </div>
-              <p class="text-[10px] text-navy-slate leading-tight">Tracking fluid distribution profiles to intercept intracellular hydration gaps.</p>
-            </div>
-
-            <!-- Box 5: Long-Term History Tracking (Spans 1 Column, 1 Row) -->
-            <div class="sm:col-span-1 sm:row-span-1 bg-white/40 border border-white/60 backdrop-blur-xl rounded-3xl p-5 flex flex-col justify-between shadow-xs hover:shadow-md transition-all duration-300">
-              <div class="flex items-center justify-between">
-                <h3 class="text-xs font-extrabold text-navy">Progress History</h3>
-                <div class="w-6 h-6 rounded-lg bg-slate-100 text-navy flex items-center justify-center">
-                  <i data-lucide="history" class="w-3.5 h-3.5"></i>
-                </div>
-              </div>
-              <p class="text-[10px] text-navy-slate leading-relaxed mt-1">
-                HCMC maps and overlays every body scan across consultation milestones to monitor absolute tissue optimization.
-              </p>
-              <div class="text-[8px] text-navy font-bold font-mono bg-white/60 p-1 rounded-md border border-white/40 flex items-center justify-between mt-1">
-                <span>Initial: 41.5kg</span>
-                <i data-lucide="arrow-right" class="w-2 h-2 text-slate-400"></i>
-                <span class="text-emerald-600">Current: 40.6kg</span>
-              </div>
-            </div>
-
+              
+            </div> 
           </div>
+
         </div>
         
         <!-- 🍃 RIGHT SIDE EMPTY SPACE ZONE (Exposes the high-end right-focused medical visual) -->
