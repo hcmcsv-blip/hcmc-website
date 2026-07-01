@@ -503,7 +503,7 @@ function renderPromotionsDeck() {
 
     return `
       <div id="promo-card-${index}" data-vac-id="${vac.id}" 
-        class="absolute top-0 left-1/2 w-[85vw] max-w-[400px] h-[240px] rounded-3xl p-6 flex flex-col justify-between cursor-pointer transition-all duration-500 ease-out select-none border ${cardBaseClasses} ${isChecked ? cardCheckedClasses : cardUncheckedClasses}"
+        class="absolute top-0 left-1/2 w-[85vw] max-w-[400px] h-[240px] rounded-3xl p-6 flex flex-col justify-between cursor-pointer transition-[shadow,background-color,border-color] duration-150 ease-in-out select-none border ${cardBaseClasses} ${isChecked ? cardCheckedClasses : cardUncheckedClasses}"
         style="cursor: grab;">
         <div class="flex flex-col gap-3">
           <div class="flex items-center justify-between">
@@ -523,7 +523,6 @@ function renderPromotionsDeck() {
     `;
   }).join('');
 
-  updatePromoDeckLayout();
   
   // เรียกใช้งาน Click Event เฉพาะใน container นี้ ป้องกันบั๊กทับซ้อน
   setupVaccineClickEvents(container); 
